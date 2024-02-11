@@ -12,7 +12,7 @@ Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introdu
 - Install all dependencies:
 
   ```bash
-  bun install
+  npm install
   ```
 
 - Install all recommended VS Code extensions for the best development experience. VS Code will prompt you to install them when you open the project.
@@ -22,7 +22,7 @@ Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introdu
 Start the development server on `http://localhost:3000`:
 
 ```bash
-bun run dev
+npm run dev
 ```
 
 ## Production
@@ -30,11 +30,11 @@ bun run dev
 Build the application for production:
 
 ```bash
-bun run build
+npm run build
 ```
 
 Locally preview production build:
 
 ```bash
-bun run preview
+npm run preview
 ```
