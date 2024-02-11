@@ -1,4 +1,4 @@
-FROM oven/bun:1 as builder
+FROM oven/bun:1 as install
 
 WORKDIR /app
 
@@ -8,15 +8,19 @@ RUN bun install --frozen-lockfile
 
 COPY . .
 
+FROM node:lts as build
+
+WORKDIR /app
+
+COPY --from=install /app /app
+
 ENV NODE_ENV=production
 
-# Really ugly hack to make sure the build doesn't hang forever
-# This is because bun run build hangs in docker :/
-RUN timeout 15s bun run build
+RUN npm run build
 
 FROM oven/bun:1
 
-COPY --from=builder /app/.output /app
+COPY --from=build /app/.output /app
 
 ENV PORT=8080
 
