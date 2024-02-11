@@ -4,7 +4,8 @@ Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introdu
 
 ## Requirements
 
-- [Bun](https://bun.sh/docs/installation)
+- [Node LTS (20.11.0)](https://nodejs.org/en/download/)
+- [Docker](https://www.docker.com/products/docker-desktop/)
 
 ## Setup
 

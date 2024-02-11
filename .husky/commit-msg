@@ -1,1 +1,1 @@
-bun run commitlint
+npm run commitlint

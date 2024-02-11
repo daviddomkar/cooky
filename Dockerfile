@@ -1,18 +1,12 @@
-FROM oven/bun:1 as install
+FROM node:20.11.0 as build
 
 WORKDIR /app
 
-COPY package.json bun.lockb ./
+COPY package.json package-lock.json ./
 
-RUN bun install --frozen-lockfile
+RUN npm ci
 
 COPY . .
-
-FROM node:lts as build
-
-WORKDIR /app
-
-COPY --from=install /app /app
 
 ENV NODE_ENV=production
 
