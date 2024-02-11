@@ -53,20 +53,5 @@ export default defineConfig({
     }),
   ],
   transformers: [transformerDirectives()],
-  preflights: [
-    {
-      getCSS: () => {
-        return `
-          body {
-            @apply font-sans text-on-surface bg-surface;
-          }
-
-          h1, h2, h3, h4, h5, h6 {
-            @apply font-display font-normal;
-          }
-        `;
-      },
-    },
-  ],
   theme: lightTheme,
 });

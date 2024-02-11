@@ -1,0 +1,26 @@
+name: cooky
+
+networks:
+  default:
+    name: cooky
+
+services:
+  cooky:
+    build:
+      context: .
+    image: cooky
+    container_name: cooky
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16.1
+    container_name: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: cooky
+    ports:
+      - "5432:5432"
