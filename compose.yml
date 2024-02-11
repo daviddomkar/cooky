@@ -20,7 +20,16 @@ services:
     container_name: postgres
     environment:
       POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: cooky
+      POSTGRES_PASSWORD: ${ROOT_PASSWORD:-root}
+      POSTGRES_DB: ${COOKY_DATABASE:-cooky}
+      COOKY_USER: ${COOKY_USER:-cooky}
+      COOKY_PASSWORD: ${COOKY_PASSWORD:-cooky}
     ports:
       - "5432:5432"
+    volumes:
+      - ./scripts:/docker-entrypoint-initdb.d
+      - cooky:/var/lib/postgresql/data
+
+volumes:
+  cooky:
+    name: cooky
