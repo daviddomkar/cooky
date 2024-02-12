@@ -14,10 +14,12 @@ RUN npm run build
 
 FROM oven/bun:1
 
-COPY --from=build /app/.output /app
+WORKDIR /app
+
+COPY --from=build /app/.output .
 
 ENV PORT=8080
 
 EXPOSE 8080
 
-ENTRYPOINT [ "bun", "run", "/app/server/index.mjs" ]
+ENTRYPOINT [ "bun", "run", "./server/index.mjs" ]

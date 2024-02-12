@@ -10,8 +10,21 @@ services:
       context: .
     image: cooky
     container_name: cooky
+    environment:
+      - DATABASE_URL=postgresql://${COOKY_USER:-cooky}:${COOKY_PASSWORD:-cooky}@postgres:5432/${COOKY_DATABASE:-cooky}?schema=public
     ports:
       - "8080:8080"
+    depends_on:
+      - prisma
+
+  prisma:
+    build:
+      context: .
+      dockerfile: ./prisma/Dockerfile
+    image: prisma
+    container_name: prisma
+    environment:
+      - DATABASE_URL=postgresql://${ROOT_USER:-cooky}:${ROOT_PASSWORD:-cooky}@postgres:5432/${COOKY_DATABASE:-cooky}?schema=public
     depends_on:
       - postgres
 
@@ -19,15 +32,15 @@ services:
     image: postgres:16.1
     container_name: postgres
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: ${ROOT_PASSWORD:-root}
-      POSTGRES_DB: ${COOKY_DATABASE:-cooky}
-      COOKY_USER: ${COOKY_USER:-cooky}
-      COOKY_PASSWORD: ${COOKY_PASSWORD:-cooky}
+      - POSTGRES_USER=${ROOT_USER:-root}
+      - POSTGRES_PASSWORD=${ROOT_PASSWORD:-root}
+      - POSTGRES_DB=${COOKY_DATABASE:-cooky}
+      - COOKY_USER=${COOKY_USER:-cooky}
+      - COOKY_PASSWORD=${COOKY_PASSWORD:-cooky}
     ports:
       - "5432:5432"
     volumes:
-      - ./scripts:/docker-entrypoint-initdb.d
+      - ./scripts/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
       - cooky:/var/lib/postgresql/data
 
 volumes:
