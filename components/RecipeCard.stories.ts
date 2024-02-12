@@ -14,6 +14,6 @@ type Story = StoryObj<typeof RecipeCard>;
 export const Default: Story = {
   render: () => ({
     components: { RecipeCard },
-    template: "<RecipeCard />",
+    template: '<RecipeCard class="w-[240px]" />',
   }),
 };
