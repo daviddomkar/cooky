@@ -4,7 +4,6 @@ export default defineNuxtConfig({
     "@nuxtjs/eslint-module",
     "@nuxtjs/stylelint-module",
     "@unocss/nuxt",
-    "@nuxtjs/storybook",
   ],
   eslint: {
     lintOnStart: false,

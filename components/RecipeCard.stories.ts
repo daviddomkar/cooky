@@ -11,4 +11,9 @@ export default meta;
 
 type Story = StoryObj<typeof RecipeCard>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  render: () => ({
+    components: { RecipeCard },
+    template: "<RecipeCard />",
+  }),
+};
