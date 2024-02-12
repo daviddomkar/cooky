@@ -15,17 +15,6 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - prisma
-
-  prisma:
-    build:
-      context: .
-      dockerfile: ./prisma/Dockerfile
-    image: prisma
-    container_name: prisma
-    environment:
-      - DATABASE_URL=postgresql://${ROOT_USER:-cooky}:${ROOT_PASSWORD:-cooky}@postgres:5432/${COOKY_DATABASE:-cooky}?schema=public
-    depends_on:
       - postgres
 
   postgres:
@@ -40,7 +29,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
+      - ./prisma/migrations:/docker-entrypoint-initdb.d/migrations
       - ./scripts/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
+      - ./scripts/seed.sql:/docker-entrypoint-initdb.d/seed.sql
       - cooky:/var/lib/postgresql/data
 
 volumes:

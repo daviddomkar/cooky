@@ -1,0 +1,1 @@
+-- This file is used for seeding the database with initial data

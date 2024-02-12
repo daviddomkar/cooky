@@ -3,17 +3,20 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prepare": "husky",
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "docker compose up -d postgres && nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "postinstall": "nuxt prepare && prisma:generate",
     "lint": "eslint . --ext .html,.js,.ts,.vue && stylelint '**/*.{css,vue}'",
     "lint:fix": "eslint . --ext .html,.js,.ts,.vue --fix && stylelint '**/*.{css,vue}' --fix",
     "lint:staged": "lint-staged",
     "commitlint": "commitlint --edit",
-    "prepare": "husky",
-    "prisma:migrate:reset": "prisma migrate reset --force"
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:migrate:dev": "prisma migrate dev --name dev",
+    "prisma:migrate:reset": "prisma migrate reset"
   },
   "lint-staged": {
     "*.{html,js,ts,vue}": "eslint --fix",
