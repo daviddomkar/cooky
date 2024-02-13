@@ -18,7 +18,8 @@
     "prisma:migrate:dev": "prisma migrate dev --name dev",
     "prisma:migrate:reset": "prisma migrate reset",
     "storybook:dev": "storybook dev --port 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "chromatic --exit-zero-on-changes"
   },
   "lint-staged": {
     "*.{html,js,ts,vue}": "eslint --fix",
