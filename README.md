@@ -1,13 +1,37 @@
-# Cooky
+# **🧁 WELCOME TO COOKY! 🧁**
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+<img src="https://64.media.tumblr.com/2894bb3d2325eb0de3e6a8fbe07c2c59/ab4f8d5953fb26f5-79/s1280x1920/9074ac143c015498cd0f9d3206fb2194dfc543e6.png" width="320" align="right" >
 
-## Requirements
+[Look at the Nuxt 3 documentation to learn more ⬅️](https://nuxt.com/docs/getting-started/introduction)
+
+### 🥐 **What is Cooky?**
+
+<p>Cooky is your interactive culinary hub where you can store personal recipes, discover new favorites, and engage with a community of food enthusiasts. Browse, rate, and save a variety of dishes shared by users around the world. 'Cooky' transforms everyday cooking into a shared journey of culinary discovery and enjoyment.</p>
+
+### **🎓 Why cookbook?**
+
+<p>Cooky, a cookbook, is a school project designed for a university course focused on databases. The goal of the project is to create a comprehensive database application that serves as a collection of recipes. The application should allow users to add their own recipes, rate existing ones, and search for recipes based on various criteria, such as ingredients or name. The project not only provides practical experience with the design and implementation of database systems but also supports understanding the importance of user-friendliness and search efficiency in databases. Cooky is therefore not just a school project but also a useful tool for anyone looking for culinary inspiration.</p>
+
+### **💻 Technologies**
+
+[![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat&logo=Docker&logoColor=white)](https://www.docker.com/)
+[![Prisma](https://img.shields.io/badge/-Prisma-2D3748?style=flat&logo=Prisma&logoColor=white)](https://www.prisma.io/)
+[![Nuxt](https://img.shields.io/badge/-Nuxt-00DC82?style=flat&logo=Nuxt.js&logoColor=white)](https://nuxtjs.org/)
+[![Vue](https://img.shields.io/badge/-Vue-4FC08D?style=flat&logo=Vue.js&logoColor=white)](https://vuejs.org/)
+[![Typescript](https://img.shields.io/badge/-Typescript-3178C6?style=flat&logo=TypeScript&logoColor=white)](https://www.typescriptlang.org/)
+[![unocss](https://img.shields.io/badge/-unocss-FF6B81?style=flat&logo=unocss&logoColor=white)](https://github.com/unocss/unocss)
+[![prettier](https://img.shields.io/badge/-prettier-F7B93E?style=flat&logo=Prettier&logoColor=black)](https://prettier.io/)
+[![eslint](https://img.shields.io/badge/-eslint-4B32C3?style=flat&logo=ESLint&logoColor=white)](https://eslint.org/)
+[![husky](https://img.shields.io/badge/-husky-A142F4?style=flat&logo=Husky&logoColor=white)](https://typicode.github.io/husky/#/)
+[![commitlint](https://img.shields.io/badge/-commitlint-207DE5?style=flat&logo=Commitlint&logoColor=white)](https://commitlint.js.org/)
+[![stylelint](https://img.shields.io/badge/-stylelint-263238?style=flat&logo=stylelint&logoColor=white)](https://stylelint.io/)
+
+### Requirements
 
 - [Node LTS (20.11.0)](https://nodejs.org/en/download/)
 - [Docker](https://www.docker.com/products/docker-desktop/)
 
-## Setup
+### Setup
 
 - Install all dependencies:
 
@@ -17,7 +41,7 @@ Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introdu
 
 - Install all recommended VS Code extensions for the best development experience. VS Code will prompt you to install them when you open the project.
 
-## Running the project
+### Development Server
 
 The easiest way to run the project is to use the provided Docker Compose configuration. This will build production application server and a PostgreSQL database.
 
@@ -46,33 +70,7 @@ To start the development server, you can use the following command:
 npm run dev
 ```
 
-The application will be available on `http://localhost:3000`.
-
-> This will also start the database provided by Docker Compose in a detached mode using the `docker compose up -d postgres` as part of the `dev` script.
-
-It is recommended to run `npm run prisma:migrate:reset` to reset the database and reseed it with prisma cli. This way you can be sure that the database is in the correct state when developing schema changes inside `prisma/schema.prisma`.
-
-The database will be persisted in the `cooky` docker volume. To remove the database and start from scratch, you can use the following commands:
-
-```bash
-docker compose down -v
-```
-
-When making changes to the database schema `prisma/schema.prisma`, you can use the following commands to make changes to local development database:
-
-```bash
-npm run prisma:push
-```
-
-When the changes are stable, create a new migration:
-
-```bash
-npm run prisma:migrate:dev
-```
-
-For more information of Prisma CLI commands, see the [Prisma documentation](https://www.prisma.io/docs/orm/prisma-migrate/workflows/development-and-production).
-
-## Production
+### Production
 
 Build the application for production:
 
