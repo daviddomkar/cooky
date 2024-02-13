@@ -17,7 +17,8 @@
     "prisma:push": "prisma db push",
     "prisma:migrate:dev": "prisma migrate dev --name dev",
     "prisma:migrate:reset": "prisma migrate reset",
-    "storybook:dev": "storybook dev --port 6006"
+    "storybook:dev": "storybook dev --port 6006",
+    "build-storybook": "storybook build"
   },
   "lint-staged": {
     "*.{html,js,ts,vue}": "eslint --fix",
@@ -44,6 +45,7 @@
     "@unocss/nuxt": "^0.58.5",
     "@unocss/transformer-directives": "^0.58.5",
     "ajv": "^8.12.0",
+    "chromatic": "^10.9.4",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "husky": "^9.0.10",
