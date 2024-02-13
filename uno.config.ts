@@ -54,4 +54,9 @@ export default defineConfig({
   ],
   transformers: [transformerDirectives()],
   theme: lightTheme,
+  content: {
+    pipeline: {
+      include: [/\.(vue|mdx?|html|stories.ts)($|\?)/],
+    },
+  },
 });
