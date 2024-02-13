@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     lintOnStart: false,
   },
   typescript: {
-    typeCheck: true,
     strict: true,
   },
   devtools: {

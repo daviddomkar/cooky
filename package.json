@@ -3,21 +3,28 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prepare": "husky",
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "docker compose up -d postgres && nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "postinstall": "nuxt prepare && prisma generate",
     "lint": "eslint . --ext .html,.js,.ts,.vue && stylelint '**/*.{css,vue}'",
     "lint:fix": "eslint . --ext .html,.js,.ts,.vue --fix && stylelint '**/*.{css,vue}' --fix",
     "lint:staged": "lint-staged",
     "commitlint": "commitlint --edit",
-    "prepare": "husky",
-    "prisma:migrate:reset": "prisma migrate reset --force"
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:migrate:dev": "prisma migrate dev --name dev",
+    "prisma:migrate:reset": "prisma migrate reset",
+    "storybook:dev": "storybook dev --port 6006"
   },
   "lint-staged": {
     "*.{html,js,ts,vue}": "eslint --fix",
     "*.{css,vue}": "stylelint --fix"
+  },
+  "prisma": {
+    "seed": "ts-node --esm --transpile-only prisma/seed.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.6.0",
@@ -27,6 +34,13 @@
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/stylelint-module": "^5.2.0",
+    "@prisma/client": "^5.9.1",
+    "@storybook-vue/nuxt": "0.2.1",
+    "@storybook/addon-essentials": "^8.0.0-beta.2",
+    "@storybook/addon-interactions": "^8.0.0-beta.2",
+    "@storybook/addon-links": "^8.0.0-beta.2",
+    "@storybook/vue3": "^8.0.0-beta.2",
+    "@storybook/vue3-vite": "^8.0.0-beta.2",
     "@unocss/nuxt": "^0.58.5",
     "@unocss/transformer-directives": "^0.58.5",
     "ajv": "^8.12.0",
@@ -38,8 +52,10 @@
     "prettier": "^3.2.5",
     "prettier-plugin-prisma": "^5.0.0",
     "prisma": "^5.9.1",
+    "storybook": "^8.0.0-beta.2",
     "stylelint": "^16.2.1",
     "stylelint-config-recommended-vue": "^1.5.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
     "unocss-preset-theme": "^0.12.0",
     "vue": "^3.4.15",

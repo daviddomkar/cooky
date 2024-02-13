@@ -37,7 +37,28 @@
 
 ### Development Server
 
-Start the development server on `http://localhost:3000`:
+The easiest way to run the project is to use the provided Docker Compose configuration. This will build production application server and a PostgreSQL database.
+
+```bash
+docker compose up
+```
+
+The database schema will be created with some initial data, application will be available at `http://localhost:8080`.
+
+This setup is just for testing purposes, to preview the finished product and not inteded for development.
+
+The database will be persisted in a `cooky` docker volume. To remove the database and start from scratch, you can use the following commands:
+
+```bash
+docker compose down -v
+docker compose up
+```
+
+## Development
+
+For development, you can use the development server provided by Nuxt. This will enable hot reload and debugging functionality.
+
+To start the development server, you can use the following command:
 
 ```bash
 npm run dev
