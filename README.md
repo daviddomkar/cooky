@@ -8,17 +8,23 @@
 
 <p>Cooky is your interactive culinary hub where you can store personal recipes, discover new favorites, and engage with a community of food enthusiasts. Browse, rate, and save a variety of dishes shared by users around the world. 'Cooky' transforms everyday cooking into a shared journey of culinary discovery and enjoyment.</p>
 
-### **💼 Developers**
-
-![Karolína Chladíková](https://img.shields.io/badge/Karolína-Chladíková-FF5F54.svg) ![Matyáš Peremský](https://img.shields.io/badge/Matyáš-Peremský-FFA14A.svg) ![David Domkář](https://img.shields.io/badge/David-Domkář-FFBD3E.svg) ![Martin Kaněra](https://img.shields.io/badge/Martin-Kaněra-FF5F54.svg)
-
 ### **🎓 Why cookbook?**
 
 <p>Cooky, a cookbook, is a school project designed for a university course focused on databases. The goal of the project is to create a comprehensive database application that serves as a collection of recipes. The application should allow users to add their own recipes, rate existing ones, and search for recipes based on various criteria, such as ingredients or name. The project not only provides practical experience with the design and implementation of database systems but also supports understanding the importance of user-friendliness and search efficiency in databases. Cooky is therefore not just a school project but also a useful tool for anyone looking for culinary inspiration.</p>
 
 ### **💻 Technologies**
 
-![Docker](https://img.shields.io/badge/Container_runtime-Docker-2496ED.svg) ![Prisma](https://img.shields.io/badge/orm-Prisma-2D3748.svg) ![Nuxt](https://img.shields.io/badge/metaframework-Nuxt-00DC82.svg) ![Vue](https://img.shields.io/badge/framework-Vue-4FC08D.svg) ![Typescript](https://img.shields.io/badge/programming_language-Typescript-3178C6.svg) ![unocss](https://img.shields.io/badge/css-unocss-FF6B81.svg) ![prettier](https://img.shields.io/badge/code_style-prettier-F7B93E.svg) ![eslint](https://img.shields.io/badge/linter-eslint-4B32C3.svg) ![husky](https://img.shields.io/badge/git_hooks-husky-A142F4.svg) ![commitlint](https://img.shields.io/badge/commit_linter-commitlint-207DE5.svg) ![stylelint](https://img.shields.io/badge/style_linter-stylelint-263238.svg)
+[![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat&logo=Docker&logoColor=white)](https://www.docker.com/)
+[![Prisma](https://img.shields.io/badge/-Prisma-2D3748?style=flat&logo=Prisma&logoColor=white)](https://www.prisma.io/)
+[![Nuxt](https://img.shields.io/badge/-Nuxt-00DC82?style=flat&logo=Nuxt.js&logoColor=white)](https://nuxtjs.org/)
+[![Vue](https://img.shields.io/badge/-Vue-4FC08D?style=flat&logo=Vue.js&logoColor=white)](https://vuejs.org/)
+[![Typescript](https://img.shields.io/badge/-Typescript-3178C6?style=flat&logo=TypeScript&logoColor=white)](https://www.typescriptlang.org/)
+[![unocss](https://img.shields.io/badge/-unocss-FF6B81?style=flat&logo=unocss&logoColor=white)](https://github.com/unocss/unocss)
+[![prettier](https://img.shields.io/badge/-prettier-F7B93E?style=flat&logo=Prettier&logoColor=black)](https://prettier.io/)
+[![eslint](https://img.shields.io/badge/-eslint-4B32C3?style=flat&logo=ESLint&logoColor=white)](https://eslint.org/)
+[![husky](https://img.shields.io/badge/-husky-A142F4?style=flat&logo=Husky&logoColor=white)](https://typicode.github.io/husky/#/)
+[![commitlint](https://img.shields.io/badge/-commitlint-207DE5?style=flat&logo=Commitlint&logoColor=white)](https://commitlint.js.org/)
+[![stylelint](https://img.shields.io/badge/-stylelint-263238?style=flat&logo=stylelint&logoColor=white)](https://stylelint.io/)
 
 ### Requirements
 
