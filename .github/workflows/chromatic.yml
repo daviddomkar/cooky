@@ -1,9 +1,10 @@
-name: "Chromatic"
+name: Chromatic
 
 on: push
 
 jobs:
   chromatic:
+    name: Chromatic
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
