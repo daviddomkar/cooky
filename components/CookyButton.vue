@@ -1,39 +1,35 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = defineProps<{
-  backgroundColorOption: "gray" | "gradient";
-  textColor: "white" | "black";
-  text: string;
-  height: 40 | 50;
-}>();
+type Props = {
+  variant: "primary" | "secondary" | "text";
+};
 
-const backgroundColorClass = computed(() => {
-  if (props.backgroundColorOption === "gray") {
-    return "bg-surface-container";
-  } else {
-    return "bg-gradient-to-r from-primary to-secondary";
+const props = withDefaults(defineProps<Props>(), {
+  variant: "primary",
+});
+
+const computedClass = computed(() => {
+  let defaultClass =
+    "flex border-none w-fit rounded-3xl items-center justify-center box-border px-6 py-3 uppercase";
+
+  switch (props.variant) {
+    case "primary":
+      defaultClass += " bg-gradient-to-r from-primary to-secondary text-white";
+      break;
+    case "secondary":
+      defaultClass += " bg-surface-container text-white";
+      break;
+    case "text":
+      defaultClass += " bg-transparent text-primary";
   }
-});
 
-const textColorClass = computed(() => {
-  return props.textColor === "white" ? "text-white" : "text-black";
-});
-
-const heightClass = computed(() => {
-  return props.height === 40 ? "h-10" : "h-12";
+  return defaultClass;
 });
 </script>
 
 <template>
-  <div
-    :class="[
-      backgroundColorClass,
-      textColorClass,
-      heightClass,
-      'w-fit rounded-[24px] flex items-center justify-center box-border px-6',
-    ]"
-  >
-    <span class="uppercase" :class="textColorClass">{{ text }}</span>
-  </div>
+  <button :class="computedClass">
+    <slot />
+  </button>
 </template>

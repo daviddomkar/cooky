@@ -6,21 +6,12 @@ const meta: Meta<typeof CookyButton> = {
   title: "CookyButton",
   component: CookyButton,
   argTypes: {
-    backgroundColorOption: {
-      control: { type: "select", options: ["gray", "gradient"] },
-      defaultValue: "gradient",
+    variant: {
+      options: ["primary", "secondary", "text"],
+      control: { type: "radio" },
     },
-    textColor: {
-      control: { type: "select", options: ["white", "black"] },
-      defaultValue: "white",
-    },
-    text: {
-      control: "text",
-      defaultValue: "Click me",
-    },
-    height: {
-      control: { type: "select", options: [40, 50] },
-      defaultValue: 40,
+    default: {
+      control: { type: "text" },
     },
   },
 };
@@ -31,16 +22,14 @@ type Story = StoryObj<typeof CookyButton>;
 
 export const Default: Story = {
   args: {
-    backgroundColorOption: "gradient",
-    textColor: "white",
-    text: "Click me",
-    height: 40,
+    variant: "primary",
+    default: "Click me",
   },
   render: (args) => ({
     components: { CookyButton },
     setup() {
       return { args };
     },
-    template: '<CookyButton v-bind="args" class="w-[240px]" />',
+    template: '<CookyButton v-bind="args">{{ args.default }}</CookyButton>',
   }),
 };

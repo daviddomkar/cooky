@@ -2,6 +2,10 @@ body {
   @apply font-sans text-on-surface bg-surface;
 }
 
+button {
+  @apply font-sans text-base leading-4;
+}
+
 h1, h2, h3, h4, h5, h6 {
   @apply font-display font-normal;
 }
