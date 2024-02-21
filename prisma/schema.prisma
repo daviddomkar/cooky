@@ -107,6 +107,9 @@ model Rating {
   author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   authorId String @map("author_id") @db.Uuid
 
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
   @@id(name: "id", fields: [recipeId, authorId])
   @@map("ratings")
 }

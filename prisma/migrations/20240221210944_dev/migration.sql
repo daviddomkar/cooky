@@ -74,6 +74,8 @@ CREATE TABLE "ratings" (
     "number_of_stars" INTEGER NOT NULL,
     "recipe_id" UUID NOT NULL,
     "author_id" UUID NOT NULL,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "ratings_pkey" PRIMARY KEY ("recipe_id","author_id")
 );
