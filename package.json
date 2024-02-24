@@ -43,6 +43,7 @@
     "@storybook/addon-links": "^8.0.0-beta.2",
     "@storybook/vue3": "^8.0.0-beta.2",
     "@storybook/vue3-vite": "^8.0.0-beta.2",
+    "@unocss/eslint-config": "^0.58.5",
     "@unocss/nuxt": "^0.58.5",
     "@unocss/transformer-directives": "^0.58.5",
     "ajv": "^8.12.0",

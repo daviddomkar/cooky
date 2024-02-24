@@ -3,32 +3,270 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
-}
-
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  relationMode = "foreignKeys"
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  posts   Post[]
-  profile Profile?
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name     String @unique @db.VarChar(32)
+  username String @unique @db.VarChar(32)
+  email    String @unique @db.VarChar(32)
+  password String @map("hashed_password") @db.Char(60)
+
+  profileImage    File    @relation("profile_image", fields: [profileImageId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  profileImageId  String  @unique @map("profile_image_id") @db.Uuid
+  coverImage      File    @relation("cover_image", fields: [coverImageId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  coverImageId    String  @unique @map("cover_image_id") @db.Uuid
+  favoritesList   List    @relation("favorites_list", fields: [favoritesListId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  favoritesListId String  @unique @map("favorites_list_id") @db.Uuid
+  lastUsedList    List?   @relation("last_used_list", fields: [lastUsedListId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  lastUsedListId  String? @unique @map("last_used_list_id") @db.Uuid
+
+  recipes       Recipe[]
+  ratings       Rating[]
+  comments      Comment[]
+  replies       Reply[]
+  lists         List[]
+  notifications Notification[]
+  replyHearts   ReplyHeart[]
+  commentHearts CommentHeart[]
+
+  @@map("users")
+}
+
+enum UnitType {
+  VOLUME
+  WEIGHT
+  QUANTITY
+
+  @@map("unit_types")
+}
+
+model Ingredient {
+  id        String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title     String     @unique @db.VarChar(32)
+  unitTypes UnitType[] @map("unit_types")
+
+  recipes RecipeIngredient[]
+
+  @@map("ingredients")
+}
+
+model Unit {
+  id           String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title        String   @unique @db.VarChar(32)
+  type         UnitType
+  abbreviation String   @unique @db.VarChar(8)
+
+  recipeIngredients RecipeIngredient[]
+
+  @@map("units")
+}
+
+model RecipeIngredient {
+  amount Int @db.Integer
+
+  unit         Unit       @relation(fields: [unitId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  unitId       String     @map("unit_id") @db.Uuid
+  recipe       Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  recipeId     String     @map("recipe_id") @db.Uuid
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  ingredientId String     @map("ingredient_id") @db.Uuid
+
+  @@id(name: "id", fields: [recipeId, ingredientId])
+  @@map("recipe_ingredients")
+}
+
+model Category {
+  id      String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title   String           @unique @db.VarChar(32)
+  order   Int              @default(autoincrement()) @db.Integer
+  icon    String           @db.VarChar(32)
+  recipes RecipeCategory[]
+
+  @@map("categories")
+}
+
+model RecipeCategory {
+  recipe     Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  recipeId   String   @map("recipe_id") @db.Uuid
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  categoryId String   @map("category_id") @db.Uuid
+
+  @@id(name: "id", fields: [recipeId, categoryId])
+  @@map("recipe_categories")
+}
+
+model Rating {
+  numberOfStars Int @map("number_of_stars") @db.Integer
+
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  recipeId String @map("recipe_id") @db.Uuid
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  authorId String @map("author_id") @db.Uuid
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@id(name: "id", fields: [recipeId, authorId])
+  @@map("ratings")
+}
+
+model CommentHeart {
+  author    User    @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  authorId  String  @map("author_id") @db.Uuid
+  comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  commentId String  @map("comment_id") @db.Uuid
+
+  @@id(name: "id", fields: [commentId, authorId])
+  @@map("comment_hearts")
+}
+
+model Comment {
+  id      String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  content String @db.Text
+
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  recipeId String @map("recipe_id") @db.Uuid
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  authorId String @map("author_id") @db.Uuid
+
+  replies Reply[]
+
+  createdAt DateTime       @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime       @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  hearts    CommentHeart[]
+
+  @@map("comments")
+}
+
+model ReplyHeart {
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  authorId String @map("author_id") @db.Uuid
+  reply    Reply  @relation(fields: [replyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  replyId  String @map("reply_id") @db.Uuid
+
+  @@id(name: "id", fields: [replyId, authorId])
+  @@map("reply_hearts")
+}
+
+model Reply {
+  id      String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  content String @db.Text
+
+  comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  commentId String  @map("comment_id") @db.Uuid
+  author    User    @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  authorId  String  @map("author_id") @db.Uuid
+
+  createdAt DateTime     @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime     @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  hearts    ReplyHeart[]
+
+  @@map("replies")
+}
+
+enum Visibility {
+  PUBLIC
+  PRIVATE
+
+  @@map("visibility")
+}
+
+model List {
+  id         String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title      String     @db.VarChar(32)
+  visibility Visibility @default(PUBLIC)
+
+  favoritesListUser User?  @relation("favorites_list")
+  lastUsedListUser  User?  @relation("last_used_list")
+  author            User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  authorId          String @map("author_id") @db.Uuid
+
+  recipes RecipeList[]
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("lists")
+}
+
+model RecipeList {
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  recipeId String @map("recipe_id") @db.Uuid
+  list     List   @relation(fields: [listId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  listId   String @map("list_id") @db.Uuid
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  @@id(name: "id", fields: [recipeId, listId])
+  @@map("recipe_lists")
+}
+
+enum RecipeState {
+  DRAFT
+  PUBLISHED
+
+  @@map("recipe_state")
+}
+
+model Recipe {
+  id                  String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title               String                  @db.VarChar(64)
+  slug                String                  @unique @db.VarChar(64)
+  description         String                  @db.Text
+  preparitionDuration Unsupported("interval") @map("preparation_duration")
+  state               RecipeState             @default(DRAFT)
+  /// [Step]
+  steps               Json[]
+  nutritionPerServing Int                     @map("nutrition_per_serving") @db.Integer
+  numberOfServings    Int                     @map("number_of_servings") @db.Integer
+
+  image    File   @relation(fields: [imageId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  imageId  String @unique @map("image_id") @db.Uuid
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  authorId String @map("author_id") @db.Uuid
+
+  ingredients RecipeIngredient[]
+  ratings     Rating[]
+  comments    Comment[]
+  lists       RecipeList[]
+  categories  RecipeCategory[]
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("recipes")
+}
+
+model File {
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  mimeType String @map("mime_type") @db.VarChar(32)
+  url      String @unique @db.VarChar(255)
+
+  profileImageUser User?   @relation("profile_image")
+  coverImageUser   User?   @relation("cover_image")
+  recipe           Recipe?
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("files")
+}
+
+model Notification {
+  id      String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title   String  @db.VarChar(64)
+  content String  @db.Text
+  read    Boolean @default(false) @db.Boolean
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String @map("user_id") @db.Uuid
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("notifications")
 }

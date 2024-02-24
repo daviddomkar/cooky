@@ -5,6 +5,7 @@
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "antfu.unocss"
+    "antfu.unocss",
+    "prisma.prisma",
   ],
 }
