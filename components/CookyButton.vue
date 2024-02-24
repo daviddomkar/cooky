@@ -11,17 +11,20 @@ const props = withDefaults(defineProps<Props>(), {
 
 const computedClass = computed(() => {
   let defaultClass =
-    "flex border-none w-fit rounded-3xl items-center justify-center box-border px-6 py-3 uppercase";
+    "flex border-none w-fit rounded-3xl items-center justify-center box-border px-6 py-3 uppercase ";
 
   switch (props.variant) {
     case "primary":
-      defaultClass += " bg-gradient-to-r from-primary to-secondary text-white";
+      defaultClass +=
+        "bg-gradient-to-r from-primary to-secondary hover:scale-110 transition duration-300 ease-in-out text-white";
       break;
     case "secondary":
-      defaultClass += " bg-surface-container text-white";
+      defaultClass +=
+        "bg-surface-container hover:scale-110 transition duration-300 ease-in-out text-white";
       break;
     case "text":
-      defaultClass += " bg-transparent text-primary";
+      defaultClass +=
+        "bg-transparent hover:text-secondary transition duration-300 ease-in-out text-primary";
   }
 
   return defaultClass;

@@ -5,7 +5,7 @@
       src="https://hips.hearstapps.com/hmg-prod/images/fluffy-pancakes-1675719604.jpg"
     />
     <div
-      class="absolute left-0 top-0 box-border h-full w-full flex flex-col justify-between p-3"
+      class="absolute left-0 top-0 z-0 box-border h-full w-full flex flex-col justify-between p-3 after:absolute before:absolute after:bottom-0 after:left-0 before:left-0 before:top-0 after:h-16 after:w-full before:h-16 before:w-full after:from-black before:from-black after:to-transparent before:to-transparent after:bg-gradient-to-t before:bg-gradient-to-b after:opacity-50 before:opacity-50 after:content-[''] before:content-[''] after:-z-1 before:-z-1"
     >
       <h2 class="my-0 text-center">Pancakes</h2>
       <div class="flex items-center">
