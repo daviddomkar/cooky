@@ -12,8 +12,27 @@ export default meta;
 type Story = StoryObj<typeof CookyRecipeCard>;
 
 export const Default: Story = {
-  render: () => ({
+  args: {
+    liked: false,
+  },
+  render: (args) => ({
     components: { CookyRecipeCard },
-    template: '<CookyRecipeCard class="w-[240px]" />',
+    setup() {
+      return { args };
+    },
+    template: '<CookyRecipeCard v-bind="args" class="w-[240px]" />',
+  }),
+};
+
+export const Liked: Story = {
+  args: {
+    liked: true,
+  },
+  render: (args) => ({
+    components: { CookyRecipeCard },
+    setup() {
+      return { args };
+    },
+    template: '<CookyRecipeCard v-bind="args" class="w-[240px]" />',
   }),
 };

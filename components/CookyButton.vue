@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const computedClass = computed(() => {
   let defaultClass =
-    "flex border-none w-fit rounded-3xl items-center justify-center box-border px-6 py-3 uppercase ";
+    "flex border-none w-fit rounded-3xl items-center justify-center box-border px-6 py-3 uppercase pointer-events-auto ";
 
   switch (props.variant) {
     case "primary":

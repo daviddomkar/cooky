@@ -33,3 +33,31 @@ export const Default: Story = {
     template: '<CookyButton v-bind="args">{{ args.default }}</CookyButton>',
   }),
 };
+
+export const Secondary: Story = {
+  args: {
+    variant: "secondary",
+    default: "Click me",
+  },
+  render: (args) => ({
+    components: { CookyButton },
+    setup() {
+      return { args };
+    },
+    template: '<CookyButton v-bind="args">{{ args.default }}</CookyButton>',
+  }),
+};
+
+export const Text: Story = {
+  args: {
+    variant: "text",
+    default: "Click me",
+  },
+  render: (args) => ({
+    components: { CookyButton },
+    setup() {
+      return { args };
+    },
+    template: '<CookyButton v-bind="args">{{ args.default }}</CookyButton>',
+  }),
+};
