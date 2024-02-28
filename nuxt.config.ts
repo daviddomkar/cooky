@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  css: ["@unocss/reset/normalize.css", "~/assets/css/preflight.css"],
+  css: ["~/assets/css/base.css"],
   modules: [
     "@nuxtjs/eslint-module",
     "@nuxtjs/stylelint-module",

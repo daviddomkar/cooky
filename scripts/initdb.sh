@@ -8,4 +8,8 @@ EOSQL
 
 export DATABASE_URL="postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@localhost:5432/$POSTGRES_DB?host=/var/run/postgresql/"
 
-prisma migrate dev --skip-generate
+echo "Downloading required dependencies, this may take a while..."
+cd docker-entrypoint-initdb.d && npm ci
+
+echo "Setting up database..."
+npm run prisma:migrate:reset -- --force

@@ -32,9 +32,11 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./package.json:/package.json
-      - ./prisma:/prisma
-      - ./scripts/migrate.sh:/docker-entrypoint-initdb.d/migrate.sh
+      - ./package.json:/docker-entrypoint-initdb.d/package.json
+      - ./package-lock.json:/docker-entrypoint-initdb.d/package-lock.json
+      - ./tsconfig.json:/docker-entrypoint-initdb.d/tsconfig.json
+      - ./prisma:/docker-entrypoint-initdb.d/prisma
+      - ./scripts/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
       - cooky:/var/lib/postgresql/data
 
 volumes:

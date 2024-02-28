@@ -9,6 +9,6 @@ RUN apt-get update && \
   gnupg \
   ca-certificates
 
-RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - && apt-get install nodejs -y
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install nodejs -y
 
-RUN npm install -g prisma ts-node
+RUN chmod 777 -R /docker-entrypoint-initdb.d
