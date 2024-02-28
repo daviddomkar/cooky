@@ -22,7 +22,7 @@ services:
       context: .
       dockerfile: prisma/Dockerfile
     image: cooky_postgres
-    container_name: postgres
+    container_name: cooky_postgres
     environment:
       - POSTGRES_USER=${ROOT_USER:-root}
       - POSTGRES_PASSWORD=${ROOT_PASSWORD:-root}
