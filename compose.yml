@@ -18,7 +18,10 @@ services:
       - postgres
 
   postgres:
-    image: postgres:16.1
+    build:
+      context: .
+      dockerfile: prisma/Dockerfile
+    image: cooky_postgres
     container_name: postgres
     environment:
       - POSTGRES_USER=${ROOT_USER:-root}
@@ -29,9 +32,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./prisma/migrations:/docker-entrypoint-initdb.d/migrations
-      - ./scripts/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
-      - ./scripts/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+      - ./package.json:/package.json
+      - ./prisma:/prisma
+      - ./scripts/migrate.sh:/docker-entrypoint-initdb.d/migrate.sh
       - cooky:/var/lib/postgresql/data
 
 volumes:

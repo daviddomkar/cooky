@@ -15,7 +15,7 @@
     "commitlint": "commitlint --edit",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
-    "prisma:migrate:dev": "prisma migrate dev --name dev",
+    "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:reset": "prisma migrate reset",
     "storybook:dev": "storybook dev --port 6006",
     "build-storybook": "storybook build",
