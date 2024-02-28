@@ -15,7 +15,7 @@
     "commitlint": "commitlint --edit",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
-    "prisma:migrate:dev": "prisma migrate dev --name dev",
+    "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:reset": "prisma migrate reset",
     "storybook:dev": "storybook dev --port 6006",
     "build-storybook": "storybook build",
@@ -26,7 +26,7 @@
     "*.{css,vue}": "stylelint --fix"
   },
   "prisma": {
-    "seed": "ts-node --esm --transpile-only prisma/seed.ts"
+    "seed": "node --loader ts-node/esm prisma/seed.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.6.0",
@@ -36,7 +36,7 @@
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/stylelint-module": "^5.2.0",
-    "@prisma/client": "^5.9.1",
+    "@prisma/client": "^5.10.2",
     "@storybook-vue/nuxt": "0.2.1",
     "@storybook/addon-essentials": "^8.0.0-beta.2",
     "@storybook/addon-interactions": "^8.0.0-beta.2",
@@ -55,7 +55,7 @@
     "nuxt": "^3.10.0",
     "prettier": "^3.2.5",
     "prettier-plugin-prisma": "^5.0.0",
-    "prisma": "^5.9.1",
+    "prisma": "^5.10.2",
     "storybook": "^8.0.0-beta.2",
     "stylelint": "^16.2.1",
     "stylelint-config-recommended-vue": "^1.5.0",

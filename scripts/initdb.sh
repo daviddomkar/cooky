@@ -6,10 +6,10 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
     GRANT ALL PRIVILEGES ON DATABASE "$POSTGRES_DB" TO "$COOKY_USER";
 EOSQL
 
-for f in /docker-entrypoint-initdb.d/migrations/**/*; do
-  case "$f" in
-    *.sql)    echo "$0: running $f"; psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -f "$f"; echo ;;
-    *)        echo "$0: ignoring $f" ;;
-  esac
-  echo
-done
+export DATABASE_URL="postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@localhost:5432/$POSTGRES_DB?host=/var/run/postgresql/"
+
+echo "Downloading required dependencies, this may take a while..."
+cd docker-entrypoint-initdb.d && npm ci
+
+echo "Setting up database..."
+npm run prisma:migrate:reset -- --force
