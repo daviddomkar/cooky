@@ -21,6 +21,7 @@
         "CONTENT"
       ],
       "alphabetical": true
-    }]
+    }],
+    "import/named": "off"
   }
 }
