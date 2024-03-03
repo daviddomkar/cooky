@@ -1,7 +1,15 @@
 body {
-  @apply font-sans text-on-surface bg-surface m-0;
+  @apply font-sans text-on-surface bg-surface transition-colors;
+}
+
+button {
+  @apply font-sans text-base leading-4;
 }
 
 h1, h2, h3, h4, h5, h6 {
   @apply font-display font-normal;
+}
+
+h1 {
+  @apply text-8xl;
 }
