@@ -10,14 +10,16 @@ CREATE TYPE "recipe_state" AS ENUM ('DRAFT', 'PUBLISHED');
 -- CreateTable
 CREATE TABLE "users" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
-    "name" VARCHAR(32) NOT NULL,
+    "name" VARCHAR(64) NOT NULL,
     "username" VARCHAR(32) NOT NULL,
     "email" VARCHAR(32) NOT NULL,
     "hashed_password" CHAR(60) NOT NULL,
-    "profile_image_id" UUID NOT NULL,
-    "cover_image_id" UUID NOT NULL,
-    "favorites_list_id" UUID NOT NULL,
+    "profile_image_id" UUID,
+    "cover_image_id" UUID,
+    "favorites_list_id" UUID,
     "last_used_list_id" UUID,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -27,6 +29,8 @@ CREATE TABLE "ingredients" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "title" VARCHAR(32) NOT NULL,
     "unit_types" "unit_types"[],
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "ingredients_pkey" PRIMARY KEY ("id")
 );
@@ -37,6 +41,8 @@ CREATE TABLE "units" (
     "title" VARCHAR(32) NOT NULL,
     "type" "unit_types" NOT NULL,
     "abbreviation" VARCHAR(8) NOT NULL,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "units_pkey" PRIMARY KEY ("id")
 );
@@ -57,6 +63,8 @@ CREATE TABLE "categories" (
     "title" VARCHAR(32) NOT NULL,
     "order" SERIAL NOT NULL,
     "icon" VARCHAR(32) NOT NULL,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "categories_pkey" PRIMARY KEY ("id")
 );
@@ -183,9 +191,6 @@ CREATE TABLE "notifications" (
 
     CONSTRAINT "notifications_pkey" PRIMARY KEY ("id")
 );
-
--- CreateIndex
-CREATE UNIQUE INDEX "users_name_key" ON "users"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_username_key" ON "users"("username");

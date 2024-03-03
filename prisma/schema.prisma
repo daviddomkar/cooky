@@ -10,17 +10,17 @@ datasource db {
 
 model User {
   id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name     String @unique @db.VarChar(32)
+  name     String @db.VarChar(64)
   username String @unique @db.VarChar(32)
   email    String @unique @db.VarChar(32)
   password String @map("hashed_password") @db.Char(60)
 
-  profileImage    File    @relation("profile_image", fields: [profileImageId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  profileImageId  String  @unique @map("profile_image_id") @db.Uuid
-  coverImage      File    @relation("cover_image", fields: [coverImageId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  coverImageId    String  @unique @map("cover_image_id") @db.Uuid
-  favoritesList   List    @relation("favorites_list", fields: [favoritesListId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  favoritesListId String  @unique @map("favorites_list_id") @db.Uuid
+  profileImage    File?   @relation("profile_image", fields: [profileImageId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  profileImageId  String? @unique @map("profile_image_id") @db.Uuid
+  coverImage      File?   @relation("cover_image", fields: [coverImageId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  coverImageId    String? @unique @map("cover_image_id") @db.Uuid
+  favoritesList   List?   @relation("favorites_list", fields: [favoritesListId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  favoritesListId String? @unique @map("favorites_list_id") @db.Uuid
   lastUsedList    List?   @relation("last_used_list", fields: [lastUsedListId], references: [id], onDelete: SetNull, onUpdate: Cascade)
   lastUsedListId  String? @unique @map("last_used_list_id") @db.Uuid
 
@@ -32,6 +32,9 @@ model User {
   notifications Notification[]
   replyHearts   ReplyHeart[]
   commentHearts CommentHeart[]
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
 
   @@map("users")
 }
@@ -51,6 +54,9 @@ model Ingredient {
 
   recipes RecipeIngredient[]
 
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
   @@map("ingredients")
 }
 
@@ -61,6 +67,9 @@ model Unit {
   abbreviation String   @unique @db.VarChar(8)
 
   recipeIngredients RecipeIngredient[]
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
 
   @@map("units")
 }
@@ -85,6 +94,9 @@ model Category {
   order   Int              @default(autoincrement()) @db.Integer
   icon    String           @db.VarChar(32)
   recipes RecipeCategory[]
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
 
   @@map("categories")
 }
@@ -161,9 +173,10 @@ model Reply {
   author    User    @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   authorId  String  @map("author_id") @db.Uuid
 
-  createdAt DateTime     @default(now()) @map("created_at") @db.Timestamptz
-  updatedAt DateTime     @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
-  hearts    ReplyHeart[]
+  hearts ReplyHeart[]
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
 
   @@map("replies")
 }
@@ -180,10 +193,10 @@ model List {
   title      String     @db.VarChar(32)
   visibility Visibility @default(PUBLIC)
 
-  favoritesListUser User?  @relation("favorites_list")
-  lastUsedListUser  User?  @relation("last_used_list")
-  author            User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  authorId          String @map("author_id") @db.Uuid
+  favouritesOfUser User?  @relation("favorites_list")
+  lastUsedOfUser   User?  @relation("last_used_list")
+  author           User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  authorId         String @map("author_id") @db.Uuid
 
   recipes RecipeList[]
 

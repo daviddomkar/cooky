@@ -1,5 +1,5 @@
 body {
-  @apply font-sans text-on-surface bg-surface;
+  @apply font-sans text-on-surface bg-surface m-0;
 }
 
 h1, h2, h3, h4, h5, h6 {
