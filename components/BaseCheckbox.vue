@@ -2,6 +2,7 @@
 
 type Props = {
   name: string,
+  modelValue: string,
   value: string
 }
 
@@ -12,7 +13,7 @@ const { checked, errorMessage, handleChange } =  useField(
   undefined,
   {
     type: "checkbox",
-    checkedValue: props.value,
+    checkedValue: props.modelValue,
     validateOnValueUpdate: true,
     syncVModel: true
   }
@@ -26,7 +27,7 @@ const { checked, errorMessage, handleChange } =  useField(
     class="m-0 mr-2 h-4 w-4 border-1 border-primary rounded-100 border-solid text-primary focus:ring-none"
     :class="{ 'bg-error!': !!errorMessage }"
     type="checkbox"
-    :value="value"
+    :value="modelValue"
     @change="handleChange"/>
 
     <label

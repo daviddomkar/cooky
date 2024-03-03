@@ -14,6 +14,7 @@ type Story = StoryObj<typeof BaseCheckbox>;
 export const Default: Story = {
   args: {
     name: "checkboy",
+    modelValue: "terms",
     default: "Agree Terms & Conditions",
   },
   render: (args) => ({
