@@ -23,7 +23,7 @@ const { value, errorMessage, handleBlur, handleChange } = useField(
 </script>
 
 <template>
-  <div class="h-16 w-80">
+  <div class="max-w-80 min-h-16 w-full flex flex-col">
     <div class="relative w-full flex items-center">
       <input
         :id="name"
@@ -67,7 +67,7 @@ const { value, errorMessage, handleBlur, handleChange } = useField(
         </legend>
       </fieldset>
     </div>
-    <label v-if="errorMessage" class="ml-6 text-xs text-error">
+    <label v-if="errorMessage" class="ml-6 inline-block text-xs text-error">
       {{ errorMessage }}
     </label>
   </div>

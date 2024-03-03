@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 import RecipeCard from "./RecipeCard.vue";
 
 const meta = {
-  title: "RecipeCard",
+  title: "Design System/Misc/RecipeCard",
   component: RecipeCard,
 } satisfies Meta<typeof RecipeCard>;
 

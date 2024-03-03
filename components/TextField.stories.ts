@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 import TextField from "./TextField.vue";
 
 const meta: Meta<typeof TextField> = {
-  title: "TextField",
+  title: "Design System/Form Fields/TextField",
   component: TextField,
   argTypes: {
     type: {
