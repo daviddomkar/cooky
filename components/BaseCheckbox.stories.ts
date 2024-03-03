@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 import BaseCheckbox from "./BaseCheckbox.vue";
 
 const meta = {
-  title: "BaseCheckbox",
+  title: "Design System/Base/BaseCheckbox",
   component: BaseCheckbox,
 } satisfies Meta<typeof BaseCheckbox>;
 

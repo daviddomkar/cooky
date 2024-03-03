@@ -12,6 +12,9 @@ export default meta;
 type Story = StoryObj<typeof PictureFrame>;
 
 export const Default: Story = {
+  args: {
+    src: "https://www.homeware.cz/images/clanky/Clanky/palacinky.jpg",
+  },
   render: (args) => ({
     components: { PictureFrame },
     setup() {

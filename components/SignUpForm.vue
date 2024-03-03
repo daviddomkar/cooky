@@ -10,6 +10,7 @@ import {
   string,
   toTrimmed,
 } from "valibot";
+import BaseCheckbox from "./BaseCheckbox.vue";
 
 const SignUpSchema = object(
   {
@@ -81,6 +82,9 @@ const onSubmit = handleSubmit((values) => {
       name="confirmPassword"
       type="password"
     />
+    <BaseCheckbox name="tosAgreement" value="idk">
+      Agree to our Terms of Service & Privacy Policy
+    </BaseCheckbox>
     <BaseButton class="mt-2 sm:mt-4" type="submit">Sign up</BaseButton>
     <p class="text-outline" to="/login">
       Already have an account?
