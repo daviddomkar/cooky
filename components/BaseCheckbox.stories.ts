@@ -15,7 +15,7 @@ export const Default: Story = {
   args: {
     name: "checkboy",
     modelValue: "terms",
-    checked: true,
+    initialState: true,
     default: "Agree Terms & Conditions",
   },
   render: (args) => ({
