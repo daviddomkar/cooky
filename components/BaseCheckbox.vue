@@ -7,10 +7,16 @@ type Props = {
 
 const props = defineProps<Props>();
 
-const { checked, errorMessage, handleChange } =  useField(() => props.name, undefined, {
-  type: "checkbox",
-  checkedValue: props.value
-})
+const { checked, errorMessage, handleChange } =  useField(
+  () => props.name,
+  undefined,
+  {
+    type: "checkbox",
+    checkedValue: props.value,
+    validateOnValueUpdate: true,
+    syncVModel: true
+  }
+)
 </script>
 
 <template>
