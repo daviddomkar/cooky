@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     "@nuxtjs/eslint-module",
     "@nuxtjs/stylelint-module",
     "@unocss/nuxt",
+    "@vee-validate/nuxt",
   ],
   eslint: {
     lintOnStart: false,
@@ -18,6 +19,15 @@ export default defineNuxtConfig({
     enabled: true,
     timeline: {
       enabled: true,
+    },
+  },
+  veeValidate: {
+    autoImports: true,
+    componentNames: {
+      Form: "VeeForm",
+      Field: "VeeField",
+      FieldArray: "VeeFieldArray",
+      ErrorMessage: "VeeErrorMessage",
     },
   },
 });

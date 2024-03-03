@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 
-import CookyButton from "./CookyButton.vue";
+import AuthButton from "./AuthButton.vue";
 
-const meta: Meta<typeof CookyButton> = {
-  title: "CookyButton",
-  component: CookyButton,
+const meta: Meta<typeof AuthButton> = {
+  title: "AuthButton",
+  component: AuthButton,
   argTypes: {
     variant: {
       options: ["primary", "secondary", "text"],
@@ -18,7 +18,7 @@ const meta: Meta<typeof CookyButton> = {
 
 export default meta;
 
-type Story = StoryObj<typeof CookyButton>;
+type Story = StoryObj<typeof AuthButton>;
 
 export const Default: Story = {
   args: {
@@ -26,11 +26,11 @@ export const Default: Story = {
     default: "Click me",
   },
   render: (args) => ({
-    components: { CookyButton },
+    components: { AuthButton },
     setup() {
       return { args };
     },
-    template: '<CookyButton v-bind="args">{{ args.default }}</CookyButton>',
+    template: '<AuthButton v-bind="args">{{ args.default }}</AuthButton>',
   }),
 };
 
@@ -40,11 +40,11 @@ export const Secondary: Story = {
     default: "Click me",
   },
   render: (args) => ({
-    components: { CookyButton },
+    components: { AuthButton },
     setup() {
       return { args };
     },
-    template: '<CookyButton v-bind="args">{{ args.default }}</CookyButton>',
+    template: '<AuthButton v-bind="args">{{ args.default }}</AuthButton>',
   }),
 };
 
@@ -54,10 +54,10 @@ export const Text: Story = {
     default: "Click me",
   },
   render: (args) => ({
-    components: { CookyButton },
+    components: { AuthButton },
     setup() {
       return { args };
     },
-    template: '<CookyButton v-bind="args">{{ args.default }}</CookyButton>',
+    template: '<AuthButton v-bind="args">{{ args.default }}</AuthButton>',
   }),
 };
