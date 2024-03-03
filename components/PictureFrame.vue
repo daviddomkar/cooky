@@ -1,17 +1,17 @@
 <script setup lang="ts">
 type Props = {
   src: string;
-  diometer: number;
+  diameter: number;
   frameWidth: number;
 };
 
 const props = withDefaults(defineProps<Props>(), {
   src: "https://www.homeware.cz/images/clanky/Clanky/palacinky.jpg",
-  diometer: 72,
+  diameter: 72,
 });
 
 const frameWidth = computed(() => {
-  return props.diometer + 8;
+  return props.diameter + 8;
 });
 </script>
 
@@ -19,7 +19,7 @@ const frameWidth = computed(() => {
   <div class="relative">
     <div
       class="overflow-hidden border-20 border-white rounded-full bg-white"
-      :class="`h-${props.diometer} w-${props.diometer}`"
+      :class="`h-${props.diameter} w-${props.diameter}`"
     >
       <img
         alt="Picture"

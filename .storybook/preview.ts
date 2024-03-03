@@ -1,4 +1,5 @@
-import type { Preview } from "@storybook/vue3";
+import type { Preview, VueRenderer } from "@storybook/vue3";
+import { withThemeByClassName } from "@storybook/addon-themes";
 
 const preview: Preview = {
   parameters: {
@@ -11,6 +12,15 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [
+    withThemeByClassName<VueRenderer>({
+      themes: {
+        light: "",
+        dark: "dark",
+      },
+      defaultTheme: "light",
+    }),
+  ],
 };
 
 export default preview;

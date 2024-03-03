@@ -10,6 +10,8 @@ const lightTheme = {
     secondary: "#ff5f54",
     surface: "#ffffff",
     "surface-container": "#f5f5f5",
+    outline: "#808080",
+    error: "ba1a1a",
     on: {
       primary: "#ffffff",
       surface: "#101010",
@@ -35,9 +37,7 @@ const darkTheme = {
 export default defineConfig({
   presets: [
     presetForms(),
-    presetUno({
-      dark: "media",
-    }),
+    presetUno(),
     presetIcons(),
     presetWebFonts({
       provider: "google",
