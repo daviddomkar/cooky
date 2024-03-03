@@ -3,11 +3,11 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 import BaseButton from "./BaseButton.vue";
 
 const meta: Meta<typeof BaseButton> = {
-  title: "BaseButton",
+  title: "Design System/Base/BaseButton",
   component: BaseButton,
   argTypes: {
     variant: {
-      options: ["primary", "secondary", "text"],
+      options: ["primary", "secondary"],
       control: { type: "radio" },
     },
     default: {
@@ -37,20 +37,6 @@ export const Default: Story = {
 export const Secondary: Story = {
   args: {
     variant: "secondary",
-    default: "Click me",
-  },
-  render: (args) => ({
-    components: { BaseButton },
-    setup() {
-      return { args };
-    },
-    template: '<BaseButton v-bind="args">{{ args.default }}</BaseButton>',
-  }),
-};
-
-export const Text: Story = {
-  args: {
-    variant: "text",
     default: "Click me",
   },
   render: (args) => ({

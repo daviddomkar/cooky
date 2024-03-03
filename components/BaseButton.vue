@@ -2,7 +2,7 @@
 import { computed } from "vue";
 
 type Props = {
-  variant: "primary" | "secondary" | "text";
+  variant: "primary" | "secondary";
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -11,20 +11,16 @@ const props = withDefaults(defineProps<Props>(), {
 
 const computedClass = computed(() => {
   let defaultClass =
-    "flex border-none w-fit rounded-3xl items-center justify-center box-border px-6 py-3 uppercase pointer-events-auto ";
+    "flex border-none w-fit rounded-full items-center justify-center box-border px-8 py-3 uppercase cursor-pointer hover:scale-[1.05] hover:active:scale-[0.97] ";
 
   switch (props.variant) {
     case "primary":
       defaultClass +=
-        "bg-gradient-to-r from-primary to-secondary hover:scale-110 transition duration-300 ease-in-out text-white";
+        "bg-gradient-to-r from-primary to-secondary transition ease-in-out text-white";
       break;
     case "secondary":
-      defaultClass +=
-        "bg-surface-container hover:scale-110 transition duration-300 ease-in-out text-white";
+      defaultClass += "bg-surface-container transition ease-in-out text-white";
       break;
-    case "text":
-      defaultClass +=
-        "bg-transparent hover:text-secondary transition duration-300 ease-in-out text-primary";
   }
 
   return defaultClass;
