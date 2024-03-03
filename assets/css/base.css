@@ -1,5 +1,5 @@
 body {
-  @apply font-sans text-on-surface bg-surface;
+  @apply font-sans text-on-surface bg-surface transition-colors;
 }
 
 button {

@@ -11,7 +11,7 @@ const lightTheme = {
     surface: "#ffffff",
     "surface-container": "#f5f5f5",
     outline: "#808080",
-    error: "ba1a1a",
+    error: "#f87171",
     on: {
       primary: "#ffffff",
       surface: "#101010",
@@ -26,6 +26,8 @@ const darkTheme = {
     secondary: "#ff5f54",
     surface: "#222222",
     "surface-container": "#101010",
+    outline: "#808080",
+    error: "#f87171",
     on: {
       primary: "#ffffff",
       surface: "#ffffff",
