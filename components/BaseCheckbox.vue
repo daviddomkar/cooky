@@ -1,43 +1,44 @@
 <script setup lang="ts">
-
 type Props = {
-  name: string,
-  modelValue: string,
-  initialState?: boolean
-}
+  name: string;
+  modelValue?: boolean;
+};
 
-const props = withDefaults(defineProps<Props>(), {
-  initialState: false
-});
+const props = defineProps<Props>();
 
-const { checked, errorMessage, handleChange } =  useField(
+const { checked, errorMessage, handleChange } = useField(
   () => props.name,
   undefined,
   {
     type: "checkbox",
-    checkedValue: props.modelValue,
-    initialValue: props.initialState ? props.modelValue : null,
-    validateOnValueUpdate: true,
-    syncVModel: true
-  }
-)
+    syncVModel: true,
+    checkedValue: true,
+    uncheckedValue: false,
+    initialValue: props.modelValue,
+  },
+);
 </script>
 
 <template>
-  <div class="flex items-center p-2">
-  <input
-    :checked="checked"
-    class="m-0 mr-2 h-4 w-4 border-1 border-primary rounded-100 border-solid text-primary focus:ring-none"
-    :class="{ 'bg-error!': !!errorMessage }"
-    type="checkbox"
-    :value="modelValue"
-    @change="handleChange"/>
-
-    <label
-      class="pr-2 text-xs text-outline"
-      :class="{ 'text-error!': !!errorMessage }"
-    >
-    <slot />
+  <div class="box-border max-w-80 min-h-8 w-full flex flex-col gap-2 px-6">
+    <div class="flex">
+      <input
+        :checked="checked"
+        class="border-box m-0 border-1 rounded-full border-solid text-primary dark:bg-surface-container checked:bg-primary focus:ring-none"
+        :class="{
+          'border-error': errorMessage,
+          'border-outline': !errorMessage,
+        }"
+        type="checkbox"
+        :value="modelValue"
+        @change="handleChange"
+      />
+      <label class="ml-2 text-xs text-outline">
+        <slot />
+      </label>
+    </div>
+    <label v-if="errorMessage" class="inline-block text-xs text-error">
+      {{ errorMessage }}
     </label>
   </div>
 </template>

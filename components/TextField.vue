@@ -18,12 +18,13 @@ const { value, errorMessage, handleBlur, handleChange } = useField(
   {
     validateOnValueUpdate: false,
     syncVModel: true,
+    initialValue: props.modelValue,
   },
 );
 </script>
 
 <template>
-  <div class="max-w-80 min-h-16 w-full flex flex-col">
+  <div class="max-w-80 min-h-16 w-full flex flex-col gap-2">
     <div class="relative w-full flex items-center">
       <input
         :id="name"
@@ -67,7 +68,7 @@ const { value, errorMessage, handleBlur, handleChange } = useField(
         </legend>
       </fieldset>
     </div>
-    <label v-if="errorMessage" class="ml-6 inline-block text-xs text-error">
+    <label v-if="errorMessage" class="inline-block px-6 text-xs text-error">
       {{ errorMessage }}
     </label>
   </div>

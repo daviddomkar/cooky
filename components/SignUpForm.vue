@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {
+  boolean,
   custom,
   email,
   forward,
@@ -42,6 +43,15 @@ const SignUpSchema = object(
       toTrimmed(),
       minLength(1, "This field is required."),
     ]),
+    agreedToTermsAndPrivacyPolicy: boolean(
+      "You must agree to our Terms & Privacy Policy.",
+      [
+        custom(
+          (input) => input === true,
+          "You must agree to our Terms & Privacy Policy.",
+        ),
+      ],
+    ),
   },
   [
     forward(
@@ -82,11 +92,12 @@ const onSubmit = handleSubmit((values) => {
       name="confirmPassword"
       type="password"
     />
-    <BaseCheckbox name="tosAgreement" value="idk">
-      Agree to our Terms of Service & Privacy Policy
+    <BaseCheckbox name="agreedToTermsAndPrivacyPolicy">
+      Agree to our <a class="cursor-pointer text-primary underline">Terms</a> &
+      <a class="cursor-pointer text-primary underline">Privacy Policy</a>
     </BaseCheckbox>
     <BaseButton class="mt-2 sm:mt-4" type="submit">Sign up</BaseButton>
-    <p class="text-outline" to="/login">
+    <p class="text-xs text-outline" to="/login">
       Already have an account?
       <a class="cursor-pointer text-primary underline">Log in</a>
     </p>
