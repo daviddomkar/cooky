@@ -13,3 +13,16 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   @apply text-8xl;
 }
+
+.cooky-auth-button::before {
+  mask: radial-gradient(64px at 0 0, #0000 99.8%, #000) 0 0;
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  @apply absolute right-0 h-16 w-16 bg-surface content-[''] -top-16;
+}
+.cooky-auth-button::after {
+  mask: radial-gradient(64px at 0 100%, #0000 99.8%, #000) 0 100%;
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  @apply absolute right-0 h-16 w-16 bg-surface content-[''] -bottom-16;
+}
