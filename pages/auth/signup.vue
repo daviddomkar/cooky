@@ -27,13 +27,25 @@ const signUp = async (values: Output<typeof SignUpSchema>) => {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
-    throw error;
   }
 };
 </script>
 
 <template>
   <div class="box-border h-full flex items-center justify-center p-8">
-    <SignUpForm :on-submit="signUp" />
+    <SignUpForm :on-submit="signUp">
+      <template #trailing>
+        <p class="text-xs text-outline">
+          Already have an account?
+          <NuxtLink
+            class="cursor-pointer text-primary underline"
+            replace
+            to="/auth/login"
+          >
+            Log in
+          </NuxtLink>
+        </p>
+      </template>
+    </SignUpForm>
   </div>
 </template>

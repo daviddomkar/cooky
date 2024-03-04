@@ -39,7 +39,19 @@ export const Filled: Story = {
       confirmPassword: "Hh8GH33ddc6y",
       agreedToTermsAndPrivacyPolicy: true,
     },
-    onSubmit: (_) => new Promise((resolve) => setTimeout(resolve, 1000)),
+    onSubmit: async (_, { resetForm }) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      resetForm({
+        values: {
+          name: "",
+          username: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          agreedToTermsAndPrivacyPolicy: false,
+        },
+      });
+    },
   },
   render: (args) => ({
     components: { SignUpForm },

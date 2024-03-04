@@ -35,7 +35,15 @@ export const Filled: Story = {
       usernameOrEmail: "johnsmith",
       password: "Hh8GH33ddc6y",
     },
-    onSubmit: (_) => new Promise((resolve) => setTimeout(resolve, 1000)),
+    onSubmit: async (_, { resetForm }) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      resetForm({
+        values: {
+          usernameOrEmail: "",
+          password: "",
+        },
+      });
+    },
   },
   render: (args) => ({
     components: { LogInForm },
