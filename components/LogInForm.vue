@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { Input, Output } from "valibot";
+import type { SubmissionHandler } from "vee-validate";
 
 const props = defineProps<{
   initialValues?: Input<typeof LogInFormSchema>;
-  onSubmit?: (values: Output<typeof LogInFormSchema>) => Promise<void>;
+  onSubmit?: SubmissionHandler<Output<typeof LogInFormSchema>>;
 }>();
 
 const { handleSubmit, isSubmitting, handleReset } = useForm({
@@ -11,19 +12,8 @@ const { handleSubmit, isSubmitting, handleReset } = useForm({
   initialValues: props.initialValues,
 });
 
-const submit = handleSubmit(async (values, { resetForm }) => {
-  try {
-    await props.onSubmit?.(values);
-    resetForm({
-      values: {
-        usernameOrEmail: "",
-        password: "",
-      },
-    });
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-  }
+const submit = handleSubmit(async (values, opts) => {
+  await props.onSubmit?.(values, opts);
 });
 </script>
 
@@ -46,15 +36,6 @@ const submit = handleSubmit(async (values, { resetForm }) => {
     <BaseButton class="mt-2 sm:mt-4" :loading="isSubmitting" type="submit">
       Log in
     </BaseButton>
-    <p class="text-xs text-outline" to="/login">
-      Not registered yet?
-      <NuxtLink
-        class="cursor-pointer text-primary underline"
-        replace
-        to="/auth/signup"
-      >
-        Sign up
-      </NuxtLink>
-    </p>
+    <slot name="trailing" />
   </form>
 </template>
