@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     "@vee-validate/nuxt",
     "@hebilicious/authjs-nuxt",
     "@nuxtjs/color-mode",
+    "nuxt3-notifications",
   ],
   runtimeConfig: {
     authJs: {

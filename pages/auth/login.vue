@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import type { Output } from "valibot";
 
-const { signIn } = useAuth();
-
 definePageMeta({
   layout: "auth",
   middleware: "guest-only",
 });
+
+const { signIn } = useAuth();
+const { notify } = useNotification();
 
 const logIn = async (values: Output<typeof LogInSchema>) => {
   try {
@@ -17,6 +18,13 @@ const logIn = async (values: Output<typeof LogInSchema>) => {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
+
+    notify({
+      title: "Error",
+      text: "Ajajaj",
+    });
+
+    console.log("after notify");
   }
 };
 </script>
