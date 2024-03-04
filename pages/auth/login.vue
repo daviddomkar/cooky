@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Output } from "valibot";
+import { useNotification } from "@kyvg/vue3-notification";
 
 definePageMeta({
   layout: "auth",
@@ -16,15 +17,11 @@ const logIn = async (values: Output<typeof LogInSchema>) => {
       password: values.password,
     });
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-
     notify({
-      title: "Error",
-      text: "Ajajaj",
+      type: "error",
+      title: "Failed to log in",
+      text: "Check your credentials and try again.",
     });
-
-    console.log("after notify");
   }
 };
 </script>
