@@ -1,75 +1,28 @@
 <script setup lang="ts">
-import {
-  boolean,
-  custom,
-  email,
-  forward,
-  maxLength,
-  minLength,
-  object,
-  regex,
-  string,
-  toTrimmed,
-} from "valibot";
+import type { Output } from "valibot";
 import BaseCheckbox from "./BaseCheckbox.vue";
 
-const SignUpSchema = object(
-  {
-    name: string("This field is required.", [
-      toTrimmed(),
-      minLength(1, "This field is required."),
-      maxLength(64, "Name is too long."),
-    ]),
-    username: string("This field is required.", [
-      toTrimmed(),
-      minLength(1, "This field is required."),
-      maxLength(32, "Username is too long."),
-    ]),
-    email: string("This field is required.", [
-      toTrimmed(),
-      minLength(1, "This field is required."),
-      maxLength(32, "Email is too long."),
-      email("Invalid email."),
-    ]),
-    password: string("This field is required.", [
-      toTrimmed(),
-      minLength(1, "This field is required."),
-      regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,}$/,
-        "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number!",
-      ),
-    ]),
-    confirmPassword: string("This field is required.", [
-      toTrimmed(),
-      minLength(1, "This field is required."),
-    ]),
-    agreedToTermsAndPrivacyPolicy: boolean(
-      "You must agree to our Terms & Privacy Policy.",
-      [
-        custom(
-          (input) => input === true,
-          "You must agree to our Terms & Privacy Policy.",
-        ),
-      ],
-    ),
-  },
-  [
-    forward(
-      custom(
-        (input) => input.password === input.confirmPassword,
-        "Passwords do not match.",
-      ),
-      ["confirmPassword"],
-    ),
-  ],
-);
+const props = defineProps<{
+  initialValues?: Output<typeof SignUpFormSchema>;
+}>();
 
-const { handleSubmit } = useForm({
-  validationSchema: toTypedSchema(SignUpSchema),
+const { handleSubmit, isSubmitting, resetForm } = useForm({
+  validationSchema: toTypedSchema(SignUpFormSchema),
+  initialValues: props.initialValues,
 });
 
-const onSubmit = handleSubmit((values) => {
-  console.log(values);
+const onSubmit = handleSubmit(async () => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  resetForm({
+    values: {
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      agreedToTermsAndPrivacyPolicy: false,
+    },
+  });
 });
 </script>
 
@@ -96,7 +49,9 @@ const onSubmit = handleSubmit((values) => {
       Agree to our <a class="cursor-pointer text-primary underline">Terms</a> &
       <a class="cursor-pointer text-primary underline">Privacy Policy</a>
     </BaseCheckbox>
-    <BaseButton class="mt-2 sm:mt-4" type="submit">Sign up</BaseButton>
+    <BaseButton class="mt-2 sm:mt-4" :loading="isSubmitting" type="submit">
+      Sign up
+    </BaseButton>
     <p class="text-xs text-outline" to="/login">
       Already have an account?
       <a class="cursor-pointer text-primary underline">Log in</a>

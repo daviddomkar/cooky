@@ -35,6 +35,7 @@ const { value, errorMessage, handleBlur, handleChange } = useField(
           'border-error': errorMessage,
         }"
         :name="name"
+        required
         :type="type"
         :value="value"
         @blur="handleBlur($event, true)"
@@ -49,6 +50,7 @@ const { value, errorMessage, handleBlur, handleChange } = useField(
           'text-outline peer-focus:text-primary': !value && !errorMessage,
           'text-error peer-focus:text-error': errorMessage,
         }"
+        :for="name"
       >
         {{ label }}
       </label>

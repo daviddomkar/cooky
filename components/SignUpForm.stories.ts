@@ -25,3 +25,27 @@ export const Default: Story = {
       '<div class="box-border flex items-center min-h-screen p-4"><SignUpForm v-bind="args" /></div>',
   }),
 };
+
+export const Filled: Story = {
+  parameters: {
+    layout: "fullscreen",
+  },
+  args: {
+    initialValues: {
+      name: "John Smith",
+      username: "johnsmith",
+      email: "john.smith@example.com",
+      password: "Hh8GH33ddc6y",
+      confirmPassword: "Hh8GH33ddc6y",
+      agreedToTermsAndPrivacyPolicy: true,
+    },
+  },
+  render: (args) => ({
+    components: { SignUpForm },
+    setup() {
+      return { args };
+    },
+    template:
+      '<div class="box-border flex items-center min-h-screen p-4"><SignUpForm v-bind="args" /></div>',
+  }),
+};

@@ -20,7 +20,7 @@ export default meta;
 
 type Story = StoryObj<typeof BaseButton>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     variant: "primary",
     default: "Click me",
@@ -38,6 +38,7 @@ export const Secondary: Story = {
   args: {
     variant: "secondary",
     default: "Click me",
+    loading: false,
   },
   render: (args) => ({
     components: { BaseButton },

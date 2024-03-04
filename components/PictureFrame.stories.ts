@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 import PictureFrame from "./PictureFrame.vue";
 
 const meta: Meta<typeof PictureFrame> = {
-  title: "Design System/Misc/PictureFrame",
+  title: "Design System/Base/PictureFrame",
   component: PictureFrame,
 };
 

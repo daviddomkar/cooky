@@ -5,7 +5,7 @@ import { prisma } from "~/server/plugins/prisma";
 export default defineEventHandler(async (event) => {
   const { name, username, email, password } = await useValidatedBody(
     event,
-    SignupSchema,
+    SignUpSchema,
   );
 
   await prisma.$transaction(async (tx) => {

@@ -1,34 +1,41 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import ProgressIndicator from "./ProgressIndicator.vue";
 
 type Props = {
-  variant: "primary" | "secondary";
+  variant?: "primary" | "secondary";
+  loading?: boolean;
 };
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   variant: "primary",
-});
-
-const computedClass = computed(() => {
-  let defaultClass =
-    "flex border-none w-fit rounded-full items-center justify-center box-border px-8 py-3 uppercase cursor-pointer hover:scale-[1.05] hover:active:scale-[0.97] ";
-
-  switch (props.variant) {
-    case "primary":
-      defaultClass +=
-        "bg-gradient-to-r from-primary to-secondary transition ease-in-out text-white";
-      break;
-    case "secondary":
-      defaultClass += "bg-surface-container transition ease-in-out text-white";
-      break;
-  }
-
-  return defaultClass;
+  loading: false,
 });
 </script>
 
 <template>
-  <button :class="computedClass">
-    <slot />
+  <button
+    class="relative box-border w-fit flex items-center justify-center rounded-full border-none px-8 py-3 uppercase"
+    :class="{
+      'bg-gradient-to-r from-primary to-secondary transition ease-in-out text-white':
+        variant === 'primary',
+      'bg-surface-container transition ease-in-out text-white':
+        variant === 'secondary',
+      'hover:scale-[1.05] hover:active:scale-[0.97] cursor-pointer': !loading,
+    }"
+  >
+    <div
+      v-if="loading"
+      class="absolute left-0 top-0 h-full w-full flex items-center justify-center"
+    >
+      <ProgressIndicator class="scale-[0.75]" />
+    </div>
+
+    <span
+      :class="{
+        invisible: loading,
+      }"
+    >
+      <slot />
+    </span>
   </button>
 </template>
