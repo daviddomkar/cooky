@@ -17,11 +17,11 @@ spec:
                 secretKeyRef:
                   key: latest
                   name: database-url
-            - name: AUTH_SECRET
+            - name: NUXT_AUTH_JS_SECRET
               valueFrom:
                 secretKeyRef:
                   key: latest
                   name: auth-secret
-            - name: AUTH_URL
+            - name: NUXT_PUBLIC_AUTH_JS_BASE_URL
               value: https://cooky-spahsae3iq-ew.a.run.app
       serviceAccountName: service-cooky@cooky-recipes.iam.gserviceaccount.com
