@@ -7,6 +7,7 @@ spec:
     spec:
       containers:
         - image: europe-west1-docker.pkg.dev/cooky-recipes/docker/cooky:latest
+          name: cooky
           ports:
             - name: http1
               containerPort: 8080
@@ -21,4 +22,6 @@ spec:
                 secretKeyRef:
                   key: latest
                   name: auth-secret
+            - name: AUTH_URL
+              value: https://cooky-spahsae3iq-ew.a.run.app
       serviceAccountName: service-cooky@cooky-recipes.iam.gserviceaccount.com
