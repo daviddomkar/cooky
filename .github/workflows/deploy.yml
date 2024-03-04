@@ -29,7 +29,7 @@ jobs:
       - name: Set up Google Cloud Platform SDK
         uses: google-github-actions/setup-gcloud@v2
 
-      - name: Authenticate Docker with Google Cloud Platform Artifacts Registry
+      - name: Authenticate Docker with Google Cloud Platform Artifact Registry
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
 
       - name: Build and push Docker image
