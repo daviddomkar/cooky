@@ -14,6 +14,15 @@ const { checked, errorMessage, handleChange } = useField(
     uncheckedValue: false,
   },
 );
+
+const model = defineModel<boolean>();
+
+watch(
+  () => checked?.value,
+  (value) => {
+    model.value = value;
+  },
+);
 </script>
 
 <template>
@@ -27,7 +36,6 @@ const { checked, errorMessage, handleChange } = useField(
           'border-error': errorMessage,
           'border-outline': !errorMessage,
         }"
-        required
         type="checkbox"
         :value="true"
         @change="handleChange($event)"

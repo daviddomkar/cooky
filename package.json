@@ -35,6 +35,7 @@
     "@hebilicious/authjs-nuxt": "^0.3.5",
     "@iconify/json": "^2.2.181",
     "@julr/unocss-preset-forms": "^0.1.0",
+    "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/stylelint-module": "^5.2.0",

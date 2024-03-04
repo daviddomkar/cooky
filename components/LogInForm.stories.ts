@@ -25,3 +25,24 @@ export const Default: Story = {
       '<div class="box-border flex items-center min-h-screen p-4"><LogInForm v-bind="args" /></div>',
   }),
 };
+
+export const Filled: Story = {
+  parameters: {
+    layout: "fullscreen",
+  },
+  args: {
+    initialValues: {
+      usernameOrEmail: "johnsmith",
+      password: "Hh8GH33ddc6y",
+    },
+    onSubmit: (_) => new Promise((resolve) => setTimeout(resolve, 1000)),
+  },
+  render: (args) => ({
+    components: { LogInForm },
+    setup() {
+      return { args };
+    },
+    template:
+      '<div class="box-border flex items-center min-h-screen p-4"><LogInForm v-bind="args" /></div>',
+  }),
+};

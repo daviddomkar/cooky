@@ -1,33 +1,42 @@
 <script setup lang="ts">
-import type { Output } from "valibot";
-import BaseCheckbox from "./BaseCheckbox.vue";
+import type { Input, Output } from "valibot";
 
 const props = defineProps<{
-  initialValues?: Output<typeof SignUpFormSchema>;
+  initialValues?: Input<typeof SignUpFormSchema>;
+  onSubmit?: (values: Output<typeof SignUpFormSchema>) => Promise<void>;
 }>();
 
-const { handleSubmit, isSubmitting, resetForm } = useForm({
+const { handleSubmit, isSubmitting, handleReset } = useForm({
   validationSchema: toTypedSchema(SignUpFormSchema),
   initialValues: props.initialValues,
 });
 
-const onSubmit = handleSubmit(async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  resetForm({
-    values: {
-      name: "",
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      agreedToTermsAndPrivacyPolicy: false,
-    },
-  });
+const submit = handleSubmit(async (values, { resetForm }) => {
+  try {
+    await props.onSubmit?.(values);
+    resetForm({
+      values: {
+        name: "",
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        agreedToTermsAndPrivacyPolicy: false,
+      },
+    });
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
 });
 </script>
 
 <template>
-  <form class="w-full flex flex-col items-center gap-2" @submit="onSubmit">
+  <form
+    class="w-full flex flex-col items-center gap-2"
+    @reset="handleReset"
+    @submit="submit"
+  >
     <div class="mb-6 box-border sm:mb-8">
       <h1 class="my-0 select-none text-center text-8xl sm:text-9xl">COOKY</h1>
       <h2
@@ -52,9 +61,15 @@ const onSubmit = handleSubmit(async () => {
     <BaseButton class="mt-2 sm:mt-4" :loading="isSubmitting" type="submit">
       Sign up
     </BaseButton>
-    <p class="text-xs text-outline" to="/login">
+    <p class="text-xs text-outline">
       Already have an account?
-      <a class="cursor-pointer text-primary underline">Log in</a>
+      <NuxtLink
+        class="cursor-pointer text-primary underline"
+        replace
+        to="/auth/login"
+      >
+        Log in
+      </NuxtLink>
     </p>
   </form>
 </template>

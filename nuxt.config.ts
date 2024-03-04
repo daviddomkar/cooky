@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@unocss/nuxt",
     "@vee-validate/nuxt",
     "@hebilicious/authjs-nuxt",
+    "@nuxtjs/color-mode",
   ],
   runtimeConfig: {
     authJs: {
@@ -46,5 +47,12 @@ export default defineNuxtConfig({
       FieldArray: "VeeFieldArray",
       ErrorMessage: "VeeErrorMessage",
     },
+  },
+  colorMode: {
+    preference: "system",
+    fallback: "light",
+    classPrefix: "",
+    classSuffix: "",
+    storageKey: "theme",
   },
 });

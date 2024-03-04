@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Output } from "valibot";
+
 const { signIn } = useAuth();
 
 definePageMeta({
@@ -6,33 +8,22 @@ definePageMeta({
   middleware: "guest-only",
 });
 
-const usernameOrEmail = ref("");
-const password = ref("");
-
-const logIn = async () => {
+const logIn = async (values: Output<typeof LogInSchema>) => {
   try {
     await signIn("credentials", {
-      usernameOrEmail: usernameOrEmail.value,
-      password: password.value,
+      usernameOrEmail: values.usernameOrEmail,
+      password: values.password,
     });
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
-    // TODO display error
+    throw error;
   }
 };
 </script>
 
 <template>
-  <div>
-    <div class="flex flex-col">
-      <h1>Log in to your account</h1>
-      <input
-        v-model="usernameOrEmail"
-        placeholder="username or email"
-        type="text"
-      />
-      <input v-model="password" placeholder="password" type="password" />
-      <button @click="logIn">Log in</button>
-    </div>
+  <div class="box-border h-full flex items-center justify-center p-8">
+    <LogInForm :on-submit="logIn" />
   </div>
 </template>
