@@ -6,7 +6,7 @@ const { session, status, signOut } = useAuth();
   <div class="flex flex-col gap-6">
     <div>Auth Status: {{ status }}</div>
     <div v-if="status === 'authenticated'" class="flex flex-col gap-6">
-      <div>Session: {{ session }}</div>
+      <div>Session: {{ session?.user }}</div>
       <BaseButton @click="signOut">Sign Out</BaseButton>
     </div>
     <div v-else class="flex gap-6">
