@@ -1,0 +1,72 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-push-deploy:
+    runs-on: ubuntu-latest
+    env:
+      SERVICE_NAME: cooky
+      PROJECT_ID: cooky-recipes
+      REGION: europe-west1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Install yq
+        run: brew install yq
+
+      - name: Authenticate with Google Cloud Platform
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - name: Set up Google Cloud Platform SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Authenticate Docker with Google Cloud Platform Artifacts Registry
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/docker/${{ env.SERVICE_NAME }}:${{ github.ref_name }},${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/docker/${{ env.SERVICE_NAME }}:latest
+
+      - name: Set service name in service.yaml
+        run: yq -i '.metadata.name = "${{ env.SERVICE_NAME }}"' service.yaml
+
+      - name: Set service ingress container image in service.yaml
+        run: yq -i '.spec.template.spec.containers[0].image = "${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/docker/${{ env.SERVICE_NAME }}:${{ github.ref_name }}"' service.yaml
+
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          region: ${{ env.REGION }}
+          metadata: service.yaml
+
+  prisma-migrate-deploy:
+    needs: build-push-deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Migrate database
+        run: npm run prisma:migrate:deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
