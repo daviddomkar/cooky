@@ -14,15 +14,13 @@ type Story = StoryObj<typeof BaseCheckbox>;
 export const Default: Story = {
   args: {
     name: "checkboy",
-    modelValue: "terms",
-    initialState: true,
-    default: "Agree Terms & Conditions",
   },
   render: (args) => ({
     setup() {
       return { args };
     },
     components: { BaseCheckbox },
-    template: '<BaseCheckbox v-bind="args">{{ args.default }}</BaseCheckbox>',
+    template:
+      '<BaseCheckbox v-bind="args">Agree to our <a class="cursor-pointer text-primary underline">Terms</a> & <a class="cursor-pointer text-primary underline">Privacy Policy</a></BaseCheckbox>',
   }),
 };
