@@ -37,13 +37,13 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/docker/${{ env.SERVICE_NAME }}:${{ github.ref_name }},${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/docker/${{ env.SERVICE_NAME }}:latest
+          tags: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/docker/${{ env.SERVICE_NAME }}:${{ github.sha }},${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/docker/${{ env.SERVICE_NAME }}:latest
 
       - name: Set service name in service.yaml
         run: yq -i '.metadata.name = "${{ env.SERVICE_NAME }}"' service.yaml
 
       - name: Set service ingress container image in service.yaml
-        run: yq -i '.spec.template.spec.containers[0].image = "${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/docker/${{ env.SERVICE_NAME }}:${{ github.ref_name }}"' service.yaml
+        run: yq -i '.spec.template.spec.containers[0].image = "${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/docker/${{ env.SERVICE_NAME }}:${{ github.sha }}"' service.yaml
 
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
