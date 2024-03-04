@@ -13,4 +13,5 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get instal
 
 COPY ./scripts/initdb.sh ./docker-entrypoint-initdb.d/initdb.sh
 
+RUN chmod +x /docker-entrypoint-initdb.d/initdb.sh
 RUN chmod 777 -R /docker-entrypoint-initdb.d

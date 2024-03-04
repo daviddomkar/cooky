@@ -1,0 +1,27 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: cooky
+spec:
+  template:
+    spec:
+      containers:
+        - image: europe-west1-docker.pkg.dev/cooky-recipes/docker/cooky:latest
+          name: cooky
+          ports:
+            - name: http1
+              containerPort: 8080
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: database-url
+            - name: NUXT_AUTH_JS_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: auth-secret
+            - name: NUXT_PUBLIC_AUTH_JS_BASE_URL
+              value: https://cooky.recipes
+      serviceAccountName: service-cooky@cooky-recipes.iam.gserviceaccount.com

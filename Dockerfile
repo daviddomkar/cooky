@@ -2,7 +2,8 @@ FROM node:20.11.0 as build
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json tsconfig.json ./
+COPY /prisma ./prisma
 
 RUN npm ci
 
@@ -12,7 +13,7 @@ ENV NODE_ENV=production
 
 RUN npm run build
 
-FROM oven/bun:1
+FROM node:20.11.0
 
 WORKDIR /app
 
@@ -22,4 +23,4 @@ ENV PORT=8080
 
 EXPOSE 8080
 
-ENTRYPOINT [ "bun", "run", "./server/index.mjs" ]
+ENTRYPOINT [ "node", "./server/index.mjs" ]
