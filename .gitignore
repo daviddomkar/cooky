@@ -6,6 +6,9 @@
 .cache
 dist
 
+# Storybook build output
+storybook-static
+
 # Node dependencies
 node_modules
 

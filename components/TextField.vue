@@ -1,16 +1,15 @@
 <script setup lang="ts">
 type Props = {
   name: string;
-  type?: "text" | "email" | "password";
-  modelValue?: string;
   label: string;
+  type?: "text" | "email" | "password";
 };
 
 const props = withDefaults(defineProps<Props>(), {
   type: "text",
-  modelValue: undefined,
-  label: undefined,
 });
+
+defineModel<string>();
 
 const { value, errorMessage, handleBlur, handleChange } = useField(
   () => props.name,
@@ -18,7 +17,6 @@ const { value, errorMessage, handleBlur, handleChange } = useField(
   {
     validateOnValueUpdate: false,
     syncVModel: true,
-    initialValue: props.modelValue,
   },
 );
 </script>
@@ -49,6 +47,7 @@ const { value, errorMessage, handleBlur, handleChange } = useField(
           'text-outline peer-focus:text-primary': !value && !errorMessage,
           'text-error peer-focus:text-error': errorMessage,
         }"
+        :for="name"
       >
         {{ label }}
       </label>

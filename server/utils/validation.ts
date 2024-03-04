@@ -1,1 +1,1 @@
-export { SignupSchema } from "../../utils/validation";
+export { SignUpSchema, LogInSchema } from "../../utils/validation";

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 type Props = {
   name: string;
-  modelValue?: boolean;
 };
 
 const props = defineProps<Props>();
@@ -11,10 +10,17 @@ const { checked, errorMessage, handleChange } = useField(
   undefined,
   {
     type: "checkbox",
-    syncVModel: true,
     checkedValue: true,
     uncheckedValue: false,
-    initialValue: props.modelValue,
+  },
+);
+
+const model = defineModel<boolean>();
+
+watch(
+  () => checked?.value,
+  (value) => {
+    model.value = value;
   },
 );
 </script>
@@ -23,17 +29,18 @@ const { checked, errorMessage, handleChange } = useField(
   <div class="box-border max-w-80 min-h-8 w-full flex flex-col gap-2 px-6">
     <div class="flex">
       <input
+        :id="name"
         :checked="checked"
-        class="border-box m-0 border-1 rounded-full border-solid text-primary dark:bg-surface-container checked:bg-primary focus:ring-none"
+        class="border-box m-0 border-1 rounded-full border-solid text-primary checked:bg-primary dark:bg-surface-container focus:ring-none"
         :class="{
           'border-error': errorMessage,
           'border-outline': !errorMessage,
         }"
         type="checkbox"
-        :value="modelValue"
-        @change="handleChange"
+        :value="true"
+        @change="handleChange($event)"
       />
-      <label class="ml-2 text-xs text-outline">
+      <label class="ml-2 text-xs text-outline" :for="name">
         <slot />
       </label>
     </div>

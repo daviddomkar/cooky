@@ -1,8 +1,10 @@
 <template>
-  <div class="h-screen w-screen flex content-center">
-    <div class="flex-1 bg-red"></div>
-    <div class="flex flex-1 items-center justify-center">
-      <slot></slot>
+  <div class="min-h-screen flex items-stretch">
+    <div
+      class="hidden w-full from-primary to-secondary bg-gradient-to-b lg:block"
+    />
+    <div class="w-full">
+      <slot />
     </div>
   </div>
 </template>

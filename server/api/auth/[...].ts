@@ -3,6 +3,7 @@ import type { AuthConfig } from "@auth/core/types";
 import { NuxtAuthHandler } from "#auth";
 import { compare } from "bcrypt";
 import type { User } from "@prisma/client";
+import { safeParseAsync } from "valibot";
 import { prisma } from "~/server/plugins/prisma";
 
 const runtimeConfig = useRuntimeConfig();
@@ -12,8 +13,9 @@ export const authOptions: AuthConfig = {
   providers: [
     CredentialsProvider({
       authorize: async (credentials) => {
-        // TODO: Credential validation
-        if (!credentials?.usernameOrEmail || !credentials?.password) {
+        const result = await safeParseAsync(LogInSchema, credentials);
+
+        if (!result.success) {
           return null;
         }
 
@@ -21,10 +23,10 @@ export const authOptions: AuthConfig = {
           where: {
             OR: [
               {
-                email: credentials.usernameOrEmail as string,
+                email: result.output.usernameOrEmail as string,
               },
               {
-                username: credentials.usernameOrEmail as string,
+                username: result.output.usernameOrEmail as string,
               },
             ],
           },
@@ -35,7 +37,7 @@ export const authOptions: AuthConfig = {
         }
 
         const passwordValid = await compare(
-          (credentials.password as string).trim(),
+          (result.output.password as string).trim(),
           user.password,
         );
 
