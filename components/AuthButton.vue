@@ -29,11 +29,18 @@ const activeAuthButton = computed(() => {
 
 <style scoped>
 .authbutton::before {
-  background: radial-gradient(64px at 0 0, transparent 99.7%, #fff);
+  --g: #0000 99.8%, #000;
+  --r: 64px;
+  mask: radial-gradient(var(--r) at 0 0, var(--g)) 0 0;
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
 }
-
 .authbutton::after {
-  background: radial-gradient(64px at 0 100%, transparent 99.7%, #fff);
+  --g: #0000 99.8%, #000;
+  --r: 64px;
+  mask: radial-gradient(var(--r) at 0 100%, var(--g)) 0 100%;
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
 }
 </style>
 ```
