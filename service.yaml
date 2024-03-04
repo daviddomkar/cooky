@@ -23,5 +23,5 @@ spec:
                   key: latest
                   name: auth-secret
             - name: NUXT_PUBLIC_AUTH_JS_BASE_URL
-              value: https://cooky-spahsae3iq-ew.a.run.app
+              value: https://cooky.recipes
       serviceAccountName: service-cooky@cooky-recipes.iam.gserviceaccount.com
