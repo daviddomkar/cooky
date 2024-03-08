@@ -1,6 +1,3 @@
--- Enable unaccent extension
-CREATE EXTENSION IF NOT EXISTS "unaccent";
-
 -- Create function to generate a slug unique to the user
 CREATE OR REPLACE FUNCTION create_recipe_slug (
     IN p_title recipes.title%TYPE,
