@@ -37,6 +37,7 @@ services:
       - ./tsconfig.json:/docker-entrypoint-initdb.d/tsconfig.json
       - ./prisma:/docker-entrypoint-initdb.d/prisma
       - cooky:/var/lib/postgresql/data
+      - ./server/utils:/docker-entrypoint-initdb.d/server/utils
 
 volumes:
   cooky:
