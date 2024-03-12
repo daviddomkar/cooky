@@ -1,0 +1,5363 @@
+{
+    "users": [
+        {
+            "name": "FluffyCooki3",
+            "username": "fluffycooki3",
+            "email": "fluffycooki3@gmail.com"
+        },
+        {
+            "name": "KulinárníUmělec",
+            "username": "kulinárníumělec",
+            "email": "kulinárníumělec@gmail.com"
+        },
+        {
+            "name": "KozičkovaKuchyně",
+            "username": "kozičkovakuchyně",
+            "email": "kozičkovakuchyně@gmail.com"
+        },
+        {
+            "name": "KochanáKočka",
+            "username": "kochanákočka",
+            "email": "kochanákočka@gmail.com"
+        },
+        {
+            "name": "ChutnýLišák",
+            "username": "chutnýlišák",
+            "email": "chutnýlišák@gmail.com"
+        },
+        {
+            "name": "MedvídekPeciválek",
+            "username": "medvídekpeciválek",
+            "email": "medvídekpeciválek@gmail.com"
+        },
+        {
+            "name": "SladkáKočička",
+            "username": "sladkákočička",
+            "email": "sladkákočička@gmail.com"
+        },
+        {
+            "name": "KulatýPandaChef",
+            "username": "kulatýpandachef",
+            "email": "kulatýpandachef@gmail.com"
+        },
+        {
+            "name": "MlsnýMedvídek",
+            "username": "mlsnýmedvídek",
+            "email": "mlsnýmedvídek@gmail.com"
+        },
+        {
+            "name": "ChutnýZajíc",
+            "username": "chutnýzajíc",
+            "email": "chutnýzajíc@gmail.com"
+        },
+        {
+            "name": "FuryPwdew",
+            "username": "furypwdew",
+            "email": "furypwdew@gmail.com"
+        },
+        {
+            "name": "F.O.O.D.",
+            "username": "f.o.o.d.",
+            "email": "f.o.o.d.@gmail.com"
+        },
+        {
+            "name": "Jirka",
+            "username": "jirka",
+            "email": "jirka@gmail.com"
+        },
+        {
+            "name": "Redakce",
+            "username": "redakce",
+            "email": "redakce@gmail.com"
+        },
+        {
+            "name": "J.Tereza",
+            "username": "j.tereza",
+            "email": "j.tereza@gmail.com"
+        },
+        {
+            "name": "Recepty",
+            "username": "recepty",
+            "email": "recepty@gmail.com"
+        },
+        {
+            "name": "Jarmiljarmil",
+            "username": "jarmiljarmil",
+            "email": "jarmiljarmil@gmail.com"
+        },
+        {
+            "name": "Nixxxie",
+            "username": "nixxxie",
+            "email": "nixxxie@gmail.com"
+        },
+        {
+            "name": "MonikaT",
+            "username": "monikat",
+            "email": "monikat@gmail.com"
+        },
+        {
+            "name": "AnetkaTom",
+            "username": "anetkatom",
+            "email": "anetkatom@gmail.com"
+        },
+        {
+            "name": "Vratislav",
+            "username": "vratislav",
+            "email": "vratislav@gmail.com"
+        },
+        {
+            "name": "Janova",
+            "username": "janova",
+            "email": "janova@gmail.com"
+        },
+        {
+            "name": "Páťa",
+            "username": "páťa",
+            "email": "páťa@gmail.com"
+        },
+        {
+            "name": "PowerMom",
+            "username": "powermom",
+            "email": "powermom@gmail.com"
+        }
+    ],
+    "recipe_images": [
+        "https://ms3.ostium.cz/instance/web-recepty/jsIUhnAa/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jIBBRyMF/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jI0iyAyB/h389w574t.jpg",
+        "https://ms1.ostium.cz/instance/web-recepty/jySWWOjL/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jneddfTT/h389w574t.jpg",
+        "https://ms1.ostium.cz/instance/web-recepty/jgJJ7hjA/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jUZklsCC/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jpkffWDD/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jl85s6s6/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/j6KhPOTt/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jv7mbfYH/h389w574t.jpg",
+        "https://ms1.ostium.cz/instance/web-recepty/j7HytnOq/h389w574t.jpg",
+        "https://ms1.ostium.cz/instance/web-recepty/jqZbFzoq/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jKyDzLBj/h389w574t.jpg",
+        "https://ms2.ostium.cz/instance/web-recepty/jACgKWiu/h389w574t.jpg",
+        "https://ms2.ostium.cz/instance/web-recepty/jJg4fLPL/h389w574t.jpg",
+        "https://ms2.ostium.cz/instance/web-recepty/jLA63R3u/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/joM4Egbb/h389w574t.jpg",
+        "https://ms2.ostium.cz/instance/web-recepty/jnrBLh8K/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jR2Y8pfD/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jQGN0023/h389w574t.jpg",
+        "https://ms2.ostium.cz/instance/web-recepty/jCXIeO5K/h389w574t.jpg",
+        "https://ms1.ostium.cz/instance/web-recepty/jcZ9YBGq/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/p2mit0gL/h389w574t.png",
+        "https://ms3.ostium.cz/instance/web-recepty/j8fMmETO/h389w574t.jpg",
+        "https://ms2.ostium.cz/instance/web-recepty/jlOzAMar/h389w574t.jpg",
+        "https://ms2.ostium.cz/instance/web-recepty/jm9f02QD/h389w574t.jpg",
+        "https://ms1.ostium.cz/instance/web-recepty/jNURASSA/h389w574t.jpg",
+        "https://ms1.ostium.cz/instance/web-recepty/j3RTBuA0/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/j0AvEJnT/h389w574t.jpg",
+        "https://ms2.ostium.cz/instance/web-recepty/jpqKBVIj/h389w574t.jpg",
+        "https://ms1.ostium.cz/instance/web-recepty/jCKyCPJ0/h389w574t.jpg",
+        "https://ms2.ostium.cz/instance/web-recepty/j7sqhjrO/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jjbYRHlt/h389w574t.jpg",
+        "https://ms2.ostium.cz/instance/web-recepty/jY3kmQeE/h389w574t.jpg",
+        "https://ms2.ostium.cz/instance/web-recepty/jqRKvHKA/h389w574t.jpg",
+        "https://ms1.ostium.cz/instance/web-recepty/jAOqgYyV/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jC5QYy7S/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jWrQUTy0/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jcZER6fy/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/j5XmgLSK/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jYYBnSlE/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/j8LNKCjm/h389w574t.jpg",
+        "https://ms3.ostium.cz/instance/web-recepty/jR0S9boy/h389w574t.jpg"
+    ],
+    "units": [
+        {
+            "title": "gram",
+            "abbreviation": "g",
+            "type": 1
+        },
+        {
+            "title": "kusů",
+            "abbreviation": "ks",
+            "type": 2
+        },
+        {
+            "title": "hrstka",
+            "abbreviation": "hrst",
+            "type": 2
+        },
+        {
+            "title": "lžička",
+            "abbreviation": "ts",
+            "type": 0
+        },
+        {
+            "title": "lžíce",
+            "abbreviation": "tbs",
+            "type": 0
+        },
+        {
+            "title": "ml",
+            "abbreviation": "ml",
+            "type": 2
+        },
+        {
+            "title": "plátek",
+            "abbreviation": "plátek",
+            "type": 2
+        },
+        {
+            "title": "kg",
+            "abbreviation": "kg",
+            "type": 2
+        },
+        {
+            "title": "balení",
+            "abbreviation": "balení",
+            "type": 2
+        },
+        {
+            "title": "stroužek",
+            "abbreviation": "stroužek",
+            "type": 2
+        },
+        {
+            "title": "snítka",
+            "abbreviation": "snítka",
+            "type": 2
+        },
+        {
+            "title": "svazek",
+            "abbreviation": "svazek",
+            "type": 2
+        },
+        {
+            "title": "špetka",
+            "abbreviation": "špetka",
+            "type": 2
+        },
+        {
+            "title": "kostka",
+            "abbreviation": "kostka",
+            "type": 2
+        },
+        {
+            "title": "l",
+            "abbreviation": "l",
+            "type": 2
+        },
+        {
+            "title": "dl",
+            "abbreviation": "dl",
+            "type": 2
+        },
+        {
+            "title": "kelímek",
+            "abbreviation": "kelímek",
+            "type": 2
+        },
+        {
+            "title": "plechovka",
+            "abbreviation": "plechovka",
+            "type": 2
+        },
+        {
+            "title": "hrnek",
+            "abbreviation": "hrnek",
+            "type": 2
+        },
+        {
+            "title": "balíček",
+            "abbreviation": "balíček",
+            "type": 2
+        }
+    ],
+    "ingredients": [
+        {
+            "title": "vařené brambory",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "olej",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "cherry rajčátka",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "olivový olej",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "brokolice",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "mrkev",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "vařená vejce",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "polníček",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "sůl",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "pepř mletý",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "hořčice",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "med",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "cibule",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "pórek",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "cuketa",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "zeleninový vývar",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "baby špenát",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "vejce",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "anglická slanina",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "růžový pepř",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "máta",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "sýr feta",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "sojová omáčka",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "podravka",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "kuřecí maso",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "solamyl (bramborový škrob)",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "palačinky",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "žervé",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "šunka",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "rajče",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "sýr",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "pažitka",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "jablka",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "moučkový cukr",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "cukr krystal",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "rozinky",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "bílek",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "skořice",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "citronová kůra",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "borůvky",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "voda",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "jahody",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "maliny",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "carte d’or crema di mascarpone",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "slanina",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "bazalka",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "špenát",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "těstoviny",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "tvrdý sýr",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "smetana ke šlehání",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "muškátový oříšek",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "mléko plnotučné",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "losos",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "růžičková kapusta",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "pepř drcený",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "citron",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "pohanka",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "zelenina",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "lněná semínka",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "chilli",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "nudle",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "rajčata",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "máslo",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "tofu",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "citronová šťáva",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "dijonská hořčice",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "cukr",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "tymián",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "česnek",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "ovesné vločky",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "penne",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "tuňák - ve vlastní šťávě",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "nakládaná kukuřice",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "ledový salát",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "bílý jogurt",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "treska",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "kapusta",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "řepkový olej",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "červená cibule",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "sezamová semínka",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "brambory",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "červená paprika",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "jarní cibulka",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "rukola",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "hořčice plnotučná",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "hořčičné semínko",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "petrželka",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "rozmarýn",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "uzený losos",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "tvaroh",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "nízkotučný jogurt",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "vlašské ořechy",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "parmazán",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "špagety",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "foie gras",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "bílé víno",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "hladká mouka",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "vařící voda",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "vepřová plec",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "zázvor",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "rýžový ocet",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "sezamový olej",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "chilli omáčka",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "čínské zelí",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "mleté maso",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "ústřicová omáčka",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "mléko",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "droždí",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "těsto na pizzu",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "špenátový protlak",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "prolisovaný česnek",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "teplá voda",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "mořská sůl",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "rajčata oloupaná",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "oregáno",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "mozzarella",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "klobása",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "vývar",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "sladká paprika",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "sádlo",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "kuřecí stehna",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "mletá sladká paprika",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "horká voda",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "kmín",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "pepř celý",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "petržel",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "mouka",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "bylinky",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "česnek sušený",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "polohrubá mouka",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "hraška",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "knorr bohatý bujon zeleninový",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "tavený sýr",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "sušené houby",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "bobkový list",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "nové koření",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "smetana",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "kopr",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "ocet",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "hovězí maso",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "rajský protlak",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "chilli papričky",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "koriandrová semínka",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "koriandr",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "římský kmín",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "kapie",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "kuřecí prsa",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "koření - garam masala",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "kurkuma",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "passata",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "hnědý cukr",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "žloutek",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "slunečnicový olej",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "vinný ocet",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "hovězí plec",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "cukr krupice",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "hovězí vývar",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "toastový chléb",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "kuře",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "špekáček",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "paprika - bílá",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "uzená paprika - koření",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "rajčatová omáčka",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "pivo - černé",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "prášek do pečiva",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "margotka",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "cukr na posypání",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "lotus sušenky",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "mascarpone",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "vanilkový cukr",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "kakao",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "mleté vlašské ořechy",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "skořice - mletá",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "rybízová marmeláda",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "hnědý rum",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "ztužený tuk",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "čokoládová poleva",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "listové těsto",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "mléko polotučné",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "hořká čokoláda",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "banány",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "broskve",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "hroznové víno",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "arašídové máslo",
+            "unit_types": [
+                0
+            ]
+        },
+        {
+            "title": "proteinový prášek",
+            "unit_types": [
+                1
+            ]
+        },
+        {
+            "title": "strouhanka",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "tuk",
+            "unit_types": [
+                2
+            ]
+        },
+        {
+            "title": "mletá paprika",
+            "unit_types": [
+                2
+            ]
+        }
+    ],
+    "recipes": [
+        {
+            "image_id": 0,
+            "author_id": 11,
+            "title": "Sedlácký salát",
+            "description": "Rustikální salát s osmaženými ve slupce uvařenými bramborami, pečenými cherry rajčátky, oblanšírovanou brokolicí, plátky mrkve a natvrdo uvařenými vajíčky, zalitý zálivkou s hrubozrnné hořčice, medu a olivového oleje, je skvělým tipem na lehkou večeři.",
+            "preparation_duration_minutes": 20,
+            "state": 0,
+            "categories": [
+                3,
+                4
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Brambory oloupejte, nakrájejte na kolečka a postupně je z obou stran osmažte na pánvi na troše oleje. Osolte a opepřete. Rajčata dejte do pekáče, zastříkněte olivovým olejem, osolte, opepřete a pečte asi 10 minut v troubě předehřáté na 180 °C. Brokolici rozeberte na růžičky a dejte do hrnce s osolenou vroucí vodou. Povařte asi 3 minuty, sceďte a ihned zchlaďte ledovou vodou. Mrkve očistěte a škrabkou nakrouhejte na „pentle“. Vařená vejce oloupejte a rozkrojte na poloviny."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Suroviny na zálivku dejte do menší zavařovací sklenice, uzavřete a důkladně protřepejte, aby se spojily. Na talíře rozložte po hrsti polníčku, přidejte opečené brambory, rajčata, brokolici, mrkev a vejce. Vše důkladně zalijte dresinkem."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Recept pro vás připravil časopis F.O.O.D. (duben/2020)"
+                }
+            ],
+            "nutritionPerServing": 431,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 600,
+                    "unit_id": 0,
+                    "ingredient_id": 0
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 1
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 2,
+                    "ingredient_id": 2
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 3
+                },
+                {
+                    "amount": 0.5,
+                    "unit_id": 1,
+                    "ingredient_id": 4
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 1,
+                    "ingredient_id": 5
+                },
+                {
+                    "amount": 8,
+                    "unit_id": 1,
+                    "ingredient_id": 6
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 2,
+                    "ingredient_id": 7
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 10
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 11
+                },
+                {
+                    "amount": 3,
+                    "unit_id": 4,
+                    "ingredient_id": 3
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                }
+            ],
+            "comments": [
+                {
+                    "author": 9,
+                    "content": "Zůstal mi pouze prázdný hrnec, vynikající recept!",
+                    "replies": []
+                },
+                {
+                    "author": 6,
+                    "content": "Náš nový oblíbený recept v rodině!",
+                    "replies": []
+                },
+                {
+                    "author": 1,
+                    "content": "Tento recept je tak úžasný, že by mohl být v jídelním lístku ve furry restauraci!",
+                    "replies": []
+                },
+                {
+                    "author": 5,
+                    "content": "Udělal jsem si tohle jídlo a cítil jsem se jako překrásný pavouk, který se má na co těšit!",
+                    "replies": []
+                },
+                {
+                    "author": 2,
+                    "content": "Tento recept je tak chutný, že by ho snědla i hladová liška!",
+                    "replies": []
+                }
+            ]
+        },
+        {
+            "image_id": 1,
+            "author_id": 11,
+            "title": "Cuketová polévka s pórkem a špenátem",
+            "description": "Hustá zeleninová polévka z cibule, pórku, cukety a špenátu, ovoněná mátou, podávaná s natvrdo uvařeným vejcem, plátky dokřupava opečené slaniny a rozdrobeným sýrem feta, je rychle hotová, zasytí ale na dlouho.",
+            "preparation_duration_minutes": 30,
+            "state": 1,
+            "categories": [
+                4
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Cibuli a pórek očistěte, z pórku důkladně vypláchněte zeminu. Cibuli pokrájejte na kostičky, pórek na půlkolečka. V hrnci zahřejte dvě lžíce oleje a obojí asi 5 minut restujte na mírném plameni, neměly by chytit barvu."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Cuketu pokrájejte na kousky a přidejte k základu polévky, restujte asi 3 minuty a zalijte vývarem. Vařte asi 5 minut, přidejte nasekaný špenát a polévku ochuťte solí a pepřem. Už jen minutu provařte a obsah hrnce rozmixujte tyčovým mixérem na hladký krém"
+                },
+                {
+                    "title": "Third step",
+                    "content": "Během vaření polévky připravte vejce: dejte vodu do rendlíku, jakmile začne vřít, vložte do hrnce vejce a vařte je 8 minut. Poté je prudce zchlaďte a oloupejte. Plátky slaniny dejte na rozpálenou pánev a vypečte je dokřupava."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Polévku rozdělte do misek, dochuťte ji červeným pepřem a trochou olivového oleje. Do každé přidejte polovinu vejce, poctivou porci nasekané máty, nadrobte slaninu a sýr."
+                },
+                {
+                    "title": "Fifth step",
+                    "content": "Recept pro vás připravil časopis F.O.O.D. (duben/2020)"
+                }
+            ],
+            "nutritionPerServing": 593,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 12
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 13
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 3
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 14
+                },
+                {
+                    "amount": 750,
+                    "unit_id": 5,
+                    "ingredient_id": 15
+                },
+                {
+                    "amount": 5,
+                    "unit_id": 2,
+                    "ingredient_id": 16
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 6,
+                    "ingredient_id": 18
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 19
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 2,
+                    "ingredient_id": 20
+                },
+                {
+                    "amount": 100,
+                    "unit_id": 0,
+                    "ingredient_id": 21
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 2,
+            "author_id": 12,
+            "title": "Babiččiny masové placičky",
+            "description": null,
+            "preparation_duration_minutes": 35,
+            "state": 0,
+            "categories": [
+                1,
+                2
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "V míse smícháme najemno nakrájenou cibuli, olej, sojovou omáčku, sůl, pepř, vejce a podravku. Přidáme na plátky nakrájené maso obalené v solamylu, všechno důkladně promícháme a necháme přes noc odležet v lednici."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Poté smažíme na rozpáleném oleji z obou stran a podáváme s vařeným bramborem nebo bramborovým salátem."
+                }
+            ],
+            "nutritionPerServing": 563,
+            "numberOfServings": null,
+            "ingredients": [
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 12
+                },
+                {
+                    "amount": 6,
+                    "unit_id": 4,
+                    "ingredient_id": 1
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 22
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 23
+                },
+                {
+                    "amount": 0.5,
+                    "unit_id": 7,
+                    "ingredient_id": 24
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 25
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 3,
+            "author_id": 13,
+            "title": "Slané palačinky",
+            "description": "Oblíbené palačinky si můžete připravit na několik způsobů. Tyto slané palačinky zapečené se sýrem, šunkou, vajíčkem a rajčaty, ozdobené pažitkou a petrželkou si zkrátka zamilujete. Jsou ideální snídaní i svačinkou.",
+            "preparation_duration_minutes": 30,
+            "state": 0,
+            "categories": [
+                1,
+                2
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Připravte si palačinky a vejce den předem. Uvařte vajíčka naměkko, nebo zkuste vejce do skla. To ostatní už bude hračka."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Druhý den si připravte krémový sýr, šunku, tvrdé sýry a rajčata."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Pekáček vyložte pečicím papírem a dejte stranou. Palačinku potřete tenkou vrstvou čerstvého sýra, který vše propojí. Pak na ni poklaďte plátky šunky, tenká kolečka rajčat a sýrů. Pokud sýr není příliš slaný, palačinku osolte a opepřete."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Nakonec palačinky dozdobte petrželkou či bazalkou."
+                },
+                {
+                    "title": "Fifth step",
+                    "content": "Vajíčko naměkko rozkrojte na osminky. A poklaďte je na palačinku. Vše zarolujte. Opatrně palačinku přeneste na pekáč vyložený pečicím papírem a položte ji spojem dolů, aby se nerozrolovala."
+                },
+                {
+                    "title": "Sixth step",
+                    "content": "Zapněte troubu na 230 °C, ideálně na horký vzduch. Palačinky pečte asi 10–12 minut."
+                }
+            ],
+            "nutritionPerServing": 626,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 6,
+                    "unit_id": 1,
+                    "ingredient_id": 26
+                },
+                {
+                    "amount": 6,
+                    "unit_id": 1,
+                    "ingredient_id": 6
+                },
+                {
+                    "amount": 12,
+                    "unit_id": 3,
+                    "ingredient_id": 27
+                },
+                {
+                    "amount": 6,
+                    "unit_id": 6,
+                    "ingredient_id": 28
+                },
+                {
+                    "amount": 18,
+                    "unit_id": 6,
+                    "ingredient_id": 29
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 30
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 31
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 4,
+            "author_id": 11,
+            "title": "Palačinky se šunkou a vejci",
+            "description": null,
+            "preparation_duration_minutes": 15,
+            "state": 0,
+            "categories": [
+                2
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Troubu předehřejte na 180 °C."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Palačinky položte na plech pokrytý pečicím papírem. Na každou dejte 2 plátky šunky, doprostřed vyklepněte vejce, okraje přehrňte a zpevněte párátkem. Vejce osolte a opepřete a pečte, až bílek ztuhne, ale žloutek zůstane mírně tekutý, asi 10 minut."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Podávejte posypané najemno nasekanou pažitkou."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "//**Know-how:** Palačinky můžete koupit hotové nebo si je jednoduše připravte sami. V misce prošlehejte jedno vejce s 250 ml mléka a špetkou soli. Postupně vešlehejte 125 g hladké mouky a nakonec lžíci perlivé minerálky. Můžete také přilít trochu rozpuštěného másla. Smažte na lehce tukem potřené palačinkové pánvi s nepřilnavým povrchem.//"
+                }
+            ],
+            "nutritionPerServing": 540,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 8,
+                    "unit_id": 6,
+                    "ingredient_id": 28
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 31
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 1,
+                    "ingredient_id": 26
+                }
+            ],
+            "comments": [
+                {
+                    "author": 12,
+                    "content": "Tento recept by mohl konkurovat i nejlepším koláčům na kožichovém veletrhu!",
+                    "replies": [
+                        {
+                            "author": 3,
+                            "content": "Ahoj FluffyCooki3! Jsem rád, že se ti recept líbil! Doufám, že ho vyzkoušíš i ty a budeš stejně nadšený jako já! :)"
+                        },
+                        {
+                            "author": 1,
+                            "content": "MedvídekPeciválek děkuje za milá slova! Doufám, že tento recept budeš mít rád stejně jako já! :)"
+                        },
+                        {
+                            "author": 9,
+                            "content": "KulatýPandaChef děkuje za podporu! Těšíme se na tvé dojmy z vyzkoušení tohoto skvělého receptu! :)"
+                        }
+                    ]
+                },
+                {
+                    "author": 1,
+                    "content": "Tento recept by mohl konkurovat i nejlepším koláčům na kožichovém veletrhu!",
+                    "replies": []
+                },
+                {
+                    "author": 9,
+                    "content": "Myslím si, že tento recept by mohl být trochu přepracovaný, aby mi chutnal.",
+                    "replies": []
+                },
+                {
+                    "author": 8,
+                    "content": "Myslím, že tento recept není pro mě, ale může to být skvělá volba pro jiné.",
+                    "replies": []
+                },
+                {
+                    "author": 9,
+                    "content": "Tento recept mě přivedl zpět do kuchyně, děkuji!",
+                    "replies": []
+                },
+                {
+                    "author": 8,
+                    "content": "Můj manžel, který není moc na nové recepty, tento zbožňuje!",
+                    "replies": []
+                },
+                {
+                    "author": 0,
+                    "content": "Když jsem poprvé ochutnal toto jídlo, byl jsem okouzlený!",
+                    "replies": []
+                }
+            ]
+        },
+        {
+            "image_id": 5,
+            "author_id": 14,
+            "title": "Palačinky s jablkovou náplní",
+            "description": null,
+            "preparation_duration_minutes": 45,
+            "state": 0,
+            "categories": [
+                3
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Za občasného míchání podusíme oloupaná a nakrájená jablka (trochu je zastříkneme vodou). Přidáme práškový cukr, rozinky, skořici a kůru. Touto náplní naplníme klasicky upečené palačinky. Svinuté palačinky klademe na pekáč. Z bílků a krystalového cukru ušleháme tuhý sníh a ozdobně ho nastříkáme po celé délce palačinek. V horké troubě zapečeme, dokud sníh nedostane pěknou barvu. Zlehka posypeme přes sítko práškovým cukrem a hned podáváme."
+                }
+            ],
+            "nutritionPerServing": 420,
+            "numberOfServings": null,
+            "ingredients": [
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 26
+                },
+                {
+                    "amount": 600,
+                    "unit_id": 0,
+                    "ingredient_id": 32
+                },
+                {
+                    "amount": 50,
+                    "unit_id": 0,
+                    "ingredient_id": 33
+                },
+                {
+                    "amount": 40,
+                    "unit_id": 0,
+                    "ingredient_id": 34
+                },
+                {
+                    "amount": 50,
+                    "unit_id": 0,
+                    "ingredient_id": 35
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 1,
+                    "ingredient_id": 36
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 37
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 38
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 6,
+            "author_id": 15,
+            "title": "Zmrzlinové palačinky s lesním ovocem",
+            "description": null,
+            "preparation_duration_minutes": null,
+            "state": 0,
+            "categories": [
+                3
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Borůvky vložíme do malého hrnce, přidáme vodu a krystalový cukr. Ohříváme dokud se cukr nerozpustí. Přihodíme maliny a jahody nakrájené na plátky, promícháme a můžeme servírovat."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Na každý talíř naaranžujeme 2 palačinky přeložené na půl a přidáme 2 kopečky zmrzliny Carte d’Or Crema di Mascarpone. Vše zalijeme teplým ovocem a podle chuti posypeme moučkovým cukrem. Čerstvé ovoce můžeme nahradit mraženým."
+                }
+            ],
+            "nutritionPerServing": 535,
+            "numberOfServings": null,
+            "ingredients": [
+                {
+                    "amount": 100,
+                    "unit_id": 0,
+                    "ingredient_id": 39
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 4,
+                    "ingredient_id": 40
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 34
+                },
+                {
+                    "amount": 8,
+                    "unit_id": 1,
+                    "ingredient_id": 26
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 33
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 41
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 42
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 43
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 7,
+            "author_id": 11,
+            "title": "Penne se špenátem",
+            "description": null,
+            "preparation_duration_minutes": null,
+            "state": 0,
+            "categories": [
+                1
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Troubu zapněte na 160 °C."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Těstoviny uvařte v osolené vodě na skus."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Špenát spařte vroucí vodou a nasekejte. Bazalku natrhejte."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Slaninu nakrájejte na kostičky, nasucho orestujte a smíchejte ji se špenátem a bazalkou, pak vmíchejte těstoviny. Vejce prošlehejte se smetanou a mlékem a dochuťte solí, pepřem a muškátovým oříškem."
+                },
+                {
+                    "title": "Fifth step",
+                    "content": "Těstoviny rozložte v zapékací misce, zalijte vejci a posypte nastrouhaným sýrem."
+                },
+                {
+                    "title": "Sixth step",
+                    "content": "Pečte 35–40 minut dozlatova."
+                }
+            ],
+            "nutritionPerServing": 581,
+            "numberOfServings": null,
+            "ingredients": [
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 150,
+                    "unit_id": 0,
+                    "ingredient_id": 44
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 2,
+                    "ingredient_id": 45
+                },
+                {
+                    "amount": 300,
+                    "unit_id": 0,
+                    "ingredient_id": 46
+                },
+                {
+                    "amount": 400,
+                    "unit_id": 0,
+                    "ingredient_id": 47
+                },
+                {
+                    "amount": 80,
+                    "unit_id": 0,
+                    "ingredient_id": 48
+                },
+                {
+                    "amount": 200,
+                    "unit_id": 5,
+                    "ingredient_id": 49
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 50
+                },
+                {
+                    "amount": 150,
+                    "unit_id": 5,
+                    "ingredient_id": 51
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 8,
+            "author_id": 16,
+            "title": "Losos na páře s restovanou zeleninou",
+            "description": null,
+            "preparation_duration_minutes": 40,
+            "state": 0,
+            "categories": [
+                1
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Lososa rozdělte na filé a z obou stran posypejte solí, pepřem a zakápněte citrónem. Společně se zeleninou dejte rybu do parního hrnce nebo do klasického hrnce na pařáček, který používáte na přípravu knedlíků. Nechte vařit přibližně 35 minut, dokud nebude jídlo hotové. Zeleninu vyndejte o chvilku dřív než lososa a orestujte na pánvi na rozpáleném olivovém oleji ze všech stran. Podle chuti dosolte a podávejte dohromady."
+                }
+            ],
+            "nutritionPerServing": 449,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 52
+                },
+                {
+                    "amount": 200,
+                    "unit_id": 0,
+                    "ingredient_id": 53
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 4
+                },
+                {
+                    "amount": 100,
+                    "unit_id": 0,
+                    "ingredient_id": 2
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 3
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 54
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 55
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 9,
+            "author_id": 17,
+            "title": "Zeleninové pohankové \"rizoto\"",
+            "description": null,
+            "preparation_duration_minutes": 20,
+            "state": 1,
+            "categories": [
+                1
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Tip na rychlý a zdravý oběd."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Nejprve si dáme vařit pohanku (5-10 minut). Vody dáme jen o malinko víc než obilniny."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Když bude téměr hotová, přidáme trochu oleje a odstavíme."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Připravíme si zeleninu - dle chuti. Já použila papriku, hrášek, mrkev a kukuřici. Může být čerstvá nebo mražená."
+                },
+                {
+                    "title": "Fifth step",
+                    "content": "Hodíme na olejem zakápnutou pánev a restujeme. Posypeme trochou soli, přidáme chilli a podlijeme vodou."
+                },
+                {
+                    "title": "Sixth step",
+                    "content": "Potom přidáme semínka a pohanku. Promícháme a můžeme servírovat. Nakonec přidáme sýr."
+                }
+            ],
+            "nutritionPerServing": 653,
+            "numberOfServings": null,
+            "ingredients": [
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 56
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 57
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 3,
+                    "ingredient_id": 58
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 59
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 30
+                }
+            ],
+            "comments": [
+                {
+                    "author": 17,
+                    "content": "Fantastický recept, přesně to, co jsem hledal!",
+                    "replies": [
+                        {
+                            "author": 0,
+                            "content": "Velmi mě těší tvá pozitivní zpětná vazba na recept! Doufám, že si ho užiješ i při jeho přípravě."
+                        },
+                        {
+                            "author": 1,
+                            "content": "KulatýPandaChef děkuje za podporu! Těšíme se na tvé dojmy z vyzkoušení tohoto skvělého receptu! :)"
+                        },
+                        {
+                            "author": 14,
+                            "content": "Ano, tento recept je opravdu skvělý! Užij si ho!"
+                        }
+                    ]
+                },
+                {
+                    "author": 8,
+                    "content": "Nemůžu uvěřit, že jsem to dokázal udělat tak dobře, díky tomuto receptu!",
+                    "replies": []
+                }
+            ]
+        },
+        {
+            "image_id": 11,
+            "author_id": 18,
+            "title": "Pečené tofu s citrónovou marinádou",
+            "description": null,
+            "preparation_duration_minutes": 30,
+            "state": 1,
+            "categories": [
+                1
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Tofu nakrájíme na hrubší proužky. Všechny ingredience kromě tofu spolu smícháme, takhle vytvoříme marinádu na tofu, do které tofu úplně ponoříme a necháme marinovat alespoň hodinu (čím delší dobu, tím líp). Pak tofu s marinádou přeneseme na plech a pečeme ve vyhřáté troubě asi 25 minut. V polovine pečení tofu obrátíme a když je třeba, přidáme extra marinádu navíc."
+                }
+            ],
+            "nutritionPerServing": 616,
+            "numberOfServings": null,
+            "ingredients": [
+                {
+                    "amount": 2,
+                    "unit_id": 8,
+                    "ingredient_id": 63
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 22
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 64
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 3
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 65
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 66
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 45
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 67
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                }
+            ],
+            "comments": [
+                {
+                    "author": 18,
+                    "content": "Nemůžu uvěřit, že jsem to dokázal udělat tak dobře, díky tomuto receptu!",
+                    "replies": []
+                },
+                {
+                    "author": 3,
+                    "content": "Když jsem si tohle jídlo dával, bylo to jako tanec medvědů na svátek zvířat!",
+                    "replies": []
+                },
+                {
+                    "author": 18,
+                    "content": "Skvělá variace na klasický recept, opravdu jsem si to užil.",
+                    "replies": []
+                },
+                {
+                    "author": 9,
+                    "content": "Udělal jsem si tohle jídlo a cítil jsem se jako překrásný pavouk, který se má na co těšit!",
+                    "replies": []
+                },
+                {
+                    "author": 13,
+                    "content": "Skvělý recept pro vegetariány i masožrouty!",
+                    "replies": []
+                },
+                {
+                    "author": 14,
+                    "content": "Díky tomuto receptu jsem se cítil jako doma ve svém vlčím smečce!",
+                    "replies": []
+                }
+            ]
+        },
+        {
+            "image_id": 12,
+            "author_id": 17,
+            "title": "Pikantní špenátové rolky",
+            "description": null,
+            "preparation_duration_minutes": 15,
+            "state": 1,
+            "categories": [
+                2
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Tip na rychlou, jednoduchou véču."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Všechny ingredience dáme do mixéru a rozmixujeme. Vše dáme na rozpálenou pánev."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Podáváme s toustíkem. Koření dáme podle chuti."
+                }
+            ],
+            "nutritionPerServing": 651,
+            "numberOfServings": null,
+            "ingredients": [
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 46
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 9,
+                    "ingredient_id": 68
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 6,
+                    "ingredient_id": 14
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 58
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 69
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 59
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 13,
+            "author_id": 11,
+            "title": "Penne s tuňákem a kukuřicí",
+            "description": null,
+            "preparation_duration_minutes": 15,
+            "state": 1,
+            "categories": [
+                2
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Penne uvařte na skus (//al dente//). Slijte tuňáka, kukuřici, salát opláchněte a rukama natrhejte na menší kousky."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Smíchejte s těstovinami, jogurtem, olejem a chuť dotáhněte citronovou šťávou, solí a pepřem."
+                }
+            ],
+            "nutritionPerServing": 409,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 500,
+                    "unit_id": 0,
+                    "ingredient_id": 70
+                },
+                {
+                    "amount": 160,
+                    "unit_id": 0,
+                    "ingredient_id": 71
+                },
+                {
+                    "amount": 170,
+                    "unit_id": 0,
+                    "ingredient_id": 72
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 73
+                },
+                {
+                    "amount": 120,
+                    "unit_id": 0,
+                    "ingredient_id": 74
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 3
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 64
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 67
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 14,
+            "author_id": 11,
+            "title": "Salát z kapusty s treskou",
+            "description": null,
+            "preparation_duration_minutes": 25,
+            "state": 1,
+            "categories": [
+                2
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Rybu osušte, osolte, opepřete a pokapejte citronovou šťávou. Mrkev očistěte a rozkrojte na polovinu, menší nechte celé. Kapustu nasekejte na tenké nudličky. Zeleninu uvařte v páře, aby zůstala křupavá."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Mezitím na oleji orestujte rybu z obou stran dozlatova."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Mrkev s kapustou přemístěte do větší mísy, přidejte cibuli a vmíchejte dresink z olivového oleje, medu, soli, pepře a citronové šťávy."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Nakonec posypte sezamovými semínky a podávejte s treskou."
+                },
+                {
+                    "title": "Fifth step",
+                    "content": "//**Tip:** Kapustu v receptu může zastoupit také mladé zelí nebo špenát.//"
+                }
+            ],
+            "nutritionPerServing": 381,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 4,
+                    "unit_id": 1,
+                    "ingredient_id": 75
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 64
+                },
+                {
+                    "amount": 500,
+                    "unit_id": 0,
+                    "ingredient_id": 5
+                },
+                {
+                    "amount": 400,
+                    "unit_id": 0,
+                    "ingredient_id": 76
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 77
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 78
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 3
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 11
+                },
+                {
+                    "amount": 40,
+                    "unit_id": 0,
+                    "ingredient_id": 79
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 15,
+            "author_id": 11,
+            "title": "Bramborový salát s vejci",
+            "description": null,
+            "preparation_duration_minutes": 15,
+            "state": 1,
+            "categories": [
+                2
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Brambory uvařte i se slupkou doměkka. Vejce vařte v osolené vodě 7 minut."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Poté vše slijte a vychladlé oloupejte a nakrájejte na poloviny. Ve větší míse přidejte k bramborám s vejci na kolečka nakrájenou papriku, nasekanou cibulku a rukolu."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Z oleje, hořčice, semínek, citronové šťávy, soli a pepře připravte dresink. Opatrně vmíchejte do salátu a ozdobte čerstvou petrželkou."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "//**Tip:** Zajímavou chuť dodá dresinku také lžíce medu.//"
+                }
+            ],
+            "nutritionPerServing": 483,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 1,
+                    "unit_id": 7,
+                    "ingredient_id": 80
+                },
+                {
+                    "amount": 8,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 2.5,
+                    "unit_id": 1,
+                    "ingredient_id": 81
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 1,
+                    "ingredient_id": 82
+                },
+                {
+                    "amount": 500,
+                    "unit_id": 0,
+                    "ingredient_id": 83
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 3
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 84
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 85
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 64
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 86
+                }
+            ],
+            "comments": [
+                {
+                    "author": 4,
+                    "content": "Tento recept je tak chutný, že by ho snědla i hladová liška!",
+                    "replies": []
+                },
+                {
+                    "author": 0,
+                    "content": "Tohle jsem nikdy předtím nevařil, ale rozhodně to zkusím znovu!",
+                    "replies": []
+                },
+                {
+                    "author": 12,
+                    "content": "Osobně nejsem fanoušek tohoto typu jídla, ale rozumím, že každý má jiný vkus.",
+                    "replies": []
+                }
+            ]
+        },
+        {
+            "image_id": 16,
+            "author_id": 11,
+            "title": "Brambory s lososovým tvarohem",
+            "description": null,
+            "preparation_duration_minutes": 25,
+            "state": 0,
+            "categories": [
+                2
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Troubu předehřejte na 180 °C."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Z rozmarýnu otrhejte lístky. Omyté brambory podélně rozpulte a rozložte na plech. Potřete olejem, posypte rozmarýnem, solí a pepřem. Pečte asi 20 minut."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Mezitím pokrájejte lososa na proužky a promíchejte s tvarohem a jogurtem."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Osolte, opepřete a podávejte k pečeným bramborám."
+                }
+            ],
+            "nutritionPerServing": 416,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 1,
+                    "unit_id": 7,
+                    "ingredient_id": 80
+                },
+                {
+                    "amount": 3,
+                    "unit_id": 10,
+                    "ingredient_id": 87
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 3
+                },
+                {
+                    "amount": 150,
+                    "unit_id": 0,
+                    "ingredient_id": 88
+                },
+                {
+                    "amount": 250,
+                    "unit_id": 0,
+                    "ingredient_id": 89
+                },
+                {
+                    "amount": 150,
+                    "unit_id": 0,
+                    "ingredient_id": 90
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 17,
+            "author_id": 11,
+            "title": "Zelené špagety",
+            "description": null,
+            "preparation_duration_minutes": 20,
+            "state": 1,
+            "categories": [
+                2
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Ve velké pánvi rozehřejte asi půl lžíce olivového oleje a osmažte na něm šunku, nakrájenou na drobné nudličky. Dejte stranou. Na pesto promíchejte jemně nasekanou petržel s utřeným česnekem a jemně mletými ořechy. Vmíchejte zbylý olej, dochuťte solí, pepřem a případně sýrem. Směs můžete připravit i v robotu. Nejprve rozmixujte petržel a ořechy, komínkem ve víku přilejte olej a nakonec vmíchejte zbylé přísady. Dejte si vařit vodu na těstoviny a dobře ji osolte. Pánev se šunkou dejte znovu na oheň, vmíchejte 2 až 3 lžíce petrželkové směsi, promíchejte a prohřejte. Špagety uvařte tak, aby zůstaly pevné na skus, asi 8 minut. Sceďte a vsypte do pánve s omáčkou, dobře promíchejte a ihned podávejte."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Know-how: Jemně nasekané byliny smíchané s olivovým olejem a dochucené ořechy, česnekem a parmazánem, to je italské pesto. To nejpůvodnější takzvané janovské, tvoří bazalka a piniová jadérka. Podle tohoto vzoru se ale dnes připravují pesta z nejrůznějších bylin a oříšků a také ze sušených rajčat (tzv. červené pesto). V uzavřené nádobce a v chladu vydrží domácí pesto několik dnů, vždy je ale lepší připravit si čerstvou dávku a hned ji zkonzumovat. Toto ochucovadlo je také ideální příležitostí ke kuchyňským experimentům."
+                }
+            ],
+            "nutritionPerServing": 610,
+            "numberOfServings": 2,
+            "ingredients": [
+                {
+                    "amount": 3,
+                    "unit_id": 4,
+                    "ingredient_id": 3
+                },
+                {
+                    "amount": 100,
+                    "unit_id": 0,
+                    "ingredient_id": 28
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 11,
+                    "ingredient_id": 86
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 9,
+                    "ingredient_id": 68
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 91
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 92
+                },
+                {
+                    "amount": 130,
+                    "unit_id": 0,
+                    "ingredient_id": 93
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                }
+            ],
+            "comments": [
+                {
+                    "author": 4,
+                    "content": "Skvělý recept, který můžete upravit podle svého vkusu.",
+                    "replies": []
+                },
+                {
+                    "author": 5,
+                    "content": "Miluji, jak jednoduchý a chutný je tento recept!",
+                    "replies": []
+                },
+                {
+                    "author": 18,
+                    "content": "Můj manžel, který není moc na nové recepty, tento zbožňuje!",
+                    "replies": []
+                },
+                {
+                    "author": 8,
+                    "content": "Prostě úžasný recept, budu ho doporučovat všem svým přátelům.",
+                    "replies": [
+                        {
+                            "author": 10,
+                            "content": "ChutnýZajíc děkuje za podporu! Těšíme se, že ochutnáš tento recept a budeš mít stejně radost i ty! :)"
+                        },
+                        {
+                            "author": 7,
+                            "content": "KozičkovaKuchyně děkuje za milá slova! Doufám, že tento recept budeš mít také rád! :)"
+                        },
+                        {
+                            "author": 1,
+                            "content": "Děkuji za podporu! Myslím, že tento recept si opravdu zaslouží vyzkoušet."
+                        },
+                        {
+                            "author": 5,
+                            "content": "Ahoj FluffyCooki3! Jsem rád, že se ti recept líbil! Doufám, že ho vyzkoušíš i ty a budeš stejně nadšený jako já! :)"
+                        }
+                    ]
+                },
+                {
+                    "author": 16,
+                    "content": "Můj manžel říkal, že mu tohle jídlo udělalo chuť jako doma.",
+                    "replies": []
+                },
+                {
+                    "author": 11,
+                    "content": "Je to jako malý kousek nebe na talíři!",
+                    "replies": []
+                },
+                {
+                    "author": 16,
+                    "content": "Když jsem si tohle jídlo dával, měl jsem pocit, že jsem uprostřed kožešinového karnevalu!",
+                    "replies": []
+                }
+            ]
+        },
+        {
+            "image_id": 18,
+            "author_id": 13,
+            "title": "Foie gras",
+            "description": "Foie gas, ztučnělá játra hus a kachen, jsou považována za delikatesu nejenom ve francouzské kuchyni. Tuhle luxusní lahůdku si nejlépe vychutnáte s čerstvým křupavým pečivem.",
+            "preparation_duration_minutes": null,
+            "state": 0,
+            "categories": [
+                3
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Připravte si vychlazená kachní nebo husí foie gras. Lžící z povrchu seškrábněte blanku a rozřízněte je tak, aby vám vznikly dva laloky. Poté odstraňte všechny žilky, vyřízněte i případná červená místa."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Mezitím si předehřejte troubu na 100 ° C. Oba kusy jater posypte čerstvě mletým pepřem, solí a trochou čerstvě nastrouhaného muškátového oříšku a namačkejte je do malého keramického pekáče. Nakonec obsah podlijte vínem, pokud máte doma koňak, přidejte 2-3 lžíce."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Zakrytý pekáček s játry vložte do většího pekáče naplněného vodou a pečte při 100 °C 40 minut. Po upečení odkryjte a z játrové hmoty pomocí lžíce odeberte tuk, který teplem vystoupal na povrch. Ten uložte do samostatné misky."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Pak povrch překryjte potravinářskou fólií nebo kusem pečícího papíru vystřiženého do tvaru pekáčku a zatižte ho něčím těžkým. Po 30 minutách závaží odstraňte, ale játra v pekáčku nechte zakrytá a dejte je na 24 hodin do chladu."
+                },
+                {
+                    "title": "Fifth step",
+                    "content": "Druhý den fólii či papír sejměte a vršek teriny zalijte předem rozpuštěným tukem, který jste po upečení sesbírali. Terinu uložte do lednice a nechte 48 hodin v chladu odpočívat. Hotový pokrm nakrájejte na plátky a podávejte namazaný na čerstvé bagetě, jako doplněk se skvěle hodí třeba fíky."
+                }
+            ],
+            "nutritionPerServing": 412,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 300,
+                    "unit_id": 0,
+                    "ingredient_id": 94
+                },
+                {
+                    "amount": 40,
+                    "unit_id": 5,
+                    "ingredient_id": 95
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 12,
+                    "ingredient_id": 50
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 19,
+            "author_id": 13,
+            "title": "Gyoza knedlíčky",
+            "description": "Mezi jedny z nejoblíbenějších japonských dobrot patří gyoza, malé plněné knedlíčky. Jsou tvořeny tenkým těstem z mouky a vody, plněným směsí masa a dalších ingrediencí. Tradičně se gyoza podávají s omáčkou připravenou z octa, sójovky a sezamového oleje, dohromady tvoří úžasnou harmonii chutí.",
+            "preparation_duration_minutes": 70,
+            "state": 0,
+            "categories": [
+                3
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Na těsto si promícháme mouku se solí a v míse ji zalijeme vroucí vodou. Vařečkou umícháme kompaktní těsto, které prohněteme ještě ručně, aby bylo hladké. Připravené těsto rozdělíme na 4 části a postupně je vyválíme na co nejtenčí plát. Z těsta pak vykrajujeme kolečka o průměru asi 10 centimetrů."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Na náplň důkladně promícháme všechny ingredience a doprostřed každého kolečka z těsta položíme vrchovatou lžičku náplně. Těsto přeložíme tak, aby vznikl půlkruh, a okraje zahneme, aby na nich vznikly varhánky."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Do pánve nalijeme trochu oleje a do jemně rozpáleného položíme knedlíčky spodní stranou bez okrajů. Snažíme se nedávat knedlíčky moc blízko sebe, mohly by se slepit a pak roztrhat. Chvíli opékáme, aby zespoda zezlátly. Pak knedlíčky zalijeme asi tak 1,5dcl vody, přikryjeme pokličkou a necháme napařovat zhruba 5 minut, dokud nejsou hotové."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Mezitím si připravíme omáčku. Na ni promícháme ingredience, nalijeme ji do mističky a položíme na talíř společně s hotovými knedlíčky, které namáčíme do omáčky."
+                }
+            ],
+            "nutritionPerServing": 508,
+            "numberOfServings": 2,
+            "ingredients": [
+                {
+                    "amount": 250,
+                    "unit_id": 0,
+                    "ingredient_id": 96
+                },
+                {
+                    "amount": 150,
+                    "unit_id": 5,
+                    "ingredient_id": 97
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 12,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 200,
+                    "unit_id": 0,
+                    "ingredient_id": 98
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 82
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 99
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 5
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 78
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 9,
+                    "ingredient_id": 68
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 1
+                },
+                {
+                    "amount": 6,
+                    "unit_id": 4,
+                    "ingredient_id": 22
+                },
+                {
+                    "amount": 3,
+                    "unit_id": 4,
+                    "ingredient_id": 100
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 101
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 102
+                }
+            ],
+            "comments": [
+                {
+                    "author": 17,
+                    "content": "Tento recept je tak chutný, že by ho chtěl ochutnat i samotný vlčí alfa!",
+                    "replies": []
+                },
+                {
+                    "author": 13,
+                    "content": "Udělal jsem si tohle jídlo a cítil jsem se jako překrásný pavouk, který se má na co těšit!",
+                    "replies": []
+                },
+                {
+                    "author": 5,
+                    "content": "Děkuji za inspiraci k vaření!",
+                    "replies": [
+                        {
+                            "author": 0,
+                            "content": "Ahoj FluffyCooki3! Jsem rád, že se ti recept líbil! Doufám, že ho vyzkoušíš i ty a budeš stejně nadšený jako já! :)"
+                        },
+                        {
+                            "author": 6,
+                            "content": "ChutnýLišák děkuje za podporu! Těšíme se, že ochutnáš tento recept a budeš mít také takový úspěch! :)"
+                        }
+                    ]
+                },
+                {
+                    "author": 6,
+                    "content": "Moje děti si tento recept zamilovaly, budu ho vařit často.",
+                    "replies": [
+                        {
+                            "author": 11,
+                            "content": "To je skvělé slyšet! Doufám, že budeš mít stejně dobré výsledky jako já!"
+                        },
+                        {
+                            "author": 10,
+                            "content": "ChutnýZajíc děkuje za podporu! Těšíme se, že ochutnáš tento recept a budeš mít stejně radost i ty! :)"
+                        }
+                    ]
+                },
+                {
+                    "author": 0,
+                    "content": "Nemohl jsem uvěřit, že můžu udělat něco tak lahodného doma!",
+                    "replies": []
+                },
+                {
+                    "author": 14,
+                    "content": "Tento recept je tak chutný, že jsem se nemohl zastavit!",
+                    "replies": [
+                        {
+                            "author": 8,
+                            "content": "Ano, tento recept je opravdu skvělý! Užij si ho!"
+                        },
+                        {
+                            "author": 7,
+                            "content": "Díky za hezká slova! Mám radost, že se ti recept líbil."
+                        },
+                        {
+                            "author": 1,
+                            "content": "Cítím se poctěn(a), že jsi si můj recept oblíbil(a)! Děkuji za podporu!"
+                        },
+                        {
+                            "author": 12,
+                            "content": "Jsem rád(a), že se ti můj recept líbil(a)! Doufám, že si ho užiješ i při jeho přípravě."
+                        }
+                    ]
+                },
+                {
+                    "author": 15,
+                    "content": "Chutný recept, který si zamilují i ti, kteří obvykle nejedí toto jídlo.",
+                    "replies": []
+                }
+            ]
+        },
+        {
+            "image_id": 20,
+            "author_id": 13,
+            "title": "Dim Sum knedlíčky",
+            "description": "Čínské plněné knedlíčky Dim Sum se dají připravit na tisíc způsobů. Můžete si je dát jako předkrm, lehký oběd, svačinu nebo večeři, a vychutnat si tak jejich lahodnou návykovou chuť. Zkuste třeba variantu s mletým krůtím masem a zeleninou.",
+            "preparation_duration_minutes": 45,
+            "state": 0,
+            "categories": [
+                3
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "V hluboké pánvi rozehřejte olej a přidejte najemno nakrájené zelí, prolisovaný česnek a zázvor. Restujte asi 6 minut a poté přendejte do mísy. Přidejte maso, nasekané cibulky, vejce, ústřicovou omáčku, sůl a pepř. Zpracujte kompaktní směs a vytvořte z ní asi 16 kuliček. Naskládejte je vedle sebe na plech vyložený pečicím papírem a odložte do ledničky."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Mezitím mouku nasypte do mísy spolu se škrobem a zalijte vroucí vodou. Zamíchejte nejprve vařečkou a poté rukama zpracujte na měkké nelepivé těsto. Pokud těsto stále lepí, podsypte ještě trochou mouky, ale dejte pozor, aby zůstalo vláčné. Z těsta vytvořte váleček o průměru 5 cm, zabalte ho do fólie a nechte v ledničce asi hodinu odpočinout."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Z válečku odkrajujte 3 až 5 mm silné plátky, na ploše lehce poprášené škrobem vyválejte velmi tenká kolečka a okraje potřete vodou. Každé kolečko vezměte do dlaně, doprostřed položte kuličku masa a postupně řasením okrajů vytvořte malé měšce. Pařák vyložte pečicím papírem a vidličkou nebo špejlí do něj propíchněte několik otvorů. Vložte do něj měšce a postavte ho do kastrolu s vroucí vodou (hladina se nesmí dotýkat knedlíčků), napařujte 6 minut. Podávejte posypané nakrájenou cibulkou, sezamem, bylinkami společně s chilli omáčkou."
+                }
+            ],
+            "nutritionPerServing": 342,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 1
+                },
+                {
+                    "amount": 300,
+                    "unit_id": 0,
+                    "ingredient_id": 103
+                },
+                {
+                    "amount": 3,
+                    "unit_id": 9,
+                    "ingredient_id": 68
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 99
+                },
+                {
+                    "amount": 500,
+                    "unit_id": 0,
+                    "ingredient_id": 104
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 1,
+                    "ingredient_id": 82
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 105
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                },
+                {
+                    "amount": 200,
+                    "unit_id": 0,
+                    "ingredient_id": 96
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 25
+                },
+                {
+                    "amount": 180,
+                    "unit_id": 5,
+                    "ingredient_id": 97
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 21,
+            "author_id": 13,
+            "title": "Gruzínské chačapuri",
+            "description": "Gruzínské chačapuri jsou tradiční gruzínské chlebové placky plněné sýrem a mají charakteristický tvar lodi nebo měsíčku. Chačapuri jsou považovány za jedno z hlavních jídel gruzínské kuchyně a mají několik variant, z nichž každá má své vlastní regionální a kulturní odlišnosti.",
+            "preparation_duration_minutes": 60,
+            "state": 1,
+            "categories": [
+                3
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Do zahřátého mléka rozdrobíme droždí a promícháme. Přidáme hladkou mouku a vejce. Ohřejeme máslo, aby změklo, a poté jej přidáme k ostatním surovinám. Nakonec přidáme sůl. Vypracujeme hladké těsto a necháme minimálně hodinu kynout."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Zatímco těsto kyne, připravíme si náplň. Nastrouháme balkánský sýr i mozzarellu a promícháme."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Po vykynutí rozdělíme těsto na dva díly a roztáhneme ho do podlouhlé placky. Můžeme si pomoct také válečkem. Na každou placku naneseme do středu polovinu náplně a rozprostřeme ji tak, aby vytvořila rovnoměrnou vrstvu. Kolem náplně necháme 2-3 cm okraj z těsta."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Začneme rolovat přebývající okraje směrem dovnitř, až vytvoříme “lodičku”, která bude uvnitř držet náplň. Hroty lodičky zamotáme do špičky. Přesuneme na plech vyložený pečicím papírem a pečeme na 180 °C přibližně 10 minut, dokud těsto nezačne zlátnout."
+                },
+                {
+                    "title": "Fifth step",
+                    "content": "Vytáhneme chačapuri z trouby, lehce rozdělíme sýr uprostřed placky a vytvoříme důlek. Do důlku vyklepneme vejce a vratíme placku na 5 minut do trouby. Poté vytáhneme z trouby a na ještě horké chačapuri dáme kousek másla, aby se roztopilo a rozteklo po povrchu."
+                }
+            ],
+            "nutritionPerServing": 316,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 250,
+                    "unit_id": 0,
+                    "ingredient_id": 96
+                },
+                {
+                    "amount": 100,
+                    "unit_id": 5,
+                    "ingredient_id": 106
+                },
+                {
+                    "amount": 25,
+                    "unit_id": 0,
+                    "ingredient_id": 62
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 0.25,
+                    "unit_id": 13,
+                    "ingredient_id": 107
+                },
+                {
+                    "amount": 0.5,
+                    "unit_id": 3,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 400,
+                    "unit_id": 0,
+                    "ingredient_id": 30
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 62
+                }
+            ],
+            "comments": [
+                {
+                    "author": 5,
+                    "content": "Tohle jídlo mě vrátilo zpět do dětství!",
+                    "replies": [
+                        {
+                            "author": 16,
+                            "content": "KulatýPandaChef děkuje za podporu! Těšíme se na tvé dojmy z vyzkoušení tohoto skvělého receptu! :)"
+                        },
+                        {
+                            "author": 18,
+                            "content": "Jsem rád(a), že se ti můj recept líbil(a)! Doufám, že si ho užiješ i při jeho přípravě."
+                        }
+                    ]
+                },
+                {
+                    "author": 17,
+                    "content": "Opravdu mi tohle jídlo udělalo den!",
+                    "replies": []
+                },
+                {
+                    "author": 15,
+                    "content": "Tohle jídlo mě vrátilo zpět do dětství!",
+                    "replies": []
+                },
+                {
+                    "author": 4,
+                    "content": "Když jsem poprvé ochutnal toto jídlo, byl jsem okouzlený!",
+                    "replies": []
+                },
+                {
+                    "author": 5,
+                    "content": "Tohle jídlo mě vrátilo zpět do dětství!",
+                    "replies": []
+                },
+                {
+                    "author": 2,
+                    "content": "Danieli, tohle jídlo je tak skvělé, že bych se k němu chtěl přitulit jako malý roztomilý koťátek! Děkuji za tu sladkou pochoutku! ^-^",
+                    "replies": []
+                },
+                {
+                    "author": 11,
+                    "content": "Skvělý nápad na rychlý a chutný oběd.",
+                    "replies": []
+                },
+                {
+                    "author": 4,
+                    "content": "Děkuji za recept, bude to teď jedno z mých oblíbených jídel!",
+                    "replies": [
+                        {
+                            "author": 11,
+                            "content": "MedvídekPeciválek děkuje za milá slova! Doufám, že tento recept budeš mít rád stejně jako já! :)"
+                        },
+                        {
+                            "author": 0,
+                            "content": "Ano, tento recept je opravdu skvělý! Užij si ho!"
+                        },
+                        {
+                            "author": 4,
+                            "content": "Ano, tento recept je opravdu skvělý! Užij si ho!"
+                        },
+                        {
+                            "author": 8,
+                            "content": "Ahoj FluffyCooki3! Jsem rád, že se ti recept líbil! Doufám, že ho vyzkoušíš i ty a budeš stejně nadšený jako já! :)"
+                        }
+                    ]
+                },
+                {
+                    "author": 5,
+                    "content": "Náš nový oblíbený recept v rodině!",
+                    "replies": [
+                        {
+                            "author": 9,
+                            "content": "Jsem rád(a), že se ti můj recept líbil(a)! Doufám, že si ho užiješ i při jeho přípravě."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "image_id": 22,
+            "author_id": 19,
+            "title": "Pizza se špenátem, slaninou a vejcem",
+            "description": null,
+            "preparation_duration_minutes": 25,
+            "state": 0,
+            "categories": [
+                3
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Cibule překrojíme napůl a pak nakrájíme na plátky (půlkolečka). Osmahneme ji zprudka na oleji až do hněda - udělá dobrou chuť. Před koncem přidáme na kostičky nakrájenou slaninu, kterou necháme středně vyškvařit."
+                },
+                {
+                    "title": "Second step",
+                    "content": "K cibuli se slaninou přidáme trochu vody, špenátový protlak a trochu soli. Pokud je špenát ještě zmrzlý, necháme ho rozpustit. Pak přidáme prolisované stroužky česneku. Směs ochutnáme a dochutíme solí dle potřeby."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Směs nalijeme na připravené těsto (vlastní nebo kupované), rozprostřeme ji po celém těstě a na vrch rozklepneme 2 vejce (dle chuti můžete i více). Ta se pokusíme vidličkou rozprostřít po co největší ploše pizzy - moc to nejde :)"
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Pizzu takto upečeme dle návodu na obalu těsta (u mého to bylo 220°C na horní + spodní ohřev po dobu 15-20 minut)."
+                }
+            ],
+            "nutritionPerServing": 593,
+            "numberOfServings": 3,
+            "ingredients": [
+                {
+                    "amount": 550,
+                    "unit_id": 0,
+                    "ingredient_id": 108
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 1
+                },
+                {
+                    "amount": 3,
+                    "unit_id": 1,
+                    "ingredient_id": 12
+                },
+                {
+                    "amount": 150,
+                    "unit_id": 0,
+                    "ingredient_id": 18
+                },
+                {
+                    "amount": 100,
+                    "unit_id": 5,
+                    "ingredient_id": 40
+                },
+                {
+                    "amount": 450,
+                    "unit_id": 0,
+                    "ingredient_id": 109
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 6,
+                    "unit_id": 9,
+                    "ingredient_id": 110
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                }
+            ],
+            "comments": [
+                {
+                    "author": 6,
+                    "content": "Skvělá variace na klasický recept, opravdu jsem si to užil.",
+                    "replies": []
+                },
+                {
+                    "author": 12,
+                    "content": "Tento recept jsem udělal pro svou roční oslavu a všichni hosté byli nadšení!",
+                    "replies": [
+                        {
+                            "author": 15,
+                            "content": "Děkuji za podporu! Myslím, že tento recept si opravdu zaslouží vyzkoušet."
+                        },
+                        {
+                            "author": 10,
+                            "content": "KozičkovaKuchyně děkuje za milá slova! Doufám, že tento recept budeš mít také rád! :)"
+                        },
+                        {
+                            "author": 16,
+                            "content": "KochanáKočka je nadšená z tvého komentáře! Doufám, že budeš mít stejně radost i z vyzkoušení tohoto receptu! :)"
+                        }
+                    ]
+                },
+                {
+                    "author": 2,
+                    "content": "Nikdy jsem nemyslel, že dokážu něco takového uvařit!",
+                    "replies": []
+                }
+            ]
+        },
+        {
+            "image_id": 25,
+            "author_id": 20,
+            "title": "Uzená kuřecí polévka",
+            "description": null,
+            "preparation_duration_minutes": 30,
+            "state": 0,
+            "categories": [
+                4
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Na oleji zpěníme nadrobno nakrájenou cibuli a přidáme na kousky nakrájené maso z vykostěného kuřecího stehna."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Posypeme mletou paprikou a lehce orestujeme."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Zaprášíme hladkou moukou, zamícháme a necháme trochu zhnědnout za stálého míchání."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Přilijeme horkou vodu, na 8 porcí 1,6 dl, a přidáme na kostičky nakrájenou mrkev, brambory a kosti z kuřecího stehna."
+                },
+                {
+                    "title": "Fifth step",
+                    "content": "Pak přidáme rozetřený česnek se solí, kmín a kuličky pepře."
+                },
+                {
+                    "title": "Sixth step",
+                    "content": "Nakonec polévku necháme asi 15 minut provařit a před podáváním z ní vyndáme kuřecí kosti."
+                },
+                {
+                    "title": "Seventh step",
+                    "content": "Přeji dobrou chuť !"
+                }
+            ],
+            "nutritionPerServing": 425,
+            "numberOfServings": 8,
+            "ingredients": [
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 77
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 12
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 120
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 121
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 96
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 14,
+                    "ingredient_id": 122
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 123
+                },
+                {
+                    "amount": 6,
+                    "unit_id": 1,
+                    "ingredient_id": 124
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 80
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 5
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 9,
+                    "ingredient_id": 68
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 8
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 26,
+            "author_id": 13,
+            "title": "Nejlepší mrkvový krém",
+            "description": "Nevíte co uvařit? Mrkvový krém vás jistě potěší a bude chutnat celé rodině. Je opravdu nejlepší!",
+            "preparation_duration_minutes": 30,
+            "state": 0,
+            "categories": [
+                4
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Veškerou zeleninu očistíme a nakrájíme na kostičky."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Na rozehřátém másle necháme zpěnit cibuli. Přidáme nakrájenou mrkev, bramboru i petržel a vše společně chvíli restujeme."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Přihodíme nasekaný česnek, který krátce opečeme."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Základ polévky zalijeme vývarem a vaříme asi 15 minut."
+                },
+                {
+                    "title": "Fifth step",
+                    "content": "Přilijeme smetanu a vše dobře rozmixujeme."
+                },
+                {
+                    "title": "Sixth step",
+                    "content": "Mrkvový krém dochutíme solí a pepřem, ozdobíme nasekanou petrželkou a můžeme podávat."
+                }
+            ],
+            "nutritionPerServing": 304,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 600,
+                    "unit_id": 5,
+                    "ingredient_id": 15
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 1,
+                    "ingredient_id": 5
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 125
+                },
+                {
+                    "amount": 0.5,
+                    "unit_id": 9,
+                    "ingredient_id": 68
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 80
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 12
+                },
+                {
+                    "amount": 200,
+                    "unit_id": 5,
+                    "ingredient_id": 49
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 2,
+                    "ingredient_id": 86
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 62
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 54
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 27,
+            "author_id": 21,
+            "title": "Brokolicová polévka s drožďovými knedlíčky (dělená strava)",
+            "description": null,
+            "preparation_duration_minutes": 60,
+            "state": 0,
+            "categories": [
+                4
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Polévka : Na oleji zpěníme pokrájenou cibuli, přimáčkneme česnek a když se rozvoní, přisypeme lžíci mouky a krátce orestujeme. Přilijeme vývar nebo vodu a přidáme kostku zeleninového bujónu. Osolíme, opepříme a přivedeme k varu. Přidáme hrubě pokrájenou brokolici a 15 minut povaříme. Pak polévku rozmixujeme dohladka a posypeme nasekanými bylinkami."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Knedlíčky : Cibuli pokrájíme nadrobno, zpěníme ji na oleji, přidáme k ní droždí a za stálého míchání opékáme, dokud se droždí nerozpustí a opětovně neztuhne v hrudkách. Odstavíme z tepla, vmícháme česnek, 4 lžíce vody, hrašku, polohrubou mouku, bylinky, sůl, pepř a zahustíme kukuřičnou strouhankou. Necháme chvilku odpočinout a zhoustnout. Těsto děláme hodně kompaktní, kukuřičná strouhanka pracuje jinak než pečivová. Z odleželé hmoty tvoříme mokrými dlaněmi knedlíčky, vyrovnáme je na talíř a naráz nasypeme do vařící se polévky. Když po pár minutách vyplavou, odstavíme hrnec z tepla a necháme je dojít pod pokličkou."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Tento recept patří do dělené stravy podle Kořínkové, skupina Kytky + zelenina, volná graf."
+                }
+            ],
+            "nutritionPerServing": 355,
+            "numberOfServings": 6,
+            "ingredients": [
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 4
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 12
+                },
+                {
+                    "amount": 3,
+                    "unit_id": 9,
+                    "ingredient_id": 68
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 3
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 126
+                },
+                {
+                    "amount": 15,
+                    "unit_id": 15,
+                    "ingredient_id": 15
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 127
+                },
+                {
+                    "amount": 42,
+                    "unit_id": 0,
+                    "ingredient_id": 107
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 3
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 12
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 128
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 129
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 130
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 4,
+                    "ingredient_id": 40
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 12,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 12,
+                    "ingredient_id": 9
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 127
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 28,
+            "author_id": 12,
+            "title": "Bramboračka s pórkem",
+            "description": null,
+            "preparation_duration_minutes": 45,
+            "state": 1,
+            "categories": [
+                4
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Pórek očistíte, brambory oloupete a oboje nakrájíte na malé kousky. V hrnci rozehřejete máslo spolu s olejem, přidáte nakrájený pórek, brambory, kmín a krátce podusíte. Vše zalijete vývarem a vaříte asi 20 minut, dokud nejsou brambory měkké."
+                },
+                {
+                    "title": "Second step",
+                    "content": "V menším hrnci necháte v mléce ohřát a rozpustit sýr. Vlijete do polévky a podle chuti dosolíte."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Na závěr polévku posypete bylinkami např. pažitkou či petrželkou."
+                }
+            ],
+            "nutritionPerServing": 700,
+            "numberOfServings": 1,
+            "ingredients": [
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 13
+                },
+                {
+                    "amount": 250,
+                    "unit_id": 0,
+                    "ingredient_id": 80
+                },
+                {
+                    "amount": 25,
+                    "unit_id": 0,
+                    "ingredient_id": 62
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 1
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 13,
+                    "ingredient_id": 131
+                },
+                {
+                    "amount": 300,
+                    "unit_id": 5,
+                    "ingredient_id": 106
+                },
+                {
+                    "amount": 150,
+                    "unit_id": 0,
+                    "ingredient_id": 132
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 123
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 2,
+                    "ingredient_id": 127
+                }
+            ],
+            "comments": [
+                {
+                    "author": 0,
+                    "content": "Skvělý nápad na rychlý a chutný oběd.",
+                    "replies": []
+                },
+                {
+                    "author": 6,
+                    "content": "Výborná kombinace ingrediencí, které dává skvělou chuť.",
+                    "replies": []
+                },
+                {
+                    "author": 20,
+                    "content": "Jsem tak vděčný za tento skvělý recept, cítil jsem se jako malá roztomilá pandička, která našla svou oblíbenou medovou dobrotu! UwU",
+                    "replies": []
+                },
+                {
+                    "author": 13,
+                    "content": "Nejlepší část dne je, když mohu ochutnat toto jídlo.",
+                    "replies": [
+                        {
+                            "author": 5,
+                            "content": "KozičkovaKuchyně děkuje za milá slova! Doufám, že tento recept budeš mít také rád! :)"
+                        },
+                        {
+                            "author": 10,
+                            "content": "Děkuji za hezká slova! Těším se, že recept vyzkoušíš a budeš mít stejně dobrý zážitek jako já!"
+                        },
+                        {
+                            "author": 4,
+                            "content": "To je úžasné, že jsi si recept zamiloval! Doufám, že si ho užiješ i při přípravě."
+                        }
+                    ]
+                },
+                {
+                    "author": 7,
+                    "content": "Tento recept by mohl konkurovat i nejlepším koláčům na kožichovém veletrhu!",
+                    "replies": []
+                },
+                {
+                    "author": 2,
+                    "content": "Z tohoto receptu jsem se stala vařečkou!",
+                    "replies": []
+                },
+                {
+                    "author": 11,
+                    "content": "Tento recept byl tak snadný a výsledek byl úžasný.",
+                    "replies": []
+                }
+            ]
+        },
+        {
+            "image_id": 29,
+            "author_id": 11,
+            "title": "Jihočeská kulajda podle časopisu F.O.O.D.",
+            "description": "Sušenými houbami provoněná polévka. To je jihočeská kulajda, na které si můžete pochutnat  k obědu i večeři. Uvařte jí plný hrnec ještě dnes.",
+            "preparation_duration_minutes": 30,
+            "state": 1,
+            "categories": [
+                4
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Houby dejte do misky a zalijte je horkou vodou. Oloupejte brambory a nakrájejte je na kostičky. V rendlíku přiveďte k varu vodu, dejte do ní vejce a vařte 8 minut. Poté je zchlaďte v ledové vodě a oloupejte."
+                },
+                {
+                    "title": "Second step",
+                    "content": "V hrnci rozpusťte máslo, zaprašte ho moukou a umíchejte jíšku. Zalijte ji vývarem, přidejte vodu z hub a metličkou vše dobře rozmíchejte, aby se jíška rovnoměrně rozpustila. Přidejte brambory, houby a koření, přiveďte k varu a vařte na mírném plameni, dokud nejsou brambory takřka hotové."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Vlijte smetanu, polévku ochuťte solí a pepřem, přidejte většinu nasekaného kopru. Už nevařte a chuť dolaďte cukrem a octem, dochucujte postupně podle toho, jak kyselou polévku máte rádi. Tu nalijte do talířů, přidejte vejce a zbylý kopr."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Recept pro vás připravil časopis F.O.O.D."
+                }
+            ],
+            "nutritionPerServing": 659,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 2,
+                    "unit_id": 2,
+                    "ingredient_id": 133
+                },
+                {
+                    "amount": 400,
+                    "unit_id": 0,
+                    "ingredient_id": 80
+                },
+                {
+                    "amount": 750,
+                    "unit_id": 5,
+                    "ingredient_id": 117
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 62
+                },
+                {
+                    "amount": 3,
+                    "unit_id": 4,
+                    "ingredient_id": 96
+                },
+                {
+                    "amount": 3,
+                    "unit_id": 1,
+                    "ingredient_id": 134
+                },
+                {
+                    "amount": 5,
+                    "unit_id": 1,
+                    "ingredient_id": 135
+                },
+                {
+                    "amount": 5,
+                    "unit_id": 1,
+                    "ingredient_id": 124
+                },
+                {
+                    "amount": 250,
+                    "unit_id": 5,
+                    "ingredient_id": 136
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 2,
+                    "ingredient_id": 137
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 66
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 138
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 30,
+            "author_id": 13,
+            "title": "Hovězí tokáň",
+            "description": "Hovězí tokáň možná na první pohled vypadá jako guláš, liší se ale tím, že se do základu nepřidává červená paprika a také se podlévá bílým vínem. Jako příloha se nejlépe hodí rýže, chutnat vám ale bude třeba i s tarhoňou.",
+            "preparation_duration_minutes": 120,
+            "state": 1,
+            "categories": [
+                5
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Maso nakrájíme na nudličky. V kastrolu na sádle osmahneme dozlatova nadrobno nakrájenou cibuli, přidáme maso, osolíme a opepříme a orestujeme ho ze všech stran. Šťávu z masa necháme vydusit."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Přidáme prolisovaný česnek, krátce restujeme, aby se rozvoněl. Přilijeme víno a za občasného míchání ho necháme úplně odvařit."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Maso podlijeme vodou a necháme pod pokličkou dusit, podle potřeby doléváme vodu. Jakmile je maso skoro hotové, vmícháme rajčatový protlak a maso dusíme doměkka."
+                }
+            ],
+            "nutritionPerServing": 523,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 600,
+                    "unit_id": 0,
+                    "ingredient_id": 139
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 12
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 9,
+                    "ingredient_id": 68
+                },
+                {
+                    "amount": 200,
+                    "unit_id": 5,
+                    "ingredient_id": 95
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 140
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 119
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 31,
+            "author_id": 13,
+            "title": "Harissa pasta",
+            "description": "Ostrá kořeněná Harissa pasta pochází z tradiční severoafrické kuchyně, zejména z Tuniska a Maroka. Vyznačuje se výraznou pikantností a používá se k dochucení různých jídel, jako omáčka nebo marináda. Jídlu dodává výrazné kořeněné aroma.",
+            "preparation_duration_minutes": 20,
+            "state": 0,
+            "categories": [
+                5
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Sušené papričky zalijeme vroucí vodou a necháme je chvíli nabobtnat. Mezitím na suché pánvi chvilku prohodíme suché koření, aby se rozvonělo."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Vodu z papriček slijeme, vložíme je do vysoké nádoby, přidáme k nim čerstvé papričky a všechny zbylé ingredience včetně koření a ponorným mixérem je důkladně rozmixujeme najemno. Můžeme přidat i kapii, aby pasta nebyla tak pálivá. Harissu přendáme do uzavíratelné sklenice a skladujeme v lednici."
+                }
+            ],
+            "nutritionPerServing": 474,
+            "numberOfServings": null,
+            "ingredients": [
+                {
+                    "amount": 50,
+                    "unit_id": 0,
+                    "ingredient_id": 141
+                },
+                {
+                    "amount": 50,
+                    "unit_id": 0,
+                    "ingredient_id": 141
+                },
+                {
+                    "amount": 6,
+                    "unit_id": 4,
+                    "ingredient_id": 3
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 9,
+                    "ingredient_id": 68
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 142
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 10,
+                    "ingredient_id": 143
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 3,
+                    "ingredient_id": 64
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 12,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 123
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 144
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 145
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 32,
+            "author_id": 13,
+            "title": "Kuřecí Tikka Masala",
+            "description": "Chicken Tikka Masala, poklad indické kuchyně, láká chuťové pohárky svou bohatou kombinací křupavě upečeného kuřecího masa a krémově pikantní omáčky. Smyslná vůně koření dělá z tohoto pokrmu opravdovou kulinářskou perlu, která si našla oblibu po celém světě.",
+            "preparation_duration_minutes": 50,
+            "state": 0,
+            "categories": [
+                5
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Maso pokrájejte na kousky a smíchejte s jogurtem, prolisovaným česnekem, nastrouhaným zázvorem, kořením (masalou, římským kmínem, kurkumou a koriandrem), chilli podle chuti a solí. Nechte alespoň půl hodiny, ale lépe až do druhého dne, marinovat."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Poté rozpalte troubu na 200 °C, maso i s marinádou rozložte do pekáčku s trochou oleje. Pečte asi 20 minut. V polovině pečení můžete maso otočit."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Mezitím si připravte omáčku. Na směsi másla a oleje nechte zesklovatět najemno pokrájené cibule, vmíchejte všechno koření, prolisovaný česnek a nastrouhaný zázvor a nechte ještě pár vteřin rozvonět."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Vmíchejte protlak, pasírovaná rajčata, sůl, cukr a trochu vody a 15 až 20 minut povařte. Na závěr zjemněte smetanou. Vmíchejte maso i se šťávou, ještě asi 10 minut povařte, případně dosolte."
+                }
+            ],
+            "nutritionPerServing": 490,
+            "numberOfServings": 6,
+            "ingredients": [
+                {
+                    "amount": 800,
+                    "unit_id": 0,
+                    "ingredient_id": 146
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 16,
+                    "ingredient_id": 74
+                },
+                {
+                    "amount": 3,
+                    "unit_id": 9,
+                    "ingredient_id": 68
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 99
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 147
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 3,
+                    "ingredient_id": 148
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 144
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 143
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 12,
+                    "ingredient_id": 59
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 1
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 1,
+                    "ingredient_id": 12
+                },
+                {
+                    "amount": 3,
+                    "unit_id": 9,
+                    "ingredient_id": 68
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 99
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 147
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 3,
+                    "ingredient_id": 148
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 144
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 143
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 17,
+                    "ingredient_id": 140
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 8,
+                    "ingredient_id": 149
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 12,
+                    "ingredient_id": 59
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 150
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 250,
+                    "unit_id": 5,
+                    "ingredient_id": 49
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 62
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 1
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 33,
+            "author_id": 13,
+            "title": "Majolka",
+            "description": "Domácí je nejlepší a u majonézy to platí dvojnásob!",
+            "preparation_duration_minutes": 15,
+            "state": 0,
+            "categories": [
+                5
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Do misky dáme žloutky, hořčici a trochu soli."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Poté dobře prošleháme a tenkým pramínkem postupně přiléváme polovinu množství oleje. Dávkujeme za stálého šlehání a opravdu opatrně, vše se musí vstřebat."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Přidáme ocet a citronovou šťávu. Prošleháme. Pramínkem přilijeme druhou polovinu oleje."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Majonézu ihned podáváme nebo skladujeme v lednici."
+                }
+            ],
+            "nutritionPerServing": 698,
+            "numberOfServings": 10,
+            "ingredients": [
+                {
+                    "amount": 2,
+                    "unit_id": 1,
+                    "ingredient_id": 151
+                },
+                {
+                    "amount": 300,
+                    "unit_id": 5,
+                    "ingredient_id": 152
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 65
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 153
+                },
+                {
+                    "amount": 0.5,
+                    "unit_id": 1,
+                    "ingredient_id": 64
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 34,
+            "author_id": 12,
+            "title": "Koprová omáčka s houskovými knedlíky",
+            "description": null,
+            "preparation_duration_minutes": 130,
+            "state": 1,
+            "categories": [
+                5
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Plec odblaníme a dáme do pekáčku. Mírně ji osolíme a poklademe 40 g másla nakrájeného na plátky. Maso podlijeme 150 ml vody a přiklopíme. Pečeme v troubě předehřáté na 160 °C asi 2 hodiny."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Zbylé máslo rozehřejeme v kastrolu, vsypeme cukr, přilijeme 4 lžíce octa, necháme přejít varem a vlijeme vývar. Jakmile začne základ vřít, přilijeme mléko a omáčku dochutíme solí a pepřem. Necháme ji na mírném ohni probublávat."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Do omáčky vsypeme na kostičky nakrájený toastový chléb a vaříme cca 10 minut, dokud se nerozvaří a omáčka nezhoustne. Připravenou omáčku odstavíme a rozmixujeme dohladka. Pokud je příliš hustá, přilijeme vývar či vodu, pak ji propasírujeme přes síto."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Lístky kopru otrháme od stonků, nasekáme a společně se smetanou vmícháme do omáčky. Povaříme asi 4 minuty a dle chuti přidáme sůl, cukr či ocet."
+                },
+                {
+                    "title": "Fifth step",
+                    "content": "Koprovku podáváme s masem, vejcem a houskovým knedlíkem."
+                }
+            ],
+            "nutritionPerServing": 683,
+            "numberOfServings": 6,
+            "ingredients": [
+                {
+                    "amount": 800,
+                    "unit_id": 0,
+                    "ingredient_id": 154
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 140,
+                    "unit_id": 0,
+                    "ingredient_id": 62
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 4,
+                    "ingredient_id": 155
+                },
+                {
+                    "amount": 7,
+                    "unit_id": 4,
+                    "ingredient_id": 138
+                },
+                {
+                    "amount": 500,
+                    "unit_id": 5,
+                    "ingredient_id": 156
+                },
+                {
+                    "amount": 100,
+                    "unit_id": 5,
+                    "ingredient_id": 106
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                },
+                {
+                    "amount": 9,
+                    "unit_id": 6,
+                    "ingredient_id": 157
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 137
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 35,
+            "author_id": 11,
+            "title": "Kuře na paprice",
+            "description": "Omáčky patří v naší kuchyni mezi velmi oblíbené pokrmy a kuře na paprice není výjimkou. V tomto receptu nahradil smetanu jemný čerstvý sýr, který omáčku krásně zahustí. Servírovat ji můžete s přílohou dle své chuti, vynikající jsou kromě houskových knedlíků také např. špenátové noky.",
+            "preparation_duration_minutes": 45,
+            "state": 0,
+            "categories": [
+                5
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Cibuli a papriku očistěte a pokrájejte na kostičky. Maso osolte a opepřete. V kastrolu se silným dnem rozehřejte máslo a opečte na něm maso, z každé strany asi 3 minuty."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Maso vyndejte na talíř, do výpeku vhoďte cibuli a orestujte ji do růžova, asi 3 minuty. Přidejte papriku a restujte další 3 minuty. Nyní přisypte sladkou papriku a promíchejte. Po minutě vraťte do kastrolu maso, zalijte vývarem a duste při mírné teplotě 20 minut."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Maso opět vyjměte z kastrolu a omáčku rozmixujte dohladka. Přidejte lučinu a metlou rozmíchejte na hladký krém. Omáčku ochuťte solí a pepřem.\nMaso pomocí vidliček natrhejte na vlákna a vraťte do omáčky. Podávejte se špenátovými noky."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Recept pro vás připravil časopis F.O.O.D."
+                }
+            ],
+            "nutritionPerServing": 506,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 12
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 81
+                },
+                {
+                    "amount": 3,
+                    "unit_id": 1,
+                    "ingredient_id": 158
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 62
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 118
+                },
+                {
+                    "amount": 700,
+                    "unit_id": 5,
+                    "ingredient_id": 117
+                },
+                {
+                    "amount": 200,
+                    "unit_id": 0,
+                    "ingredient_id": 30
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 36,
+            "author_id": 13,
+            "title": "Špekáčky na pivu",
+            "description": "Chalupářská klasika, která má mnoho obměn. Tentokrát podle Koko.",
+            "preparation_duration_minutes": 60,
+            "state": 0,
+            "categories": [
+                5
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Špekáčky překrojte podélně na poloviny. Naskládejte je na pánev řeznou stranou dolů a začněte pomalu zahřívat. Papriky nakrájejte na kostičky a přihoďte je do pánve hned, jakmile se začnou špekáčky opékat. Po chvíli je obraťte a opečte i z druhé strany."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Obsah pánve odložte vedle a zatím na sádle zprudka osmažte cibuli. Přisypte cukr a nechte zkaramelizovat. Přidejte i česnek. Nakonec přidejte papriku, zalijte černým pivem a promíchejte. Nezapomeňte osolit a přihodit i bobkový list."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Přilijte passatu, zmírněte plamen, zamíchejte, ochutnejte, dopepřete a přidejte buřty s paprikou. Vše by mělo být ponořeno v omáčce. Přiklopte poklicí a šup s tím do trouby. Prvních 15 minut pečte na 180 °C přiklopené, pak odklopte a dopékejte dalších přibližně 20, maximálně 30 minut. Asi není potřeba zdůrazňovat, že chutě se lépe propojí, pokud připravujete tohle jídlo předem. A taky že servírujeme s měkkým čerstvým chlebem. Případně posypané trochou petrželky nebo jarní cibulky."
+                }
+            ],
+            "nutritionPerServing": 495,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 6,
+                    "unit_id": 1,
+                    "ingredient_id": 159
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 1,
+                    "ingredient_id": 160
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 81
+                },
+                {
+                    "amount": 6,
+                    "unit_id": 9,
+                    "ingredient_id": 68
+                },
+                {
+                    "amount": 3,
+                    "unit_id": 1,
+                    "ingredient_id": 134
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 1,
+                    "ingredient_id": 12
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 4,
+                    "ingredient_id": 161
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 119
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 3,
+                    "ingredient_id": 66
+                },
+                {
+                    "amount": 500,
+                    "unit_id": 5,
+                    "ingredient_id": 162
+                },
+                {
+                    "amount": 500,
+                    "unit_id": 5,
+                    "ingredient_id": 163
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 12,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 12,
+                    "ingredient_id": 9
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 12,
+                    "ingredient_id": 59
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 37,
+            "author_id": 22,
+            "title": "Margotková bábovka",
+            "description": null,
+            "preparation_duration_minutes": 55,
+            "state": 1,
+            "categories": [
+                0
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Připravíme si mísu do které dáme suroviny které jsem uvedl (je jedno v jakém pořadí). Pak do mísy nastrouháme tyčinku Margot. Všechno důkladně promícháme."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Necháme troubu předehřát na 150 °C. Těsto vlijeme do přichystané formy a pečeme 35-45 minut."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Po upečení a vychladnutí pocukrujeme."
+                }
+            ],
+            "nutritionPerServing": 689,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 2,
+                    "unit_id": 18,
+                    "ingredient_id": 129
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 18,
+                    "ingredient_id": 1
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 18,
+                    "ingredient_id": 106
+                },
+                {
+                    "amount": 3,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 19,
+                    "ingredient_id": 164
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 8,
+                    "ingredient_id": 165
+                },
+                {
+                    "amount": 100,
+                    "unit_id": 0,
+                    "ingredient_id": 166
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 38,
+            "author_id": 13,
+            "title": "Lotus cheesecake",
+            "description": "Chesscake miluje snad každý, s tímhle ale rozhodně zabodujete. Tento dezert spojuje krémovou strukturu cheesecaku s lahodným a specifickým aroma karamelových sušenek. Je výborný, jednoduchý a rychlý na přípravu a také krásně vypadá.",
+            "preparation_duration_minutes": 30,
+            "state": 0,
+            "categories": [
+                0
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Sušenky nadrobte nebo rozmixujte dohladka. Trochu si odeberte na zdobení a do zbytku přidejte rozpuštěné máslo a vzniklou směs namačkejte do pečicím papírem vyložené formy."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Ušlehejte krém z tvarohu, mascarpone, vajec a cukru a navršte na korpus. Dejte péct na 160 stupňů asi na 50 minut. Upečený dort nechte vychladnout a studený ho polijte rozehřátou Lotus pomazánkou a posypte drobečky, které jste si odložili při jejich drcení. Nechte cheesecake ztuhnout v lednici."
+                }
+            ],
+            "nutritionPerServing": 448,
+            "numberOfServings": null,
+            "ingredients": [
+                {
+                    "amount": 250,
+                    "unit_id": 0,
+                    "ingredient_id": 167
+                },
+                {
+                    "amount": 80,
+                    "unit_id": 0,
+                    "ingredient_id": 62
+                },
+                {
+                    "amount": 750,
+                    "unit_id": 0,
+                    "ingredient_id": 89
+                },
+                {
+                    "amount": 250,
+                    "unit_id": 0,
+                    "ingredient_id": 168
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 66
+                }
+            ],
+            "comments": [
+                {
+                    "author": 6,
+                    "content": "Myslím, že tento recept není pro mě, ale může to být skvělá volba pro jiné.",
+                    "replies": []
+                },
+                {
+                    "author": 12,
+                    "content": "Výborný recept, který určitě zůstane v mé kuchařce!",
+                    "replies": []
+                },
+                {
+                    "author": 15,
+                    "content": "Doporučuji tento recept každému, kdo má rád dobré jídlo.",
+                    "replies": []
+                },
+                {
+                    "author": 13,
+                    "content": "Prostě úžasný recept, budu ho doporučovat všem svým přátelům.",
+                    "replies": []
+                },
+                {
+                    "author": 7,
+                    "content": "Užívám si tohle jídlo tak moc! Cítím se jako malý roztomilý zajíček, který objevil svůj lahodný mrkvičkový dort! ^w^",
+                    "replies": [
+                        {
+                            "author": 4,
+                            "content": "Cítím se poctěn(a), že jsi si můj recept oblíbil(a)! Děkuji za podporu!"
+                        },
+                        {
+                            "author": 21,
+                            "content": "SladkáKočička je nadšená z tvého komentáře! Věřím, že tento recept oceníš stejně jako já! :)"
+                        },
+                        {
+                            "author": 11,
+                            "content": "Jsem rád(a), že se ti můj recept líbil(a)! Doufám, že si ho užiješ i při jeho přípravě."
+                        },
+                        {
+                            "author": 7,
+                            "content": "To je úžasné, že jsi si recept zamiloval! Doufám, že si ho užiješ i při přípravě."
+                        },
+                        {
+                            "author": 7,
+                            "content": "Ano, tento recept je opravdu skvělý! Užij si ho!"
+                        }
+                    ]
+                },
+                {
+                    "author": 13,
+                    "content": "Osobně nejsem fanoušek tohoto typu jídla, ale rozumím, že každý má jiný vkus.",
+                    "replies": []
+                }
+            ]
+        },
+        {
+            "image_id": 39,
+            "author_id": 12,
+            "title": "Košíčky Izidor",
+            "description": null,
+            "preparation_duration_minutes": 90,
+            "state": 0,
+            "categories": [
+                0
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Z uvedených ingrediencí vypracujeme těsto, které necháme odpočinout v chladu. Poté ho znovu propracujeme, plníme do malých košíčkových formiček a v troubě vyhřáté na 180 °C pečeme cca 20 minut. Necháme vychladnout a vyklopíme."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Do mísy dáme ořechy, oba druhy cukru, marmeládu a rum, dobře promícháme a náplní košíčky naplníme."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Dále připravíme krém. Do mísy dáme vejce, oba druhy cukru a kakao, dobře promícháme a ve vodní lázni zahříváme, dokud není směs horká. Odstavíme, přidáme tuk a rum a necháme vychladnout. Máslo vyšleháme do pěny, postupně do ní zašleháváme vychladlou směs a vyšleháme hladký krém."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Krém nastříkáme pomocí cukrářského sáčku na náplň, necháme ztuhnout a namáčíme do čokoládové polevy."
+                }
+            ],
+            "nutritionPerServing": 669,
+            "numberOfServings": null,
+            "ingredients": [
+                {
+                    "amount": 210,
+                    "unit_id": 0,
+                    "ingredient_id": 96
+                },
+                {
+                    "amount": 70,
+                    "unit_id": 0,
+                    "ingredient_id": 33
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 169
+                },
+                {
+                    "amount": 20,
+                    "unit_id": 0,
+                    "ingredient_id": 170
+                },
+                {
+                    "amount": 40,
+                    "unit_id": 0,
+                    "ingredient_id": 171
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 12,
+                    "ingredient_id": 172
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 12,
+                    "ingredient_id": 38
+                },
+                {
+                    "amount": 140,
+                    "unit_id": 0,
+                    "ingredient_id": 62
+                },
+                {
+                    "amount": 150,
+                    "unit_id": 0,
+                    "ingredient_id": 171
+                },
+                {
+                    "amount": 50,
+                    "unit_id": 0,
+                    "ingredient_id": 33
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 169
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 173
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 174
+                },
+                {
+                    "amount": 3,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 150,
+                    "unit_id": 0,
+                    "ingredient_id": 33
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 169
+                },
+                {
+                    "amount": 2,
+                    "unit_id": 4,
+                    "ingredient_id": 170
+                },
+                {
+                    "amount": 100,
+                    "unit_id": 0,
+                    "ingredient_id": 175
+                },
+                {
+                    "amount": 20,
+                    "unit_id": 5,
+                    "ingredient_id": 174
+                },
+                {
+                    "amount": 400,
+                    "unit_id": 0,
+                    "ingredient_id": 62
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 176
+                }
+            ],
+            "comments": [
+                {
+                    "author": 18,
+                    "content": "Myslím, že tento recept není pro mě, ale může to být skvělá volba pro jiné.",
+                    "replies": []
+                },
+                {
+                    "author": 13,
+                    "content": "Mám rád, jak tento recept zahrnuje běžně dostupné ingredience.",
+                    "replies": []
+                },
+                {
+                    "author": 11,
+                    "content": "Náš nový oblíbený recept v rodině!",
+                    "replies": []
+                },
+                {
+                    "author": 9,
+                    "content": "Tento recept je úžasný, každý by ho měl zkusit!",
+                    "replies": []
+                },
+                {
+                    "author": 19,
+                    "content": "Kombinace chutí v tomto receptu je naprosto dokonalá.",
+                    "replies": []
+                },
+                {
+                    "author": 6,
+                    "content": "Děkuji za recept, ušetřil mi spoustu času!",
+                    "replies": [
+                        {
+                            "author": 1,
+                            "content": "MlsnýMedvídek děkuje za milá slova! Doufáme, že budeš mít také radost z přípravy tohoto lahodného jídla! :)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "image_id": 40,
+            "author_id": 13,
+            "title": "Kremrole",
+            "description": "Upečte si nadýchané domácí kremrole z listového těsta naplněné sladkým sněhem, který se rozplyne na jazyku.",
+            "preparation_duration_minutes": 55,
+            "state": 0,
+            "categories": [
+                0
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Listové těsto rozválíme na pomoučené ploše na plát silný asi 3 mm a rádýlkem ho nakrájíme na proužky přibližně 2 cm široké. Jednotlivé proužky těsta natočíme na kovové trubičky, naskládáme je na plech s papírem na pečení a povrch trubiček potřeme rozšlehaným vejcem."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Kremrole pečeme v troubě vyhřáté na 180 °C dozlatova. Po upečení je ještě za tepla stáhneme z trubiček."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Než kremrole vychladnou, připravíme si bílkový krém. Z vody a 160 g cukru uvaříme cukrový rozvar o teplotě 113 - 116 °C. Současně vyšleháme bílky se zbylými 90 g cukru na tuhý sníh, do kterého ihned zašleháme horký cukrový rozvar, který přiléváme tenkým pramínkem za stálého šlehání. Snížíme rychlost robotu a při pomalých otáčkách krém došleháme, tím se  vychladí a zhoustne."
+                },
+                {
+                    "title": "Fourth step",
+                    "content": "Krém naplníme do cukrářského sáčku s hladkou zdobící trubičkou a nastříkáme ho do kremrolí. Nakonec je pocukrujeme a podáváme."
+                }
+            ],
+            "nutritionPerServing": 455,
+            "numberOfServings": 9,
+            "ingredients": [
+                {
+                    "amount": 400,
+                    "unit_id": 0,
+                    "ingredient_id": 177
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 96
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 33
+                },
+                {
+                    "amount": 250,
+                    "unit_id": 0,
+                    "ingredient_id": 155
+                },
+                {
+                    "amount": 68,
+                    "unit_id": 5,
+                    "ingredient_id": 40
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 1,
+                    "ingredient_id": 36
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 41,
+            "author_id": 23,
+            "title": "Ovesná kaše proteinová",
+            "description": null,
+            "preparation_duration_minutes": 3,
+            "state": 1,
+            "categories": [
+                0
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Vločky nasypeme do misky a přilejeme mléko. Dáme ohřát do mikrovlnné trouby na 1,5 minuty."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Po ohřátí zamícháme a zkontrolujeme konzistenci kaše, kterou upravíme přidáním trochy studeného mléka nebo vody. Přidáme 15 g proteinového prášku libovolné chuti. Vše dobře promícháme."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Hotovou kaši ozdobíme ovocem, dále čokoládou a ořechovým máslem a množství si upravíme dle našich potřeb."
+                }
+            ],
+            "nutritionPerServing": 312,
+            "numberOfServings": 1,
+            "ingredients": [
+                {
+                    "amount": 30,
+                    "unit_id": 0,
+                    "ingredient_id": 69
+                },
+                {
+                    "amount": 100,
+                    "unit_id": 5,
+                    "ingredient_id": 178
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 13,
+                    "ingredient_id": 179
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 180
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 181
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 2,
+                    "ingredient_id": 182
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 3,
+                    "ingredient_id": 183
+                },
+                {
+                    "amount": 15,
+                    "unit_id": 0,
+                    "ingredient_id": 184
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 42,
+            "author_id": 15,
+            "title": "Skotská vejce",
+            "description": null,
+            "preparation_duration_minutes": 60,
+            "state": 0,
+            "categories": [
+                0
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Maso naklepeme, opepříme a osolíme. Oloupané natvrdo uvařené vejce zabalíme do plátku šunky a pak do řízku. Upevníme párátkem a obalíme v trojobalu (mouka, vejce rozšlehané s mlékem, strouhanka). Vložíme do rozehřátého tuku a smažíme do zlatova."
+                },
+                {
+                    "title": "Second step",
+                    "content": "Odložíme na papírový ubrousek, který odsaje přebytečný tuk a vyndáme párátka."
+                },
+                {
+                    "title": "Third step",
+                    "content": "Podáváme s vařenými nebo jinak upravenými brambory a obložíme zeleninou."
+                }
+            ],
+            "nutritionPerServing": 536,
+            "numberOfServings": 4,
+            "ingredients": [
+                {
+                    "amount": 4,
+                    "unit_id": 1,
+                    "ingredient_id": 24
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 9
+                },
+                {
+                    "amount": 4,
+                    "unit_id": 6,
+                    "ingredient_id": 28
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 96
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 106
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 185
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 186
+                }
+            ],
+            "comments": []
+        },
+        {
+            "image_id": 43,
+            "author_id": 15,
+            "title": "Vejce na maďarský způsob",
+            "description": null,
+            "preparation_duration_minutes": null,
+            "state": 0,
+            "categories": [
+                0
+            ],
+            "steps": [
+                {
+                    "title": "First step",
+                    "content": "Vejce uvaříme natvrdo, horká oloupeme, přepůlíme a dáme na talířek. Posypeme nadrobno pokrájenou cibulkou, osolíme, zaprášíme sladkou nebo pálivou  paprikou a zalejeme rozehřátým máslem. Jíme s chlebem a odháníme myšlenky na to, jak je to nezdravé."
+                }
+            ],
+            "nutritionPerServing": 535,
+            "numberOfServings": null,
+            "ingredients": [
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 12
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 62
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 8
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 17
+                },
+                {
+                    "amount": 1,
+                    "unit_id": 1,
+                    "ingredient_id": 187
+                }
+            ],
+            "comments": [
+                {
+                    "author": 14,
+                    "content": "Nejsem si jistý, že by mi tento recept chutnal, ale děkuji za sdílení.",
+                    "replies": []
+                }
+            ]
+        }
+    ]
+}
