@@ -1,7 +1,7 @@
 FROM postgres:16.1
 
 RUN apt-get update && \
-  apt-get install -yq --no-install-recommends build-essential \
+  apt-get install -yq --no-install-recommends \
   openssl \
   curl \ 
   wget \
