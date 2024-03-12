@@ -2,8 +2,6 @@ import { RecipeState, UnitType } from "@prisma/client";
 import { prisma } from "../server/utils/prisma-client";
 
 async function main() {
-  await prisma.$executeRaw`TRUNCATE TABLE "users" CASCADE;`;
-
   const user = await prisma.user.create({
     data: {
       email: "test@test.com",
