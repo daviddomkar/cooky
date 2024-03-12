@@ -6,4 +6,13 @@ declare module "@auth/core/types" {
   }
 }
 
+declare global {
+  namespace PrismaJson {
+    type Step = {
+      title: string;
+      content: string;
+    };
+  }
+}
+
 export {};
