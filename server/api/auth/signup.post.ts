@@ -1,6 +1,5 @@
 import { hash } from "bcrypt";
 import { useValidatedBody } from "h3-valibot";
-import prisma from "~/server/utils/prisma-client";
 
 export default defineEventHandler(async (event) => {
   const { name, username, email, password } = await useValidatedBody(

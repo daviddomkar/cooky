@@ -3,6 +3,10 @@ generator client {
   previewFeatures = ["postgresqlExtensions"]
 }
 
+generator json {
+  provider = "prisma-json-types-generator"
+}
+
 datasource db {
   provider     = "postgresql"
   url          = env("DATABASE_URL")
@@ -79,12 +83,12 @@ model Unit {
 model RecipeIngredient {
   amount Int @db.Integer
 
-  unit         Unit       @relation(fields: [unitId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  unitId       String     @map("unit_id") @db.Uuid
-  recipe       Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  recipeId     String     @map("recipe_id") @db.Uuid
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   ingredientId String     @map("ingredient_id") @db.Uuid
+  recipe       Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  recipeId     String     @map("recipe_id") @db.Uuid
+  unit         Unit       @relation(fields: [unitId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  unitId       String     @map("unit_id") @db.Uuid
 
   @@id(name: "id", fields: [recipeId, ingredientId])
   @@map("recipe_ingredients")

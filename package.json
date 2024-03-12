@@ -27,7 +27,7 @@
     "*.{css,vue}": "stylelint --fix"
   },
   "prisma": {
-    "seed": "npx tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts"
   },
   "devDependencies": {
     "@auth/core": "^0.17.0",
@@ -73,6 +73,7 @@
     "stylelint": "^16.2.1",
     "stylelint-config-recommended-vue": "^1.5.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.7.1",
     "typescript": "^5.3.3",
     "unocss-preset-theme": "^0.12.0",
     "valibot": "0.24.1",
