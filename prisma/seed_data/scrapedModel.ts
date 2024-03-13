@@ -33,13 +33,13 @@ export type ScrapedUnit = {
 
 export type ScrapedIngredient = {
   title: string;
-  unit_types: ScrapedUnitType[];
+  unitTypes: ScrapedUnitType[];
 };
 
 export type ScrapedRecipeIngredient = {
   amount: number;
-  unit_id: number;
-  ingredient_id: number;
+  unitId: number;
+  ingredientId: number;
 };
 
 export type ScrapedRecipeStep = {
@@ -61,7 +61,7 @@ export type ScrapedRecipeComment = {
 export type ScrapedRecipe = {
   title: string;
   description: string;
-  preparation_duration_minutes: number;
+  preparationDurationMinutes: number;
   state: ScrapedRecipeState;
   categories: ScrapedRecipeCategory[];
   steps: ScrapedRecipeStep[];
@@ -69,12 +69,12 @@ export type ScrapedRecipe = {
   numberOfServings: number;
   ingredients: ScrapedRecipeIngredient[];
   comments: ScrapedRecipeComment[];
-  image_id: number;
-  author_id: number;
+  imageId: number;
+  authorId: number;
 };
 
 export type ScrapedData = {
-  recipe_images: string[];
+  recipeImages: string[];
   users: ScrapedUser[];
   ingredients: ScrapedIngredient[];
   units: ScrapedUnit[];
