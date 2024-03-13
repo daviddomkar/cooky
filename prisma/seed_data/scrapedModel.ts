@@ -1,11 +1,11 @@
-export enum UnitType {
+export enum ScrapedUnitType {
   VOLUME,
   WEIGHT,
   QUANTITY,
   UNKNOWN,
 }
 
-export enum RecipeCategory {
+export enum ScrapedRecipeCategory {
   BREAKFAST,
   LUNCH,
   DINNER,
@@ -14,69 +14,69 @@ export enum RecipeCategory {
   SAUCES,
 }
 
-export enum RecipeState {
+export enum ScrapedRecipeState {
   DRAFT,
   PUBLISHED,
 }
 
-export type User = {
+export type ScrapedUser = {
   name: string;
   username: string;
   email: string;
 };
 
-export type Unit = {
+export type ScrapedUnit = {
   title: string;
-  type: UnitType;
+  type: ScrapedUnitType;
   abbreviation: string;
 };
 
-export type Ingredient = {
+export type ScrapedIngredient = {
   title: string;
-  unit_types: UnitType[];
+  unit_types: ScrapedUnitType[];
 };
 
-export type RecipeIngredient = {
+export type ScrapedRecipeIngredient = {
   amount: number;
   unit_id: number;
   ingredient_id: number;
 };
 
-export type RecipeStep = {
+export type ScrapedRecipeStep = {
   title: string;
   content: string;
 };
 
-export type RecipeReply = {
+export type ScrapedRecipeReply = {
   author: number;
   content: string;
 };
 
-export type RecipeComment = {
+export type ScrapedRecipeComment = {
   author: number;
   content: string;
-  replies: RecipeReply[];
+  replies: ScrapedRecipeReply[];
 };
 
-export type Recipe = {
+export type ScrapedRecipe = {
   title: string;
   description: string;
   preparation_duration_minutes: number;
-  state: RecipeState;
-  categories: RecipeCategory[];
-  steps: RecipeStep[];
+  state: ScrapedRecipeState;
+  categories: ScrapedRecipeCategory[];
+  steps: ScrapedRecipeStep[];
   nutritionPerServing: number;
   numberOfServings: number;
-  ingredients: RecipeIngredient[];
-  comments: RecipeComment[];
+  ingredients: ScrapedRecipeIngredient[];
+  comments: ScrapedRecipeComment[];
   image_id: number;
   author_id: number;
 };
 
 export type ScrapedData = {
   recipe_images: string[];
-  users: User[];
-  ingredients: Ingredient[];
-  units: Unit[];
-  recipes: Recipe[];
+  users: ScrapedUser[];
+  ingredients: ScrapedIngredient[];
+  units: ScrapedUnit[];
+  recipes: ScrapedRecipe[];
 };
