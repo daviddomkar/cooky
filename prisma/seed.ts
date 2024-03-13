@@ -1,126 +1,107 @@
-import { RecipeState, UnitType } from "@prisma/client";
-import { prisma } from "../server/utils/prisma-client";
+import { PrismaClient, UnitType } from "@prisma/client";
+import { hash } from "bcrypt";
+import scrapedData from "./seed_data/scraped.json" assert { type: "json" };
+
+const prisma = new PrismaClient();
+
+async function getMimeTypeFromUrl(url: string) {
+  const reponse = await fetch(url, {
+    method: "HEAD",
+  });
+  return reponse.headers.get("Content-Type") ?? "image/jpeg";
+}
 
 async function main() {
-  const user = await prisma.user.create({
-    data: {
-      email: "test@test.com",
-      password: "test",
-      name: "Test User",
-      username: "testuser",
-    },
+  const usersData = await Promise.all(
+    scrapedData.users.map(async (x) => {
+      return {
+        ...x,
+        password: await hash(`${x.username}password`, 12),
+      };
+    }),
+  );
+
+  const unitTypeDict: Record<number, UnitType> = {
+    0: UnitType.VOLUME,
+    1: UnitType.WEIGHT,
+    2: UnitType.QUANTITY,
+  };
+
+  const unitsData = scrapedData.units.map((x) => {
+    const type = unitTypeDict[x.type] || UnitType.QUANTITY;
+    return {
+      title: x.title,
+      abbreviation: x.abbreviation.slice(0, 8),
+      type,
+    };
   });
 
-  const image = await prisma.file.create({
-    data: {
-      url: "https://www.google.com",
-      mimeType: "image/jpeg",
-    },
+  const ingredientsData = scrapedData.ingredients.map((x) => {
+    const unitTypes = x.unit_types.map(
+      (x) => unitTypeDict[x] || UnitType.QUANTITY,
+    );
+    return {
+      title: x.title,
+      unitTypes,
+    };
   });
 
-  const ingredients = await Promise.all(
-    [
-      { title: "Mouka", unitTypes: [UnitType.VOLUME, UnitType.WEIGHT] },
-      { title: "Vajíčka", unitTypes: [UnitType.QUANTITY] },
-      { title: "Mléko", unitTypes: [UnitType.VOLUME] },
-      { title: "Sůl", unitTypes: [UnitType.WEIGHT] },
-      { title: "Olej", unitTypes: [UnitType.VOLUME] },
-    ].map(async ({ title, unitTypes }) => {
-      return await prisma.ingredient.create({
-        data: {
-          title,
-          unitTypes,
-        },
-      });
+  const recipeImagesData = await Promise.all(
+    scrapedData.recipe_images.map(async (x) => {
+      return {
+        url: x,
+        mimeType: await getMimeTypeFromUrl(x),
+      };
     }),
   );
 
-  const units = await Promise.all(
-    [
-      { title: "gram", abbreviation: "g", type: UnitType.WEIGHT },
-      { title: "kusy", abbreviation: "ks", type: UnitType.QUANTITY },
-      { title: "militry", abbreviation: "ml", type: UnitType.VOLUME },
-    ].map(async ({ title, abbreviation, type }) => {
-      return await prisma.unit.create({
+  prisma.$transaction(async (tx) => {
+    /* USERS */
+    await tx.$executeRaw`TRUNCATE TABLE "users" CASCADE;`;
+    const users = await prisma.$transaction(
+      usersData.map((data) => prisma.user.create({ data })),
+    );
+
+    for (const u of users) {
+      await tx.list.create({
         data: {
-          title,
-          abbreviation,
-          type,
+          author: {
+            connect: {
+              id: u.id,
+            },
+          },
+          favouritesOfUser: {
+            connect: {
+              id: u.id,
+            },
+          },
+          title: "Favorites",
         },
       });
-    }),
-  );
+    }
 
-  const recipeIngredients = [
-    {
-      amount: 200,
-      ingredientId: ingredients[0].id,
-      unitId: units[0].id,
-    },
-    {
-      amount: 2,
-      ingredientId: ingredients[1].id,
-      unitId: units[1].id,
-    },
-    {
-      amount: 500,
-      ingredientId: ingredients[2].id,
-      unitId: units[2].id,
-    },
-    {
-      amount: 1,
-      ingredientId: ingredients[3].id,
-      unitId: units[0].id,
-    },
-    {
-      amount: 1,
-      ingredientId: ingredients[4].id,
-      unitId: units[2].id,
-    },
-  ];
+    /* UNITS */
+    await tx.$executeRaw`TRUNCATE TABLE "units" CASCADE;`;
+    /* const units = */ await prisma.$transaction(
+      unitsData.map((data) => prisma.unit.create({ data })),
+    );
 
-  const categories = await Promise.all(
-    [
-      { title: "Snídaně", order: 1, icon: "breakfast" },
-      { title: "Večeře", order: 2, icon: "dinner" },
-      { title: "Oběd", order: 3, icon: "lunch" },
-    ].map(async ({ title, order, icon }) => {
-      return await prisma.category.create({
-        data: {
-          title,
-          order,
-          icon,
-        },
-      });
-    }),
-  );
+    /* INGREDIENTS */
+    await tx.$executeRaw`TRUNCATE TABLE "ingredients" CASCADE;`;
+    /* const ingredients = */ await prisma.$transaction(
+      ingredientsData.map((data) => prisma.ingredient.create({ data })),
+    );
 
-  await prisma.recipe.create({
-    title: "Palačinky",
-    description: "Velmi dobré palačinky",
-    preparationDuration: {
-      days: 0,
-      hours: 0,
-      minutes: 20,
-      seconds: 0,
-    },
-    state: RecipeState.PUBLISHED,
-    steps: [
-      {
-        title: "Smíchání surovin",
-        content: "Smíchejte všechny suroviny dohromady",
-      },
-      {
-        title: "Opečení palačinek",
-        content: "Opečte palačinky",
-      },
-    ],
-    nutritionPerServing: 400,
-    numberOfServings: 2,
-    imageId: image.id,
-    authorId: user.id,
-    recipeIngredients,
-    categories: categories.map(({ id }) => id),
+    /* RECIPE IMAGES */
+    await tx.$executeRaw`TRUNCATE TABLE "files" CASCADE;`;
+    /* const files = */ await prisma.$transaction(
+      recipeImagesData.map((data) => prisma.file.create({ data })),
+    );
+
+    /* RECIPIES */
+    await tx.$executeRaw`TRUNCATE TABLE "recipes" CASCADE;`;
+    // for (const recipeData of scrapedData.recipes) {
+    // }
   });
 }
 
