@@ -6,6 +6,7 @@ import {
 } from "@prisma/client";
 import { hash } from "bcrypt";
 import scrapedData from "./seed_data/scraped.json" assert { type: "json" };
+import { customListTitles, notificationData } from "./seed_data/fakeData";
 import { prisma } from "~/server/utils/prisma-client";
 import {
   generateRandomUniqueElements,
@@ -50,32 +51,6 @@ async function main() {
     "SNACKS",
     "SOUPS",
     "SAUCES",
-  ];
-
-  const customListTitles = [
-    "Quick Dinners",
-    "Healthy Meals",
-    "Comfort Foods",
-    "Veggie/Vegan",
-    "Budget Meals",
-    "One-Pot Meals",
-    "Family Favorites",
-    "Brunch Ideas",
-    "Quick Bites",
-    "Solo Meals",
-    "Simple Recipes",
-    "Cocktail Companions",
-    "Weeknight Wonders",
-    "Lazy Day Eats",
-    "Sweet Treats",
-    "Home Alone Delights",
-    "Effortless Dishes",
-    "Snack Attack",
-    "Impressive Yet Easy",
-    "Weekend Indulgences",
-    "Late Night Snacks",
-    "Fancy Feasts",
-    "On-the-Go Options",
   ];
 
   const unitsData = scrapedData.units.map((x) => {
@@ -267,6 +242,21 @@ async function main() {
   }
 
   for (const user of users) {
+    /* NOTIFICATIONS */
+    if (Math.random() > 0.5) {
+      const notifications = Array.from(Array(randomInteger(1, 5))).map(() =>
+        randomElement(...notificationData),
+      );
+      await prisma.notification.createMany({
+        data: notifications.map((x) => {
+          return {
+            ...x,
+            read: Math.random() > 0.5,
+            userId: user.id,
+          };
+        }),
+      });
+    }
     /* FAVORITE LISTS */
     const favoriteRecipes = generateRandomUniqueElements(
       randomInteger(0, 3),
