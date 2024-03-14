@@ -1,4 +1,9 @@
-import { RecipeState, UnitType, type RecipeIngredient } from "@prisma/client";
+import {
+  RecipeState,
+  UnitType,
+  type Recipe,
+  type RecipeIngredient,
+} from "@prisma/client";
 import { hash } from "bcrypt";
 import scrapedData from "./seed_data/scraped.json" assert { type: "json" };
 import { prisma } from "~/server/utils/prisma-client";
@@ -45,6 +50,32 @@ async function main() {
     "SNACKS",
     "SOUPS",
     "SAUCES",
+  ];
+
+  const customListTitles = [
+    "Quick Dinners",
+    "Healthy Meals",
+    "Comfort Foods",
+    "Veggie/Vegan",
+    "Budget Meals",
+    "One-Pot Meals",
+    "Family Favorites",
+    "Brunch Ideas",
+    "Quick Bites",
+    "Solo Meals",
+    "Simple Recipes",
+    "Cocktail Companions",
+    "Weeknight Wonders",
+    "Lazy Day Eats",
+    "Sweet Treats",
+    "Home Alone Delights",
+    "Effortless Dishes",
+    "Snack Attack",
+    "Impressive Yet Easy",
+    "Weekend Indulgences",
+    "Late Night Snacks",
+    "Fancy Feasts",
+    "On-the-Go Options",
   ];
 
   const unitsData = scrapedData.units.map((x) => {
@@ -126,6 +157,7 @@ async function main() {
   );
 
   /* RECIPIES */
+  const recipes: Recipe[] = [];
   for (const recipeData of scrapedData.recipes) {
     /* INGREDIENTS */
     const recipeIngredients: RecipeIngredientInput[] =
@@ -159,11 +191,12 @@ async function main() {
       imageId: files[recipeData.imageId].id,
       authorId: users[recipeData.authorId].id,
     });
+    recipes.push(recipe);
     /* RATINGS */
     if (Math.random() > 0.2) {
       const randomRating = () => {
         return {
-          numberOfStars: randomInteger(0, 9),
+          numberOfStars: randomInteger(1, 5),
           recipeId: recipe.id,
           authorId: randomElement(...users).id,
         };
@@ -230,6 +263,46 @@ async function main() {
         };
       };
       await prisma.replyHeart.create({ data: randomReplytHeart() });
+    }
+  }
+
+  for (const user of users) {
+    /* FAVORITE LISTS */
+    const favoriteRecipes = generateRandomUniqueElements(
+      randomInteger(0, 3),
+      () => randomElement(...recipes),
+      (a, b) => a.id === b.id,
+    );
+    const favoriteListId = user.favoritesListId;
+    if (favoriteListId) {
+      await prisma.recipeList.createMany({
+        data: favoriteRecipes.map((x) => {
+          return { listId: favoriteListId, recipeId: x.id };
+        }),
+      });
+    }
+    /* CUSTOM LISTS */
+    const titles = customListTitles
+      .sort(() => Math.random() - 0.5)
+      .slice(0, randomInteger(0, 5));
+
+    for (const title of titles) {
+      const randomRecipes = generateRandomUniqueElements(
+        randomInteger(0, 5),
+        () => randomElement(...recipes),
+        (a, b) => a.id === b.id,
+      );
+      const customList = await prisma.list.create({
+        data: {
+          title,
+          authorId: user.id,
+        },
+      });
+      await prisma.recipeList.createMany({
+        data: randomRecipes.map((x) => {
+          return { listId: customList.id, recipeId: x.id };
+        }),
+      });
     }
   }
 }
