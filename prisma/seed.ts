@@ -137,33 +137,22 @@ async function main() {
     const steps: PrismaJson.Step[] = recipeData.steps;
     const recipe = await prisma.recipe.create({
       title: recipeData.title,
-      // title: defaultRecipe.title + i,
       description: recipeData.description ?? "",
-      // description: defaultRecipe.description + i,
       preparationDuration: {
         days: 0,
         hours: 0,
         minutes: recipeData.preparationDurationMinutes ?? 20,
         seconds: 0,
       },
-      // preparationDuration: defaultRecipe.preparationDuration,
       state: recipeStateDict[recipeData.state] ?? RecipeState.PUBLISHED,
-      // state: defaultRecipe.state,
       nutritionPerServing: recipeData.nutritionPerServing,
-      // nutritionPerServing: defaultRecipe.nutritionPerServing,
       numberOfServings: recipeData.numberOfServings ?? 1,
-      // numberOfServings: defaultRecipe.numberOfServings,
 
       categories: recipeCategories,
-      // categories: defaultRecipe.categories,
       recipeIngredients,
-      // recipeIngredients: defaultRecipe.recipeIngredients,
       steps,
-      // steps: defaultRecipe.steps,
       imageId: files[recipeData.imageId].id,
-      // imageId: defaultRecipe.imageId,
       authorId: users[recipeData.authorId].id,
-      // authorId: defaultRecipe.authorId,
     });
 
     /* COMMENTS */
