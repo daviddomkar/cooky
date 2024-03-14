@@ -2,6 +2,11 @@ import { RecipeState, UnitType, type RecipeIngredient } from "@prisma/client";
 import { hash } from "bcrypt";
 import scrapedData from "./seed_data/scraped.json" assert { type: "json" };
 import { prisma } from "~/server/utils/prisma-client";
+import {
+  generateRandomUniqueElements,
+  randomElement,
+  randomInteger,
+} from "~/utils/random";
 
 type RecipeIngredientInput = Omit<RecipeIngredient, "recipeId">;
 
@@ -154,9 +159,27 @@ async function main() {
       imageId: files[recipeData.imageId].id,
       authorId: users[recipeData.authorId].id,
     });
+    /* RATINGS */
+    if (Math.random() > 0.2) {
+      const randomRating = () => {
+        return {
+          numberOfStars: randomInteger(0, 9),
+          recipeId: recipe.id,
+          authorId: randomElement(...users).id,
+        };
+      };
+      const randomRatings = generateRandomUniqueElements(
+        randomInteger(1, 30),
+        randomRating,
+        (a, b) => a.authorId === b.authorId,
+      );
+      await prisma.rating.createMany({
+        data: randomRatings,
+      });
+    }
 
     /* COMMENTS */
-    await prisma.$transaction(
+    const comments = await prisma.$transaction(
       recipeData.comments.map((c) =>
         prisma.comment.create({
           data: {
@@ -177,6 +200,37 @@ async function main() {
         }),
       ),
     );
+    /* COMMENT_HEARTS */
+    const randomCommentHeart = () => {
+      return {
+        commentId: randomElement(...comments).id,
+        authorId: randomElement(...users).id,
+      };
+    };
+    const randomCommentHearts = generateRandomUniqueElements(
+      randomInteger(0, comments.length),
+      randomCommentHeart,
+      (a, b) => a.authorId === b.authorId && a.commentId === b.commentId,
+    );
+    await prisma.commentHeart.createMany({ data: randomCommentHearts });
+
+    /* REPLY_HEARTS */
+    const randomReply = await prisma.reply.findFirst({
+      where: {
+        comment: {
+          recipeId: recipe.id,
+        },
+      },
+    });
+    if (randomReply) {
+      const randomReplytHeart = () => {
+        return {
+          replyId: randomReply.id,
+          authorId: randomElement(...users).id,
+        };
+      };
+      await prisma.replyHeart.create({ data: randomReplytHeart() });
+    }
   }
 }
 
