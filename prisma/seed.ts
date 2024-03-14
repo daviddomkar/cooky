@@ -1,8 +1,9 @@
-import { PrismaClient, UnitType } from "@prisma/client";
+import { RecipeState, UnitType, type RecipeIngredient } from "@prisma/client";
 import { hash } from "bcrypt";
 import scrapedData from "./seed_data/scraped.json" assert { type: "json" };
+import { prisma } from "~/server/utils/prisma-client";
 
-const prisma = new PrismaClient();
+type RecipeIngredientInput = Omit<RecipeIngredient, "recipeId">;
 
 async function getMimeTypeFromUrl(url: string) {
   const reponse = await fetch(url, {
@@ -21,14 +22,28 @@ async function main() {
     }),
   );
 
-  const unitTypeDict: Record<number, UnitType> = {
-    0: UnitType.VOLUME,
-    1: UnitType.WEIGHT,
-    2: UnitType.QUANTITY,
-  };
+  const unitTypeDict: UnitType[] = [
+    UnitType.VOLUME,
+    UnitType.WEIGHT,
+    UnitType.QUANTITY,
+  ];
+
+  const recipeStateDict: RecipeState[] = [
+    RecipeState.DRAFT,
+    RecipeState.PUBLISHED,
+  ];
+
+  const recipeCategoryDict: string[] = [
+    "BREAKFAST",
+    "LUNCH",
+    "DINNER",
+    "SNACKS",
+    "SOUPS",
+    "SAUCES",
+  ];
 
   const unitsData = scrapedData.units.map((x) => {
-    const type = unitTypeDict[x.type] || UnitType.QUANTITY;
+    const type = unitTypeDict[x.type] ?? UnitType.QUANTITY;
     return {
       title: x.title,
       abbreviation: x.abbreviation.slice(0, 8),
@@ -37,8 +52,8 @@ async function main() {
   });
 
   const ingredientsData = scrapedData.ingredients.map((x) => {
-    const unitTypes = x.unit_types.map(
-      (x) => unitTypeDict[x] || UnitType.QUANTITY,
+    const unitTypes = x.unitTypes.map(
+      (x) => unitTypeDict[x] ?? UnitType.QUANTITY,
     );
     return {
       title: x.title,
@@ -47,7 +62,7 @@ async function main() {
   });
 
   const recipeImagesData = await Promise.all(
-    scrapedData.recipe_images.map(async (x) => {
+    scrapedData.recipeImages.map(async (x) => {
       return {
         url: x,
         mimeType: await getMimeTypeFromUrl(x),
@@ -55,54 +70,125 @@ async function main() {
     }),
   );
 
-  prisma.$transaction(async (tx) => {
-    /* USERS */
-    await tx.$executeRaw`TRUNCATE TABLE "users" CASCADE;`;
-    const users = await prisma.$transaction(
-      usersData.map((data) => prisma.user.create({ data })),
-    );
+  /* USERS */
+  const users = await prisma.$transaction(
+    usersData.map((data) => prisma.user.create({ data })),
+  );
 
-    for (const u of users) {
-      await tx.list.create({
-        data: {
-          author: {
-            connect: {
-              id: u.id,
-            },
+  for (const u of users) {
+    await prisma.list.create({
+      data: {
+        author: {
+          connect: {
+            id: u.id,
           },
-          favouritesOfUser: {
-            connect: {
-              id: u.id,
-            },
-          },
-          title: "Favorites",
         },
-      });
-    }
+        favouritesOfUser: {
+          connect: {
+            id: u.id,
+          },
+        },
+        title: "Favorites",
+      },
+    });
+  }
 
-    /* UNITS */
-    await tx.$executeRaw`TRUNCATE TABLE "units" CASCADE;`;
-    /* const units = */ await prisma.$transaction(
-      unitsData.map((data) => prisma.unit.create({ data })),
-    );
+  /* UNITS */
+  const units = await prisma.$transaction(
+    unitsData.map((data) => prisma.unit.create({ data })),
+  );
 
+  /* INGREDIENTS */
+  const ingredients = await prisma.$transaction(
+    ingredientsData.map((data) => prisma.ingredient.create({ data })),
+  );
+
+  /* RECIPE IMAGES */
+  const files = await prisma.$transaction(
+    recipeImagesData.map((data) => prisma.file.create({ data })),
+  );
+
+  /* CATEGORIES */
+  const categories = await prisma.$transaction(
+    recipeCategoryDict.map((data) =>
+      prisma.category.create({
+        data: {
+          title: data,
+          icon: data,
+        },
+      }),
+    ),
+  );
+
+  /* RECIPIES */
+  for (const recipeData of scrapedData.recipes) {
     /* INGREDIENTS */
-    await tx.$executeRaw`TRUNCATE TABLE "ingredients" CASCADE;`;
-    /* const ingredients = */ await prisma.$transaction(
-      ingredientsData.map((data) => prisma.ingredient.create({ data })),
-    );
-
-    /* RECIPE IMAGES */
-    await tx.$executeRaw`TRUNCATE TABLE "files" CASCADE;`;
-    /* const files = */ await prisma.$transaction(
-      recipeImagesData.map((data) => prisma.file.create({ data })),
-    );
+    const recipeIngredients: RecipeIngredientInput[] =
+      recipeData.ingredients.map((x) => {
+        return {
+          amount: Math.round(x.amount),
+          ingredientId: ingredients[x.ingredientId].id,
+          unitId: units[x.unitId].id,
+        };
+      });
 
     /* RECIPIES */
-    await tx.$executeRaw`TRUNCATE TABLE "recipes" CASCADE;`;
-    // for (const recipeData of scrapedData.recipes) {
-    // }
-  });
+    const recipeCategories = recipeData.categories.map((x) => categories[x].id);
+    const steps: PrismaJson.Step[] = recipeData.steps;
+    const recipe = await prisma.recipe.create({
+      title: recipeData.title,
+      // title: defaultRecipe.title + i,
+      description: recipeData.description ?? "",
+      // description: defaultRecipe.description + i,
+      preparationDuration: {
+        days: 0,
+        hours: 0,
+        minutes: recipeData.preparationDurationMinutes ?? 20,
+        seconds: 0,
+      },
+      // preparationDuration: defaultRecipe.preparationDuration,
+      state: recipeStateDict[recipeData.state] ?? RecipeState.PUBLISHED,
+      // state: defaultRecipe.state,
+      nutritionPerServing: recipeData.nutritionPerServing,
+      // nutritionPerServing: defaultRecipe.nutritionPerServing,
+      numberOfServings: recipeData.numberOfServings ?? 1,
+      // numberOfServings: defaultRecipe.numberOfServings,
+
+      categories: recipeCategories,
+      // categories: defaultRecipe.categories,
+      recipeIngredients,
+      // recipeIngredients: defaultRecipe.recipeIngredients,
+      steps,
+      // steps: defaultRecipe.steps,
+      imageId: files[recipeData.imageId].id,
+      // imageId: defaultRecipe.imageId,
+      authorId: users[recipeData.authorId].id,
+      // authorId: defaultRecipe.authorId,
+    });
+
+    /* COMMENTS */
+    await prisma.$transaction(
+      recipeData.comments.map((c) =>
+        prisma.comment.create({
+          data: {
+            content: c.content,
+            authorId: users[c.author].id,
+            recipeId: recipe.id,
+            /* REPLIES */
+            replies: {
+              create: c.replies.map((r) => {
+                return {
+                  authorId: users[r.author].id,
+                  content: r.content,
+                };
+              }),
+            },
+          },
+          include: { recipe: true },
+        }),
+      ),
+    );
+  }
 }
 
 main();
