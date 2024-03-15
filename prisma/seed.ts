@@ -15,7 +15,7 @@ async function main() {
   const image = await prisma.file.create({
     data: {
       mimeType: "image/jpeg",
-      iv: randomBytes(16),
+      key: randomBytes(16),
     },
   });
 

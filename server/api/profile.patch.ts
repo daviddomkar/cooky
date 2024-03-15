@@ -1,9 +1,6 @@
-import { createWriteStream, mkdir, existsSync } from "node:fs";
 import { join } from "node:path";
 import { Blob } from "node:buffer";
-import { pipeline } from "node:stream";
-import { promisify } from "node:util";
-import { createCipheriv, randomBytes, pbkdf2 } from "node:crypto";
+import { randomBytes } from "node:crypto";
 import { getServerSession } from "#auth";
 import { blob, maxSize, mimeType, object, parse, type Output } from "valibot";
 import { authOptions } from "./auth/[...]";
@@ -62,13 +59,13 @@ export default defineEventHandler(async (event) => {
     fileStorage: { path, secret },
   } = useRuntimeConfig();
 
-  const iv = randomBytes(16);
-
   await prisma.$transaction(async (tx) => {
+    const key = randomBytes(32);
+
     const file = await tx.file.create({
       data: {
         mimeType: profileImage.type,
-        iv,
+        key: await fileStorage.encryptKey(secret, key),
         profileImageUser: {
           connect: {
             id: session.user.id,
@@ -77,24 +74,6 @@ export default defineEventHandler(async (event) => {
       },
     });
 
-    const salt = randomBytes(64);
-
-    const key = await promisify(pbkdf2)(secret, salt, 2145, 32, "sha512");
-
-    const stream = profileImage.stream() as unknown as NodeJS.ReadableStream;
-
-    if (!existsSync(path)) {
-      await promisify(mkdir)(path, { recursive: true });
-    }
-
-    const destination = createWriteStream(join(path, file.id));
-    destination.write(iv);
-    destination.write(salt);
-
-    await promisify(pipeline)(
-      stream,
-      createCipheriv("aes-256-gcm", key, iv),
-      destination,
-    );
+    await fileStorage.saveFile(join(path, file.id), profileImage, key);
   });
 });
