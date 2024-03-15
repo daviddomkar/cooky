@@ -3,6 +3,7 @@ import { Blob } from "node:buffer";
 import { randomBytes } from "node:crypto";
 import { getServerSession } from "#auth";
 import { blob, maxSize, mimeType, object, parse, type Output } from "valibot";
+import sharp from "sharp";
 import { authOptions } from "./auth/[...]";
 
 const Schema = object({
@@ -74,6 +75,11 @@ export default defineEventHandler(async (event) => {
       },
     });
 
-    await fileStorage.saveFile(join(path, file.id), profileImage, key);
+    await fileStorage.saveFile(
+      join(path, file.id),
+      profileImage,
+      key,
+      sharp().resize(256, 256),
+    );
   });
 });

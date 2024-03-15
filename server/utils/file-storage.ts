@@ -15,12 +15,13 @@ import {
   randomBytes,
   scrypt,
 } from "node:crypto";
-import { Transform } from "node:stream";
+import { PipelineTransform, Transform } from "node:stream";
 
 const ivLength = 12;
 const keyLength = 32;
 const authTagLength = 16;
 const saltLength = 64;
+const cipherAlgorithm = "aes-256-gcm";
 
 class FileStorage {
   async encryptKey(secret: string, key: Buffer) {
@@ -33,7 +34,7 @@ class FileStorage {
       keyLength,
     )) as Buffer;
 
-    const cipher = createCipheriv("aes-256-gcm", masterKey, iv, {
+    const cipher = createCipheriv(cipherAlgorithm, masterKey, iv, {
       authTagLength,
     });
 
@@ -69,7 +70,7 @@ class FileStorage {
       keyLength,
     )) as Buffer;
 
-    const decipher = createDecipheriv("aes-256-gcm", masterKey, iv, {
+    const decipher = createDecipheriv(cipherAlgorithm, masterKey, iv, {
       authTagLength,
     });
     decipher.setAuthTag(authTag);
@@ -77,35 +78,47 @@ class FileStorage {
     return Buffer.concat([decipher.update(key), decipher.final()]);
   }
 
-  async saveFile(path: string, file: Blob, key: Buffer) {
+  async saveFile(
+    path: string,
+    file: Blob,
+    key: Buffer,
+    transform?: PipelineTransform<any, any>,
+  ) {
     if (!existsSync(path)) {
       await mkdir(dirname(path), { recursive: true });
     }
 
     const iv = randomBytes(ivLength);
 
-    const cipher = createCipheriv("aes-256-gcm", key, iv, {
+    const cipher = createCipheriv(cipherAlgorithm, key, iv, {
       authTagLength,
+    });
+
+    const appendTransformer = new Transform({
+      transform(chunk, _, callback) {
+        this.push(chunk);
+        callback();
+      },
+      final(callback) {
+        this.push(cipher.getAuthTag());
+        this.push(iv);
+        callback();
+      },
     });
 
     const writable = createWriteStream(path);
 
-    await pipeline(
-      file.stream(),
-      cipher,
-      new Transform({
-        transform(chunk, _, callback) {
-          this.push(chunk);
-          callback();
-        },
-        final(callback) {
-          this.push(cipher.getAuthTag());
-          this.push(iv);
-          callback();
-        },
-      }),
-      writable,
-    );
+    if (!transform) {
+      await pipeline(file.stream(), cipher, appendTransformer, writable);
+    } else {
+      await pipeline(
+        file.stream(),
+        transform,
+        cipher,
+        appendTransformer,
+        writable,
+      );
+    }
   }
 
   async readFile(path: string, key: Buffer) {
@@ -118,7 +131,7 @@ class FileStorage {
 
     const stream = createReadStream(path, { start: 0, end: dataSize - 1 });
 
-    const decipher = createDecipheriv("aes-256-gcm", key, iv, {
+    const decipher = createDecipheriv(cipherAlgorithm, key, iv, {
       authTagLength,
     });
     decipher.setAuthTag(authTag);
@@ -126,7 +139,7 @@ class FileStorage {
     return stream.pipe(decipher);
   }
 
-  async readBytes(path: string, start: number, end: number) {
+  private async readBytes(path: string, start: number, end: number) {
     const chunks = [];
     for await (const chunk of createReadStream(path, {
       start,
