@@ -11,7 +11,10 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
   ],
   runtimeConfig: {
-    fileStoragePath: process.env.FILE_STORAGE_PATH,
+    fileStorage: {
+      path: process.env.FILE_STORAGE_PATH,
+      secret: process.env.FILE_STORAGE_SECRET,
+    },
     authJs: {
       secret: process.env.AUTH_SECRET,
     },

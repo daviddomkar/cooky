@@ -263,6 +263,7 @@ model Recipe {
 model File {
   id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   mimeType String @map("mime_type") @db.VarChar(32)
+  key      Bytes  @db.ByteA
 
   profileImageUser User?   @relation("profile_image")
   coverImageUser   User?   @relation("cover_image")

@@ -1,3 +1,4 @@
+import { randomBytes } from "node:crypto";
 import { RecipeState, UnitType } from "@prisma/client";
 import { prisma } from "../server/utils/prisma-client";
 
@@ -13,8 +14,8 @@ async function main() {
 
   const image = await prisma.file.create({
     data: {
-      url: "https://www.google.com",
       mimeType: "image/jpeg",
+      iv: randomBytes(16),
     },
   });
 
