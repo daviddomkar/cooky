@@ -5,15 +5,21 @@ networks:
     name: cooky
 
 services:
-  cooky:
+  app:
     build:
       context: .
-    image: cooky
-    container_name: cooky
+    image: cooky_app
+    container_name: cooky_app
     environment:
       - DATABASE_URL=postgresql://${COOKY_USER:-cooky}:${COOKY_PASSWORD:-cooky}@postgres:5432/${COOKY_DATABASE:-cooky}?schema=public
+      - NUXT_AUTH_JS_SECRET=${AUTH_SECRET:-cooky}
+      - NUXT_PUBLIC_AUTH_JS_BASE_URL=${AUTH_URL:-http://localhost:8080}
+      - NUXT_FILE_STORAGE_PATH=/var/lib/cooky/data
+      - NUXT_FILE_STORAGE_SECRET=${FILE_STORAGE_SECRET:-cooky}
     ports:
       - "8080:8080"
+    volumes:
+      - cooky_storage:/var/lib/cooky/data
     depends_on:
       - postgres
 
@@ -36,9 +42,11 @@ services:
       - ./package-lock.json:/docker-entrypoint-initdb.d/package-lock.json
       - ./tsconfig.json:/docker-entrypoint-initdb.d/tsconfig.json
       - ./prisma:/docker-entrypoint-initdb.d/prisma
-      - cooky:/var/lib/postgresql/data
+      - cooky_database:/var/lib/postgresql/data
       - ./server/utils:/docker-entrypoint-initdb.d/server/utils
 
 volumes:
-  cooky:
-    name: cooky
+  cooky_database:
+    name: cooky_database
+  cooky_storage:
+    name: cooky_storage
