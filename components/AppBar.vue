@@ -16,6 +16,7 @@
           />
         </div>
         <PictureFrame
+          borderless
           class="cursor-pointer"
           :diameter="40"
           src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/08/Untitled-design-(24).png"

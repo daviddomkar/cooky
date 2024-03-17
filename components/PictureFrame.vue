@@ -2,16 +2,22 @@
 type Props = {
   src: string;
   diameter?: number;
+  borderless: boolean;
 };
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   diameter: 256,
+  borderless: false,
 });
 </script>
 
 <template>
   <img
-    class="block border-8 border-white rounded-full border-solid object-cover shadow-2xl"
+    class="block rounded-full object-cover"
+    :class="{
+      'border-8 border-solid border-white shadow-2xl': !props.borderless,
+      'border-none': props.borderless,
+    }"
     :height="diameter"
     :src="src"
     :width="diameter"
