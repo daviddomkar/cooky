@@ -71,7 +71,7 @@ function getSkirtPath(x: number, y: number, height: number, edgeWidth: number, e
   
     <div v-if="variant === 'user'" class="content relative px-10 py-4">
       <div class="title mb-10 text-center font-size-12 font-display">Cooky</div>
-        <div class="on-surface-variant font-size-6 font-display">LIBRARY</div>
+        <div class="font-size-6 color-on-surface-variant font-display">LIBRARY</div>
       <ul class="m-0 p-0">
         <li
           v-for="title in categoryTitles"
