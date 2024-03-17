@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 import AppBar from "./AppBar.vue";
 
 const meta: Meta<typeof AppBar> = {
-  title: "Design System/Base/AppBar",
+  title: "Components/BaseComponents/AppBar",
   component: AppBar,
 };
 
