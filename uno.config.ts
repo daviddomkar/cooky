@@ -12,11 +12,9 @@ const lightTheme = {
     "surface-container": "#f5f5f5",
     outline: "#808080",
     error: "#f87171",
-    on: {
-      primary: "#ffffff",
-      surface: "#101010",
-      "surface-variant": "#b6b6b6",
-    },
+    "on-primary": "#ffffff",
+    "on-surface": "#101010",
+    "on-surface-variant": "#c6c6c6",
   },
 } as Theme;
 
@@ -28,11 +26,9 @@ const darkTheme = {
     "surface-container": "#101010",
     outline: "#808080",
     error: "#f87171",
-    on: {
-      primary: "#ffffff",
-      surface: "#ffffff",
-      "surface-variant": "#ffffff",
-    },
+    "on-primary": "#ffffff",
+    "on-surface": "#ffffff",
+    "on-surface-variant": "#ffffff",
   },
 } as Theme;
 
