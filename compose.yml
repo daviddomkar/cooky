@@ -13,7 +13,7 @@ services:
     environment:
       - DATABASE_URL=postgresql://${COOKY_USER:-cooky}:${COOKY_PASSWORD:-cooky}@postgres:5432/${COOKY_DATABASE:-cooky}?schema=public
       - NUXT_AUTH_JS_SECRET=${AUTH_SECRET:-cooky}
-      - NUXT_PUBLIC_AUTH_JS_BASE_URL=${AUTH_URL:-http://localhost:8080}
+      - NUXT_PUBLIC_AUTH_JS_BASE_URL=http://localhost:8080
       - NUXT_FILE_STORAGE_PATH=/var/lib/cooky/data
       - NUXT_FILE_STORAGE_SECRET=${FILE_STORAGE_SECRET:-cooky}
     ports:

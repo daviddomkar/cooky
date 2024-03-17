@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "prepare": "husky",
-    "build": "nuxt build",
+    "build": "nuxt build && npm run postbuild",
+    "postbuild": "cp -r node_modules/@img .output/server/node_modules/",
     "dev": "docker compose up -d postgres && nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
