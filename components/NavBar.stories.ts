@@ -7,7 +7,7 @@ const meta: Meta<typeof NavBar> = {
   component: NavBar,
   argTypes: {
     variant: {
-      options: ["primary", "secondary"],
+      options: ["user", "admin"],
     },
   },
 };
@@ -18,7 +18,8 @@ type Story = StoryObj<typeof NavBar>;
 
 export const Primary: Story = {
   args: {
-    variant: "primary",
+    variant: "user",
+    stripe: true,
   },
   render: (args) => ({
     components: { NavBar },
@@ -31,7 +32,8 @@ export const Primary: Story = {
 
 export const Secondary: Story = {
   args: {
-    variant: "secondary",
+    variant: "admin",
+    stripe: true,
   },
   render: (args) => ({
     components: { NavBar },
