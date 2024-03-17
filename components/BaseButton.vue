@@ -30,12 +30,12 @@ withDefaults(defineProps<Props>(), {
       <ProgressIndicator class="scale-[0.75]" />
     </div>
 
-    <span
+    <div
       :class="{
         invisible: loading,
       }"
     >
       <slot />
-    </span>
+    </div>
   </button>
 </template>
