@@ -1,14 +1,18 @@
 <script setup lang="ts">
 
 type Props = {
-  variant?: "primary" | "secondary";
+  variant?: "user" | "admin";
+  stripe?: boolean
 };
 
 withDefaults(defineProps<Props>(), {
-  variant: "primary",
+  variant: "user",
+  stripe: true
 });
 
 const categoryTitles = ref(["BREAKFAST", "LUNCH", "DINNER", "SNACKS", "SOUPS", "SAUCES"]);
+const profileTitles = ref(["MY RECIPES", "FAVOURITES"]);
+const adminTitles = ref(["RECIPES", "CATEGORIES", "INGREDIENTS", "REVIEWS", "USERS", "ROLES"]);
 
 </script>
 
@@ -36,6 +40,15 @@ const categoryTitles = ref(["BREAKFAST", "LUNCH", "DINNER", "SNACKS", "SOUPS", "
       <div class="font-size-6 color-surface-variant font-display">PROFILE</div>
       <ul class="m-0 p-0">
         <li v-for="title in profileTitles" :key="title" class="nav-item">
+          {{ title }}
+        </li>
+      </ul>
+    </div>
+
+    <div v-else class="content relative px-10 py-4">
+      <div class="title mb-10 text-center font-size-12 font-display">Cooky</div>
+      <ul class="m-0 p-0">
+        <li v-for="title in adminTitles" :key="title" class="nav-item">
           {{ title }}
         </li>
       </ul>
