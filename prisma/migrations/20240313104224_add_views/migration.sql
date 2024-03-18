@@ -1,10 +1,10 @@
 -- Create views
 
 CREATE OR REPLACE VIEW recipes_sorted_by_ratings AS
-SELECT avg(number_of_stars) AS average_stars
+SELECT ratings.recipe_id AS recipe_id, avg(number_of_stars) AS average_stars
 FROM ratings
     NATURAL JOIN recipes
-GROUP BY recipe_id
+GROUP BY ratings.recipe_id
 ORDER BY avg(number_of_stars)
 DESC;
 
