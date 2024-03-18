@@ -76,13 +76,13 @@ function getSkirtPath(x: number, y: number, height: number, edgeWidth: number, e
       <ul v-if="categoryTitles" class="m-0 p-0">
         <li
           v-for="category in categoryTitles"
-          :key="category.title" :ref="(el) => bindItem(`category/${category.title}`, el)"
+          :key="category.title" :ref="(el) => bindItem(`/category/${category.title}`, el)"
           class="mb-4 list-none no-underline"
         >
           <NuxtLink
           active-class="bg-transparent text-white"
           class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
-          :to="`category/${category.title}`"
+          :to="`/category/${category.title}`"
           >
             {{ category.title }}
           </NuxtLink>
@@ -93,13 +93,13 @@ function getSkirtPath(x: number, y: number, height: number, edgeWidth: number, e
         <li
           v-for="title in profileTitles"
           :key="title"
-          :ref="(el) => bindItem(`profile/${title}`, el)"
+          :ref="(el) => bindItem(`/auth/${title}`, el)"
           class="list-none no-underline"
         >
           <NuxtLink
             active-class="bg-transparent text-white"
             class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
-            :to="`profile/${title}`"
+            :to="`/auth/${title}`"
           >
             {{ title }}
           </NuxtLink>
@@ -113,13 +113,13 @@ function getSkirtPath(x: number, y: number, height: number, edgeWidth: number, e
         <li
           v-for="title in adminTitles"
           :key="title"
-          :ref="(el) => bindItem(`admin/${title}`, el)"
+          :ref="(el) => bindItem(`/admin/${title}`, el)"
           class="mb-4 list-none no-underline"
         >
           <NuxtLink
             active-class="bg-transparent text-white"
             class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
-            :to="`admin/${title}`"
+            :to="`/admin/${title}`"
           >
             {{ title }}
           </NuxtLink>
