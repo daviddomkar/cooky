@@ -3,12 +3,7 @@ import { Blob } from "node:buffer";
 import { randomBytes } from "node:crypto";
 import { getServerSession } from "#auth";
 import {
-  blob,
-  maxSize,
-  mimeType,
-  object,
   parseAsync,
-  unionAsync,
   toTrimmed,
   minLength,
   string,
@@ -27,33 +22,6 @@ const ParametersSchema = objectAsync({
     minLength(1, "This field is required."),
   ]),
 });
-
-const UnifiedSchema = unionAsync([
-  object({
-    name: string("This field is required.", [
-      toTrimmed(),
-      minLength(1, "This field is required."),
-    ]),
-  }),
-  object({
-    profileImage: blob("This field is required.", [
-      mimeType(
-        ["image/jpeg", "image/png", "image/gif"],
-        "The file must be an image (jpeg, png or gif).",
-      ),
-      maxSize(5 * 1024 * 1024, "The file size must be less than 5MB."),
-    ]),
-  }),
-  object({
-    coverImage: blob("This field is required.", [
-      mimeType(
-        ["image/jpeg", "image/png", "image/gif"],
-        "The file must be an image (jpeg, png or gif).",
-      ),
-      maxSize(5 * 1024 * 1024, "The file size must be less than 5MB."),
-    ]),
-  }),
-]);
 
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event, authOptions);
@@ -77,10 +45,10 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const multipartFormData = await readMultipartFormDataAsBlobs(event);
 
-  let data: Output<typeof UnifiedSchema>;
+  let data: Output<typeof EditProfileSchema>;
 
   try {
-    data = await parseAsync(UnifiedSchema, {
+    data = await parseAsync(EditProfileSchema, {
       ...body,
       ...multipartFormData,
     });
