@@ -42,11 +42,9 @@ function updateRect() {
   };
 }
 
-onMounted(() => updateRect());
-
-function getSkirtPath(x: number, y: number, height: number, edgeWidth: number, edgeHeight: number) {
-  return `M ${x} ${y} c 0 0, ${edgeWidth} 0, ${edgeWidth} -${edgeHeight} l 0 ${height + 2*edgeHeight} c 0 -${edgeHeight} -${edgeWidth} -${edgeHeight} -${edgeWidth} -${edgeHeight} Z`;
-}
+useNuxtApp().hook('page:finish', () => {
+  updateRect();
+});
 
 </script>
 
