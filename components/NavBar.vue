@@ -51,10 +51,11 @@ function getSkirtPath(x: number, y: number, height: number, edgeWidth: number, e
 </script>
 
 <template>
-  <nav class="relative h-100% min-w-240px bg-surface-container">
+  <nav class="relative h-100% min-w-240px w-fit bg-surface-container">
+    <!-- BG GRADIENT -->
     <div v-if="stripe && selectedItemRect">
-      <div id="nav-gradient" class="nav-gradient absolute left-0 top-0 h-100% w-100%"></div>
-      <div id="nav-strip" class="nav-gradient absolute right-0 top-0 h-100% w-20px"></div>
+      <div id="nav-gradient" class="absolute left-0 top-0 h-100% w-100% bg-orange from-#FFBD3E via-#FFA14A to-#FF5F54 bg-gradient-to-b"></div>
+      <div id="nav-strip" class="absolute right-0 top-0 h-100% w-20px bg-orange from-#FFBD3E via-#FFA14A to-#FF5F54 bg-gradient-to-b"></div>
       <svg id="nav-svg" class="absolute left-0 top-0 h-100% w-100%">
         <clipPath id="clip">
           <rect
@@ -131,13 +132,5 @@ function getSkirtPath(x: number, y: number, height: number, edgeWidth: number, e
 <style>
 #nav-gradient {
   clip-path: url(#clip);
-}
-@layer components {
-  .nav-gradient {
-    @apply bg-orange from-#FFBD3E via-#FFA14A to-#FF5F54 bg-gradient-to-b
-  }
-  .nav-item {
-    @apply bg-white mb-4 cursor-pointer list-none rounded-5 px-4 py-2 color-black no-underline
-  }
 }
 </style>
