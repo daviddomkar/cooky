@@ -68,36 +68,60 @@ function getSkirtPath(x: number, y: number, height: number, edgeWidth: number, e
         </clipPath>
       </svg>
     </div>
-  
+    <!-- USER NAV -->
     <div v-if="variant === 'user'" class="content relative px-10 py-4">
       <div class="title mb-10 text-center font-size-12 font-display">Cooky</div>
         <div class="font-size-6 color-on-surface-variant font-display">LIBRARY</div>
-      <ul class="m-0 p-0">
+      <ul v-if="categoryTitles" class="m-0 p-0">
         <li
-          v-for="title in categoryTitles"
-          :key="title" :ref="(el) => bindItem(title, el as Element)"
-          class="nav-item"
-          :class="{
-            'bg-transparent text-white':
-            title === selectedPage
-          }"
+          v-for="category in categoryTitles"
+          :key="category.title" :ref="(el) => bindItem(`category/${category.title}`, el)"
+          class="mb-4 list-none no-underline"
         >
-          {{ title }}
+          <NuxtLink
+          active-class="bg-transparent text-white"
+          class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
+          :to="`category/${category.title}`"
+          >
+            {{ category.title }}
+          </NuxtLink>
         </li>
       </ul>
-      <div class="on-surface-variant font-size-6 font-display">PROFILE</div>
+      <div class="font-size-6 color-on-surface-variant font-display">PROFILE</div>
       <ul class="m-0 p-0">
-        <li v-for="title in profileTitles" :key="title" class="nav-item">
-          {{ title }}
+        <li
+          v-for="title in profileTitles"
+          :key="title"
+          :ref="(el) => bindItem(`profile/${title}`, el)"
+          class="list-none no-underline"
+        >
+          <NuxtLink
+            active-class="bg-transparent text-white"
+            class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
+            :to="`profile/${title}`"
+          >
+            {{ title }}
+          </NuxtLink>
         </li>
       </ul>
     </div>
-
+    <!-- ADMIN NAV -->
     <div v-else class="content relative px-10 py-4">
       <div class="title mb-10 text-center font-size-12 font-display">Cooky</div>
       <ul class="m-0 p-0">
-        <li v-for="title in adminTitles" :key="title" class="nav-item">
-          {{ title }}
+        <li
+          v-for="title in adminTitles"
+          :key="title"
+          :ref="(el) => bindItem(`admin/${title}`, el)"
+          class="mb-4 list-none no-underline"
+        >
+          <NuxtLink
+            active-class="bg-transparent text-white"
+            class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
+            :to="`admin/${title}`"
+          >
+            {{ title }}
+          </NuxtLink>
         </li>
       </ul>
     </div>
