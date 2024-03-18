@@ -28,6 +28,14 @@ export default defineNuxtConfig({
   alias: {
     cookie: resolve(__dirname, "node_modules/cookie"),
   },
+  imports: {
+    dirs: ["schemas"],
+  },
+  nitro: {
+    imports: {
+      dirs: ["server/schemas", "server/composables"],
+    },
+  },
   eslint: {
     lintOnStart: false,
   },

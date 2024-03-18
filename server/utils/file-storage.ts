@@ -6,7 +6,7 @@ import {
   statSync,
   createReadStream,
 } from "node:fs";
-import { mkdir } from "node:fs/promises";
+import { mkdir, unlink } from "node:fs/promises";
 import { dirname } from "node:path";
 import { pipeline } from "node:stream/promises";
 import {
@@ -137,6 +137,10 @@ class FileStorage {
     decipher.setAuthTag(authTag);
 
     return stream.pipe(decipher);
+  }
+
+  deleteFile(path: string) {
+    return unlink(path);
   }
 
   private async readBytes(path: string, start: number, end: number) {
