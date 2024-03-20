@@ -132,7 +132,7 @@ useNuxtApp().hook('page:finish', () => {
     </div>
     <div v-else class="content relative h-100% flex flex-col px-10 py-4">
     <!-- ADMIN NAV -->
-      <div class="title mb-10 text-center font-size-12 font-display">Cooky</div>
+      <div id="admin-title" class="title relative mb-10 text-center font-size-12 font-display">Cooky</div>
       <ul class="m-0 p-0">
         <li
           v-for="item in adminItems"
@@ -160,5 +160,16 @@ useNuxtApp().hook('page:finish', () => {
 <style>
 #nav-gradient {
   clip-path: url(#clip);
+}
+#admin-title:after {
+  content: "ADMIN";
+  position: absolute;
+  top:80%;left:50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: white;
+  background-image: linear-gradient(to right, rgb(var(--un-preset-theme-colors-primary)), rgb(var(--un-preset-theme-colors-secondary)));
+  border-radius: 1rem;
+  padding: 0 0.5rem;
 }
 </style>
