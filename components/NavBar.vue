@@ -74,9 +74,9 @@ useNuxtApp().hook('page:finish', () => {
 </script>
 
 <template>
-  <nav class="relative h-100% min-w-240px w-fit bg-surface-container">
-    <!-- BG GRADIENT -->
+  <nav class="relative h-100% min-w-240px bg-surface-container">
     <div v-if="stripe && selectedItemRect">
+    <!-- BG GRADIENT -->
       <div id="nav-gradient" class="absolute left-0 top-0 h-100% w-100% bg-orange from-#FFBD3E via-#FFA14A to-#FF5F54 bg-gradient-to-b"></div>
       <div id="nav-strip" class="absolute right-0 top-0 h-100% w-20px bg-orange from-#FFBD3E via-#FFA14A to-#FF5F54 bg-gradient-to-b"></div>
       <svg id="nav-svg" class="absolute left-0 top-0 h-100% w-100%">
@@ -92,8 +92,8 @@ useNuxtApp().hook('page:finish', () => {
         </clipPath>
       </svg>
     </div>
-    <!-- USER NAV -->
     <div v-if="variant === 'user'" class="content relative px-10 py-4">
+    <!-- USER NAV -->
       <div class="title mb-10 text-center font-size-12 font-display">Cooky</div>
         <div class="font-size-6 color-on-surface-variant font-display">LIBRARY</div>
       <ul class="m-0 p-0">
@@ -129,8 +129,8 @@ useNuxtApp().hook('page:finish', () => {
         </li>
       </ul>
     </div>
+    <div v-else class="content relative h-100% flex flex-col px-10 py-4">
     <!-- ADMIN NAV -->
-    <div v-else class="content relative px-10 py-4">
       <div class="title mb-10 text-center font-size-12 font-display">Cooky</div>
       <ul class="m-0 p-0">
         <li
