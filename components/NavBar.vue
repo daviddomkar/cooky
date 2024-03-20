@@ -1,18 +1,36 @@
 <script setup lang="ts">
+import type { Category } from '@prisma/client';
+
+type NavItem = {
+  title: string,
+  icon: string,
+  slug: string
+}
 
 type Props = {
   variant?: "user" | "admin";
   stripe?: boolean,
+  categories?: Category[]
 };
 
 withDefaults(defineProps<Props>(), {
   variant: "user",
-  stripe: true
+  stripe: true,
+  categories: () => []
 });
 
-const categoryTitles = ref(["BREAKFAST", "LUNCH", "DINNER", "SNACKS", "SOUPS", "SAUCES"]);
-const profileTitles = ref(["MY RECIPES", "FAVOURITES"]);
-const adminTitles = ref(["RECIPES", "CATEGORIES", "INGREDIENTS", "REVIEWS", "USERS", "ROLES"]);
+const profileItems = ref<NavItem[]>([
+  { title: "MY RECIPES", slug: "recipes", icon: "recipes" },
+  { title: "FAVOURITES", slug: "favourites", icon: "favourites" }
+]);
+const adminItems = ref<NavItem[]>([
+  { title: "RECIPES", slug: "recipes", icon: "recipes" },
+  { title: "CATEGORIES", slug: "categories", icon: "categories" },
+  { title: "INGREDIENTS", slug: "ingredients", icon: "ingredients" }, 
+  { title: "REVIEWS", slug: "reviews", icon: "reviews" }, 
+  { title: "USERS", slug: "users", icon: "users" }, 
+  { title: "ROLES", slug: "roles", icon: "roles" }, 
+]);
 
 type ItemRect = {
   x: number,
@@ -42,10 +60,10 @@ function getSkirtPath(x: number, y: number, height: number, edgeWidth: number, e
 function updateRect() {
   if(!selectedItem.value) return;
   selectedItemRect.value = {
-    x: selectedItem.value?.offsetLeft,
-    y: selectedItem.value?.offsetTop,
-    width: selectedItem.value?.clientWidth,
-    height: selectedItem.value?.clientHeight
+    x: selectedItem.value.offsetLeft,
+    y: selectedItem.value.offsetTop,
+    width: selectedItem.value.clientWidth,
+    height: selectedItem.value.clientHeight
   };
 }
 
@@ -78,35 +96,35 @@ useNuxtApp().hook('page:finish', () => {
     <div v-if="variant === 'user'" class="content relative px-10 py-4">
       <div class="title mb-10 text-center font-size-12 font-display">Cooky</div>
         <div class="font-size-6 color-on-surface-variant font-display">LIBRARY</div>
-      <ul v-if="categoryTitles" class="m-0 p-0">
+      <ul class="m-0 p-0">
         <li
-          v-for="category in categoryTitles"
-          :key="category.title" :ref="(el) => bindItem(`/category/${category.title}`, el)"
+          v-for="category in categories"
+          :key="category.slug" :ref="(el) => bindItem(`/category/${category.slug}`, el)"
           class="mb-4 list-none no-underline"
         >
           <NuxtLink
           active-class="bg-transparent text-white"
           class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
-          :to="`/category/${category.title}`"
+          :to="`/category/${category.slug}`"
           >
-            {{ category.title }}
+            {{ category.title.toUpperCase() }}
           </NuxtLink>
         </li>
       </ul>
       <div class="font-size-6 color-on-surface-variant font-display">PROFILE</div>
       <ul class="m-0 p-0">
         <li
-          v-for="title in profileTitles"
-          :key="title"
-          :ref="(el) => bindItem(`/auth/${title}`, el)"
+          v-for="item in profileItems"
+          :key="item.slug"
+          :ref="(el) => bindItem(`/profile/${item.slug}`, el)"
           class="list-none no-underline"
         >
           <NuxtLink
             active-class="bg-transparent text-white"
             class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
-            :to="`/auth/${title}`"
+            :to="`/profile/${item.slug}`"
           >
-            {{ title }}
+            {{ item.title.toUpperCase() }}
           </NuxtLink>
         </li>
       </ul>
@@ -116,17 +134,17 @@ useNuxtApp().hook('page:finish', () => {
       <div class="title mb-10 text-center font-size-12 font-display">Cooky</div>
       <ul class="m-0 p-0">
         <li
-          v-for="title in adminTitles"
-          :key="title"
-          :ref="(el) => bindItem(`/admin/${title}`, el)"
+          v-for="item in adminItems"
+          :key="item.slug"
+          :ref="(el) => bindItem(`/admin/${item.slug}`, el)"
           class="mb-4 list-none no-underline"
         >
           <NuxtLink
             active-class="bg-transparent text-white"
             class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
-            :to="`/admin/${title}`"
+            :to="`/admin/${item.slug}`"
           >
-            {{ title }}
+            {{ item.title.toUpperCase() }}
           </NuxtLink>
         </li>
       </ul>
