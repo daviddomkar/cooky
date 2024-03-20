@@ -44,7 +44,7 @@ const selectedItem = ref<HTMLElement>();
 const selectedItemRect = ref<ItemRect>();
 
 function isSelected(path: string) {
-  return path === route.path
+  return route && path === route.path
 }
 
 function bindItem(path: string, element: Element | ComponentPublicInstance | null) {
