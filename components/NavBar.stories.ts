@@ -4,7 +4,7 @@ import type { Category } from "@prisma/client";
 import NavBar from "./NavBar.vue";
 
 const meta: Meta<typeof NavBar> = {
-  title: "NavBar",
+  title: "Components/Layout/NavBar",
   component: NavBar,
   argTypes: {
     variant: {
