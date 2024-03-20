@@ -107,7 +107,7 @@ useNuxtApp().hook('page:finish', () => {
           class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
           :to="`/category/${category.slug}`"
           >
-            {{ category.title.toUpperCase() }}
+            <div :class="`i-cooky:${category.icon} float-left h-4 w-4`" />&nbsp;{{ category.title.toUpperCase() }}
           </NuxtLink>
         </li>
       </ul>
@@ -124,7 +124,7 @@ useNuxtApp().hook('page:finish', () => {
             class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
             :to="`/profile/${item.slug}`"
           >
-            {{ item.title.toUpperCase() }}
+            <div :class="`i-cooky:${item.icon} float-left h-4 w-4`" />&nbsp;{{ item.title.toUpperCase() }}
           </NuxtLink>
         </li>
       </ul>
@@ -144,7 +144,7 @@ useNuxtApp().hook('page:finish', () => {
             class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
             :to="`/admin/${item.slug}`"
           >
-            {{ item.title.toUpperCase() }}
+            <div :class="`i-cooky:${item.icon} float-left h-4 w-4`" />&nbsp;{{ item.title.toUpperCase() }}
           </NuxtLink>
         </li>
       </ul>
