@@ -78,8 +78,8 @@ useNuxtApp().hook('page:finish', () => {
   <nav class="relative h-100% min-w-240px bg-surface-container">
     <div v-if="stripe">
     <!-- BG GRADIENT -->
-      <div v-if="selectedItemRect" id="nav-gradient" class="absolute left-0 top-0 h-100% w-100% bg-orange from-#FFBD3E via-#FFA14A to-#FF5F54 bg-gradient-to-b"></div>
-      <div id="nav-strip" class="absolute right-0 top-0 h-100% w-20px bg-orange from-#FFBD3E via-#FFA14A to-#FF5F54 bg-gradient-to-b"></div>
+      <div v-if="selectedItemRect" id="nav-gradient" class="absolute left-0 top-0 h-100% w-100% bg-orange from-primary via-#FFA14A to-secondary bg-gradient-to-b"></div>
+      <div id="nav-strip" class="absolute right-0 top-0 h-100% w-20px bg-orange from-primary via-#FFA14A to-secondary bg-gradient-to-b"></div>
       <svg id="nav-svg" class="absolute left-0 top-0 h-100% w-100%">
         <clipPath v-if="selectedItemRect" id="clip">
           <rect
