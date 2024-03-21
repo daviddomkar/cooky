@@ -76,12 +76,12 @@ useNuxtApp().hook('page:finish', () => {
 
 <template>
   <nav class="relative h-100% min-w-240px bg-surface-container">
-    <div v-if="stripe && selectedItemRect">
+    <div v-if="stripe">
     <!-- BG GRADIENT -->
-      <div id="nav-gradient" class="absolute left-0 top-0 h-100% w-100% bg-orange from-#FFBD3E via-#FFA14A to-#FF5F54 bg-gradient-to-b"></div>
+      <div v-if="selectedItemRect" id="nav-gradient" class="absolute left-0 top-0 h-100% w-100% bg-orange from-#FFBD3E via-#FFA14A to-#FF5F54 bg-gradient-to-b"></div>
       <div id="nav-strip" class="absolute right-0 top-0 h-100% w-20px bg-orange from-#FFBD3E via-#FFA14A to-#FF5F54 bg-gradient-to-b"></div>
       <svg id="nav-svg" class="absolute left-0 top-0 h-100% w-100%">
-        <clipPath id="clip">
+        <clipPath v-if="selectedItemRect" id="clip">
           <rect
             id="rect"
             :height="selectedItemRect.height" rx="1rem" width="100%" :x="selectedItemRect.x" :y="selectedItemRect.y"
@@ -104,7 +104,7 @@ useNuxtApp().hook('page:finish', () => {
           class="mb-4 list-none no-underline"
         >
           <NuxtLink
-          active-class="bg-transparent text-white"
+          :active-class="stripe ? 'bg-transparent text-white' : 'bg-#FFBD3E! text-white'"
           class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
           :to="`/category/${category.slug}`"
           >
@@ -121,7 +121,7 @@ useNuxtApp().hook('page:finish', () => {
           class="list-none no-underline"
         >
           <NuxtLink
-            active-class="bg-transparent text-white"
+            :active-class="stripe ? 'bg-transparent text-white' : 'bg-#FFA14A! text-white'"
             class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
             :to="`/profile/${item.slug}`"
           >
@@ -141,7 +141,7 @@ useNuxtApp().hook('page:finish', () => {
           class="mb-4 list-none no-underline"
         >
           <NuxtLink
-            active-class="bg-transparent text-white"
+            :active-class="stripe ? 'bg-transparent text-white' : 'bg-#FFBD3E! text-white'"
             class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
             :to="`/admin/${item.slug}`"
           >
