@@ -150,7 +150,7 @@ useNuxtApp().hook('page:finish', () => {
         </li>
       </ul>
       <div class="m-0 flex flex-grow-1 flex-col items-stretch justify-end pb-4">
-        <BaseButton class="mb-4">COOKY</BaseButton>
+        <BaseButton class="mb-4" @click="() => navigateTo('/')">COOKY</BaseButton>
         <BaseButton class="mb-4" @click="signOut">LOG OUT</BaseButton>
       </div>
     </div>
