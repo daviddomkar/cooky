@@ -11,6 +11,10 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
   ],
   runtimeConfig: {
+    fileStorage: {
+      path: process.env.FILE_STORAGE_PATH,
+      secret: process.env.FILE_STORAGE_SECRET,
+    },
     authJs: {
       secret: process.env.AUTH_SECRET,
     },
@@ -23,6 +27,14 @@ export default defineNuxtConfig({
   },
   alias: {
     cookie: resolve(__dirname, "node_modules/cookie"),
+  },
+  imports: {
+    dirs: ["schemas"],
+  },
+  nitro: {
+    imports: {
+      dirs: ["server/schemas", "server/composables"],
+    },
   },
   eslint: {
     lintOnStart: false,

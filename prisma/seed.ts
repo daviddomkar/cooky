@@ -1,11 +1,13 @@
+import { randomBytes } from "node:crypto";
 import { RecipeState, UnitType } from "@prisma/client";
+import { hash } from "bcrypt";
 import { prisma } from "../server/utils/prisma-client";
 
 async function main() {
   const user = await prisma.user.create({
     data: {
       email: "test@test.com",
-      password: "test",
+      password: await hash("test", 12),
       name: "Test User",
       username: "testuser",
     },
@@ -13,8 +15,8 @@ async function main() {
 
   const image = await prisma.file.create({
     data: {
-      url: "https://www.google.com",
       mimeType: "image/jpeg",
+      key: randomBytes(16),
     },
   });
 
