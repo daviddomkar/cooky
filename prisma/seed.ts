@@ -1,4 +1,6 @@
+import fs from "fs";
 import {
+  Prisma,
   RecipeState,
   UnitType,
   type Recipe,
@@ -7,7 +9,6 @@ import {
 import { hash } from "bcrypt";
 import scrapedData from "./seed_data/scraped.json" assert { type: "json" };
 import { customListTitles, notificationData } from "./seed_data/fakeData";
-import { prisma } from "~/server/utils/prisma-client";
 import {
   generateRandomUniqueElements,
   randomElement,
@@ -15,12 +16,68 @@ import {
 } from "~/utils/random";
 
 type RecipeIngredientInput = Omit<RecipeIngredient, "recipeId">;
+type RecipeCreateInput = {
+  title: string;
+  description: string;
+  preparationDuration: {
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  };
+  state: Recipe["state"];
+  steps: PrismaJson.Step[];
+  nutritionPerServing: number;
+  numberOfServings: number;
+  imageId: string;
+  authorId: string;
+  recipeIngredients: RecipeIngredientInput[];
+  categories: string[];
+};
+
+type SeedData = {
+  user: Prisma.UserCreateManyInput[];
+  list: Prisma.ListCreateManyInput[];
+  unit: Prisma.UnitCreateManyInput[];
+  ingredient: Prisma.IngredientCreateManyInput[];
+  file: Prisma.FileCreateManyInput[];
+  category: Prisma.CategoryCreateManyInput[];
+  recipe: RecipeCreateInput[];
+  rating: Prisma.RatingCreateManyInput[];
+  comment: Prisma.CommentCreateManyInput[];
+  reply: Prisma.ReplyCreateManyInput[];
+  commentHeart: Prisma.CommentHeartCreateManyInput[];
+  replyHeart: Prisma.ReplyHeartCreateManyInput[];
+  notification: Prisma.NotificationCreateManyInput[];
+  recipeList: Prisma.RecipeListCreateManyInput[];
+};
+
+const seedData: SeedData = {
+  user: [],
+  list: [],
+  unit: [],
+  ingredient: [],
+  file: [],
+  category: [],
+  recipe: [],
+  rating: [],
+  comment: [],
+  reply: [],
+  commentHeart: [],
+  replyHeart: [],
+  notification: [],
+  recipeList: [],
+};
 
 async function getMimeTypeFromUrl(url: string) {
   const reponse = await fetch(url, {
     method: "HEAD",
   });
   return reponse.headers.get("Content-Type") ?? "image/jpeg";
+}
+
+function saveToJSON(path: string, data: any) {
+  fs.writeFileSync(path, JSON.stringify(data, null, 4));
 }
 
 async function main() {
@@ -82,72 +139,50 @@ async function main() {
   );
 
   /* USERS */
-  const users = await prisma.$transaction(
-    usersData.map((data) => prisma.user.create({ data })),
-  );
+  seedData.user = usersData;
 
-  for (const u of users) {
-    await prisma.list.create({
-      data: {
-        author: {
-          connect: {
-            id: u.id,
-          },
-        },
-        favouritesOfUser: {
-          connect: {
-            id: u.id,
-          },
-        },
-        title: "Favorites",
-      },
-    });
-  }
+  /* FAVORITE_LISTS */
+  seedData.list = seedData.user.map((_x, i) => {
+    return {
+      title: "Favorites",
+      authorId: i as unknown as string,
+    };
+  });
 
   /* UNITS */
-  const units = await prisma.$transaction(
-    unitsData.map((data) => prisma.unit.create({ data })),
-  );
+  seedData.unit = unitsData;
 
   /* INGREDIENTS */
-  const ingredients = await prisma.$transaction(
-    ingredientsData.map((data) => prisma.ingredient.create({ data })),
-  );
+  seedData.ingredient = ingredientsData;
 
   /* RECIPE IMAGES */
-  const files = await prisma.$transaction(
-    recipeImagesData.map((data) => prisma.file.create({ data })),
-  );
+  seedData.file = recipeImagesData;
 
   /* CATEGORIES */
-  const categories = await prisma.$transaction(
-    recipeCategoryDict.map((data) =>
-      prisma.category.create({
-        data: {
-          title: data,
-          icon: data,
-        },
-      }),
-    ),
-  );
+  seedData.category = recipeCategoryDict.map((x) => {
+    return {
+      title: x,
+      icon: x,
+    };
+  });
 
   /* RECIPIES */
-  const recipes: Recipe[] = [];
-  for (const recipeData of scrapedData.recipes) {
+  for (const i in scrapedData.recipes) {
+    const recipeData = scrapedData.recipes[i];
     /* INGREDIENTS */
     const recipeIngredients: RecipeIngredientInput[] =
       recipeData.ingredients.map((x) => {
         return {
           amount: Math.round(x.amount),
-          ingredientId: ingredients[x.ingredientId].id,
-          unitId: units[x.unitId].id,
+          ingredientId: x.ingredientId as unknown as string,
+          unitId: x.unitId as unknown as string,
         };
       });
 
     /* RECIPIES */
-    const recipeCategories = recipeData.categories.map((x) => categories[x].id);
+    const recipeCategories = recipeData.categories as unknown as string[];
     const steps: PrismaJson.Step[] = recipeData.steps;
-    const recipe = await prisma.recipe.create({
+    const recipeCreateInput = {
       title: recipeData.title,
       description: recipeData.description ?? "",
       preparationDuration: {
@@ -163,17 +198,22 @@ async function main() {
       categories: recipeCategories,
       recipeIngredients,
       steps,
-      imageId: files[recipeData.imageId].id,
-      authorId: users[recipeData.authorId].id,
-    });
-    recipes.push(recipe);
+      imageId: recipeData.imageId as unknown as string,
+      authorId: recipeData.authorId as unknown as string,
+    };
+
+    seedData.recipe.push(recipeCreateInput);
+
     /* RATINGS */
     if (Math.random() > 0.2) {
       const randomRating = () => {
         return {
           numberOfStars: randomInteger(1, 5),
-          recipeId: recipe.id,
-          authorId: randomElement(...users).id,
+          recipeId: Number(i) as unknown as string,
+          authorId: randomInteger(
+            0,
+            seedData.user.length - 1,
+          ) as unknown as string,
         };
       };
       const randomRatings = generateRandomUniqueElements(
@@ -181,96 +221,114 @@ async function main() {
         randomRating,
         (a, b) => a.authorId === b.authorId,
       );
-      await prisma.rating.createMany({
-        data: randomRatings,
-      });
+
+      seedData.rating.push(...randomRatings);
     }
 
     /* COMMENTS */
-    const comments = await prisma.$transaction(
-      recipeData.comments.map((c) =>
-        prisma.comment.create({
-          data: {
-            content: c.content,
-            authorId: users[c.author].id,
-            recipeId: recipe.id,
-            /* REPLIES */
-            replies: {
-              create: c.replies.map((r) => {
-                return {
-                  authorId: users[r.author].id,
-                  content: r.content,
-                };
-              }),
-            },
-          },
-          include: { recipe: true },
+    const commentIndexStart = seedData.comment.length;
+    const replytIndexStart = seedData.reply.length;
+    for (const j in recipeData.comments) {
+      const comment = recipeData.comments[j];
+      seedData.comment.push({
+        authorId: comment.author as unknown as string,
+        recipeId: Number(i) as unknown as string,
+        content: comment.content,
+      });
+      /* REPLIES */
+      seedData.reply.push(
+        ...comment.replies.map((x) => {
+          return {
+            authorId: x.author as unknown as string,
+            commentId: Number(j) as unknown as string,
+            content: x.content,
+          };
         }),
-      ),
-    );
+      );
+    }
     /* COMMENT_HEARTS */
     const randomCommentHeart = () => {
       return {
-        commentId: randomElement(...comments).id,
-        authorId: randomElement(...users).id,
+        commentId: randomInteger(
+          commentIndexStart,
+          seedData.comment.length - 1,
+        ) as unknown as string,
+        authorId: randomInteger(
+          0,
+          seedData.user.length - 1,
+        ) as unknown as string,
       };
     };
     const randomCommentHearts = generateRandomUniqueElements(
-      randomInteger(0, comments.length),
+      randomInteger(0, seedData.comment.length - commentIndexStart),
       randomCommentHeart,
       (a, b) => a.authorId === b.authorId && a.commentId === b.commentId,
     );
-    await prisma.commentHeart.createMany({ data: randomCommentHearts });
+
+    seedData.commentHeart.push(...randomCommentHearts);
 
     /* REPLY_HEARTS */
-    const randomReply = await prisma.reply.findFirst({
-      where: {
-        comment: {
-          recipeId: recipe.id,
-        },
-      },
-    });
-    if (randomReply) {
+
+    if (seedData.reply.length > replytIndexStart) {
       const randomReplytHeart = () => {
         return {
-          replyId: randomReply.id,
-          authorId: randomElement(...users).id,
+          replyId: randomInteger(
+            replytIndexStart,
+            seedData.reply.length - 1,
+          ) as unknown as string,
+          authorId: randomInteger(
+            0,
+            seedData.user.length - 1,
+          ) as unknown as string,
         };
       };
-      await prisma.replyHeart.create({ data: randomReplytHeart() });
+      const randomReplyHearts = generateRandomUniqueElements(
+        randomInteger(0, seedData.reply.length - replytIndexStart),
+        randomReplytHeart,
+        (a, b) => a.authorId === b.authorId && a.replyId === b.replyId,
+      );
+
+      seedData.replyHeart.push(...randomReplyHearts);
     }
   }
 
-  for (const user of users) {
+  for (const i in seedData.user) {
     /* NOTIFICATIONS */
     if (Math.random() > 0.5) {
       const notifications = Array.from(Array(randomInteger(1, 5))).map(() =>
         randomElement(...notificationData),
       );
-      await prisma.notification.createMany({
-        data: notifications.map((x) => {
-          return {
-            ...x,
-            read: Math.random() > 0.5,
-            userId: user.id,
-          };
-        }),
+      seedData.notification = notifications.map((x) => {
+        return {
+          ...x,
+          read: Math.random() > 0.5,
+          userId: Number(i) as unknown as string,
+        };
       });
     }
+
     /* FAVORITE LISTS */
     const favoriteRecipes = generateRandomUniqueElements(
-      randomInteger(0, 3),
-      () => randomElement(...recipes),
-      (a, b) => a.id === b.id,
+      randomInteger(0, 5),
+      () => randomInteger(0, seedData.recipe.length - 1),
+      (a, b) => a === b,
     );
-    const favoriteListId = user.favoritesListId;
-    if (favoriteListId) {
-      await prisma.recipeList.createMany({
-        data: favoriteRecipes.map((x) => {
-          return { listId: favoriteListId, recipeId: x.id };
+
+    const favListIndex = seedData.list.findIndex(
+      (x) => (x.authorId as unknown as number) === Number(i),
+    );
+
+    if (favListIndex !== -1) {
+      seedData.recipeList.push(
+        ...favoriteRecipes.map((x) => {
+          return {
+            listId: favListIndex as unknown as string,
+            recipeId: x as unknown as string,
+          };
         }),
-      });
+      );
     }
+
     /* CUSTOM LISTS */
     const titles = customListTitles
       .sort(() => Math.random() - 0.5)
@@ -279,22 +337,26 @@ async function main() {
     for (const title of titles) {
       const randomRecipes = generateRandomUniqueElements(
         randomInteger(0, 5),
-        () => randomElement(...recipes),
-        (a, b) => a.id === b.id,
+        () => randomInteger(0, seedData.recipe.length - 1),
+        (a, b) => a === b,
       );
-      const customList = await prisma.list.create({
-        data: {
-          title,
-          authorId: user.id,
-        },
+      seedData.list.push({
+        title,
+        authorId: Number(i) as unknown as string,
       });
-      await prisma.recipeList.createMany({
-        data: randomRecipes.map((x) => {
-          return { listId: customList.id, recipeId: x.id };
+
+      const customListIndex = seedData.list.length - 1;
+      seedData.recipeList.push(
+        ...randomRecipes.map((x) => {
+          return {
+            listId: customListIndex as unknown as string,
+            recipeId: x as unknown as string,
+          };
         }),
-      });
+      );
     }
   }
+  saveToJSON("./prisma/seed_data/seed.json", seedData);
 }
 
 main();
