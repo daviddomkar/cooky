@@ -327,13 +327,15 @@ async function main() {
       const notifications = Array.from(Array(randomInteger(1, 5))).map(() =>
         randomElement(...notificationData),
       );
-      seedData.notification = notifications.map((x) => {
-        return {
-          ...x,
-          read: Math.random() > 0.5,
-          userId: Number(i) as unknown as string,
-        };
-      });
+      seedData.notification.push(
+        ...notifications.map((x) => {
+          return {
+            ...x,
+            read: Math.random() > 0.5,
+            userId: Number(i) as unknown as string,
+          };
+        }),
+      );
     }
 
     /* FAVORITE LISTS */
