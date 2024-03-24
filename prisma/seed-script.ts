@@ -7,7 +7,12 @@ import {
   type RecipeIngredient,
 } from "@prisma/client";
 import scrapedData from "./seed_data/scraped.json" assert { type: "json" };
-import { customListTitles, notificationData } from "./seed_data/fakeData";
+import {
+  customListTitles,
+  notificationData,
+  profileBanners,
+  profileImages,
+} from "./seed_data/fakeData";
 import {
   generateRandomUniqueElements,
   randomElement,
@@ -143,8 +148,29 @@ async function main() {
     }),
   );
 
+  /* RECIPE IMAGES */
+  seedData.file = recipeImagesData;
+
   /* USERS */
-  seedData.user = usersData;
+  for (const i in usersData) {
+    /* PROFILE PICTURES */
+    const profileImgUrl = profileImages[Number(i) % profileImages.length];
+    seedData.file.push({
+      url: profileImgUrl,
+      mimeType: await getMimeTypeFromUrl(profileImgUrl),
+    });
+    /* PROFILE BANNERS */
+    const bannerImgUrl = profileBanners[Number(i) % profileBanners.length];
+    seedData.file.push({
+      url: bannerImgUrl,
+      mimeType: await getMimeTypeFromUrl(bannerImgUrl),
+    });
+    seedData.user.push({
+      ...usersData[i],
+      coverImageId: (seedData.file.length - 1) as unknown as string,
+      profileImageId: (seedData.file.length - 2) as unknown as string,
+    });
+  }
 
   /* FAVORITE_LISTS */
   seedData.list = seedData.user.map((_x, i) => {
@@ -159,9 +185,6 @@ async function main() {
 
   /* INGREDIENTS */
   seedData.ingredient = ingredientsData;
-
-  /* RECIPE IMAGES */
-  seedData.file = recipeImagesData;
 
   /* CATEGORIES */
   seedData.category = recipeCategoryDict.map((x) => {

@@ -1,3 +1,28 @@
+export const profileImages = [
+  "https://nekopara-anime.com/en/character/img/chocola_face.png",
+  "https://nekopara-anime.com/en/character/img/vanilla_face.png",
+  "https://nekopara-anime.com/en/character/img/kashou_face.png",
+  "https://nekopara-anime.com/en/character/img/shigure_face.png",
+  "https://nekopara-anime.com/en/character/img/azuki_face.png",
+  "https://nekopara-anime.com/en/character/img/maple_face.png",
+  "https://nekopara-anime.com/en/character/img/coconut_face.png",
+  "https://nekopara-anime.com/en/character/img/secret_face.png",
+];
+
+export const profileBanners = [
+  "https://cdn.pfps.gg/banners/1986-nebo.gif",
+  "https://cdn.pfps.gg/banners/2149-cargos.png",
+  "https://cdn.pfps.gg/banners/1679-minecrffr.png",
+  "https://cdn.pfps.gg/banners/9064-banned.png",
+  "https://cdn.pfps.gg/banners/1330-minecraft-chicken.png",
+  "https://cdn.pfps.gg/banners/9701-sans-banner.png",
+  "https://cdn.pfps.gg/banners/4985-sakura-banner.png",
+  "https://cdn.pfps.gg/banners/4292-idgas.gif",
+  "https://cdn.pfps.gg/banners/2276-we-bare-bears.png",
+  "https://cdn.pfps.gg/banners/7169-sunset.png",
+  "https://cdn.pfps.gg/banners/4993-1xkilla.png",
+];
+
 export const customListTitles = [
   "Quick Dinners",
   "Healthy Meals",
