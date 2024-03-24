@@ -6,7 +6,6 @@ import {
   type Recipe,
   type RecipeIngredient,
 } from "@prisma/client";
-import { hash } from "bcrypt";
 import scrapedData from "./seed_data/scraped.json" assert { type: "json" };
 import { customListTitles, notificationData } from "./seed_data/fakeData";
 import {
@@ -76,16 +75,22 @@ async function getMimeTypeFromUrl(url: string) {
   return reponse.headers.get("Content-Type") ?? "image/jpeg";
 }
 
+function replaceAccentedCharacters(str: string) {
+  return str.normalize("NFD").replace(/[\u0300-\u036F]/g, "");
+}
+
 function saveToJSON(path: string, data: any) {
   fs.writeFileSync(path, JSON.stringify(data, null, 4));
 }
 
 async function main() {
   const usersData = await Promise.all(
-    scrapedData.users.map(async (x) => {
+    scrapedData.users.map((x) => {
       return {
         ...x,
-        password: await hash(`${x.username}password`, 12),
+        email: replaceAccentedCharacters(x.email),
+        username: replaceAccentedCharacters(x.username),
+        password: `${replaceAccentedCharacters(x.username)}password`,
       };
     }),
   );
