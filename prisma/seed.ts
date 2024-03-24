@@ -1,3 +1,4 @@
+
 import { hash } from "bcrypt";
 import { $Enums, Prisma } from "@prisma/client";
 import seedData from "./seed.json" assert { type: "json" };
