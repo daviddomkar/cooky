@@ -154,21 +154,30 @@ async function main() {
   /* USERS */
   for (const i in usersData) {
     /* PROFILE PICTURES */
-    const profileImgUrl = profileImages[Number(i) % profileImages.length];
-    seedData.file.push({
-      url: profileImgUrl,
-      mimeType: await getMimeTypeFromUrl(profileImgUrl),
-    });
+    let PFPIndex = null;
+    if (Number(i) < profileImages.length) {
+      const profileImgUrl = profileImages[Number(i)];
+      seedData.file.push({
+        url: profileImgUrl,
+        mimeType: await getMimeTypeFromUrl(profileImgUrl),
+      });
+      PFPIndex = seedData.file.length - 1;
+    }
+
     /* PROFILE BANNERS */
-    const bannerImgUrl = profileBanners[Number(i) % profileBanners.length];
-    seedData.file.push({
-      url: bannerImgUrl,
-      mimeType: await getMimeTypeFromUrl(bannerImgUrl),
-    });
+    let bannerIndex = null;
+    if (Number(i) < profileBanners.length) {
+      const bannerImgUrl = profileBanners[Number(i)];
+      seedData.file.push({
+        url: bannerImgUrl,
+        mimeType: await getMimeTypeFromUrl(bannerImgUrl),
+      });
+      bannerIndex = seedData.file.length - 1;
+    }
     seedData.user.push({
       ...usersData[i],
-      coverImageId: (seedData.file.length - 1) as unknown as string,
-      profileImageId: (seedData.file.length - 2) as unknown as string,
+      profileImageId: PFPIndex as unknown as string,
+      coverImageId: bannerIndex as unknown as string,
     });
   }
 
@@ -297,7 +306,6 @@ async function main() {
     seedData.commentHeart.push(...randomCommentHearts);
 
     /* REPLY_HEARTS */
-
     if (seedData.reply.length > replytIndexStart) {
       const randomReplytHeart = () => {
         return {
