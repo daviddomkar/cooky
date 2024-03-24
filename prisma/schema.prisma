@@ -99,6 +99,7 @@ model Category {
   title   String           @unique @db.VarChar(32)
   order   Int              @default(autoincrement()) @db.Integer
   icon    String           @db.VarChar(32)
+  slug    String           @unique @db.VarChar(64)
   recipes RecipeCategory[]
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
