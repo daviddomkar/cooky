@@ -1,0 +1,51 @@
+<script setup lang="ts">
+type Props = {
+  title: string;
+  description?: string;
+  dismissable?: boolean;
+};
+
+const props = withDefaults(defineProps<Props>(), {
+  description: undefined,
+  dismissable: true,
+});
+
+const model = defineModel<boolean>({
+  default: false,
+});
+
+const open = () => {
+  model.value = true;
+};
+
+const handleClose = () => {
+  if (props.dismissable) {
+    model.value = false;
+  }
+};
+</script>
+
+<template>
+  <div>
+    <slot name="activator" :open="open" />
+    <HeadlessDialog class="relative z-30" :open="model" @close="handleClose">
+      <div aria-hidden="true" class="fixed inset-0 bg-black/40 backdrop-blur" />
+
+      <div class="fixed inset-0 w-screen flex items-center justify-center p-4">
+        <HeadlessDialogPanel
+          class="box-border max-w-md w-full flex flex-col gap-4 rounded-2xl bg-surface p-4"
+        >
+          <HeadlessDialogTitle
+            class="my-0 text-center text-2xl font-display uppercase"
+          >
+            {{ title }}
+          </HeadlessDialogTitle>
+          <HeadlessDialogDescription v-if="description">
+            {{ description }}
+          </HeadlessDialogDescription>
+          <slot />
+        </HeadlessDialogPanel>
+      </div>
+    </HeadlessDialog>
+  </div>
+</template>

@@ -10,10 +10,17 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <img
-    class="block border-8 border-white rounded-full border-solid object-cover shadow-2xl"
-    :height="diameter"
-    :src="src"
-    :width="diameter"
-  />
+  <div
+    class="relative overflow-hidden border-8 border-white rounded-full border-solid shadow-2xl"
+  >
+    <img
+      class="block overflow-hidden object-cover"
+      :height="diameter"
+      :src="src"
+      :width="diameter"
+    />
+    <div v-if="$slots.default" class="absolute left-0 top-0 h-full w-full">
+      <slot />
+    </div>
+  </div>
 </template>

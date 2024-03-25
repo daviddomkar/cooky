@@ -1,10 +1,12 @@
 <script setup lang="ts">
 const route = useRoute();
 
-const { data: profile, refresh } = await useFetch(
+const { session } = useAuth();
+
+const { data: profile } = await useFetch(
   `/api/profile/${route.params.username}`,
 );
-
+/*
 const { handleSubmit, isSubmitting, handleReset } = useForm({
   validationSchema: toTypedSchema(EditProfileFormSchema),
 });
@@ -53,10 +55,68 @@ const submit = handleSubmit(async (values, { resetForm }) => {
 
   resetForm();
 });
+*/
 </script>
 
 <template>
-  <div class="box-border flex flex-col gap-4 p-8">
+  <div class="min-h-screen">
+    <div
+      class="relative max-h-96 flex bg-cover bg-center"
+      :style="{
+        'background-image': profile?.coverImageId
+          ? `url(/api/files/${profile.coverImageId})`
+          : 'url(https://www.homeware.cz/images/clanky/Clanky/palacinky.jpg)',
+      }"
+    >
+      <div class="h-full w-full backdrop-blur-xl">
+        <img
+          v-if="profile?.coverImageId"
+          class="mx-auto block max-w-320 w-full object-cover"
+          :src="`/api/files/${profile.coverImageId}`"
+        />
+      </div>
+    </div>
+    <div class="mx-auto box-border max-w-320 w-full flex gap-8 px-8">
+      <div>
+        <PictureFrame
+          class="relative -mt-[96px]"
+          :diameter="192"
+          :src="
+            profile?.profileImageId
+              ? `/api/files/${profile.profileImageId}`
+              : 'https://www.homeware.cz/images/clanky/Clanky/palacinky.jpg'
+          "
+        >
+          <ImageCropDialog
+            v-if="session?.user.username === profile?.username"
+            class="h-full w-full"
+            title="Change profile image"
+          >
+            <template #activator="{ handleChange }">
+              <label
+                class="block h-full w-full flex cursor-pointer items-center justify-center border-none bg-black/40 opacity-0 transition-opacity hover:opacity-100"
+              >
+                <div class="i-material-symbols:edit text-4xl" />
+                <input
+                  accept="image/*"
+                  hidden
+                  type="file"
+                  @change="handleChange"
+                />
+              </label>
+            </template>
+          </ImageCropDialog>
+        </PictureFrame>
+      </div>
+      <div class="box-border flex grow flex-col gap-4 pt-7">
+        <div>
+          <p class="my-0 text-base text-primary"> @{{ profile?.username }}</p>
+          <h1 class="my-0 text-6xl">{{ profile?.name }}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--<div class="box-border flex flex-col">
     {{ profile?.username }}
     {{ profile?.name }}
     <div v-if="profile?.profileImageId">
@@ -111,5 +171,5 @@ const submit = handleSubmit(async (values, { resetForm }) => {
         Upload
       </BaseButton>
     </form>
-  </div>
+  </div>-->
 </template>
