@@ -20,12 +20,12 @@ withDefaults(defineProps<Props>(), {
 });
 
 const profileItems = ref<NavItem[]>([
-  { title: "MY RECIPES", slug: "recipes", icon: "recipes" },
+  { title: "MY RECIPES", slug: "recipes", icon: "my-recipes" },
   { title: "FAVOURITES", slug: "favourites", icon: "favourites" }
 ]);
 const adminItems = ref<NavItem[]>([
   { title: "RECIPES", slug: "recipes", icon: "recipes" },
-  { title: "CATEGORIES", slug: "categories", icon: "categories" },
+  { title: "CATEGORIES", slug: "categories", icon: "list" },
   { title: "INGREDIENTS", slug: "ingredients", icon: "ingredients" }, 
   { title: "REVIEWS", slug: "reviews", icon: "reviews" }, 
   { title: "USERS", slug: "users", icon: "users" }, 
@@ -150,10 +150,10 @@ useNuxtApp().hook('page:finish', () => {
       </ul>
       <div class="m-0 flex flex-grow-1 flex-col items-stretch justify-end pb-4">
         <NuxtLink class="mb-4" :to="`/`">
-          <BaseButton>COOKY</BaseButton>
+          <BaseButton><div :class="`i-cooky:cooky float-left h-4 w-4`" />&nbsp;COOKY</BaseButton>
         </NuxtLink>
-          <NuxtLink class="mb-4" :to="`/signout`">
-          <BaseButton>LOG OUT</BaseButton>
+        <NuxtLink class="mb-4" :to="`/signout`">
+          <BaseButton><div :class="`i-cooky:logout float-left h-4 w-4`" />&nbsp;LOG OUT</BaseButton>
         </NuxtLink>
       </div>
     </div>
