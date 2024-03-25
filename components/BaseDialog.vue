@@ -28,27 +28,23 @@ const handleClose = () => {
 </script>
 
 <template>
-  <div>
-    <slot name="activator" :open="open" />
-    <HeadlessDialog class="relative z-30" :open="model" @close="handleClose">
-      <div aria-hidden="true" class="fixed inset-0 bg-black/40 backdrop-blur" />
+  <slot name="activator" :open="open" />
+  <HeadlessDialog class="relative z-30" :open="model" @close="handleClose">
+    <div aria-hidden="true" class="fixed inset-0 bg-black/40 backdrop-blur" />
 
-      <div class="fixed inset-0 w-screen flex items-center justify-center p-4">
-        <HeadlessDialogPanel
-          class="box-border max-w-md w-full flex flex-col gap-4 rounded-[1.75rem] bg-surface p-4"
-          :class="panelClass"
-        >
-          <HeadlessDialogTitle
-            class="my-0 text-center text-2xl font-display uppercase"
-          >
-            {{ title }}
-          </HeadlessDialogTitle>
-          <HeadlessDialogDescription v-if="description">
-            {{ description }}
-          </HeadlessDialogDescription>
-          <slot />
-        </HeadlessDialogPanel>
-      </div>
-    </HeadlessDialog>
-  </div>
+    <div class="fixed inset-0 w-screen flex items-center justify-center p-4">
+      <HeadlessDialogPanel
+        class="box-border max-w-md w-full flex flex-col gap-4 rounded-[1.75rem] bg-surface p-4"
+        :class="panelClass"
+      >
+        <HeadlessDialogTitle class="my-0 text-center text-4xl uppercase">
+          {{ title }}
+        </HeadlessDialogTitle>
+        <HeadlessDialogDescription v-if="description">
+          {{ description }}
+        </HeadlessDialogDescription>
+        <slot />
+      </HeadlessDialogPanel>
+    </div>
+  </HeadlessDialog>
 </template>
