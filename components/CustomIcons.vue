@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-4 gap-12">
+  <div class="grid grid-cols-5 gap-12">
     <div class="i-cooky:breakfast h-24 w-24" />
     <div class="i-cooky:dinner h-24 w-24" />
     <div class="i-cooky:lunch h-24 w-24" />
@@ -20,5 +20,7 @@
     <div class="i-cooky:reviews h-24 w-24" />
     <div class="i-cooky:roles h-24 w-24" />
     <div class="i-cooky:users h-24 w-24" />
+    <div class="i-cooky:cooky h-24 w-24" />
+    <div class="i-cooky:admin h-24 w-24" />
   </div>
 </template>
