@@ -44,6 +44,7 @@
     "@nuxtjs/stylelint-module": "^5.2.0",
     "@prisma/client": "^5.11.0",
     "@storybook-vue/nuxt": "0.2.1",
+    "@storybook/addon-actions": "^8.0.4",
     "@storybook/addon-essentials": "^8.0.0-beta.2",
     "@storybook/addon-interactions": "^8.0.0-beta.2",
     "@storybook/addon-links": "^8.0.0-beta.2",
