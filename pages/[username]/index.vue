@@ -33,12 +33,11 @@ const saveCoverImage = async (blob: Blob) => {
 </script>
 
 <template>
-  <div class="min-h-screen">
+  <div>
     <div
       class="relative max-h-96 flex"
       :class="{
         'bg-cover bg-center': profile?.coverImageId,
-        'h-96': !profile?.coverImageId,
       }"
       :style="{
         backgroundImage: profile?.coverImageId
@@ -48,7 +47,7 @@ const saveCoverImage = async (blob: Blob) => {
     >
       <div
         v-if="!profile?.coverImageId"
-        class="background-pattern absolute left-0 top-0 box-border h-96 w-full bg-on-surface"
+        class="background-pattern absolute left-0 top-0 box-border h-full w-full bg-on-surface"
       />
       <div
         class="box-border h-full w-full"
@@ -62,7 +61,7 @@ const saveCoverImage = async (blob: Blob) => {
           class="relative mx-auto max-w-320 w-full"
           :class="{
             'bg-black': profile?.coverImageId,
-            'h-full': !profile?.coverImageId,
+            'aspect-ratio-[1280/384]': !profile?.coverImageId,
           }"
         >
           <img
@@ -112,7 +111,6 @@ const saveCoverImage = async (blob: Blob) => {
         >
           <ImageCropDialog
             v-if="session?.user.username === profile?.username"
-            class="h-full w-full"
             :on-save="saveProfileImage"
             :stencil-size="{ width: 384, height: 384 }"
             stencil-type="circle"
