@@ -26,7 +26,7 @@ const ImageFileSchema = blob("Invalid file.", [
 
 const { notify } = useNotification();
 
-const blobModel = ref<Blob | null>(null);
+const blobRef = ref<Blob | null>(null);
 
 const handleChange = (payload: Event) => {
   const target = payload.target as HTMLInputElement;
@@ -45,7 +45,7 @@ const handleChange = (payload: Event) => {
 
   try {
     const blob = parse(ImageFileSchema, target.files[0]);
-    blobModel.value = blob;
+    blobRef.value = blob;
   } catch (error) {
     if (error instanceof ValiError) {
       notify({
@@ -79,7 +79,7 @@ const handleChange = (payload: Event) => {
   >
     <ImageCropDialog
       v-if="editable"
-      v-model="blobModel"
+      v-model="blobRef"
       :on-save="onNewProfileImage"
       :stencil-size="{ width: 384, height: 384 }"
       stencil-type="circle"

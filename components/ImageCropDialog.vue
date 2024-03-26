@@ -74,18 +74,22 @@ const loadBlob = (blob: Blob) => {
   model.value = blob;
 };
 
-watch(model, (blob) => {
-  if (src.value) {
-    URL.revokeObjectURL(src.value);
-  }
+watch(
+  model,
+  (blob) => {
+    if (src.value) {
+      URL.revokeObjectURL(src.value);
+    }
 
-  if (!blob) {
-    src.value = null;
-    return;
-  }
+    if (!blob) {
+      src.value = null;
+      return;
+    }
 
-  src.value = URL.createObjectURL(blob);
-});
+    src.value = URL.createObjectURL(blob);
+  },
+  { immediate: true },
+);
 
 onUnmounted(() => {
   if (src.value) {
