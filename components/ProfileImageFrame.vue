@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useNotification } from "@kyvg/vue3-notification";
+import { parse, blob, mimeType, maxSize, ValiError } from "valibot";
+
 type Props = {
   username: string;
   profileImageId?: string | null;
@@ -12,6 +15,57 @@ withDefaults(defineProps<Props>(), {
   editable: false,
   diameter: 192,
 });
+
+const ImageFileSchema = blob("Invalid file.", [
+  mimeType(
+    ["image/jpeg", "image/png", "image/gif"],
+    "The file must be an image (jpeg, png or gif).",
+  ),
+  maxSize(10 * 1024 * 1024, "The file size must be less than 10MB."),
+]);
+
+const { notify } = useNotification();
+
+const blobModel = ref<Blob | null>(null);
+
+const handleChange = (payload: Event) => {
+  const target = payload.target as HTMLInputElement;
+
+  if (!target.files?.length) {
+    // Reset the input value so it can be used again
+    target.value = "";
+
+    notify({
+      type: "error",
+      title: "An error occurred",
+      text: "No file was selected.",
+    });
+    return;
+  }
+
+  try {
+    const blob = parse(ImageFileSchema, target.files[0]);
+    blobModel.value = blob;
+  } catch (error) {
+    if (error instanceof ValiError) {
+      notify({
+        type: "error",
+        title: "Invalid file",
+        text: error.message,
+      });
+    } else {
+      notify({
+        type: "error",
+        title: "An error occurred",
+        text: "An error occurred while processing the file.",
+      });
+    }
+    return;
+  } finally {
+    // Reset the input value so it can be used again
+    target.value = "";
+  }
+};
 </script>
 
 <template>
@@ -25,12 +79,13 @@ withDefaults(defineProps<Props>(), {
   >
     <ImageCropDialog
       v-if="editable"
+      v-model="blobModel"
       :on-save="onNewProfileImage"
       :stencil-size="{ width: 384, height: 384 }"
       stencil-type="circle"
       title="Change profile picture"
     >
-      <template #activator="{ handleChange }">
+      <template #activator>
         <label
           class="block h-full w-full flex cursor-pointer items-center justify-center border-none bg-black/40 opacity-0 transition-opacity hover:opacity-100"
         >

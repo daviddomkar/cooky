@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useNotification } from "@kyvg/vue3-notification";
+import { parse, blob, mimeType, maxSize, ValiError } from "valibot";
+
 type Props = {
   coverImageId?: string | null;
   editable?: boolean;
@@ -9,6 +12,57 @@ withDefaults(defineProps<Props>(), {
   coverImageId: undefined,
   editable: false,
 });
+
+const ImageFileSchema = blob("Invalid file.", [
+  mimeType(
+    ["image/jpeg", "image/png", "image/gif"],
+    "The file must be an image (jpeg, png or gif).",
+  ),
+  maxSize(10 * 1024 * 1024, "The file size must be less than 10MB."),
+]);
+
+const { notify } = useNotification();
+
+const blobModel = ref<Blob | null>(null);
+
+const handleChange = (payload: Event) => {
+  const target = payload.target as HTMLInputElement;
+
+  if (!target.files?.length) {
+    // Reset the input value so it can be used again
+    target.value = "";
+
+    notify({
+      type: "error",
+      title: "An error occurred",
+      text: "No file was selected.",
+    });
+    return;
+  }
+
+  try {
+    const blob = parse(ImageFileSchema, target.files[0]);
+    blobModel.value = blob;
+  } catch (error) {
+    if (error instanceof ValiError) {
+      notify({
+        type: "error",
+        title: "Invalid file",
+        text: error.message,
+      });
+    } else {
+      notify({
+        type: "error",
+        title: "An error occurred",
+        text: "An error occurred while processing the file.",
+      });
+    }
+    return;
+  } finally {
+    // Reset the input value so it can be used again
+    target.value = "";
+  }
+};
 </script>
 
 <template>
@@ -48,12 +102,13 @@ withDefaults(defineProps<Props>(), {
         />
         <div v-if="editable" class="absolute bottom-4 right-4">
           <ImageCropDialog
+            v-model="blobModel"
             :on-save="onNewCoverImage"
             panel-class="!max-w-320"
             :stencil-size="{ width: 1280, height: 384 }"
             title="Change cover photo"
           >
-            <template #activator="{ handleChange }">
+            <template #activator>
               <label
                 class="w-fit flex cursor-pointer items-center gap-2 rounded-full from-primary to-secondary bg-gradient-to-r px-4 py-3 text-base text-white leading-4 uppercase outline-none ring-none transition ease-in-out hover:scale-[1.05] focus:outline-none focus:ring-none hover:active:scale-[0.97]"
               >

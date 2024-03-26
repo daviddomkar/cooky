@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { Cropper, CircleStencil, RectangleStencil } from "vue-advanced-cropper";
 import { SuperImageCropper } from "super-image-cropper";
-import { useNotification } from "@kyvg/vue3-notification";
-import { parse, blob, mimeType, maxSize, ValiError } from "valibot";
 
 type Props = {
   title: string;
@@ -20,79 +18,11 @@ const props = withDefaults(defineProps<Props>(), {
   panelClass: undefined,
 });
 
-const model = defineModel<boolean>({
-  default: false,
-});
-
-onUnmounted(() => {
-  // Revoke the object URL, to allow the garbage collector to destroy the uploaded file
-  if (src.value) {
-    URL.revokeObjectURL(src.value);
-  }
-});
-
-const ImageFileSchema = blob("Invalid file.", [
-  mimeType(
-    ["image/jpeg", "image/png", "image/gif"],
-    "The file must be an image (jpeg, png or gif).",
-  ),
-  maxSize(10 * 1024 * 1024, "The file size must be less than 10MB."),
-]);
-
-const { notify } = useNotification();
+const model = defineModel<Blob | null>();
 
 const src = ref<string | null>(null);
 const cropperRef = ref<InstanceType<typeof Cropper>>();
 const saving = ref(false);
-
-const handleChangeWithOpen = (open: () => void) => {
-  return (payload: Event) => {
-    const target = payload.target as HTMLInputElement;
-
-    if (!target.files?.length) {
-      // Reset the input value so it can be used again
-      target.value = "";
-
-      notify({
-        type: "error",
-        title: "An error occurred",
-        text: "No file was selected.",
-      });
-      return;
-    }
-
-    try {
-      const blob = parse(ImageFileSchema, target.files[0]);
-
-      // Revoke the object URL, to allow the garbage collector to destroy the uploaded file
-      if (src.value) {
-        URL.revokeObjectURL(src.value);
-      }
-
-      src.value = URL.createObjectURL(blob);
-    } catch (error) {
-      if (error instanceof ValiError) {
-        notify({
-          type: "error",
-          title: "Invalid file",
-          text: error.message,
-        });
-      } else {
-        notify({
-          type: "error",
-          title: "An error occurred",
-          text: "An error occurred while processing the file.",
-        });
-      }
-      return;
-    } finally {
-      // Reset the input value so it can be used again
-      target.value = "";
-    }
-
-    open();
-  };
-};
 
 const saveImage = async () => {
   if (saving.value) {
@@ -134,17 +64,45 @@ const saveImage = async () => {
 
   try {
     await props.onSave(blob as Blob);
-    model.value = false;
+    model.value = null;
   } finally {
     saving.value = false;
   }
 };
+
+const loadBlob = (blob: Blob) => {
+  model.value = blob;
+};
+
+watch(model, (blob) => {
+  if (src.value) {
+    URL.revokeObjectURL(src.value);
+  }
+
+  if (!blob) {
+    src.value = null;
+    return;
+  }
+
+  src.value = URL.createObjectURL(blob);
+});
+
+onUnmounted(() => {
+  if (src.value) {
+    URL.revokeObjectURL(src.value);
+  }
+});
 </script>
 
 <template>
-  <BaseDialog v-model="model" :panel-class="panelClass" :title="title">
-    <template #activator="{ open }">
-      <slot :handle-change="handleChangeWithOpen(open)" name="activator" />
+  <BaseDialog
+    :model-value="!!model"
+    :panel-class="panelClass"
+    :title="title"
+    @update:model-value="model = null"
+  >
+    <template #activator>
+      <slot :load-blob="loadBlob" name="activator" />
     </template>
     <div
       class="w-full overflow-hidden rounded-[1.25rem] bg-black"
@@ -186,7 +144,7 @@ const saveImage = async () => {
         class="w-full"
         :disabled="saving"
         variant="danger"
-        @click="model = false"
+        @click="model = null"
       >
         Cancel
       </BaseButton>
