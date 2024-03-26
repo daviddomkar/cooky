@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { signOut } from '#auth';
 import type { Category } from '@prisma/client';
 
 type NavItem = {
@@ -152,9 +153,7 @@ useNuxtApp().hook('page:finish', () => {
         <NuxtLink class="mb-4" :to="`/`">
           <BaseButton><div :class="`i-cooky:cooky float-left h-4 w-4`" />&nbsp;COOKY</BaseButton>
         </NuxtLink>
-        <NuxtLink class="mb-4" :to="`/signout`">
-          <BaseButton><div :class="`i-cooky:logout float-left h-4 w-4`" />&nbsp;LOG OUT</BaseButton>
-        </NuxtLink>
+        <BaseButton class="mb-4" @click="signOut"><div :class="`i-cooky:logout float-left h-4 w-4`" />&nbsp;LOG OUT</BaseButton>
       </div>
     </div>
 </nav>
