@@ -9,6 +9,7 @@ const meta: Meta<typeof NavBar> = {
   argTypes: {
     variant: {
       options: ["user", "admin"],
+      control: { type: "radio" },
     },
   },
 };
