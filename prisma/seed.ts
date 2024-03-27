@@ -1,14 +1,36 @@
 
+import { randomBytes } from "node:crypto";
+import { readFileSync } from "node:fs";
+import { Blob } from "node:buffer";
+import { join } from "node:path";
 import { hash } from "bcrypt";
 import { $Enums, Prisma } from "@prisma/client";
 import seedData from "./seed.json" assert { type: "json" };
 import { prisma } from "~/server/utils/prisma-client";
+import { fileStorage } from "~/server/utils/file-storage";
+
+const path = process.env.FILE_STORAGE_PATH;
+const secret = process.env.FILE_STORAGE_SECRET;
 
 async function main() {
   /* FILES */
-  const files = await prisma.$transaction(
-    seedData.file.map((data) => prisma.file.create({ data })),
-  );
+  const files = await prisma.$transaction(async(tx) => {
+    return await Promise.all(seedData.file.map(async ({ path: imagePath, mimeType}) => {
+        const key = randomBytes(32);
+        const blob = new Blob([readFileSync(imagePath)]);
+
+        const file = await tx.file.create({
+          data: {
+            mimeType,
+            key: await fileStorage.encryptKey(secret!, key),
+          },
+        });
+
+        await fileStorage.saveFile(join(path!, file.id), blob, key);
+
+        return file;
+    }));
+  });
 
   /* USER */
   const userDataPromise = seedData.user.map(async (user) => {
