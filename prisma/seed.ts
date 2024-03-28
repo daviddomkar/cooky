@@ -13,7 +13,7 @@ const path = process.env.FILE_STORAGE_PATH;
 const secret = process.env.FILE_STORAGE_SECRET;
 
 async function main() {
-  /* FILES */
+  // Files
   const files = await prisma.$transaction(async(tx) => {
     return await Promise.all(seedData.file.map(async ({ path: imagePath, mimeType}) => {
         const key = randomBytes(32);
@@ -32,7 +32,7 @@ async function main() {
     }));
   });
 
-  /* USER */
+  // Users
   const userDataPromise = seedData.user.map(async (user) => {
     return {
       ...user,
@@ -49,34 +49,34 @@ async function main() {
     userData.map((data) => prisma.user.create({ data })),
   );
 
-  /* UNITS */
+  // Units
   const unitData = seedData.unit as Prisma.UnitCreateInput[];
   const units = await prisma.$transaction(
     unitData.map((data) => prisma.unit.create({ data })),
   );
 
-  /* INGREDIENTS */
+  // Ingredients
   const IngredientData = seedData.ingredient as Prisma.IngredientCreateInput[];
   const ingredients = await prisma.$transaction(
     IngredientData.map((data) => prisma.ingredient.create({ data })),
   );
 
-  /* CATEGORIES */
+  // Categories
   const categoryData = seedData.category;
   const categories = await prisma.$transaction(
     categoryData.map((data) => prisma.category.create({ data })),
   );
 
-  /* RECIPES */
+  // Recipes
   const recipeData = seedData.recipe.map((recipe) => {
-    const recipeIngredients = recipe.recipeIngredients.map((ing) => {
+    const recipeIngredients = recipe.recipeIngredients.map((ingredient) => {
       return {
-        ...ing,
-        unitId: units[ing.unitId].id,
-        ingredientId: ingredients[ing.ingredientId].id,
+        ...ingredient,
+        unitId: units[ingredient.unitId].id,
+        ingredientId: ingredients[ingredient.ingredientId].id,
       };
     });
-    const recipeCategories = recipe.categories.map((cat) => categories[cat].id);
+    const recipeCategories = recipe.categories.map((category) => categories[category].id);
     return {
       ...recipe,
       categories: recipeCategories,
@@ -89,7 +89,7 @@ async function main() {
   const createRecipes = recipeData.map((data) => prisma.recipe.create(data));
   const recipes = await Promise.all(createRecipes);
 
-  /* RATINGS */
+  // Ratings
   const ratingData = seedData.rating.map((rating) => {
     return {
       ...rating,
@@ -101,7 +101,7 @@ async function main() {
     ratingData.map((data) => prisma.rating.create({ data })),
   );
 
-  /* COMMENTS */
+  // Comments
   const commentData = seedData.comment.map((comment) => {
     return {
       ...comment,
@@ -113,7 +113,7 @@ async function main() {
     commentData.map((data) => prisma.comment.create({ data })),
   );
 
-  /* REPLIES */
+  // Replies
   const replyData = seedData.reply.map((reply) => {
     return {
       ...reply,
@@ -125,7 +125,7 @@ async function main() {
     replyData.map((data) => prisma.reply.create({ data })),
   );
 
-  /* COMMENT_HEARTS */
+  // Comment Hearts
   const commentHeartData = seedData.commentHeart.map((commentHeart) => {
     return {
       ...commentHeart,
@@ -137,7 +137,7 @@ async function main() {
     commentHeartData.map((data) => prisma.commentHeart.create({ data })),
   );
 
-  /* REPLY_HEARTS */
+  // Reply Hearts
   const replyHeartData = seedData.replyHeart.map((replyHeart) => {
     return {
       ...replyHeart,
@@ -149,7 +149,7 @@ async function main() {
     replyHeartData.map((data) => prisma.replyHeart.create({ data })),
   );
 
-  /* NOTIFICATIONS */
+  // Notifications
   const notificationData = seedData.notification.map((notification) => {
     return {
       ...notification,
@@ -160,7 +160,7 @@ async function main() {
     notificationData.map((data) => prisma.notification.create({ data })),
   );
 
-  /* LISTS */
+  // Lists
   const listData = seedData.list.map((list) => {
     return {
       ...list,
@@ -171,7 +171,7 @@ async function main() {
     listData.map((data) => prisma.list.create({ data })),
   );
 
-  /* RECIPE_LIST */
+  // Recipe Lists
   const recipeListData = seedData.recipeList.map((recipeList) => {
     return {
       ...recipeList,
