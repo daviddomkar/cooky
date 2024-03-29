@@ -7,25 +7,6 @@ generator json {
   provider = "prisma-json-types-generator"
 }
 
-view RecipesSortedByRatings {
-  id                  String      @id
-  title               String
-  slug                String
-  description         String
-  state               RecipeState
-  /// [Step]
-  steps               Json[]
-  nutritionPerServing Int         @map("nutrition_per_serving")
-  numberOfServings    Int         @map("number_of_servings")
-  imageId             String      @map("image_id")
-  authorId            String      @map("author_id")
-  createdAt           DateTime    @map("created_at")
-  updatedAt           DateTime    @map("updated_at")
-  averageStars        Decimal     @map("average_stars")
-
-  @@map("recipes_sorted_by_ratings")
-}
-
 datasource db {
   provider     = "postgresql"
   url          = env("DATABASE_URL")
@@ -100,7 +81,7 @@ model Unit {
 }
 
 model RecipeIngredient {
-  amount Int @db.Integer
+  amount Decimal @db.Decimal
 
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   ingredientId String     @map("ingredient_id") @db.Uuid
@@ -308,6 +289,26 @@ model Notification {
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
 
   @@map("notifications")
+}
+
+view RecipesByRatings {
+  id                  String                  @id
+  title               String
+  slug                String
+  description         String
+  preparitionDuration Unsupported("interval") @map("preparation_duration")
+  state               RecipeState
+  /// [Step]
+  steps               Json[]
+  nutritionPerServing Int                     @map("nutrition_per_serving")
+  numberOfServings    Int                     @map("number_of_servings")
+  imageId             String                  @map("image_id")
+  authorId            String                  @map("author_id")
+  createdAt           DateTime                @map("created_at")
+  updatedAt           DateTime                @map("updated_at")
+  averageStars        Decimal                 @map("average_stars")
+
+  @@map("recipes_by_ratings")
 }
 
 view RecipesByComments {
