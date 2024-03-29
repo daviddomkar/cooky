@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { Blob } from "node:buffer";
 import { join } from "node:path";
 import { hash } from "bcrypt";
-import { $Enums, Prisma } from "@prisma/client";
+import { Prisma, type Recipe } from "@prisma/client";
 import seedData from "./seed.json" assert { type: "json" };
 import { prisma } from "~/server/utils/prisma-client";
 import { fileStorage } from "~/server/utils/file-storage";
@@ -81,7 +81,7 @@ async function main() {
       ...recipe,
       categories: recipeCategories,
       recipeIngredients,
-      state: recipe.state as $Enums.RecipeState,
+      state: recipe.state as Recipe["state"],
       imageId: files[recipe.imageId].id,
       authorId: users[recipe.authorId].id,
     };
