@@ -72,6 +72,7 @@ async function main() {
     const recipeIngredients = recipe.recipeIngredients.map((ingredient) => {
       return {
         ...ingredient,
+        amount: new Prisma.Decimal(ingredient.amount),
         unitId: units[ingredient.unitId].id,
         ingredientId: ingredients[ingredient.ingredientId].id,
       };
