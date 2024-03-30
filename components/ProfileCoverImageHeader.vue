@@ -79,12 +79,15 @@ const handleChange = (payload: Event) => {
   >
     <div
       v-if="!coverImageId"
-      class="background-pattern absolute left-0 top-0 box-border h-full w-full bg-on-surface"
+      class="background-pattern absolute left-0 top-0 box-border h-full w-full border-b-1 border-b-on-surface border-b-solid bg-on-surface"
+    />
+    <div
+      v-if="!coverImageId"
+      class="absolute bottom-0 h-[1px] w-full bg-on-surface"
     />
     <div
       class="box-border h-full w-full"
       :class="{
-        'border-b-1 border-b-on-surface border-b-solid': !coverImageId,
         'backdrop-blur-xl': coverImageId,
       }"
     >
