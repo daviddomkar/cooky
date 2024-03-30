@@ -11,7 +11,7 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <div
-    class="relative overflow-hidden border-8 border-white rounded-full border-solid shadow-2xl"
+    class="relative overflow-hidden border-8 border-white rounded-full border-solid bg-black shadow-2xl"
   >
     <img
       class="block overflow-hidden object-cover"

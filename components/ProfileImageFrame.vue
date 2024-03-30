@@ -89,7 +89,7 @@ const handleChange = (payload: Event) => {
         <label
           class="block h-full w-full flex cursor-pointer items-center justify-center border-none bg-black/40 opacity-0 transition-opacity hover:opacity-100"
         >
-          <div class="i-material-symbols:edit text-4xl" />
+          <div class="i-material-symbols:edit text-4xl text-white" />
           <input accept="image/*" hidden type="file" @change="handleChange" />
         </label>
       </template>

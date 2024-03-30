@@ -67,7 +67,7 @@ const handleChange = (payload: Event) => {
 
 <template>
   <div
-    class="relative max-h-96 flex"
+    class="relative max-h-96 flex overflow-hidden"
     :class="{
       'bg-cover bg-center': coverImageId,
     }"

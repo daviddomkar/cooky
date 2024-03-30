@@ -22,9 +22,9 @@ withDefaults(defineProps<Props>(), {
     :class="{
       'bg-gradient-to-r from-primary to-secondary text-white':
         variant === 'primary',
-      'bg-surface-container  text-white': variant === 'secondary',
+      'bg-surface-dimmed  text-on-surface-dimmed': variant === 'secondary',
       'bg-error  text-white': variant === 'danger',
-      'hover:scale-[1.05] hover:active:scale-[0.97] cursor-pointer':
+      'hover:active:scale-[0.97] cursor-pointer':
         !loading && !disabled,
       'cursor-not-allowed': loading,
       'w-fit': !expanded,
