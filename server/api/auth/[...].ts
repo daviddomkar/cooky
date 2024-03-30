@@ -4,7 +4,6 @@ import { NuxtAuthHandler } from "#auth";
 import { compare } from "bcrypt";
 import type { User } from "@prisma/client";
 import { safeParseAsync } from "valibot";
-import { prisma } from "~/server/plugins/prisma";
 
 const runtimeConfig = useRuntimeConfig();
 

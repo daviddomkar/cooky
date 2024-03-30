@@ -1,11 +1,17 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions", "views"]
+}
+
+generator json {
+  provider = "prisma-json-types-generator"
 }
 
 datasource db {
   provider     = "postgresql"
   url          = env("DATABASE_URL")
   relationMode = "foreignKeys"
+  extensions   = [unaccent]
 }
 
 model User {
@@ -75,14 +81,14 @@ model Unit {
 }
 
 model RecipeIngredient {
-  amount Int @db.Integer
+  amount Decimal @db.Decimal
 
-  unit         Unit       @relation(fields: [unitId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  unitId       String     @map("unit_id") @db.Uuid
-  recipe       Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  recipeId     String     @map("recipe_id") @db.Uuid
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   ingredientId String     @map("ingredient_id") @db.Uuid
+  recipe       Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  recipeId     String     @map("recipe_id") @db.Uuid
+  unit         Unit       @relation(fields: [unitId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  unitId       String     @map("unit_id") @db.Uuid
 
   @@id(name: "id", fields: [recipeId, ingredientId])
   @@map("recipe_ingredients")
@@ -93,6 +99,7 @@ model Category {
   title   String           @unique @db.VarChar(32)
   order   Int              @default(autoincrement()) @db.Integer
   icon    String           @db.VarChar(32)
+  slug    String           @unique @db.VarChar(64)
   recipes RecipeCategory[]
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
@@ -257,7 +264,7 @@ model Recipe {
 model File {
   id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   mimeType String @map("mime_type") @db.VarChar(32)
-  url      String @unique @db.VarChar(255)
+  key      Bytes  @db.ByteA
 
   profileImageUser User?   @relation("profile_image")
   coverImageUser   User?   @relation("cover_image")
@@ -282,4 +289,102 @@ model Notification {
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
 
   @@map("notifications")
+}
+
+view RecipesByRatings {
+  id                  String                  @id
+  title               String
+  slug                String
+  description         String
+  preparitionDuration Unsupported("interval") @map("preparation_duration")
+  state               RecipeState
+  /// [Step]
+  steps               Json[]
+  nutritionPerServing Int                     @map("nutrition_per_serving")
+  numberOfServings    Int                     @map("number_of_servings")
+  imageId             String                  @map("image_id")
+  authorId            String                  @map("author_id")
+  createdAt           DateTime                @map("created_at")
+  updatedAt           DateTime                @map("updated_at")
+  averageStars        Decimal                 @map("average_stars")
+
+  @@map("recipes_by_ratings")
+}
+
+view RecipesByComments {
+  id                  String                  @id
+  title               String
+  slug                String
+  description         String
+  preparitionDuration Unsupported("interval") @map("preparation_duration")
+  state               RecipeState
+  /// [Step]
+  steps               Json[]
+  nutritionPerServing Int                     @map("nutrition_per_serving")
+  numberOfServings    Int                     @map("number_of_servings")
+  imageId             String                  @map("image_id")
+  authorId            String                  @map("author_id")
+  createdAt           DateTime                @map("created_at")
+  updatedAt           DateTime                @map("updated_at")
+  comentCount         Int                     @map("comment_count")
+
+  @@map("recipes_by_comments")
+}
+
+view RecipesBySaves {
+  id                  String                  @id
+  title               String
+  slug                String
+  description         String
+  preparitionDuration Unsupported("interval") @map("preparation_duration")
+  state               RecipeState
+  /// [Step]
+  steps               Json[]
+  nutritionPerServing Int                     @map("nutrition_per_serving")
+  numberOfServings    Int                     @map("number_of_servings")
+  imageId             String                  @map("image_id")
+  authorId            String                  @map("author_id")
+  createdAt           DateTime                @map("created_at")
+  updatedAt           DateTime                @map("updated_at")
+  saveCount           Int                     @map("save_count")
+
+  @@map("recipes_by_saves")
+}
+
+view RecipesByCreatedAt {
+  id                  String                  @id
+  title               String
+  slug                String
+  description         String
+  preparitionDuration Unsupported("interval") @map("preparation_duration")
+  state               RecipeState
+  /// [Step]
+  steps               Json[]
+  nutritionPerServing Int                     @map("nutrition_per_serving")
+  numberOfServings    Int                     @map("number_of_servings")
+  imageId             String                  @map("image_id")
+  authorId            String                  @map("author_id")
+  createdAt           DateTime                @map("created_at")
+  updatedAt           DateTime                @map("updated_at")
+
+  @@map("recipes_by_created_at")
+}
+
+view RandomRecipe {
+  id                  String                  @id
+  title               String
+  slug                String
+  description         String
+  preparitionDuration Unsupported("interval") @map("preparation_duration")
+  state               RecipeState
+  /// [Step]
+  steps               Json[]
+  nutritionPerServing Int                     @map("nutrition_per_serving")
+  numberOfServings    Int                     @map("number_of_servings")
+  imageId             String                  @map("image_id")
+  authorId            String                  @map("author_id")
+  createdAt           DateTime                @map("created_at")
+  updatedAt           DateTime                @map("updated_at")
+
+  @@map("random_recipe")
 }
