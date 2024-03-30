@@ -22,7 +22,7 @@ const likedIconClass = computed(() => {
 </script>
 
 <template>
-  <div class="relative overflow-hidden rounded-[24px]">
+  <div class="relative overflow-hidden rounded-3xl">
     <img
       class="block w-full brightness-80"
       :src="`/api/files/${coverImageId}`"
