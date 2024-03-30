@@ -12,10 +12,14 @@ export default meta;
 type Story = StoryObj<typeof RecipeListCard>;
 
 export const Default: Story = {
-  render: () => ({
+  args: {
+    coverImageId: "pancakes.jpg",
+    title: "Pancakes",
+  },
+  render: (args) => ({
     components: { RecipeListCard },
     setup() {
-      return {};
+      return { args };
     },
     template: '<RecipeListCard v-bind="args" />',
   }),
