@@ -8,7 +8,7 @@ defineProps<Props>();
 </script>
 
 <template>
-  <div class="relative h-40 overflow-hidden rounded-3xl">
+  <div class="relative h-32 overflow-hidden rounded-3xl sm:h-40">
     <div
       class="absolute box-border h-full w-full flex items-center justify-center p-4"
     >

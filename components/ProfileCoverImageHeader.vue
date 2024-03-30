@@ -100,7 +100,7 @@ const handleChange = (payload: Event) => {
       >
         <img
           v-if="coverImageId"
-          class="block h-full w-full object-cover"
+          class="block h-full max-h-96 w-full object-cover object-center"
           :src="`/api/files/${coverImageId}`"
         />
         <div v-if="editable" class="absolute bottom-4 right-4">

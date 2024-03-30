@@ -6,14 +6,12 @@ type Props = {
   username: string;
   profileImageId?: string | null;
   editable?: boolean;
-  diameter?: number;
   onNewProfileImage: (blob: Blob) => Promise<void>;
 };
 
 withDefaults(defineProps<Props>(), {
   profileImageId: undefined,
   editable: false,
-  diameter: 192,
 });
 
 const ImageFileSchema = blob("Invalid file.", [

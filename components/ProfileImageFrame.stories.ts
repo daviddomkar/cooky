@@ -23,7 +23,7 @@ export const Default: Story = {
     setup() {
       return { args };
     },
-    template: '<ProfileImageFrame v-bind="args" />',
+    template: '<ProfileImageFrame v-bind="args" class="w-48 h-48" />',
   }),
 };
 
@@ -40,7 +40,7 @@ export const WithCustomProfileImage: Story = {
     setup() {
       return { args };
     },
-    template: '<ProfileImageFrame v-bind="args" />',
+    template: '<ProfileImageFrame v-bind="args" class="w-48 h-48" />',
   }),
 };
 
@@ -58,6 +58,6 @@ export const Editable: Story = {
     setup() {
       return { args };
     },
-    template: '<ProfileImageFrame v-bind="args" />',
+    template: '<ProfileImageFrame v-bind="args" class="w-48 h-48" />',
   }),
 };
