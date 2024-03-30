@@ -44,7 +44,7 @@ const saveCoverImage = async (blob: Blob) => {
     <div class="mx-auto box-border max-w-336 w-full flex flex-col gap-8 px-8 pb-8">
       <div class="mx-auto flex flex-col items-center gap-4 lg:m-0 lg:flex-row lg:items-end">
         <ProfileImageFrame
-          class="relative -mt-[96px]"
+          class="relative h-32 w-32 -mt-[64px] sm:h-48 sm:w-48 -sm:mt-[96px]"
           :editable="session?.user.username === profile?.username"
           :on-new-profile-image="saveProfileImage"
           :profile-image-id="profile?.profileImageId"
@@ -52,12 +52,12 @@ const saveCoverImage = async (blob: Blob) => {
         />
         <div class="text-center lg:text-left">
           <p class="my-0 text-base text-primary"> @{{ profile?.username }}</p>
-          <h1 class="my-0 text-[4rem]">{{ profile?.name }}</h1>
+          <h1 class="my-0 text-[3rem] sm:text-[4rem]">{{ profile?.name }}</h1>
         </div>
       </div>
       <div v-if="profile!.lists.length > 0" class="flex flex-col">
-        <h2 class="my-0 text-center text-[3rem] lg:text-left">Lists</h2>
-        <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_auto))] gap-4">
+        <h2 class="my-0 text-center text-[2rem] lg:text-left sm:text-[3rem]">Lists</h2>
+        <div class="grid grid-cols-[repeat(1,_minmax(240px,_auto))] gap-4 sm:grid-cols-[repeat(auto-fit,_minmax(300px,_auto))]">
           <NuxtLink v-for="list in profile!.lists" :key="list.id" class="block" :to="`/list/${list.id}`">
             <RecipeListCard :cover-image-id="list.imageId" :title="list.title" />
           </NuxtLink>
@@ -68,7 +68,7 @@ const saveCoverImage = async (blob: Blob) => {
         </div>
       </div>
       <div v-if="profile!.recipes.length > 0" class="flex flex-col">
-        <h2 class="my-0 text-center text-[3rem] lg:text-left">Recipes</h2>
+        <h2 class="my-0 text-center text-[2rem] lg:text-left sm:text-[3rem]">Recipes</h2>
         <MasonryWall :column-width="300" :gap="16" :items="profile!.recipes" :max-columns="4" :ssr-columns="isMobile ? 1 : 4">
           <template #default="{ item }">
             <NuxtLink class="block" :to="`/${profile!.username}/${item.slug}`">

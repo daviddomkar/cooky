@@ -1,18 +1,14 @@
 <script setup lang="ts">
 type Props = {
   src: string;
-  diameter?: number;
 };
 
-withDefaults(defineProps<Props>(), {
-  diameter: 256,
-});
+defineProps<Props>();
 </script>
 
 <template>
   <div
-    class="relative box-border overflow-hidden border-8 border-white rounded-full border-solid bg-black shadow-2xl"
-    :style="{ width: `${diameter}px`, height: `${diameter}px` }"
+    class="relative box-border min-h-4 min-w-4 overflow-hidden border-8 border-white rounded-full border-solid bg-black shadow-2xl"
   >
     <img
       class="block h-full w-full overflow-hidden object-cover"

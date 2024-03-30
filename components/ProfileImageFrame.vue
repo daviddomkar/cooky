@@ -70,7 +70,6 @@ const handleChange = (payload: Event) => {
 
 <template>
   <PictureFrame
-    :diameter="diameter"
     :src="
       profileImageId
         ? `/api/files/${profileImageId}`
