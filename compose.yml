@@ -44,9 +44,9 @@ services:
       - ./package-lock.json:/docker-entrypoint-initdb.d/package-lock.json
       - ./tsconfig.json:/docker-entrypoint-initdb.d/tsconfig.json
       - ./prisma:/docker-entrypoint-initdb.d/prisma
-      - cooky_database:/var/lib/postgresql/data
       - ./server/utils:/docker-entrypoint-initdb.d/server/utils
       - ./.storage:/var/lib/cooky/data
+      - cooky_database:/var/lib/postgresql/data
 
 volumes:
   cooky_database:
