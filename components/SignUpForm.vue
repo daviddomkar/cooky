@@ -31,8 +31,8 @@ const submit = handleSubmit(async (values, opts) => {
         Create your<br />account
       </h2>
     </div>
-    <TextField class="max-w-80" label="Name" name="name" type="text" />
-    <TextField class="max-w-80" label="Username" name="username" type="text" />
+    <TextField class="max-w-80" label="Name" name="name" />
+    <TextField class="max-w-80" label="Username" name="username" />
     <TextField class="max-w-80" label="Email" name="email" type="email" />
     <TextField
       class="max-w-80"

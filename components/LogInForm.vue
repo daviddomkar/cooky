@@ -35,7 +35,6 @@ const submit = handleSubmit(async (values, opts) => {
       class="max-w-80"
       label="Username / Email"
       name="usernameOrEmail"
-      type="text"
     />
     <TextField
       class="max-w-80"

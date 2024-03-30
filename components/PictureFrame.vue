@@ -5,7 +5,7 @@ type Props = {
   borderless: boolean;
 };
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   diameter: 256,
   borderless: false,
 });
@@ -15,8 +15,8 @@ const props = withDefaults(defineProps<Props>(), {
   <img
     class="block rounded-full object-cover"
     :class="{
-      'border-8 border-solid border-white shadow-2xl': !props.borderless,
-      'border-none': props.borderless,
+      'border-8 border-solid border-white shadow-2xl': !borderless,
+      'border-none': borderless,
     }"
     :height="diameter"
     :src="src"

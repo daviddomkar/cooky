@@ -5,8 +5,8 @@
     >
       <SearchField class="grow" />
       <div class="flex items-center gap-6">
-        <a class="cursor-pointer uppercase">About</a>
-        <BaseButton>Random recipe</BaseButton>
+        <a class="cursor-pointer uppercase">Random recipe</a>
+        <BaseButton>New recipe</BaseButton>
       </div>
       <div class="flex items-center gap-6">
         <div class="relative cursor-pointer">
