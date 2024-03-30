@@ -12,7 +12,7 @@ defineProps<Props>();
     <div
       class="absolute box-border h-full w-full flex items-center justify-center p-4"
     >
-      <h2 class="relative z-1 my-0 text-center text-4xl text-white leading-8">
+      <h2 class="relative z-1 my-0 text-center text-[2rem] text-white leading-8">
         {{ title }}
       </h2>
     </div>
