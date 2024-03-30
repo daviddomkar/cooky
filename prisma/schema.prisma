@@ -99,6 +99,7 @@ model Category {
   title   String           @unique @db.VarChar(32)
   order   Int              @default(autoincrement()) @db.Integer
   icon    String           @db.VarChar(32)
+  slug    String           @unique @db.VarChar(64)
   recipes RecipeCategory[]
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
@@ -263,7 +264,7 @@ model Recipe {
 model File {
   id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   mimeType String @map("mime_type") @db.VarChar(32)
-  url      String @unique @db.VarChar(255)
+  key      Bytes  @db.ByteA
 
   profileImageUser User?   @relation("profile_image")
   coverImageUser   User?   @relation("cover_image")
