@@ -52,11 +52,11 @@ const saveCoverImage = async (blob: Blob) => {
         />
         <div class="text-center lg:text-left">
           <p class="my-0 text-base text-primary"> @{{ profile?.username }}</p>
-          <h1 class="my-0 text-[4rem]">{{ profile?.name }}</h1>
+          <h1 class="my-0 text-5xl sm:text-6xl">{{ profile?.name }}</h1>
         </div>
       </div>
-      <div v-if="profile!.lists.length > 0" class="flex flex-col">
-        <h2 class="my-0 text-center text-[3rem] lg:text-left">Lists</h2>
+      <div v-if="profile!.lists.length > 0" class="flex flex-col gap-1">
+        <h2 class="my-0 text-center text-4xl text-on-surface-variant lg:text-left sm:text-5xl">Lists</h2>
         <div class="grid grid-cols-[repeat(auto-fit,_minmax(256px,_auto))] gap-4">
           <NuxtLink v-for="list in profile!.lists" :key="list.id" class="block" :to="`/list/${list.id}`">
             <RecipeListCard :cover-image-id="list.imageId" :title="list.title" />
@@ -67,8 +67,8 @@ const saveCoverImage = async (blob: Blob) => {
           <div v-if="profile!.lists.length < 4" />
         </div>
       </div>
-      <div v-if="profile!.recipes.length > 0" class="flex flex-col">
-        <h2 class="my-0 text-center text-[3rem] lg:text-left">Recipes</h2>
+      <div v-if="profile!.recipes.length > 0" class="flex flex-col gap-1">
+        <h2 class="my-0 text-center text-4xl text-on-surface-variant lg:text-left sm:text-5xl">Recipes</h2>
         <MasonryWall :column-width="256" :gap="16" :items="profile!.recipes" :max-columns="4" :ssr-columns="isMobile ? 1 : 4">
           <template #default="{ item }">
             <NuxtLink class="block" :to="`/${profile!.username}/${item.slug}`">

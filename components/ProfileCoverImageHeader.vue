@@ -113,7 +113,7 @@ const handleChange = (payload: Event) => {
           >
             <template #activator>
               <label
-                class="w-fit flex cursor-pointer items-center gap-2 rounded-full from-primary to-secondary bg-gradient-to-r px-4 py-3 text-base text-white leading-4 uppercase outline-none ring-none transition ease-in-out hover:scale-[1.05] focus:outline-none focus:ring-none hover:active:scale-[0.97]"
+                class="w-fit flex cursor-pointer items-center gap-2 rounded-full from-primary to-secondary bg-gradient-to-r px-4 py-3 text-base text-white leading-4 uppercase outline-none ring-none transition ease-in-out focus:outline-none focus:ring-none hover:active:scale-[0.97]"
               >
                 <input
                   accept="image/*"
