@@ -21,6 +21,17 @@ export default defineEventHandler(async (event) => {
       username: true,
       profileImageId: true,
       coverImageId: true,
+      recipes: {
+        orderBy: {
+          createdAt: "desc",
+        },
+        select: {
+          id: true,
+          title: true,
+          slug: true,
+          imageId: true,
+        },
+      },
     },
   });
 

@@ -54,6 +54,7 @@ const saveCoverImage = async (blob: Blob) => {
           <p class="my-0 text-base text-primary"> @{{ profile?.username }}</p>
           <h1 class="my-0 text-6xl">{{ profile?.name }}</h1>
         </div>
+        {{ profile?.recipes }}
       </div>
     </div>
   </div>
