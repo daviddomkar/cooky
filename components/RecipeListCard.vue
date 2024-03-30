@@ -8,11 +8,11 @@ defineProps<Props>();
 </script>
 
 <template>
-  <div class="relative h-32 overflow-hidden rounded-3xl sm:h-40">
+  <div class="relative h-40 overflow-hidden rounded-3xl">
     <div
       class="absolute box-border h-full w-full flex items-center justify-center p-4"
     >
-      <h2 class="relative z-1 my-0 text-center text-[1.5rem] text-white leading-8 sm:text-[2rem]">
+      <h2 class="relative z-1 my-0 text-center text-[2rem] text-white leading-8">
         {{ title }}
       </h2>
     </div>

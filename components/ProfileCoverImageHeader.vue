@@ -122,7 +122,7 @@ const handleChange = (payload: Event) => {
                   @change="handleChange"
                 />
                 <div class="i-material-symbols:edit" />
-                Change cover photo
+                <span class="hidden md:inline" >Change cover photo</span>
               </label>
             </template>
           </ImageCropDialog>
