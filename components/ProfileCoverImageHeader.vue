@@ -92,10 +92,10 @@ const handleChange = (payload: Event) => {
       }"
     >
       <div
-        class="relative mx-auto max-w-320 w-full"
+        class="relative mx-auto max-w-336 w-full"
         :class="{
           'bg-black': coverImageId,
-          'aspect-ratio-[1280/384]': !coverImageId,
+          'aspect-ratio-[1344/384]': !coverImageId,
         }"
       >
         <img
@@ -107,8 +107,8 @@ const handleChange = (payload: Event) => {
           <ImageCropDialog
             v-model="blobRef"
             :on-save="onNewCoverImage"
-            panel-class="!max-w-320"
-            :stencil-size="{ width: 1280, height: 384 }"
+            panel-class="!max-w-336"
+            :stencil-size="{ width: 1344, height: 384 }"
             title="Change cover photo"
           >
             <template #activator>

@@ -8,7 +8,7 @@ defineProps<Props>();
 </script>
 
 <template>
-  <div class="relative h-38 w-80 overflow-hidden rounded-3xl">
+  <div class="relative h-40 overflow-hidden rounded-3xl">
     <div
       class="absolute box-border h-full w-full flex items-center justify-center p-4"
     >
@@ -17,7 +17,7 @@ defineProps<Props>();
       </h2>
     </div>
     <img
-      class="block h-full w-full object-cover object-center brightness-80"
+      class="block h-full w-full object-cover object-center brightness-60"
       :src="`/api/files/${coverImageId}`"
     />
   </div>

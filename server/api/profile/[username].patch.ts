@@ -165,7 +165,7 @@ export default defineEventHandler(async (event) => {
           join(path, file.id),
           coverImage,
           key,
-          sharp({ animated: true }).resize(1280, 384),
+          sharp({ animated: true }).resize(1344, 384),
         );
 
         if (oldCoverImageFile) {

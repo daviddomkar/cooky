@@ -15,8 +15,11 @@ export const Default: Story = {
   args: {
     title: "Pancakes",
     coverImageId: "pancakes.jpg",
-    authorName: "Rem Rem",
-    authorImageId: "rem.jpg",
+    author: {
+      username: "remrem",
+      name: "Rem Rem",
+      profileImageId: "rem.jpg",
+    },
     liked: false,
   },
   render: (args) => ({
@@ -32,8 +35,11 @@ export const Liked: Story = {
   args: {
     title: "Pancakes",
     coverImageId: "pancakes.jpg",
-    authorName: "Rem Rem",
-    authorImageId: "rem.jpg",
+    author: {
+      username: "remrem",
+      name: "Rem Rem",
+      profileImageId: "rem.jpg",
+    },
     liked: true,
   },
   render: (args) => ({

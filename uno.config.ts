@@ -94,7 +94,8 @@ export default defineConfig({
       fonts: {
         sans: "ABeeZee:400",
         display: {
-          name: "Supreme",
+          name: "Bebas Neue", // "Pilcrow Rounded", // "Supreme", // "Bevellier",
+          weights: [400],
           provider: "fontshare",
         },
       },

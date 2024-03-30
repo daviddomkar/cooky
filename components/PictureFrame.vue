@@ -11,13 +11,12 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <div
-    class="relative overflow-hidden border-8 border-white rounded-full border-solid bg-black shadow-2xl"
+    class="relative box-border overflow-hidden border-8 border-white rounded-full border-solid bg-black shadow-2xl"
+    :style="{ width: `${diameter}px`, height: `${diameter}px` }"
   >
     <img
-      class="block overflow-hidden object-cover"
-      :height="diameter"
+      class="block h-full w-full overflow-hidden object-cover"
       :src="src"
-      :width="diameter"
     />
     <div v-if="$slots.default" class="absolute left-0 top-0 h-full w-full">
       <slot />

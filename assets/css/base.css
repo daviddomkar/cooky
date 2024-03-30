@@ -11,7 +11,7 @@ input, label {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply font-display !font-extrabold uppercase;
+  @apply font-display font-normal uppercase tracking-wide;
 }
 
 h1 {

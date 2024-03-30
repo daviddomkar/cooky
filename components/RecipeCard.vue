@@ -1,30 +1,24 @@
 <script setup lang="ts">
-import { computed } from "vue";
-
 type Props = {
   title: string;
   coverImageId: string;
-  authorName: string;
-  authorImageId: string;
-  liked: boolean;
+  author: {
+    username: string;
+    name: string;
+    profileImageId?: string | null;
+  };
+  liked?: boolean;
 };
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   liked: false,
-});
-
-const likedIconClass = computed(() => {
-  const defaultClass =
-    "i-ph-heart-fill h-6 w-6 transition-all duration-300 ease-in-out hover:scale-110 ";
-
-  return defaultClass + (props.liked ? "bg-red" : "bg-gray");
 });
 </script>
 
 <template>
   <div class="relative overflow-hidden rounded-3xl">
     <img
-      class="block w-full brightness-80"
+      class="block w-full brightness-60"
       :src="`/api/files/${coverImageId}`"
     />
     <div
@@ -34,10 +28,16 @@ const likedIconClass = computed(() => {
       <div class="flex items-center">
         <img
           class="h-6 w-6 rounded-full object-cover"
-          :src="`/api/files/${authorImageId}`"
+          :src="getProfileImageUrl(author.username, author.profileImageId)"
         />
-        <span class="ml-2 grow text-xs text-white">{{ authorName }}</span>
-        <div :class="likedIconClass"></div>
+        <span class="ml-2 grow text-xs text-white">{{ author.name }}</span>
+        <div
+          class="i-ph-heart-fill h-6 w-6 transition-all duration-300 ease-in-out hover:scale-110"
+          :class="{
+            'bg-red': liked,
+            'bg-gray': !liked,
+          }" 
+        />
       </div>
     </div>
   </div>
