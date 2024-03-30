@@ -13,11 +13,11 @@ type Story = StoryObj<typeof RecipeCard>;
 
 export const Default: Story = {
   args: {
-    liked: false,
-    coverImageId: "pancakes.jpg",
     title: "Pancakes",
+    coverImageId: "pancakes.jpg",
     authorName: "Rem Rem",
     authorImageId: "rem.jpg",
+    liked: false,
   },
   render: (args) => ({
     components: { RecipeCard },
@@ -30,6 +30,10 @@ export const Default: Story = {
 
 export const Liked: Story = {
   args: {
+    title: "Pancakes",
+    coverImageId: "pancakes.jpg",
+    authorName: "Rem Rem",
+    authorImageId: "rem.jpg",
     liked: true,
   },
   render: (args) => ({
