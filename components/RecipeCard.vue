@@ -18,7 +18,7 @@ withDefaults(defineProps<Props>(), {
 <template>
   <div class="relative overflow-hidden rounded-3xl">
     <img
-      class="block w-full brightness-60"
+      class="block w-full brightness-70"
       :src="`/api/files/${coverImageId}`"
     />
     <div

@@ -17,7 +17,7 @@ defineProps<Props>();
       </h2>
     </div>
     <img
-      class="block h-full w-full object-cover object-center brightness-60"
+      class="block h-full w-full object-cover object-center brightness-70"
       :src="`/api/files/${coverImageId}`"
     />
   </div>
