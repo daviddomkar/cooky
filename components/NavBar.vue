@@ -93,7 +93,7 @@ useNuxtApp().hook('page:finish', () => {
         </clipPath>
       </svg>
     </div>
-    <div v-if="variant === 'user'" class="content relative px-10 py-4">
+    <div v-if="variant === 'user'" class="content relative box-border h-100% overflow-y-auto px-10 py-4">
     <!-- USER NAV -->
       <div class="title mb-10 text-center font-size-12 font-display">Cooky</div>
         <div class="font-size-6 color-on-surface-variant font-display">LIBRARY</div>
@@ -108,7 +108,7 @@ useNuxtApp().hook('page:finish', () => {
           class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
           :to="`/category/${category.slug}`"
           >
-            <div :class="`i-cooky:${category.icon} float-left h-4 w-4`" />&nbsp;{{ category.title.toUpperCase() }}
+            <div :class="`i-cooky:${category.icon} float-left h-4 w-4 mr-2`" />{{ category.title.toUpperCase() }}
           </NuxtLink>
         </li>
       </ul>
@@ -125,12 +125,12 @@ useNuxtApp().hook('page:finish', () => {
             class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
             :to="`/profile/${item.slug}`"
           >
-            <div :class="`i-cooky:${item.icon} float-left h-4 w-4`" />&nbsp;{{ item.title.toUpperCase() }}
+            <div :class="`i-cooky:${item.icon} float-left h-4 w-4 mr-2`" />{{ item.title.toUpperCase() }}
           </NuxtLink>
         </li>
       </ul>
     </div>
-    <div v-else class="content relative h-100% flex flex-col px-10 py-4">
+    <div v-else class="content relative box-border h-100% flex flex-col overflow-y-auto px-10 py-4">
     <!-- ADMIN NAV -->
       <div id="admin-title" class="title relative mb-10 text-center font-size-12 font-display">Cooky</div>
       <ul class="m-0 p-0">
@@ -145,15 +145,15 @@ useNuxtApp().hook('page:finish', () => {
             class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
             :to="`/admin/${item.slug}`"
           >
-            <div :class="`i-cooky:${item.icon} float-left h-4 w-4`" />&nbsp;{{ item.title.toUpperCase() }}
+            <div :class="`i-cooky:${item.icon} float-left h-4 w-4 mr-2`" />{{ item.title.toUpperCase() }}
           </NuxtLink>
         </li>
       </ul>
       <div class="m-0 flex flex-grow-1 flex-col items-stretch justify-end pb-4">
-        <NuxtLink class="mb-4" :to="`/`">
-          <BaseButton><div :class="`i-cooky:cooky float-left h-4 w-4`" />&nbsp;COOKY</BaseButton>
+        <NuxtLink class="mb-3 no-underline" :to="`/`">
+          <BaseButton :icon="`i-cooky:cooky`">COOKY</BaseButton>
         </NuxtLink>
-        <BaseButton class="mb-4" @click="signOut"><div :class="`i-cooky:logout float-left h-4 w-4`" />&nbsp;LOG OUT</BaseButton>
+        <BaseButton class="mb-3" :icon="`i-cooky:logout`" @click="signOut">LOG OUT</BaseButton>
       </div>
     </div>
 </nav>
