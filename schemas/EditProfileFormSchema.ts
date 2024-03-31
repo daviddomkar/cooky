@@ -22,7 +22,7 @@ export default union([
         ["image/jpeg", "image/png", "image/gif"],
         "The file must be an image (jpeg, png or gif).",
       ),
-      maxSize(5 * 1024 * 1024, "The file size must be less than 5MB."),
+      maxSize(10 * 1024 * 1024, "The file size must be less than 10MB."),
     ]),
   }),
   object({
@@ -31,7 +31,7 @@ export default union([
         ["image/jpeg", "image/png", "image/gif"],
         "The file must be an image (jpeg, png or gif).",
       ),
-      maxSize(5 * 1024 * 1024, "The file size must be less than 5MB."),
+      maxSize(10 * 1024 * 1024, "The file size must be less than 10MB."),
     ]),
   }),
 ]);
