@@ -123,7 +123,7 @@ export default defineEventHandler(async (event) => {
         }
       },
       {
-        timeout: 20000,
+        timeout: 40000,
       },
     );
 
@@ -177,7 +177,7 @@ export default defineEventHandler(async (event) => {
         }
       },
       {
-        timeout: 20000,
+        timeout: 40000,
       },
     );
 
