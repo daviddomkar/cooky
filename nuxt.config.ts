@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
 
 export default defineNuxtConfig({
-  css: ["~/assets/css/base.css"],
+  css: ["~/assets/css/base.css", "vue-advanced-cropper/dist/style.css"],
   modules: [
     "@nuxtjs/eslint-module",
     "@nuxtjs/stylelint-module",
@@ -9,8 +9,14 @@ export default defineNuxtConfig({
     "@vee-validate/nuxt",
     "@hebilicious/authjs-nuxt",
     "@nuxtjs/color-mode",
+    "@nuxtjs/device",
+    "nuxt-headlessui",
   ],
   runtimeConfig: {
+    fileStorage: {
+      path: process.env.FILE_STORAGE_PATH,
+      secret: process.env.FILE_STORAGE_SECRET,
+    },
     authJs: {
       secret: process.env.AUTH_SECRET,
     },
@@ -23,6 +29,14 @@ export default defineNuxtConfig({
   },
   alias: {
     cookie: resolve(__dirname, "node_modules/cookie"),
+  },
+  imports: {
+    dirs: ["schemas"],
+  },
+  nitro: {
+    imports: {
+      dirs: ["server/schemas", "server/composables"],
+    },
   },
   eslint: {
     lintOnStart: false,

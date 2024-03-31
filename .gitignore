@@ -26,3 +26,6 @@ logs
 
 # Stylelint cache
 .stylelintcache
+
+# Local file storage path
+.storage

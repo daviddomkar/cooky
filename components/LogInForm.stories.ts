@@ -5,6 +5,9 @@ import LogInForm from "./LogInForm.vue";
 const meta: Meta<typeof LogInForm> = {
   title: "Components/Forms/LogInForm",
   component: LogInForm,
+  parameters: {
+    layout: "fullscreen",
+  },
 };
 
 export default meta;
@@ -12,10 +15,6 @@ export default meta;
 type Story = StoryObj<typeof LogInForm>;
 
 export const Default: Story = {
-  parameters: {
-    layout: "fullscreen",
-  },
-  args: {},
   render: (args) => ({
     components: { LogInForm },
     setup() {
@@ -27,9 +26,6 @@ export const Default: Story = {
 };
 
 export const Filled: Story = {
-  parameters: {
-    layout: "fullscreen",
-  },
   args: {
     initialValues: {
       usernameOrEmail: "johnsmith",

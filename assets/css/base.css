@@ -1,13 +1,17 @@
 body {
-  @apply font-sans text-on-surface bg-surface transition-colors m-0;
+  @apply font-sans text-on-surface bg-surface transition-colors m-0 min-w-80;
 }
 
 button {
   @apply font-sans text-base leading-4;
 }
 
+input, label {
+  @apply font-sans;
+}
+
 h1, h2, h3, h4, h5, h6 {
-  @apply font-display font-normal;
+  @apply font-display font-normal uppercase tracking-wide;
 }
 
 h1 {

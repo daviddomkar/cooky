@@ -2,26 +2,35 @@
 import ProgressIndicator from "./ProgressIndicator.vue";
 
 type Props = {
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "danger";
   loading?: boolean;
+  disabled?: boolean;
+  expanded?: boolean;
 };
 
 withDefaults(defineProps<Props>(), {
   variant: "primary",
   loading: false,
+  disabled: false,
+  expanded: false,
 });
 </script>
 
 <template>
   <button
-    class="relative box-border w-fit flex items-center justify-center rounded-full border-none px-8 py-3 uppercase"
+    class="relative box-border flex items-center justify-center rounded-full border-none px-8 py-3 uppercase outline-none ring-none transition ease-in-out disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-none"
     :class="{
-      'bg-gradient-to-r from-primary to-secondary transition ease-in-out text-white':
+      'bg-gradient-to-r from-primary to-secondary text-white':
         variant === 'primary',
-      'bg-surface-container transition ease-in-out text-white':
-        variant === 'secondary',
-      'hover:scale-[1.05] hover:active:scale-[0.97] cursor-pointer': !loading,
+      'bg-surface-dimmed  text-on-surface-dimmed': variant === 'secondary',
+      'bg-error  text-white': variant === 'danger',
+      'hover:active:scale-[0.97] cursor-pointer':
+        !loading && !disabled,
+      'cursor-not-allowed': loading,
+      'w-fit': !expanded,
+      'w-full grow basis-0': expanded,
     }"
+    :disabled="disabled"
   >
     <div
       v-if="loading"
@@ -30,12 +39,12 @@ withDefaults(defineProps<Props>(), {
       <ProgressIndicator class="scale-[0.75]" />
     </div>
 
-    <span
+    <div
       :class="{
         invisible: loading,
       }"
     >
       <slot />
-    </span>
+    </div>
   </button>
 </template>
