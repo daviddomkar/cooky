@@ -21,6 +21,7 @@ const logIn = async (values: Output<typeof LogInSchema>) => {
       type: "error",
       title: "Failed to log in",
       text: "Check your credentials and try again.",
+      duration: 50000,
     });
   }
 };

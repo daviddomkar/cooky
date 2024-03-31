@@ -12,6 +12,9 @@ const lightTheme = {
     "surface-container": "#f5f5f5",
     outline: "#808080",
     error: "#f87171",
+    success: "#9ac678",
+    info: "#f5f5f5",
+    warning: "#ffb774",
     on: {
       primary: "#ffffff",
       surface: "#101010",
@@ -28,6 +31,9 @@ const darkTheme = {
     "surface-container": "#101010",
     outline: "#808080",
     error: "#f87171",
+    success: "#9ac678",
+    info: "#f5f5f5",
+    warning: "#ffb774",
     on: {
       primary: "#ffffff",
       surface: "#ffffff",
