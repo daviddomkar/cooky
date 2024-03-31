@@ -7,10 +7,14 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "@storybook/addon-themes",
+    "@storybook/addon-actions",
   ],
   framework: {
     name: "@storybook-vue/nuxt",
-    options: {},
+    options: {
+      // @ts-ignore
+      docgen :"vue-component-meta"
+    },
   },
   docs: {
     autodocs: "tag",

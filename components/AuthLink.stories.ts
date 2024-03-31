@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 import AuthLink from "./AuthLink.vue";
 
 const meta: Meta<typeof AuthLink> = {
-  title: "Design System/Base/AuthLink",
+  title: "Components/Auth/AuthLink",
   component: AuthLink,
 };
 
@@ -14,7 +14,6 @@ type Story = StoryObj<typeof AuthLink>;
 export const Login: Story = {
   args: {
     default: "Log in",
-    active: true,
   },
   render: (args) => ({
     components: { AuthLink },
