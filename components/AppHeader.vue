@@ -1,5 +1,20 @@
 <script setup lang="ts">
+type Props = {
+  user?: {
+    username: string;
+    profileImageId?: string | null;
+  }
+};
+
+defineProps<Props>();
+
+const router = useRouter();
+
 const searchVisible = ref(false);
+
+const logIn = () => {
+  router.push("/auth/login");
+};
 </script>
 
 <template>
@@ -59,8 +74,10 @@ const searchVisible = ref(false);
         <BaseButton class="shrink-0 !hidden !px-4 md:!flex" variant="secondary">
           <div class="i-fad:random-1dice h-6 w-6 scale-[1.25]" />
         </BaseButton>
-        <BaseButton class="shrink-0 !hidden md:!flex">New recipe</BaseButton>
+        <BaseButton v-if="user" class="shrink-0 !hidden md:!flex">New recipe</BaseButton>
+        <BaseButton v-else class="shrink-0 !hidden md:!flex" @click="logIn">Log in</BaseButton>
         <BaseButton
+          v-if="user"
           class="relative shrink-0 sm:h-12 sm:min-w-12" 
           :class="{
             '!hidden': searchVisible,
@@ -74,14 +91,16 @@ const searchVisible = ref(false);
             class="absolute right-1 top-1 h-2 w-2 rounded-full bg-secondary sm:right-3 sm:top-3"
           />
         </BaseButton>
-        <PictureFrame
-          borderless
-          class="w-8 shrink-0 cursor-pointer sm:w-12 hover:active:scale-[0.97]"
-          :class="{
-            '!hidden': searchVisible,
-          }"
-          src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/08/Untitled-design-(24).png"
-        />
+        <NuxtLink v-if="user" class="block hover:active:scale-[0.97]" :to="`/${user?.username}`">
+          <PictureFrame
+            borderless
+            class="w-8 shrink-0 cursor-pointer sm:w-12"
+            :class="{
+              '!hidden': searchVisible,
+            }"
+            :src="getProfileImageUrl(user.username, user.profileImageId)"
+          />
+        </NuxtLink>
       </div>
   </header>
 </template>
