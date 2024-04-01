@@ -1,10 +1,10 @@
 import AuthWelcome from '~/components/AuthWelcome.vue';
 <template>
   <div class="relative min-h-screen flex items-stretch">
-    <div class="relative w-full !hidden !lg:block">
+    <div class="relative w-full !hidden !xl:block">
       <div class="fixed h-screen w-[50%]">
-        <AuthWelcome class="h-full w-full !hidden !lg:flex" />
-        <div class="absolute bottom-[calc(20%_-_6rem)] hidden -right-24 lg:block">
+        <AuthWelcome class="h-full w-full !hidden !xl:flex" />
+        <div class="absolute bottom-[calc(20%_-_6rem)] hidden -right-24 xl:block">
           <PictureFrame class="w-48" src="/food_1.jpg" />
         </div>
       </div>

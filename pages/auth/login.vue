@@ -30,7 +30,7 @@ const logIn = async (values: Output<typeof LogInSchema>) => {
   <div class="box-border flex items-center justify-center p-4 sm:p-8">
     <LogInForm :on-submit="logIn">
       <template #trailing>
-        <p class="text-xs text-outline" to="/login">
+        <p class="text-xs text-outline xl:hidden" to="/login">
           Not registered yet?
           <NuxtLink
             class="cursor-pointer text-primary underline"
