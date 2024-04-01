@@ -20,6 +20,6 @@ export const Default: Story = {
     setup() {
       return { args };
     },
-    template: '<PictureFrame v-bind="args">{{ args.default }}</PictureFrame>',
+    template: '<PictureFrame v-bind="args" class="w-48 h-48">{{ args.default }}</PictureFrame>',
   }),
 };

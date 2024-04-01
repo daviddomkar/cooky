@@ -15,7 +15,7 @@ import {
   randomBytes,
   scrypt,
 } from "node:crypto";
-import { PipelineTransform, Transform } from "node:stream";
+import { type PipelineTransform, Transform } from "node:stream";
 
 const ivLength = 12;
 const keyLength = 32;

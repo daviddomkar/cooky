@@ -1,30 +1,43 @@
 <script setup lang="ts">
-import ProgressIndicator from "./ProgressIndicator.vue";
-
 type Props = {
-  variant?: "primary" | "secondary";
-  icon?: string;
+  variant?: "primary" | "secondary" | "danger" | "transparent";
+  density?: "relaxed" | "default" | "compact";
+  spread?: "compact" | "default" | "full" | "none";
   loading?: boolean;
+  disabled?: boolean;
 };
 
 withDefaults(defineProps<Props>(), {
   variant: "primary",
+  density: "default",
+  compact: false,
   loading: false,
+  disabled: false,
+  spread: "default",
 });
 </script>
 
 <template>
   <button
-    class="relative box-border w-fit flex items-center justify-center rounded-full border-none px-8 py-3 uppercase"
-    :class="[
-      {
-      'bg-gradient-to-r from-primary to-secondary transition ease-in-out text-white':
+    class="relative box-border flex items-center justify-center rounded-full border-none uppercase outline-none ring-none transition ease-in-out disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-none"
+    :class="{
+      'h-8 min-w-8': density === 'compact',
+      'h-10 min-w-10': density === 'default',
+      'h-12 min-w-12': density === 'relaxed',
+      'bg-gradient-to-r from-primary to-secondary text-white':
         variant === 'primary',
-      'bg-surface-container transition ease-in-out text-white':
-        variant === 'secondary',
-      'hover:scale-[1.05] hover:active:scale-[0.97] cursor-pointer': !loading,
-    },
-    { '!w-100% !justify-start !px-5': icon }]"
+      'bg-surface-dimmed  text-on-surface-dimmed': variant === 'secondary',
+      'bg-error  text-white': variant === 'danger',
+      'bg-transparent text-on-surface': variant === 'transparent',
+      'hover:active:scale-[0.97] cursor-pointer':
+        !loading && !disabled,
+      'cursor-not-allowed': loading,
+      'w-fit px-0': spread === 'none',
+      'w-fit px-4': spread === 'compact',
+      'w-fit px-8': spread === 'default',
+      'w-full grow basis-0': spread === 'full',
+    }"
+    :disabled="disabled"
   >
     <div
       v-if="loading"
@@ -34,13 +47,13 @@ withDefaults(defineProps<Props>(), {
       <ProgressIndicator class="scale-[0.75]" />
     </div>
 
-    <span
+    <div
       :class="{
         invisible: loading,
       }"
     >
       <div v-if="icon" :class="`${icon} float-left h-4 w-4 mr-2`" />
       <slot />
-    </span>
+    </div>
   </button>
 </template>

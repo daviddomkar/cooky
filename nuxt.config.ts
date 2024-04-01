@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
 
 export default defineNuxtConfig({
-  css: ["~/assets/css/base.css"],
+  css: ["~/assets/css/base.css", "vue-advanced-cropper/dist/style.css"],
   modules: [
     "@nuxtjs/eslint-module",
     "@nuxtjs/stylelint-module",
@@ -9,6 +9,8 @@ export default defineNuxtConfig({
     "@vee-validate/nuxt",
     "@hebilicious/authjs-nuxt",
     "@nuxtjs/color-mode",
+    "@nuxtjs/device",
+    "nuxt-headlessui",
   ],
   runtimeConfig: {
     fileStorage: {
