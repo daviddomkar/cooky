@@ -58,8 +58,20 @@ export const authOptions: AuthConfig = {
       }
       return token;
     },
-    session({ session, token }) {
-      session.user = token.user as User;
+    async session({ session, token }) { 
+      const user = await prisma.user.findUnique({
+        where: {
+          id: (token.user as User).id,
+        },
+      })
+
+      const userWithoutPassword = {
+        ...user,
+        password: undefined,
+      };
+
+      // @ts-ignore
+      session.user = userWithoutPassword;
       return session;
     },
   },
