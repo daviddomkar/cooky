@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type { Session } from '@auth/core/types';
+
 const route = useRoute();
 
-const { session } = useAuth();
+const { session, updateSession } = useAuth();
 
 const { isMobile } = useDevice();
 
@@ -19,6 +21,10 @@ const saveProfileImage = async (blob: Blob) => {
   });
 
   await refresh();
+
+  const refreshedSession = await $fetch<Session>(`/api/auth/session`);
+
+  updateSession(refreshedSession);
 };
 
 const saveCoverImage = async (blob: Blob) => {
@@ -31,6 +37,10 @@ const saveCoverImage = async (blob: Blob) => {
   });
 
   await refresh();
+
+  const refreshedSession = await $fetch<Session>(`/api/auth/session`);
+
+  updateSession(refreshedSession);
 };
 </script>
 
