@@ -31,8 +31,17 @@ const submit = handleSubmit(async (values, opts) => {
         You're back!
       </h2>
     </div>
-    <TextField label="Username / Email" name="usernameOrEmail" type="text" />
-    <TextField label="Password" name="password" type="password" />
+    <TextField
+      class="max-w-80"
+      label="Username / Email"
+      name="usernameOrEmail"
+    />
+    <TextField
+      class="max-w-80"
+      label="Password"
+      name="password"
+      type="password"
+    />
     <BaseButton class="mt-2 sm:mt-4" :loading="isSubmitting" type="submit">
       Log in
     </BaseButton>
