@@ -27,7 +27,7 @@ const logIn = async (values: Output<typeof LogInSchema>) => {
 </script>
 
 <template>
-  <div class="box-border h-full flex items-center justify-center p-4 sm:p-8">
+  <div class="box-border flex items-center justify-center p-4 sm:p-8">
     <LogInForm :on-submit="logIn">
       <template #trailing>
         <p class="text-xs text-outline" to="/login">

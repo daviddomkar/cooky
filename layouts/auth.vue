@@ -1,24 +1,24 @@
 import AuthWelcome from '~/components/AuthWelcome.vue';
 <template>
-  <div class="min-h-screen flex items-stretch">
-    <AuthWelcome class="w-full !hidden !lg:flex">
-      <NuxtLink custom to="/auth/signup">
-        <template #default="{ href, isActive, navigate }">
-          <AuthLink :active="isActive" :href="href" @click="navigate">
-            Sign Up
-          </AuthLink>
-        </template>
-      </NuxtLink>
-      <NuxtLink custom to="/auth/login">
-        <template #default="{ href, isActive, navigate }">
-          <AuthLink :active="isActive" :href="href" @click="navigate">
-            Log in
-          </AuthLink>
-        </template>
-      </NuxtLink>
-    </AuthWelcome>
-    <div class="w-full">
-      <slot />
+  <div class="relative min-h-screen flex items-stretch">
+    <div class="relative w-full !hidden !lg:block">
+      <div class="fixed h-screen w-[50%]">
+        <AuthWelcome class="h-full w-full !hidden !lg:flex" />
+        <div class="absolute bottom-[calc(20%_-_6rem)] hidden -right-24 lg:block">
+          <PictureFrame class="w-48" src="/food_1.jpg" />
+        </div>
+      </div>
+    </div>
+    <div class="relative w-full flex flex-col justify-center overflow-hidden">
+      <div class="relative min-h-200 flex flex-col justify-center">
+        <div class="absolute left-[calc(48%_-_12rem)] -top-96">
+          <PictureFrame class="w-96" src="/food_0.jpg" />
+        </div>
+        <slot />
+        <div class="absolute -bottom-112 -right-32">
+          <PictureFrame class="w-112" src="/food_2.jpg" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
