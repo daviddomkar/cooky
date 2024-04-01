@@ -24,9 +24,11 @@ const submit = handleSubmit(async (values, opts) => {
     @submit="submit"
   >
     <div class="mb-6 box-border sm:mb-8">
-      <h1 class="my-0 select-none text-center text-8xl sm:text-9xl">COOKY</h1>
+      <h1 class="my-0 select-none text-center text-8xl xl:hidden sm:text-9xl">
+        COOKY
+      </h1>
       <h2
-        class="my-0 select-none from-primary to-secondary bg-gradient-to-r bg-clip-text text-center text-4xl text-transparent uppercase sm:text-5xl"
+        class="my-0 select-none from-primary to-secondary bg-gradient-to-r bg-clip-text text-center text-4xl text-transparent uppercase sm:text-5xl xl:text-8xl xl:text-on-surface"
       >
         You're back!
       </h2>
