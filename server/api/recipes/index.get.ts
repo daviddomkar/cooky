@@ -9,7 +9,7 @@ export default defineEventHandler((event) => {
     where: {
       slug,
       author: {
-        username  
+        username
       }
     }
   });
