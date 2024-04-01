@@ -1,7 +1,7 @@
 <script setup lang="ts">
 type Props = {
   src: string;
-  borderless: boolean;
+  borderless?: boolean;
 };
 
 withDefaults(defineProps<Props>(), {
@@ -11,7 +11,7 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <div
-    class="relative box-border aspect-square min-h-4 min-w-4 overflow-hidden border-8 border-white rounded-full border-solid bg-black shadow-2xl"
+    class="relative box-border aspect-square min-h-4 min-w-4 overflow-hidden rounded-full bg-black"
     :class="{
       'border-8 border-solid border-white shadow-2xl': !borderless,
       'border-none': borderless,

@@ -10,6 +10,14 @@ const meta: Meta<typeof BaseButton> = {
       options: ["primary", "secondary", "danger"],
       control: { type: "radio" },
     },
+    density: {
+      options: ["relaxed", "default", "compact"],
+      control: { type: "radio" },
+    },
+    spread: {
+      options: ["compact", "default", "full", "none"],
+      control: { type: "radio" },
+    },
     default: {
       control: { type: "text" },
     },
@@ -23,6 +31,8 @@ type Story = StoryObj<typeof BaseButton>;
 export const Primary: Story = {
   args: {
     variant: "primary",
+    density: "default",
+    spread: "default",
     default: "Click me",
   },
   render: (args) => ({
@@ -37,6 +47,8 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     variant: "secondary",
+    density: "default",
+    spread: "default",
     default: "Click me",
   },
   render: (args) => ({
@@ -51,6 +63,8 @@ export const Secondary: Story = {
 export const Danger: Story = {
   args: {
     variant: "danger",
+    density: "default",
+    spread: "default",
     default: "Click me",
   },
   render: (args) => ({
@@ -62,11 +76,12 @@ export const Danger: Story = {
   }),
 };
 
-export const Expanded: Story = {
+export const Spread: Story = {
   args: {
     variant: "primary",
+    density: "default",
+    spread: "full",
     default: "Click me",
-    expanded: true,
   },
   render: (args) => ({
     components: { BaseButton },
@@ -83,8 +98,10 @@ export const Expanded: Story = {
 export const Loading: Story = {
   args: {
     variant: "primary",
-    default: "Click me",
+    density: "default",
+    spread: "default",
     loading: true,
+    default: "Click me",
   },
   render: (args) => ({
     components: { BaseButton },
@@ -98,8 +115,10 @@ export const Loading: Story = {
 export const Disabled: Story = {
   args: {
     variant: "primary",
-    default: "Click me",
+    density: "default",
+    spread: "default",
     disabled: true,
+    default: "Click me",
   },
   render: (args) => ({
     components: { BaseButton },

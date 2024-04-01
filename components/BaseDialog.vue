@@ -30,7 +30,7 @@ const handleClose = () => {
 <template>
   <slot name="activator" :open="open" />
   <HeadlessDialog class="relative z-30" :open="model" @close="handleClose">
-    <div aria-hidden="true" class="fixed inset-0 bg-black/40 backdrop-blur" />
+    <div aria-hidden="true" class="fixed inset-0 bg-black/40 backdrop-blur-xl" />
 
     <div class="fixed inset-0 box-border w-screen flex items-center justify-center p-4">
       <HeadlessDialogPanel

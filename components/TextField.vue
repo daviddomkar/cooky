@@ -22,7 +22,7 @@ const { value, errorMessage, handleBlur, handleChange } = useField(
 </script>
 
 <template>
-  <div class="min-h-16 w-full w-full flex flex-col gap-2">
+  <div class="min-h-16 w-full flex flex-col gap-2">
     <div class="relative w-full flex items-center">
       <input
         :id="name"
