@@ -1,25 +1,28 @@
 <script setup lang="ts">
 type Props = {
   src: string;
-  diameter?: number;
   borderless: boolean;
 };
 
 withDefaults(defineProps<Props>(), {
-  diameter: 256,
   borderless: false,
 });
 </script>
 
 <template>
-  <img
-    class="block rounded-full object-cover"
+  <div
+    class="relative box-border aspect-square min-h-4 min-w-4 overflow-hidden border-8 border-white rounded-full border-solid bg-black shadow-2xl"
     :class="{
       'border-8 border-solid border-white shadow-2xl': !borderless,
       'border-none': borderless,
     }"
-    :height="diameter"
-    :src="src"
-    :width="diameter"
-  />
+  >
+    <img
+      class="block h-full w-full overflow-hidden object-cover"
+      :src="src"
+    />
+    <div v-if="$slots.default" class="absolute left-0 top-0 h-full w-full">
+      <slot />
+    </div>
+  </div>
 </template>

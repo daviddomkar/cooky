@@ -1,115 +1,91 @@
 <script setup lang="ts">
 const route = useRoute();
 
+const { session } = useAuth();
+
+const { isMobile } = useDevice();
+
 const { data: profile, refresh } = await useFetch(
   `/api/profile/${route.params.username}`,
 );
 
-const { handleSubmit, isSubmitting, handleReset } = useForm({
-  validationSchema: toTypedSchema(EditProfileFormSchema),
-});
+const saveProfileImage = async (blob: Blob) => {
+  const formData = new FormData();
+  formData.append("profileImage", blob);
 
-const {
-  value: profileImageValue,
-  errorMessage: profileImageErrorMessage,
-  handleChange: profileImageHandleChange,
-  handleBlur: profileImageHandleBlur,
-  handleReset: profileImageHandleReset,
-} = useField("profileImage");
-
-const {
-  value: coverImageValue,
-  errorMessage: coverImageErrorMessage,
-  handleChange: coverImageHandleChange,
-  handleBlur: coverImageHandleBlur,
-  handleReset: coverImageHandleReset,
-} = useField("coverImage");
-
-const submit = handleSubmit(async (values, { resetForm }) => {
-  if ("name" in values) {
-    await $fetch(`/api/profile/${profile.value?.username}`, {
-      method: "PATCH",
-      body: { name: values.name },
-    });
-  } else if ("profileImage" in values) {
-    const formData = new FormData();
-    formData.append("profileImage", values.profileImage);
-
-    await $fetch(`/api/profile/${profile.value?.username}`, {
-      method: "PATCH",
-      body: formData,
-    });
-  } else if ("coverImage" in values) {
-    const formData = new FormData();
-    formData.append("coverImage", values.coverImage);
-
-    await $fetch(`/api/profile/${profile.value?.username}`, {
-      method: "PATCH",
-      body: formData,
-    });
-  }
+  await $fetch(`/api/profile/${profile.value?.username}`, {
+    method: "PATCH",
+    body: formData,
+  });
 
   await refresh();
+};
 
-  resetForm();
-});
+const saveCoverImage = async (blob: Blob) => {
+  const formData = new FormData();
+  formData.append("coverImage", blob);
+
+  await $fetch(`/api/profile/${profile.value?.username}`, {
+    method: "PATCH",
+    body: formData,
+  });
+
+  await refresh();
+};
 </script>
 
 <template>
-  <div class="box-border flex flex-col gap-4 p-8">
-    {{ profile?.username }}
-    {{ profile?.name }}
-    <div v-if="profile?.profileImageId">
-      <img :src="`/api/files/${profile.profileImageId}`" />
+  <main>
+    <ProfileCoverImageHeader
+      :cover-image-id="profile?.coverImageId"
+      :editable="session?.user.username === profile?.username"
+      :on-new-cover-image="saveCoverImage"
+    />
+    <div class="mx-auto box-border max-w-336 w-full flex flex-col gap-8 px-4 pb-4 sm:px-8 sm:pb-8">
+      <div class="mx-auto flex flex-col items-center gap-4 lg:m-0 lg:flex-row lg:items-end">
+        <ProfileImageFrame
+          class="relative h-32 w-32 -mt-[64px] sm:h-48 sm:w-48 -sm:mt-[96px]"
+          :editable="session?.user.username === profile?.username"
+          :on-new-profile-image="saveProfileImage"
+          :profile-image-id="profile?.profileImageId"
+          :username="profile!.username"
+        />
+        <div class="text-center lg:text-left">
+          <p class="my-0 text-base text-primary"> @{{ profile?.username }}</p>
+          <h1 class="my-0 text-5xl sm:text-6xl">{{ profile?.name }}</h1>
+        </div>
+      </div>
+      <div v-if="profile!.lists.length > 0" class="flex flex-col gap-1">
+        <h2 class="my-0 text-center text-4xl text-on-surface-variant lg:text-left sm:text-5xl">Lists</h2>
+        <div class="grid grid-cols-[repeat(auto-fit,_minmax(256px,_auto))] gap-4">
+          <NuxtLink v-for="list in profile!.lists" :key="list.id" class="block" :to="`/list/${list.id}`">
+            <RecipeListCard :cover-image-id="list.imageId" :title="list.title" />
+          </NuxtLink>
+          <!-- Add empty divs to fill the grid when the amount of lists is low -->
+          <div v-if="profile!.lists.length < 2" />
+          <div v-if="profile!.lists.length < 3" />
+          <div v-if="profile!.lists.length < 4" />
+        </div>
+      </div>
+      <div v-if="profile!.recipes.length > 0" class="flex flex-col gap-1">
+        <h2 class="my-0 text-center text-4xl text-on-surface-variant lg:text-left sm:text-5xl">Recipes</h2>
+        <MasonryWall :column-width="256" :gap="16" :items="profile!.recipes" :max-columns="4" :ssr-columns="isMobile ? 1 : 4">
+          <template #default="{ item }">
+            <NuxtLink class="block" :to="`/${profile!.username}/${item.slug}`">
+              <RecipeCard
+                :key="item.id"
+                :author="{
+                  username: profile!.username,
+                  name: profile!.name,
+                  profileImageId: profile!.profileImageId,
+                }"
+                :cover-image-id="item.imageId"
+                :title="item.title"
+              />
+            </NuxtLink>
+          </template>
+        </MasonryWall>
+      </div>
     </div>
-    <div v-if="profile?.coverImageId">
-      <img :src="`/api/files/${profile.coverImageId}`" />
-    </div>
-    <form class="flex flex-col gap-4" @reset="handleReset" @submit="submit">
-      <TextField label="Name" name="name" />
-      <input
-        id="profileImage"
-        class="peer box-border h-12 w-full border-1 rounded-full border-solid px-6 text-on-surface outline-none transition-colors focus:border-primary/0 dark:bg-surface-container focus:outline-none focus:ring-none"
-        :class="{
-          'border-primary/0 outline-none ring-none': profileImageValue,
-          'border-outline': !profileImageValue && !profileImageErrorMessage,
-          '!border-error': profileImageErrorMessage,
-        }"
-        name="profileImage"
-        type="file"
-        @blur="profileImageHandleBlur"
-        @change="profileImageHandleChange"
-        @reset="profileImageHandleReset"
-      />
-      <label
-        v-if="profileImageErrorMessage"
-        class="inline-block px-6 text-xs text-error"
-      >
-        {{ profileImageErrorMessage }}
-      </label>
-      <input
-        id="coverImage"
-        class="peer box-border h-12 w-full border-1 rounded-full border-solid px-6 text-on-surface outline-none transition-colors focus:border-primary/0 dark:bg-surface-container focus:outline-none focus:ring-none"
-        :class="{
-          'border-primary/0 outline-none ring-none': coverImageValue,
-          'border-outline': !coverImageValue && !coverImageErrorMessage,
-          '!border-error': coverImageErrorMessage,
-        }"
-        name="coverImage"
-        type="file"
-        @blur="coverImageHandleBlur"
-        @change="coverImageHandleChange"
-        @reset="coverImageHandleReset"
-      />
-      <label
-        v-if="coverImageErrorMessage"
-        class="inline-block px-6 text-xs text-error"
-      >
-        {{ coverImageErrorMessage }}
-      </label>
-      <BaseButton class="mt-2 sm:mt-4" :loading="isSubmitting" type="submit">
-        Upload
-      </BaseButton>
-    </form>
-  </div>
+  </main>
 </template>

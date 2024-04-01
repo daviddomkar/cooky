@@ -82,45 +82,50 @@ export default defineEventHandler(async (event) => {
 
     let oldProfileImageFile: File | null | undefined;
 
-    await prisma.$transaction(async (tx) => {
-      oldProfileImageFile = await tx.file.findFirst({
-        where: {
-          profileImageUser: {
-            username,
-          },
-        },
-      });
-
-      const key = randomBytes(32);
-
-      const file = await tx.file.create({
-        data: {
-          mimeType: profileImage.type,
-          key: await fileStorage.encryptKey(secret, key),
-          profileImageUser: {
-            connect: {
+    await prisma.$transaction(
+      async (tx) => {
+        oldProfileImageFile = await tx.file.findFirst({
+          where: {
+            profileImageUser: {
               username,
             },
           },
-        },
-      });
+        });
 
-      // Save the file within the transaction to ensure that the trabnsaction is rolled back if the file save fails
-      await fileStorage.saveFile(
-        join(path, file.id),
-        profileImage,
-        key,
-        sharp().resize(256, 256),
-      );
+        const key = randomBytes(32);
 
-      if (oldProfileImageFile) {
-        await tx.file.delete({
-          where: {
-            id: oldProfileImageFile.id,
+        const file = await tx.file.create({
+          data: {
+            mimeType: profileImage.type,
+            key: await fileStorage.encryptKey(secret, key),
+            profileImageUser: {
+              connect: {
+                username,
+              },
+            },
           },
         });
-      }
-    });
+
+        // Save the file within the transaction to ensure that the trabnsaction is rolled back if the file save fails
+        await fileStorage.saveFile(
+          join(path, file.id),
+          profileImage,
+          key,
+          sharp({ animated: true }).resize(256, 256),
+        );
+
+        if (oldProfileImageFile) {
+          await tx.file.delete({
+            where: {
+              id: oldProfileImageFile.id,
+            },
+          });
+        }
+      },
+      {
+        timeout: 40000,
+      },
+    );
 
     // Delete the old profile image file only after the transaction is committed
     if (oldProfileImageFile) {
@@ -131,45 +136,50 @@ export default defineEventHandler(async (event) => {
 
     let oldCoverImageFile: { id: string } | null | undefined;
 
-    await prisma.$transaction(async (tx) => {
-      oldCoverImageFile = await tx.file.findFirst({
-        where: {
-          coverImageUser: {
-            username,
-          },
-        },
-      });
-
-      const key = randomBytes(32);
-
-      const file = await tx.file.create({
-        data: {
-          mimeType: coverImage.type,
-          key: await fileStorage.encryptKey(secret, key),
-          coverImageUser: {
-            connect: {
+    await prisma.$transaction(
+      async (tx) => {
+        oldCoverImageFile = await tx.file.findFirst({
+          where: {
+            coverImageUser: {
               username,
             },
           },
-        },
-      });
+        });
 
-      // Save the file within the transaction to ensure that the trabnsaction is rolled back if the file save fails
-      await fileStorage.saveFile(
-        join(path, file.id),
-        coverImage,
-        key,
-        sharp().resize(undefined, 1080),
-      );
+        const key = randomBytes(32);
 
-      if (oldCoverImageFile) {
-        await tx.file.delete({
-          where: {
-            id: oldCoverImageFile.id,
+        const file = await tx.file.create({
+          data: {
+            mimeType: coverImage.type,
+            key: await fileStorage.encryptKey(secret, key),
+            coverImageUser: {
+              connect: {
+                username,
+              },
+            },
           },
         });
-      }
-    });
+
+        // Save the file within the transaction to ensure that the trabnsaction is rolled back if the file save fails
+        await fileStorage.saveFile(
+          join(path, file.id),
+          coverImage,
+          key,
+          sharp({ animated: true }).resize(1344, 384),
+        );
+
+        if (oldCoverImageFile) {
+          await tx.file.delete({
+            where: {
+              id: oldCoverImageFile.id,
+            },
+          });
+        }
+      },
+      {
+        timeout: 40000,
+      },
+    );
 
     // Delete the old cover image file only after the transaction is committed
     if (oldCoverImageFile) {

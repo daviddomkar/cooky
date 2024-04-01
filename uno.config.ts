@@ -10,13 +10,13 @@ const lightTheme = {
     secondary: "#ff5f54",
     surface: "#ffffff",
     "surface-container": "#f5f5f5",
+    "surface-dimmed": "#d9d9d9",
     outline: "#808080",
     error: "#f87171",
-    on: {
-      primary: "#ffffff",
-      surface: "#101010",
-      "surface-variant": "#b6b6b6",
-    },
+    "on-primary": "#ffffff",
+    "on-surface": "#101010",
+    "on-surface-variant": "#c6c6c6",
+    "on-surface-dimmed": "#8e8e8e",
   },
 } as Theme;
 
@@ -26,13 +26,13 @@ const darkTheme = {
     secondary: "#ff5f54",
     surface: "#222222",
     "surface-container": "#101010",
+    "surface-dimmed": "#101010",
     outline: "#808080",
     error: "#f87171",
-    on: {
-      primary: "#ffffff",
-      surface: "#ffffff",
-      "surface-variant": "#ffffff",
-    },
+    "on-primary": "#ffffff",
+    "on-surface": "#ffffff",
+    "on-surface-variant": "#ffffff",
+    "on-surface-dimmed": "#ffffff",
   },
 } as Theme;
 
@@ -93,7 +93,11 @@ export default defineConfig({
       provider: "google",
       fonts: {
         sans: "ABeeZee:400",
-        display: "Koulen:400",
+        display: {
+          name: "Bebas Neue", // "Pilcrow Rounded", // "Supreme", // "Bevellier",
+          weights: [400],
+          provider: "fontshare",
+        },
       },
     }),
     presetTheme({
