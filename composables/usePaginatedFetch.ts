@@ -1,17 +1,4 @@
-interface PaginationData {
-  take?: number;
-  where?: Record<string, any>;
-}
-
-interface Data<T> {
-  data: T[];
-  pagination: {
-    prevCursor?: string;
-    nextCursor?: string;
-  }
-}
-
-export const usePaginatedFetch = async <T>(url: string, { take, where }: PaginationData = {}) => {
+export const usePaginatedFetch = async <T>(url: string, { take, where }: PaginationParams = {}) => {
   const prevCursor = ref<string | undefined>();
   const nextCursor = ref<string | undefined>();
   const data = ref<T[]>();
@@ -27,7 +14,7 @@ export const usePaginatedFetch = async <T>(url: string, { take, where }: Paginat
     pending.value = true;
 
     try {
-      const { data: records, pagination } = await $fetch<Data<T>>(url, {
+      const { data: records, pagination } = await $fetch<PaginationResult<T>>(url, {
         query: {
           ...where,
           take,
@@ -53,7 +40,7 @@ export const usePaginatedFetch = async <T>(url: string, { take, where }: Paginat
     pending.value = true;
 
     try {
-      const { data: records, pagination } = await $fetch<Data<T>>(url, {
+      const { data: records, pagination } = await $fetch<PaginationResult<T>>(url, {
         query: {
           ...where,
           take,
@@ -76,7 +63,7 @@ export const usePaginatedFetch = async <T>(url: string, { take, where }: Paginat
 
   // Initial fetch with useFetch
   const result = reactive(
-    await useFetch<Data<T>>(url, {
+    await useFetch<PaginationResult<T>>(url, {
       query: {
         ...where,
         take,
