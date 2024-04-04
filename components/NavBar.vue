@@ -1,177 +1,141 @@
 <script setup lang="ts">
-import { signOut } from '#auth';
 import type { Category } from '@prisma/client';
 
-type NavItem = {
-  title: string,
-  icon: string,
-  slug: string
-}
-
 type Props = {
-  variant?: "user" | "admin";
-  stripe?: boolean,
-  categories?: Category[]
+  categories: Category[]
 };
 
-withDefaults(defineProps<Props>(), {
-  variant: "user",
-  stripe: true,
-  categories: () => []
-});
-
-const profileItems = ref<NavItem[]>([
-  { title: "MY RECIPES", slug: "recipes", icon: "my-recipes" },
-  { title: "FAVOURITES", slug: "favourites", icon: "favourites" }
-]);
-const adminItems = ref<NavItem[]>([
-  { title: "RECIPES", slug: "recipes", icon: "recipes" },
-  { title: "CATEGORIES", slug: "categories", icon: "list" },
-  { title: "INGREDIENTS", slug: "ingredients", icon: "ingredients" }, 
-  { title: "REVIEWS", slug: "reviews", icon: "reviews" }, 
-  { title: "USERS", slug: "users", icon: "users" }, 
-  { title: "ROLES", slug: "roles", icon: "roles" }, 
-]);
-
-type ItemRect = {
-  x: number,
-  y: number,
-  width: number,
-  height: number
-}
+const props = defineProps<Props>();
 
 const route = useRoute();
-const selectedItem = ref<HTMLElement>();
-const selectedItemRect = ref<ItemRect>();
 
-function isSelected(path: string) {
-  return route && path === route.path
-}
+const admin = computed(() => route.path.startsWith('/admin'));
 
-function bindItem(path: string, element: Element | ComponentPublicInstance | null) {
-  if(element && isSelected(path)){
-    selectedItem.value = element as HTMLElement;
+const sections = computed(() => {
+  return [
+    {
+      title: "Library",
+      hidden: admin.value,
+      items: props.categories.map((category) => ({
+        title: category.title,
+        to: `/category/${category.slug}`,
+        icon: category.icon
+      }))
+    },
+    {
+      title: "Profile",
+      hidden: admin.value,
+      items: [
+        { title: "My Recipes", to: "/recipes", icon: "my-recipes" },
+        { title: "Favourites", to: "/favourites", icon: "favourites" }
+      ]
+    },
+    {
+      hidden: !admin.value,
+      items: [
+        { title: "Recipes", to: "/admin/recipes", icon: "recipes" },
+        { title: "Categories", to: "/admin/categories", icon: "list" },
+        { title: "Ingredients", to: "/admin/ingredients", icon: "ingredients" },
+        { title: "Reviews", to: "/admin/reviews", icon: "reviews" },
+        { title: "Users", to: "/admin/users", icon: "users" },
+        { title: "Roles", to: "/admin/roles", icon: "roles" }
+      ]
+    },
+  ];
+});
+
+const active = computed(() => sections.value.flatMap((section) => section.items).some((item) => route.path.startsWith(item.to)));
+
+const activeItemY = computed(() => {
+  if (!active.value) return 0;
+
+  // Start with logo height
+  let y = 96;
+
+  for (const section of sections.value) {
+    // Skip hidden sections
+    if (section.hidden) continue;
+
+    // If section contains a title, add its height
+    if (section.title) {
+      y += 32;
+    }
+
+    for (const item of section.items) {
+      // Active item found, return y
+      if (route.path.startsWith(item.to)) {
+        return y;
+      }
+
+      // Add item height
+      y += 40;
+
+      // Add gap between items
+      if (item !== section.items[section.items.length - 1]) {
+        y += 16;
+      }
+    }
+
+    // Add gap between sections
+    if (section !== sections.value[sections.value.length - 1]) {
+      y += 32;
+    }
   }
-}
+
+  return y;
+});
 
 function getSkirtPath(x: number, y: number, height: number, edgeWidth: number, edgeHeight: number) {
   return `M ${x} ${y} c 0 0, ${edgeWidth} 0, ${edgeWidth} -${edgeHeight} l 0 ${height + 2*edgeHeight} c 0 -${edgeHeight} -${edgeWidth} -${edgeHeight} -${edgeWidth} -${edgeHeight} Z`;
 }
-
-function updateRect() {
-  if(!selectedItem.value) return;
-  selectedItemRect.value = {
-    x: selectedItem.value.offsetLeft,
-    y: selectedItem.value.offsetTop,
-    width: selectedItem.value.clientWidth,
-    height: selectedItem.value.clientHeight
-  };
-}
-
-useNuxtApp().hook('page:finish', () => {
-  updateRect();
-});
-
 </script>
 
 <template>
-  <nav class="relative h-100% min-w-240px bg-surface-container">
-    <div v-if="stripe">
-    <!-- BG GRADIENT -->
-      <div v-if="selectedItemRect" id="nav-gradient" class="absolute left-0 top-0 h-100% w-100% bg-orange from-primary via-#FFA14A to-secondary bg-gradient-to-b"></div>
-      <div id="nav-strip" class="absolute right-0 top-0 h-100% w-20px bg-orange from-primary via-#FFA14A to-secondary bg-gradient-to-b"></div>
-      <svg id="nav-svg" class="absolute left-0 top-0 h-100% w-100%">
-        <clipPath v-if="selectedItemRect" id="clip">
+  <nav class="relative box-border min-w-240px bg-surface-container">
+    <template v-if="active">
+      <div id="nav-gradient" class="absolute left-0 top-0 h-full w-full from-primary to-secondary bg-gradient-to-b -z-1" />
+      <div class="absolute right-0 top-0 h-full w-4 from-primary to-secondary bg-gradient-to-b -z-1" />
+      <svg class="absolute left-0 top-0 h-full w-full -z-1">
+        <clipPath id="clip">
           <rect
-            id="rect"
-            :height="selectedItemRect.height" rx="1rem" width="100%" :x="selectedItemRect.x" :y="selectedItemRect.y"
+            height="2.5rem" rx="1.25rem" :width="`${176 + 32}px`" :x="32" :y="activeItemY - 1"
           />
           <path
-            id="skirt"
-            :d="getSkirtPath(selectedItemRect.x + selectedItemRect.width, selectedItemRect.y, selectedItemRect.height, 20, 20)"
+            :d="getSkirtPath(176 + 12, activeItemY - 1, 40, 36, 36)"
           />
         </clipPath>
       </svg>
+    </template>
+    <div class="h-24 flex items-center justify-center">
+      <h1 class="relative my-0 block text-center text-5xl">
+        <NuxtLink class="decoration-none visited:text-inherit" to="/">Cooky</NuxtLink>
+        <span v-if="admin" class="absolute left-0 w-full text-xs font-display uppercase -bottom-3">
+          <span class="rounded-full from-primary to-secondary bg-gradient-to-r px-2 text-white tracking-normal">
+            Admin
+          </span>
+        </span>
+      </h1>
     </div>
-    <div v-if="variant === 'user'" class="content relative box-border h-100% overflow-y-auto px-10 py-4">
-    <!-- USER NAV -->
-      <div class="title mb-10 text-center font-size-12 font-display">Cooky</div>
-        <div class="font-size-6 color-on-surface-variant font-display">LIBRARY</div>
-      <ul class="m-0 p-0">
-        <li
-          v-for="category in categories"
-          :key="category.slug" :ref="(el) => bindItem(`/category/${category.slug}`, el)"
-          class="mb-4 list-none no-underline"
-        >
-          <NuxtLink
-          :active-class="stripe ? 'bg-transparent text-white' : 'bg-#FFBD3E! text-white'"
-          class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
-          :to="`/category/${category.slug}`"
-          >
-            <div :class="`i-cooky:${category.icon} float-left h-4 w-4 mr-2`" />{{ category.title.toUpperCase() }}
-          </NuxtLink>
-        </li>
-      </ul>
-      <div class="font-size-6 color-on-surface-variant font-display">PROFILE</div>
-      <ul class="m-0 p-0">
-        <li
-          v-for="item in profileItems"
-          :key="item.slug"
-          :ref="(el) => bindItem(`/profile/${item.slug}`, el)"
-          class="list-none no-underline"
-        >
-          <NuxtLink
-            :active-class="stripe ? 'bg-transparent text-white' : 'bg-#FFA14A! text-white'"
-            class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
-            :to="`/profile/${item.slug}`"
-          >
-            <div :class="`i-cooky:${item.icon} float-left h-4 w-4 mr-2`" />{{ item.title.toUpperCase() }}
-          </NuxtLink>
-        </li>
-      </ul>
+    <div class="flex flex-col gap-8">
+      <template v-for="(section, index) in sections" :key="index">
+        <section v-if="!section.hidden" class="px-8">
+          <h2 v-if="section.title" class="my-0 ml-4 text-on-surface-variant">{{ section.title }}</h2>
+          <ul class="my-0 flex flex-col list-none gap-4 pl-0">
+            <li v-for="item in section.items" :key="item.to">
+              <NuxtLink active-class="bg-transparent" class="box-border h-10 flex items-center rounded-full bg-surface px-4 decoration-none link:text-inherit visited:text-inherit" :to="item.to">
+                <div class="mr-2" :class="`i-cooky:${item.icon}`" />
+                <span class="uppercase">{{ item.title }}</span>
+              </NuxtLink>
+            </li>
+          </ul>
+        </section>
+      </template>
     </div>
-    <div v-else class="content relative box-border h-100% flex flex-col overflow-y-auto px-10 py-4">
-    <!-- ADMIN NAV -->
-      <div id="admin-title" class="title relative mb-10 text-center font-size-12 font-display">Cooky</div>
-      <ul class="m-0 p-0">
-        <li
-          v-for="item in adminItems"
-          :key="item.slug"
-          :ref="(el) => bindItem(`/admin/${item.slug}`, el)"
-          class="mb-4 list-none no-underline"
-        >
-          <NuxtLink
-            :active-class="stripe ? 'bg-transparent text-white' : 'bg-#FFBD3E! text-white'"
-            class="mb-4 block cursor-pointer rounded-5 bg-surface px-4 py-2 text-on-surface no-underline"
-            :to="`/admin/${item.slug}`"
-          >
-            <div :class="`i-cooky:${item.icon} float-left h-4 w-4 mr-2`" />{{ item.title.toUpperCase() }}
-          </NuxtLink>
-        </li>
-      </ul>
-      <div class="m-0 flex flex-grow-1 flex-col items-stretch justify-end pb-4">
-        <NuxtLink class="mb-3 no-underline" :to="`/`">
-          <BaseButton :icon="`i-cooky:cooky`">COOKY</BaseButton>
-        </NuxtLink>
-        <BaseButton class="mb-3" :icon="`i-cooky:logout`" @click="signOut">LOG OUT</BaseButton>
-      </div>
-    </div>
-</nav>
+  </nav>
 </template>
 
-<style>
+<style scoped>
 #nav-gradient {
   clip-path: url(#clip);
-}
-#admin-title:after {
-  content: "ADMIN";
-  position: absolute;
-  top:80%;left:50%;
-  transform: translateX(-50%);
-  font-size: 0.7rem;
-  color: white;
-  background-image: linear-gradient(to right, rgb(var(--un-preset-theme-colors-primary)), rgb(var(--un-preset-theme-colors-secondary)));
-  border-radius: 1rem;
-  padding: 0 0.5rem;
 }
 </style>

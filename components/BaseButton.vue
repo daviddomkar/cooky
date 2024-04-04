@@ -36,13 +36,13 @@ withDefaults(defineProps<Props>(), {
       'w-fit px-4': spread === 'compact',
       'w-fit px-8': spread === 'default',
       'w-full grow basis-0': spread === 'full',
+      'gap-2': $slots.icon,
     }"
     :disabled="disabled"
   >
     <div
       v-if="loading"
       class="absolute left-0 top-0 h-full w-full flex items-center justify-center"
-      :class="{ 'w-100%': icon }"
     >
       <ProgressIndicator class="scale-[0.75]" />
     </div>
@@ -52,7 +52,7 @@ withDefaults(defineProps<Props>(), {
         invisible: loading,
       }"
     >
-      <div v-if="icon" :class="`${icon} float-left h-4 w-4 mr-2`" />
+      <slot name="icon" />
       <slot />
     </div>
   </button>
