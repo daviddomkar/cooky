@@ -122,7 +122,7 @@ function getSkirtPath(x: number, y: number, height: number, edgeWidth: number, e
           <h2 v-if="section.title" class="my-0 ml-4 text-on-surface-variant">{{ section.title }}</h2>
           <ul class="my-0 flex flex-col list-none gap-4 pl-0">
             <li v-for="item in section.items" :key="item.to">
-              <NuxtLink active-class="bg-transparent" class="box-border h-10 flex items-center rounded-full bg-surface px-4 decoration-none link:text-inherit visited:text-inherit" :to="item.to">
+              <NuxtLink active-class="bg-transparent !text-white" class="box-border h-10 flex items-center rounded-full bg-surface px-4 decoration-none link:text-inherit visited:text-inherit" :to="item.to">
                 <div class="mr-2" :class="`i-cooky:${item.icon}`" />
                 <span class="uppercase">{{ item.title }}</span>
               </NuxtLink>
