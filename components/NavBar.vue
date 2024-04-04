@@ -93,7 +93,7 @@ function getSkirtPath(x: number, y: number, height: number, edgeWidth: number, e
 <template>
   <nav class="relative box-border min-w-240px bg-surface-container">
     <template v-if="active">
-      <div id="nav-gradient" class="absolute left-0 top-0 h-full w-full from-primary to-secondary bg-gradient-to-b -z-1" />
+      <div class="[clip-path:url(#clip)] absolute left-0 top-0 h-full w-full from-primary to-secondary bg-gradient-to-b -z-1" />
       <div class="absolute right-0 top-0 h-full w-4 from-primary to-secondary bg-gradient-to-b -z-1" />
       <svg class="absolute left-0 top-0 h-full w-full -z-1">
         <clipPath id="clip">
@@ -133,9 +133,3 @@ function getSkirtPath(x: number, y: number, height: number, edgeWidth: number, e
     </div>
   </nav>
 </template>
-
-<style scoped>
-#nav-gradient {
-  clip-path: url(#clip);
-}
-</style>
