@@ -1,11 +1,10 @@
 const DEFAULT_TAKE = 10;
 
 interface PaginationData {
-  take?: number;
-  lastItemId?: string;
-  backwards?: boolean;
-  prevCursor?: string;
-  nextCursor?: string;
+  take?: number | null;
+  backwards?: boolean | null;
+  prevCursor?: string | null;
+  nextCursor?: string | null;
 }
 
 interface PaginateParams<T> {
@@ -23,13 +22,17 @@ export async function usePagination<T extends { id: string }>({
 }: PaginateParams<T>) {
   const { take = DEFAULT_TAKE, backwards = false, ...cursors } = paginationData;
   let { prevCursor, nextCursor } = cursors;
-  prevCursor = prevCursor ? Buffer.from(prevCursor, 'base64').toString('utf-8') : undefined;
-  nextCursor = nextCursor ? Buffer.from(nextCursor, 'base64').toString('utf-8') : undefined;
+  prevCursor = prevCursor
+    ? Buffer.from(prevCursor, "base64").toString("utf-8")
+    : undefined;
+  nextCursor = nextCursor
+    ? Buffer.from(nextCursor, "base64").toString("utf-8")
+    : undefined;
 
   const adjustedTake = backwards ? -(Number(take) + 1) : Number(take) + 1;
   const cursor = backwards ? prevCursor : nextCursor;
   // Adjust skip logic: Skip only when paginating forwards with a 'nextCursor'.
-  const skipCursor = backwards ? prevCursor ? 1 : 0 : nextCursor ? 1 : 0;
+  const skipCursor = backwards ? (prevCursor ? 1 : 0) : nextCursor ? 1 : 0;
 
   const data = await prismaModel.findMany({
     where,
@@ -37,12 +40,12 @@ export async function usePagination<T extends { id: string }>({
     take: adjustedTake,
     cursor: cursor ? { id: cursor as string } : undefined,
     orderBy: {
-      id: 'asc'
+      id: "asc",
     },
     select: {
       id: true,
       title: true,
-    }
+    },
   });
 
   const hasMore = data.length > Number(take);
@@ -65,8 +68,10 @@ export async function usePagination<T extends { id: string }>({
   }
 
   // Encode cursors to base64
-  if (newPrevCursor) newPrevCursor = Buffer.from(newPrevCursor).toString('base64');
-  if (newNextCursor) newNextCursor = Buffer.from(newNextCursor).toString('base64');
+  if (newPrevCursor)
+    newPrevCursor = Buffer.from(newPrevCursor).toString("base64");
+  if (newNextCursor)
+    newNextCursor = Buffer.from(newNextCursor).toString("base64");
 
   return {
     data,
