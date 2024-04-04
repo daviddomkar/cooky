@@ -70,6 +70,7 @@
     "lint-staged": "^15.2.2",
     "nuxt": "^3.11.0",
     "nuxt-headlessui": "^1.1.5",
+    "nuxt-marquee": "^1.0.3",
     "patch-package": "^8.0.0",
     "prettier": "^3.2.5",
     "prettier-plugin-prisma": "^5.0.0",
@@ -92,5 +93,8 @@
   },
   "overrides": {
     "valibot": "^0.28.1"
+  },
+  "dependencies": {
+    "vue3-marquee": "^4.2.0"
   }
 }
