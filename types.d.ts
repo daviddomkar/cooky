@@ -13,6 +13,19 @@ declare global {
       content: string;
     };
   }
+
+  interface PaginationParams {
+    take?: number;
+    where?: Record<string, any>;
+  }
+
+  interface PaginationResult<T> {
+    data: T[];
+    pagination: {
+      prevCursor?: string;
+      nextCursor?: string;
+    }
+}
 }
 
 export {};
