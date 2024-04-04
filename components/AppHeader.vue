@@ -10,15 +10,10 @@ defineProps<Props>();
 
 const emit = defineEmits<{
   (e: 'open'): void
+  (e: 'log-in'): void
 }>();
 
-const router = useRouter();
-
 const searchVisible = ref(false);
-
-const logIn = () => {
-  router.push("/auth/login");
-};
 </script>
 
 <template>
@@ -80,7 +75,7 @@ const logIn = () => {
           <div class="i-fad:random-1dice h-6 w-6 scale-[1.25]" />
         </BaseButton>
         <BaseButton v-if="user" class="shrink-0 !hidden lg:!flex">New recipe</BaseButton>
-        <BaseButton v-else class="shrink-0 !hidden md:!flex" @click="logIn">Log in</BaseButton>
+        <BaseButton v-else class="shrink-0 !hidden md:!flex" @click="emit('log-in')">Log in</BaseButton>
         <BaseButton
           v-if="user"
           class="relative shrink-0 sm:h-12 sm:min-w-12" 
@@ -97,7 +92,7 @@ const logIn = () => {
           />
         </BaseButton>
         <NuxtLink
-            v-if="user" class="block hover:active:scale-[0.97]"
+            v-if="user" class="block transition-transform hover:active:scale-[0.97]"
             :class="{
               '!hidden': searchVisible,
             }" :to="`/${user?.username}`">

@@ -35,8 +35,7 @@ withDefaults(defineProps<Props>(), {
       'w-fit px-0': spread === 'none',
       'w-fit px-4': spread === 'compact',
       'w-fit px-8': spread === 'default',
-      'w-full grow basis-0': spread === 'full',
-      'gap-2': $slots.icon,
+      'w-full': spread === 'full',
     }"
     :disabled="disabled"
   >
@@ -48,8 +47,10 @@ withDefaults(defineProps<Props>(), {
     </div>
 
     <div
+      class="flex"
       :class="{
         invisible: loading,
+        'px-4 gap-2 w-full': $slots.icon,
       }"
     >
       <slot name="icon" />
