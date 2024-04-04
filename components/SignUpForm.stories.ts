@@ -5,6 +5,9 @@ import SignUpForm from "./SignUpForm.vue";
 const meta: Meta<typeof SignUpForm> = {
   title: "Components/Forms/SignUpForm",
   component: SignUpForm,
+  parameters: {
+    layout: "fullscreen",
+  },
 };
 
 export default meta;
@@ -12,10 +15,6 @@ export default meta;
 type Story = StoryObj<typeof SignUpForm>;
 
 export const Default: Story = {
-  parameters: {
-    layout: "fullscreen",
-  },
-  args: {},
   render: (args) => ({
     components: { SignUpForm },
     setup() {
@@ -27,9 +26,6 @@ export const Default: Story = {
 };
 
 export const Filled: Story = {
-  parameters: {
-    layout: "fullscreen",
-  },
   args: {
     initialValues: {
       name: "John Smith",

@@ -24,18 +24,26 @@ const submit = handleSubmit(async (values, opts) => {
     @submit="submit"
   >
     <div class="mb-6 box-border sm:mb-8">
-      <h1 class="my-0 select-none text-center text-8xl sm:text-9xl">COOKY</h1>
+      <h1 class="my-0 select-none text-center text-8xl xl:hidden sm:text-9xl">
+        COOKY
+      </h1>
       <h2
-        class="my-0 select-none from-primary to-secondary bg-gradient-to-r bg-clip-text text-center text-4xl text-transparent uppercase sm:text-5xl"
+        class="my-0 select-none from-primary to-secondary bg-gradient-to-r bg-clip-text text-center text-4xl text-transparent uppercase sm:text-5xl xl:text-8xl xl:text-on-surface"
       >
         Create your<br />account
       </h2>
     </div>
-    <TextField label="Name" name="name" type="text" />
-    <TextField label="Username" name="username" type="text" />
-    <TextField label="Email" name="email" type="email" />
-    <TextField label="Password" name="password" type="password" />
+    <TextField class="max-w-80" label="Name" name="name" />
+    <TextField class="max-w-80" label="Username" name="username" />
+    <TextField class="max-w-80" label="Email" name="email" type="email" />
     <TextField
+      class="max-w-80"
+      label="Password"
+      name="password"
+      type="password"
+    />
+    <TextField
+      class="max-w-80"
       label="Confirm password"
       name="confirmPassword"
       type="password"

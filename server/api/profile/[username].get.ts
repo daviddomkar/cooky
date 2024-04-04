@@ -21,6 +21,36 @@ export default defineEventHandler(async (event) => {
       username: true,
       profileImageId: true,
       coverImageId: true,
+      lists: {
+        orderBy: {
+          createdAt: "desc",
+        },
+        select: {
+          id: true,
+          title: true,
+          recipes: {
+            take: 1,
+            select: {
+              recipe: {
+                select: {
+                  imageId: true,
+                },
+              }
+            },
+          },
+        },
+      },
+      recipes: {
+        orderBy: {
+          createdAt: "desc",
+        },
+        select: {
+          id: true,
+          title: true,
+          slug: true,
+          imageId: true,
+        },
+      },
     },
   });
 
@@ -31,5 +61,16 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  return profile;
+  return {
+    name: profile.name,
+    username: profile.username,
+    profileImageId: profile.profileImageId,
+    coverImageId: profile.coverImageId,
+    lists: profile.lists.filter((list) => list.recipes.length > 0).map((list) => ({
+      id: list.id,
+      title: list.title,
+      imageId: list.recipes[0]!.recipe.imageId,
+    })),
+    recipes: profile.recipes,
+  };
 });
