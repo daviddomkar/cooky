@@ -8,6 +8,10 @@ type Props = {
 
 defineProps<Props>();
 
+const emit = defineEmits<{
+  (e: 'open'): void
+}>();
+
 const router = useRouter();
 
 const searchVisible = ref(false);
@@ -29,7 +33,8 @@ const logIn = () => {
           }"
           density="compact"
           spread="none"
-          variant="transparent" 
+          variant="transparent"
+          @click="emit('open')" 
         >
           <div class="i-cooky:hamburger h-6 w-6" />
         </BaseButton>
@@ -71,10 +76,10 @@ const logIn = () => {
             </BaseButton>
           </div>
         </div>
-        <BaseButton class="shrink-0 !hidden !px-4 md:!flex" variant="secondary">
+        <BaseButton class="shrink-0 !hidden !px-4 lg:!flex" variant="secondary">
           <div class="i-fad:random-1dice h-6 w-6 scale-[1.25]" />
         </BaseButton>
-        <BaseButton v-if="user" class="shrink-0 !hidden md:!flex">New recipe</BaseButton>
+        <BaseButton v-if="user" class="shrink-0 !hidden lg:!flex">New recipe</BaseButton>
         <BaseButton v-else class="shrink-0 !hidden md:!flex" @click="logIn">Log in</BaseButton>
         <BaseButton
           v-if="user"
@@ -91,13 +96,15 @@ const logIn = () => {
             class="absolute right-1 top-1 h-2 w-2 rounded-full bg-secondary sm:right-3 sm:top-3"
           />
         </BaseButton>
-        <NuxtLink v-if="user" class="block hover:active:scale-[0.97]" :to="`/${user?.username}`">
+        <NuxtLink
+            v-if="user" class="block hover:active:scale-[0.97]"
+            :class="{
+              '!hidden': searchVisible,
+            }" :to="`/${user?.username}`">
           <PictureFrame
             borderless
             class="w-8 shrink-0 cursor-pointer sm:w-12"
-            :class="{
-              '!hidden': searchVisible,
-            }"
+            
             :src="getProfileImageUrl(user.username, user.profileImageId)"
           />
         </NuxtLink>
