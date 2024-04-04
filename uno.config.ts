@@ -13,7 +13,7 @@ const lightTheme = {
     outline: "#808080",
     error: "#f87171",
     success: "#9ac678",
-    info: "#f5f5f5",
+    info: "#757575",
     warning: "#ffb774",
     on: {
       primary: "#ffffff",
@@ -32,7 +32,7 @@ const darkTheme = {
     outline: "#808080",
     error: "#f87171",
     success: "#9ac678",
-    info: "#f5f5f5",
+    info: "#494949",
     warning: "#ffb774",
     on: {
       primary: "#ffffff",

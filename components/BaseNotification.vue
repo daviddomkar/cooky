@@ -12,7 +12,7 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <div
-    class="h-full w-full flex rounded-3xl px-2 py-1"
+    class="mb-4 box-border h-full w-full flex items-center justify-center gap-4 rounded-3xl p-4"
     :class="{
       'bg-error': type === 'error',
       'bg-success': type === 'success',
@@ -21,7 +21,7 @@ withDefaults(defineProps<Props>(), {
     }"
   >
     <div
-      class="h-6 w-6 text-4xl text-white"
+      class="box-border h-24 w-24 text-4xl text-white"
       :class="{
         'i-material-symbols:error-circle-rounded-outline-sharp':
           type === 'error',
@@ -32,8 +32,8 @@ withDefaults(defineProps<Props>(), {
     />
 
     <div>
-      <h3 class="">{{ title }}</h3>
-      <p>{{ content }}</p>
+      <h2 class="m-0 text-white">{{ title }}</h2>
+      <p class="m-0 text-white">{{ content }}</p>
     </div>
   </div>
 </template>
