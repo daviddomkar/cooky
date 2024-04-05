@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 import RecipeCard from "./RecipeCard.vue";
 
 const meta = {
-  title: "Design System/Business/RecipeCard",
+  title: "Components/Recipe/RecipeCard",
   component: RecipeCard,
 } satisfies Meta<typeof RecipeCard>;
 
@@ -13,6 +13,13 @@ type Story = StoryObj<typeof RecipeCard>;
 
 export const Default: Story = {
   args: {
+    title: "Pancakes",
+    coverImageId: "pancakes.jpg",
+    author: {
+      username: "remrem",
+      name: "Rem Rem",
+      profileImageId: "rem.jpg",
+    },
     liked: false,
   },
   render: (args) => ({
@@ -26,6 +33,13 @@ export const Default: Story = {
 
 export const Liked: Story = {
   args: {
+    title: "Pancakes",
+    coverImageId: "pancakes.jpg",
+    author: {
+      username: "remrem",
+      name: "Rem Rem",
+      profileImageId: "rem.jpg",
+    },
     liked: true,
   },
   render: (args) => ({
