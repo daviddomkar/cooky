@@ -1,19 +1,19 @@
 const DEFAULT_TAKE = 10;
 
-interface PaginationData {
+type PaginationData = {
   take?: number | null;
   backwards?: boolean | null;
   prevCursor?: string | null;
   nextCursor?: string | null;
-}
+};
 
-interface PaginateParams<T> {
+type PaginateParams<T> = {
   prismaModel: {
     findMany: (where: any, ...args: any) => Promise<T[]>;
   };
   paginationData: PaginationData;
   where: Record<string, any>;
-}
+};
 
 export async function usePagination<T extends { id: string }>({
   prismaModel,
