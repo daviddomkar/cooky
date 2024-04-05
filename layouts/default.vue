@@ -21,9 +21,9 @@ watch(() => route.path, () => {
   <div class="overflow-clip">
     <div class="min-h-screen w-[calc(100%_+_15rem)] flex items-stretch md:w-full">
       <div
-          class="sticky top-0 max-h-screen shrink-0 overflow-hidden transition-transform -translate-x-60 md:translate-x-0"
+          class="sticky top-0 max-h-screen shrink-0 transition-transform -translate-x-60 md:translate-x-0 md:overflow-auto"
           :class="{
-            '!translate-x-0 !overflow-auto': navbarOpened,
+            '!translate-x-0 overflow-auto': navbarOpened,
           }"
       >
         <NavBar
@@ -45,7 +45,7 @@ watch(() => route.path, () => {
         <div
           class="pointer-events-none absolute left-0 top-0 z-20 h-full w-full bg-black opacity-0 md:pointer-events-none md:opacity-0"
           :class="{
-            'opacity-50 transition-opacity pointer-events-unset': navbarOpened,
+            'opacity-50 transition-opacity pointer-events-unset touch-none': navbarOpened,
           }"
           @click="navbarOpened = false"
         />
