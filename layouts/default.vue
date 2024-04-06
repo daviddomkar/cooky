@@ -41,13 +41,13 @@ watch(() => route.path, () => {
         />
       </div>
       <div
-        class="relative grow transition-transform -translate-x-60 md:translate-x-0"
+        class="relative max-w-screen flex grow flex-col transition-transform md:max-w-[calc(100vw_-_15rem)] -translate-x-60 md:translate-x-0"
         :class="{
           '!translate-x-0': navbarOpened,
         }"
       >
         <AppHeader class="sticky top-0 z-10" :user="session?.user" @log-in="logIn" @open="navbarOpened = true"  />
-        <div class="box-border">
+        <div class="box-border flex grow flex-col items-stretch">
           <slot />
 
         </div>

@@ -115,7 +115,7 @@ const activeItemY = computed(() => {
     </template>
     <div class="h-24 flex shrink-0 items-center justify-center">
       <h1 class="relative my-0 block text-center text-5xl transition-transform hover:active:scale-[0.97]">
-        <NuxtLink class="decoration-none visited:text-inherit" to="/">Cooky</NuxtLink>
+        <NuxtLink class="decoration-none link:text-inherit visited:text-inherit" to="/">Cooky</NuxtLink>
         <span v-if="admin" class="absolute left-0 w-full text-xs font-display uppercase -bottom-3">
           <span class="rounded-full from-primary to-secondary bg-gradient-to-r px-2 text-white tracking-normal">
             Admin

@@ -1,44 +1,55 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { data: recipesByRating } = await useFetch("/api/recipes/most-rated");
+
+const rows = computed(() => {
+  if (!recipesByRating.value) {
+    return [];
+  }
+
+  const rows = [];
+  const countInRow = 10;
+
+  for (let i = 0; i < recipesByRating.value.length; i += countInRow) {
+    rows.push(recipesByRating.value.slice(i, i + countInRow));
+  }
+
+  return rows;
+});
+
+</script>
 
 <template>
-  <main
-    class="m-auto min-h-[calc(100vh-96px)] w-full flex flex-col justify-center py-24"
-  >
-    <div class="flex flex-col items-center justify-center">
-      <h1 class="m-0 pb-8 text-5xl md:pb-0 md:text-8xl">Hello and Welcome</h1>
-      <h2 class="m-8 hidden text-5xl md:flex">Add | Save | Rate</h2>
+  <main class="box-border h-full w-full flex flex-col justify-center gap-8 py-4 sm:py-8">
+    <div class="px-4 sm:px-8">
+      <h1 class="my-0 text-center text-5xl sm:text-8xl">Hello and Welcome</h1>
+      <h2 class="my-0 text-center text-3xl sm:text-5xl">Add | Save | Rate</h2>
     </div>
-    <div>
-      <Vue3Marquee>
-        <RecipeListCard
-          v-for="n in 5"
-          :key="n"
-          class="mx-12 mb-12 box-border w-96"
-          :cover-image-id="'b6b95954-52e7-472f-967a-b523f60affc7'"
-          title="Pancakes"
-        />
-      </Vue3Marquee>
-      <Vue3Marquee direction="reverse">
-        <RecipeListCard
-          v-for="n in 5"
-          :key="n"
-          class="mx-12 mb-12 box-border w-96"
-          :cover-image-id="'b6b95954-52e7-472f-967a-b523f60affc7'"
-          title="Pancakes"
-        />
-      </Vue3Marquee>
-      <Vue3Marquee class="visible md:invisible">
-        <RecipeListCard
-          v-for="n in 5"
-          :key="n"
-          class="mx-12 box-border w-96"
-          :cover-image-id="'b6b95954-52e7-472f-967a-b523f60affc7'"
-          title="Pancakes"
-        />
-      </Vue3Marquee>
-    </div>
-    <div class="flex items-center justify-center md:hidden">
-      <h2 class="m-8 text-5xl">Add | Save | Rate</h2>
+
+    <div class="h-112 max-w-full flex flex-col gap-8 md:h-88 sm:h-136">
+      <ClientOnly>
+        <div
+          v-for="(row, index) in rows"
+          :key="index"
+          :class="{
+            'block md:hidden': index === 2,
+          }"
+        >
+          <Vue3Marquee
+            clone
+            :direction="index % 2 === 0 ? 'reverse' : 'normal'"
+            :duration="120"
+            pause-on-hover
+          >
+            <NuxtLink v-for="ratedRecipe in row" :key="ratedRecipe.id" class="block transition-transform hover:active:scale-[0.97]" :to="`/${ratedRecipe.authorUsername}/${ratedRecipe.slug}`">
+              <RecipeListCard
+                class="mx-4 box-border w-80 sm:w-96"
+                :cover-image-id="ratedRecipe.imageId"
+                :title="ratedRecipe.title"
+              />
+            </NuxtLink>
+          </Vue3Marquee>
+        </div>
+      </ClientOnly>
     </div>
   </main>
 </template>
