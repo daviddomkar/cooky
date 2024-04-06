@@ -59,9 +59,9 @@
     "@unocss/transformer-directives": "^0.58.5",
     "@vee-validate/nuxt": "^4.12.6",
     "@vee-validate/valibot": "^4.12.6",
-    "@yeger/vue-masonry-wall": "^5.0.8",
     "@vueuse/core": "^10.9.0",
     "@vueuse/nuxt": "^10.9.0",
+    "@yeger/vue-masonry-wall": "^5.0.8",
     "ajv": "^8.12.0",
     "bcrypt": "^5.1.1",
     "chromatic": "^10.9.4",
@@ -90,7 +90,8 @@
     "vue": "^3.4.15",
     "vue-advanced-cropper": "^2.8.8",
     "vue-router": "^4.2.5",
-    "vue-tsc": "^1.8.27"
+    "vue-tsc": "^1.8.27",
+    "vue3-marquee": "^4.2.0"
   },
   "overrides": {
     "valibot": "^0.28.1"
