@@ -103,7 +103,7 @@ const handleChange = (payload: Event) => {
           class="block h-full max-h-96 w-full object-cover object-center"
           :src="`/api/files/${coverImageId}`"
         />
-        <div v-if="editable" class="absolute bottom-4 right-4">
+        <div v-if="editable" class="absolute bottom-4 right-4 sm:right-8">
           <ImageCropDialog
             v-model="blobRef"
             :on-save="onNewCoverImage"
@@ -122,7 +122,7 @@ const handleChange = (payload: Event) => {
                   @change="handleChange"
                 />
                 <div class="i-material-symbols:edit" />
-                <span class="hidden md:inline" >Change cover photo</span>
+                <span class="hidden lg:inline" >Change cover photo</span>
               </label>
             </template>
           </ImageCropDialog>

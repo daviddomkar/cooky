@@ -15,7 +15,7 @@ const lightTheme = {
     error: "#f87171",
     "on-primary": "#ffffff",
     "on-surface": "#101010",
-    "on-surface-variant": "#c6c6c6",
+    "on-surface-variant": "#b6b6b6",
     "on-surface-dimmed": "#8e8e8e",
   },
 } as Theme;
@@ -114,4 +114,18 @@ export default defineConfig({
       include: [/\.(vue|mdx?|html|stories.ts)($|\?)/],
     },
   },
+  safelist: `i-cooky:breakfast
+  i-cooky:lunch
+  i-cooky:dinner
+  i-cooky:snacks
+  i-cooky:soups
+  i-cooky:sauces
+  i-cooky:my-recipes
+  i-cooky:favourites
+  i-cooky:recipes
+  i-cooky:list
+  i-cooky:ingredients
+  i-cooky:reviews
+  i-cooky:users
+  i-cooky:roles`.split(/\s+/),
 });
