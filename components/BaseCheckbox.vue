@@ -26,7 +26,7 @@ watch(
 </script>
 
 <template>
-  <div class="box-border max-w-80 min-h-8 w-full flex flex-col gap-2 px-6">
+  <div class="box-border max-w-80 min-h-8 w-full flex flex-col gap-1 px-6">
     <div class="flex">
       <input
         :id="name"
@@ -44,7 +44,7 @@ watch(
         <slot />
       </label>
     </div>
-    <label v-if="errorMessage" class="inline-block text-xs text-error">
+    <label v-if="errorMessage" class="inline- pb-1 text-xs text-error">
       {{ errorMessage }}
     </label>
   </div>

@@ -16,7 +16,7 @@ const lightTheme = {
     "on-primary": "#ffffff",
     "on-surface": "#101010",
     "on-surface-variant": "#b6b6b6",
-    "on-surface-dimmed": "#8e8e8e",
+    "on-surface-dimmed": "#4e4e4e",
   },
 } as Theme;
 

@@ -10,6 +10,10 @@ const logIn = () => {
   router.push("/auth/login");
 };
 
+const newRecipe = () => {
+  router.push("/new");
+};
+
 const logOut = async () => {
   await signOut({
     callbackUrl: "/",
@@ -46,7 +50,7 @@ watch(() => route.path, () => {
           '!translate-x-0': navbarOpened,
         }"
       >
-        <AppHeader class="sticky top-0 z-10" :user="session?.user" @log-in="logIn" @open="navbarOpened = true"  />
+        <AppHeader class="sticky top-0 z-10" :user="session?.user" @log-in="logIn" @new="newRecipe" @open="navbarOpened = true"  />
         <div class="box-border flex grow flex-col items-stretch">
           <slot />
 

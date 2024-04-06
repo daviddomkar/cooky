@@ -1,19 +1,23 @@
 <script setup lang="ts">
 type Props = {
+  type?: "button" | "submit" | "reset";
   variant?: "primary" | "secondary" | "danger" | "transparent";
   density?: "relaxed" | "default" | "compact";
-  spread?: "compact" | "default" | "full" | "none";
+  spread?: "compact" | "default" | "none";
   loading?: boolean;
   disabled?: boolean;
+  expanded?: boolean;
 };
 
 withDefaults(defineProps<Props>(), {
+  type: "button",
   variant: "primary",
   density: "default",
   compact: false,
   loading: false,
   disabled: false,
   spread: "default",
+  expanded: false,
 });
 </script>
 
@@ -29,15 +33,15 @@ withDefaults(defineProps<Props>(), {
       'bg-surface-dimmed  text-on-surface-dimmed': variant === 'secondary',
       'bg-error  text-white': variant === 'danger',
       'bg-transparent text-on-surface': variant === 'transparent',
-      'hover:active:scale-[0.97] cursor-pointer':
-        !loading && !disabled,
+      'hover:active:scale-[0.97] cursor-pointer': !loading && !disabled,
       'cursor-not-allowed': loading,
       'w-fit px-0': spread === 'none',
       'w-fit px-4': spread === 'compact',
       'w-fit px-8': spread === 'default',
-      'w-full': spread === 'full',
+      'w-full': expanded,
     }"
     :disabled="disabled"
+    :type="type"
   >
     <div
       v-if="loading"
@@ -50,7 +54,7 @@ withDefaults(defineProps<Props>(), {
       class="flex"
       :class="{
         invisible: loading,
-        'px-4 gap-2 w-full': $slots.icon,
+        'gap-2 w-full': $slots.icon,
       }"
     >
       <slot name="icon" />
