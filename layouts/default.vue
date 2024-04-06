@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { session } = useAuth();
+const { session, signOut } = useAuth();
 
 const { data: categories } = await useFetch("/api/categories");
 
@@ -8,6 +8,13 @@ const router = useRouter();
 
 const logIn = () => {
   router.push("/auth/login");
+};
+
+const logOut = async () => {
+  await signOut({
+    callbackUrl: "/",
+  });
+  navbarOpened.value = false;
 };
 
 const navbarOpened = ref(false);
@@ -29,6 +36,8 @@ watch(() => route.path, () => {
         <NavBar
           :categories="categories!"
           class="min-h-screen"
+          :user="session?.user"
+          @log-out="logOut"
         />
       </div>
       <div

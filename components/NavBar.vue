@@ -1,11 +1,18 @@
 <script setup lang="ts">
 type Props = {
+  user?: {
+    username: string;
+    favoritesListId?: string | null;
+  };
   categories: { title: string; slug: string; icon: string; }[];
 };
 
 const props = defineProps<Props>();
 
-const { session, signOut } = useAuth();
+const emit = defineEmits<{
+  (e: 'log-out'): void
+}>();
+
 const route = useRoute();
 
 const getSkirtPath = (x: number, y: number, height: number, edgeWidth: number, edgeHeight: number) => {
@@ -28,10 +35,10 @@ const sections = computed(() => {
     },
     {
       title: "Profile",
-      hidden: admin.value || !session.value,
+      hidden: admin.value || !props.user,
       items: [
-        { title: "My Recipes", to: `/${session.value?.user.username}`, icon: "my-recipes", exact: true },
-        { title: "Favourites", to: `/list/${session.value?.user.favoritesListId}`, icon: "favourites", exact: false }
+        { title: "My Recipes", to: `/${props.user?.username}`, icon: "my-recipes", exact: true },
+        { title: "Favourites", to: `/list/${props.user?.favoritesListId}`, icon: "favourites", exact: false }
       ]
     },
     {
@@ -136,8 +143,8 @@ const activeItemY = computed(() => {
           </ul>
         </section>
       </template>
-      <div class="box-border w-full flex grow flex-col justify-end gap-4 px-8">
-        <BaseButton spread="full" @click="signOut">
+      <div v-if="props.user" class="box-border w-full flex grow flex-col justify-end gap-4 px-8">
+        <BaseButton spread="full" @click="emit('log-out')">
           <template #icon>
             <div class="i-cooky:logout" />
           </template>
