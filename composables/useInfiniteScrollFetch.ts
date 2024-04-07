@@ -1,38 +1,56 @@
 import type { UseInfiniteScrollOptions } from "@vueuse/core";
 
-export const useInfiniteScrollFetch = <T>(url: string, el: Ref<HTMLElement | null>, { take, where, ...infiniteScrollOptions }: PaginationParams & UseInfiniteScrollOptions = {}) => {
+export const useInfiniteScrollFetch = <T>(
+  url: string,
+  el: Ref<HTMLElement | null>,
+  providedQuery: MaybeRefOrGetter<PaginationQuery> = {},
+  infiniteScrollOptions: UseInfiniteScrollOptions = {},
+) => {
   const nextCursor = ref<string | undefined>();
-  const data = ref<T[]>([]) as Ref<T[]>
+  const data = ref<T[]>([]) as Ref<T[]>;
   const error = ref<any>(undefined);
   const hasMore = ref(true);
+  const isFetching = ref(false);
+  const query = ref(providedQuery);
 
-  const { isLoading } = useInfiniteScroll(
-    el,
-    async () => {
-      if (!hasMore.value) return;
-
-      try {
-        const result = await $fetch<PaginationResult<T>>(url, {
-          query: {
-            ...where,
-            take,
-            nextCursor: nextCursor.value
-          }
-        });
-
-        data.value?.push(...result.data)
-        nextCursor.value = result.pagination.nextCursor;
-        hasMore.value = !!result.pagination.nextCursor;
-      } catch (e) {
-        error.value = e;
-      }
+  watch(
+    () => toValue(query),
+    async (changedQuery) => {
+      query.value = changedQuery;
+      data.value = [];
+      nextCursor.value = undefined;
+      hasMore.value = true;
+      isFetching.value = true;
+      await infiniteScrollCallback();
+      isFetching.value = false;
     },
-    infiniteScrollOptions
-  )
+  );
+
+  const infiniteScrollCallback = async () => {
+    try {
+      const result = await $fetch<PaginationResult<T>>(url, {
+        query: {
+          ...query.value,
+          nextCursor: nextCursor.value,
+        },
+      });
+
+      data.value?.push(...result.data);
+      nextCursor.value = result.pagination.nextCursor;
+      hasMore.value = !!result.pagination.nextCursor;
+    } catch (e) {
+      error.value = e;
+    }
+  };
+
+  const { isLoading } = useInfiniteScroll(el, infiniteScrollCallback, {
+    ...infiniteScrollOptions,
+    canLoadMore: () => hasMore.value && !isFetching.value,
+  });
 
   return {
     data,
     pending: isLoading,
-    error
+    error,
   };
 };

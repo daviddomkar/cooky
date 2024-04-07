@@ -14,17 +14,16 @@ declare global {
     };
   }
 
-  type PaginationParams = {
+  type PaginationQuery = {
     take?: number;
-    where?: Record<string, any>;
-  };
+  } & Record<string, any>;
 
   type PaginationResult<T> = {
     data: T[];
     pagination: {
       prevCursor?: string;
       nextCursor?: string;
-    }
+    };
   };
 }
 
