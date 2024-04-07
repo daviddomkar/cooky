@@ -4,11 +4,15 @@ type Props = {
   label: string;
   type?: "text" | "email" | "password" | "number";
   multiline?: boolean;
+  min?: number;
+  max?: number;
 };
 
 const props = withDefaults(defineProps<Props>(), {
   type: "text",
   multiline: false,
+  min: undefined,
+  max: undefined,
 });
 
 defineModel<string>();
@@ -19,6 +23,11 @@ const { value, errorMessage, handleBlur, handleChange } = useField<
   validateOnValueUpdate: false,
   syncVModel: true,
 });
+
+// This is required in order to prevent 0 value from being considered as empty
+const hasValue = computed(
+  () => value.value !== null && value.value !== undefined && value.value !== "",
+);
 </script>
 
 <template>
@@ -35,29 +44,38 @@ const { value, errorMessage, handleBlur, handleChange } = useField<
         grow: props.multiline,
       }"
     >
-      <component
-        :is="props.multiline ? 'textarea' : 'input'"
-        :id="name"
-        class="peer box-border h-full w-full resize-none self-start border-1 rounded-3xl border-solid px-6 text-on-surface outline-none transition-colors focus:border-primary/0 dark:bg-surface-container focus:outline-none focus:ring-none"
+      <div
+        class="peer box-border h-full w-full flex items-center self-start overflow-hidden border-1 rounded-3xl border-solid text-on-surface transition-colors focus-within:border-primary/0 dark:bg-surface-container"
         :class="{
-          'border-primary/0 outline-none ring-none': value,
-          'border-outline': !value && !errorMessage,
+          'border-primary/0': hasValue,
+          'border-outline': !hasValue && !errorMessage,
           'border-error': errorMessage,
         }"
-        :name="name"
-        :type="type"
-        :value="value"
-        @blur="handleBlur($event, true)"
-        @change="handleChange"
-        @input="handleChange($event, !!errorMessage)"
-      />
+      >
+        <component
+          :is="props.multiline ? 'textarea' : 'input'"
+          :id="name"
+          class="box-border h-full w-full grow basis-0 resize-none border-none bg-transparent px-6 py-3 text-on-surface focus:outline-none focus:ring-none"
+          :max="max"
+          :min="min"
+          :name="name"
+          :type="type"
+          :value="value"
+          @blur="handleBlur($event, true)"
+          @change="handleChange"
+          @input="handleChange($event, !!errorMessage)"
+        />
+        <slot name="trailing" />
+      </div>
       <label
-        class="pointer-events-none absolute top-4 ml-6 inline-block leading-4 uppercase transition-all peer-focus:translate-x-[1px] peer-focus:translate-y-[-23.5px] peer-focus:text-xs"
+        class="pointer-events-none absolute top-4 ml-6 inline-block leading-4 uppercase transition-all peer-focus-within:translate-x-[1px] peer-focus-within:translate-y-[-23.5px] peer-focus-within:text-xs"
         :class="{
-          'text-xs translate-y-[-23.5px] translate-x-[1px]': value,
-          'text-primary peer-focus:text-primary': value && !errorMessage,
-          'text-outline peer-focus:text-primary': !value && !errorMessage,
-          'text-error peer-focus:text-error': errorMessage,
+          'text-xs translate-y-[-23.5px] translate-x-[1px]': hasValue,
+          'text-primary peer-focus-within:text-primary':
+            hasValue && !errorMessage,
+          'text-outline peer-focus-within:text-primary':
+            !hasValue && !errorMessage,
+          'text-error peer-focus-within:text-error': errorMessage,
         }"
         :for="name"
       >
@@ -66,10 +84,11 @@ const { value, errorMessage, handleBlur, handleChange } = useField<
       <fieldset
         class="pointer-events-none absolute bottom-0 left-0 mx-0 box-border h-[calc(100%_+_0.475rem)] w-full border-1 rounded-3xl border-solid p-0 transition-colors"
         :class="{
-          'border-primary peer-focus:border-primary': value && !errorMessage,
-          'border-transparent peer-focus:border-primary':
-            !value && !errorMessage,
-          'border-error peer-focus:border-error': errorMessage,
+          'border-primary peer-focus-within:border-primary':
+            hasValue && !errorMessage,
+          'border-transparent peer-focus-within:border-primary':
+            !hasValue && !errorMessage,
+          'border-error peer-focus-within:border-error': errorMessage,
         }"
       >
         <legend

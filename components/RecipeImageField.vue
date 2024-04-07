@@ -76,13 +76,13 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="min-h-112 flex shrink-0 basis-0 flex-col gap-1"
+    class="flex shrink-0 basis-0 flex-col gap-1"
     :class="{
       'pb-4': !errorMessage,
     }"
   >
     <label
-      class="relative box-border h-112 w-80 flex shrink-0 flex-col cursor-pointer items-center justify-center gap-2 overflow-hidden border-2 border-outline rounded-3xl border-dashed text-outline transition-colors hover:border-primary hover:text-primary"
+      class="relative box-border h-112 w-full flex shrink-0 flex-col cursor-pointer items-center justify-center gap-2 overflow-hidden border-2 border-outline rounded-3xl border-dashed text-outline transition-colors hover:border-primary hover:text-primary"
       :class="{
         '!h-initial !border-primary !text-primary !border-solid':
           src && value.type.startsWith('image/') && !errorMessage,
