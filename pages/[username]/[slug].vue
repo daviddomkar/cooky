@@ -45,7 +45,27 @@
         </ul>
       </div>
     </div>
-    <div class="body">
+    <div class="body flex flex-row items-start">
+      <div class="ingredients mx-5">
+        <div class="title flex flex-row items-center">
+          <h2 class="mr-3">INGREDIENTS</h2>
+          <h3 class="mr-3">SERV</h3>
+          {{ recipeData.numberOfServings }}
+        </div>
+        <ul class="list-none p-0">
+        <li v-for="(ingredient, i) in recipeData.ingredients" :key="i" class="mb-3">
+          {{ ingredient.amount }} {{ ingredient.unit.abbreviation }} {{ ingredient.ingredient.title }}
+        </li>
+      </ul>
+      </div>
+      <div class="steps mx-5 flex flex-col">
+        <h2>STEPS</h2>
+        <ol class="p-0 pl-5">
+          <li v-for="(step, i) in recipeData.steps" :key="i" class="mb-3">
+            {{ step.content }}
+          </li>
+        </ol>
+      </div>
     </div>
   </main>
 </template>
