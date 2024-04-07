@@ -1,5 +1,6 @@
 import { useValidatedParams } from "h3-valibot";
 import { string, objectAsync } from "valibot";
+import { prisma } from "~/server/utils/prisma-client";
 
 const ParametersSchema = objectAsync({
   username: string("This field is required."),
@@ -11,7 +12,12 @@ export default defineEventHandler(async (event) => {
 
   const recipe = prisma.recipe.findFirst({
     include: {
-      ingredients: true,
+      ingredients: {
+        include: {
+          ingredient: true,
+          unit: true,
+        },
+      },
     },
     where: {
       slug,
