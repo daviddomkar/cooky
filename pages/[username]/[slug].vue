@@ -13,7 +13,7 @@
     v-if="recipeData && userData"
     class="m-auto min-h-[calc(100vh-96px)] w-full flex flex-col justify-center py-24"
   >
-    <div class="header flex flex-row p-5">
+    <div class="header flex flex-col p-5 sm:flex-row">
       <RecipeImage class="flex-shrink-0" :image-id="recipeData.imageId" />
       <div class="info flex flex-col justify-start p-5">
         <div class="info-header flex flex-col">
@@ -45,7 +45,7 @@
         </ul>
       </div>
     </div>
-    <div class="body flex flex-row items-start">
+    <div class="body flex flex-col items-start sm:flex-row">
       <div class="ingredients mx-5">
         <div class="title flex flex-row items-center">
           <h2 class="mr-3">INGREDIENTS</h2>
