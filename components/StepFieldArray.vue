@@ -56,7 +56,7 @@ useSortable("#steps", steps, {
         </div>
       </div>
     </div>
-    <BaseButton spread="compact" @click="addStep">
+    <BaseButton spread="compact" @click="addStep({ title: '', content: '' })">
       <template #icon>
         <div class="i-material-symbols:add scale-[1.25]" />
       </template>
