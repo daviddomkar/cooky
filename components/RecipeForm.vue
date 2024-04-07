@@ -14,10 +14,8 @@ const { handleSubmit, handleReset, errors } = useForm({
 });
 
 const submit = handleSubmit(async (values, opts) => {
-  await props.onSubmit?.(values, opts);
+  await props.onSubmit?.(values, opts as any);
 });
-
-useField("image");
 
 const {
   push: addIngredient,
