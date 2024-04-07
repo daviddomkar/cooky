@@ -33,17 +33,11 @@ useSortable("#steps", steps, {
             <div class="i-material-symbols:drag-indicator h-8 w-8" />
           </BaseButton>
         </div>
-        <div class="grow basis-0 items-stretch">
-          <TextField :label="`${idx + 1}. Step`" :name="`steps.${idx}.title`" />
-          <div class="box-border sm:pl-12">
-            <TextField
-              class="h-32"
-              label="Content"
-              multiline
-              :name="`steps.${idx}.content`"
-            />
-          </div>
-        </div>
+        <StepField
+          class="grow basis-0"
+          :label="`${idx + 1}. Step`"
+          :name="`steps[${idx}]`"
+        />
         <div class="h-12 flex items-center">
           <BaseButton
             class="z-1"

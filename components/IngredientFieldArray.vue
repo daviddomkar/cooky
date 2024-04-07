@@ -7,7 +7,7 @@ const {
   remove: removeIngredient,
   fields: ingredients,
   move: moveIngredient,
-} = useFieldArray<Output<typeof IngredientSchema>>("ingredients");
+} = useFieldArray<Output<typeof RecipeIngredientSchema>>("ingredients");
 
 useSortable("#ingredients", ingredients, {
   handle: ".cursor-grab",
@@ -41,7 +41,7 @@ useSortable("#ingredients", ingredients, {
           <div class="grow basis-0">
             <TextField
               :label="`${idx + 1}. Ingredient`"
-              :name="`ingredients.${idx}.id`"
+              :name="`ingredients.${idx}.title`"
             >
               <template #trailing>
                 <BaseButton
@@ -89,7 +89,18 @@ useSortable("#ingredients", ingredients, {
         </div>
       </div>
     </div>
-    <BaseButton spread="compact" @click="addIngredient({ id: '', amount: 1 })">
+    <BaseButton
+      spread="compact"
+      @click="
+        addIngredient({
+          ingredient: {
+            id: '',
+          },
+          amount: 1,
+          unitId: '',
+        })
+      "
+    >
       <template #icon>
         <div class="i-material-symbols:add scale-[1.25]" />
       </template>
