@@ -2,7 +2,7 @@
 type Props = {
   name: string;
   label: string;
-  type?: "text" | "email" | "password";
+  type?: "text" | "email" | "password" | "number";
   multiline?: boolean;
 };
 
@@ -13,19 +13,17 @@ const props = withDefaults(defineProps<Props>(), {
 
 defineModel<string>();
 
-const { value, errorMessage, handleBlur, handleChange } = useField(
-  () => props.name,
-  undefined,
-  {
-    validateOnValueUpdate: false,
-    syncVModel: true,
-  },
-);
+const { value, errorMessage, handleBlur, handleChange } = useField<
+  string | number
+>(() => props.name, undefined, {
+  validateOnValueUpdate: false,
+  syncVModel: true,
+});
 </script>
 
 <template>
   <div
-    class="w-full flex flex-col gap-1"
+    class="box-border w-full flex flex-col gap-1"
     :class="{
       'pb-4': !errorMessage,
     }"

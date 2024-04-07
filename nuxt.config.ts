@@ -54,6 +54,9 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
+  authJs: {
+    guestRedirectTo: "/auth/login",
+  },
   veeValidate: {
     autoImports: true,
     componentNames: {
