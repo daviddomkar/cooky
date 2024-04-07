@@ -38,44 +38,11 @@ useSortable("#ingredients", ingredients, {
           </BaseButton>
         </div>
         <div class="flex grow basis-0 gap-2">
-          <div class="grow basis-0">
-            <TextField
-              :label="`${idx + 1}. Ingredient`"
-              :name="`ingredients.${idx}.title`"
-            >
-              <template #trailing>
-                <BaseButton
-                  class="mr-0.75"
-                  spread="compact"
-                  variant="secondary"
-                >
-                  <div class="i-material-symbols:edit h-6 w-6 scale-[0.75]" />
-                </BaseButton>
-              </template>
-            </TextField>
-            <div class="box-border sm:ml-12">
-              <TextField
-                label="Amount"
-                :name="`ingredients.${idx}.amount`"
-                type="number"
-              >
-                <template #trailing>
-                  <BaseButton
-                    class="mr-0.75"
-                    spread="compact"
-                    variant="secondary"
-                  >
-                    <template #icon>
-                      <div
-                        class="i-material-symbols:keyboard-arrow-down-rounded scale-[1.25]"
-                      />
-                    </template>
-                    ks
-                  </BaseButton>
-                </template>
-              </TextField>
-            </div>
-          </div>
+          <IngredientField
+            class="grow basis-0"
+            :label="`${idx + 1}. Ingredient`"
+            :name="`ingredients[${idx}]`"
+          />
           <div class="h-12 flex items-center">
             <BaseButton
               class="z-1"

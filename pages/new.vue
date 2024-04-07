@@ -12,7 +12,9 @@ definePageMeta({
         description: '',
         ingredients: [
           {
-            id: '',
+            ingredient: {
+              id: '',
+            },
             amount: 1,
           },
         ],

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { Notifications } from "@kyvg/vue3-notification";
+
+provideHeadlessUseId(() => useId());
 </script>
 
 <template>

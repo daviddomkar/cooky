@@ -1,7 +1,7 @@
 import type { UseInfiniteScrollOptions } from "@vueuse/core";
 
 export const useInfiniteScrollFetch = <T>(
-  url: string,
+  request: Parameters<typeof useFetch<T>>[0],
   el: Ref<HTMLElement | null>,
   providedQuery: MaybeRefOrGetter<PaginationQuery> = {},
   infiniteScrollOptions: UseInfiniteScrollOptions = {},
@@ -28,7 +28,7 @@ export const useInfiniteScrollFetch = <T>(
 
   const infiniteScrollCallback = async () => {
     try {
-      const result = await $fetch<PaginationResult<T>>(url, {
+      const result = await $fetch<PaginationResult<T>>(toValue(request), {
         query: {
           ...query.value,
           nextCursor: nextCursor.value,
