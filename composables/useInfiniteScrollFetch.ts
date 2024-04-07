@@ -11,10 +11,10 @@ export const useInfiniteScrollFetch = <T>(
   const error = ref<any>(undefined);
   const hasMore = ref(true);
   const isFetching = ref(false);
-  const query = ref(providedQuery);
+  const query = ref(toValue(providedQuery));
 
   watch(
-    () => toValue(query),
+    () => toValue(providedQuery),
     async (changedQuery) => {
       query.value = changedQuery;
       data.value = [];

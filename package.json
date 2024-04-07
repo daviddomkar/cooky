@@ -96,7 +96,6 @@
     "vue3-marquee": "^4.2.0"
   },
   "overrides": {
-    "valibot": "^0.28.1",
-    "@headlessui/vue": "0.0.0-insiders.c8037fc"
+    "valibot": "^0.28.1"
   }
 }

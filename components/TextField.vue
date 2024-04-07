@@ -6,11 +6,13 @@ type Props = {
   multiline?: boolean;
   min?: number;
   max?: number;
+  controlled?: boolean;
 };
 
 const props = withDefaults(defineProps<Props>(), {
   type: "text",
   multiline: false,
+  controlled: true,
   min: undefined,
   max: undefined,
 });
@@ -22,6 +24,7 @@ const { value, errorMessage, handleBlur, handleChange } = useField<
 >(() => props.name, undefined, {
   validateOnValueUpdate: false,
   syncVModel: true,
+  controlled: props.controlled,
 });
 
 // This is required in order to prevent 0 value from being considered as empty

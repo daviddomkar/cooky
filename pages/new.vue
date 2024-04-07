@@ -10,14 +10,7 @@ definePageMeta({
       :initial-values="{
         title: '',
         description: '',
-        ingredients: [
-          {
-            ingredient: {
-              id: '',
-            },
-            amount: 1,
-          },
-        ],
+        ingredients: [{}],
         steps: [
           {
             title: '',

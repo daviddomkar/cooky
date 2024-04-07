@@ -13,31 +13,28 @@ import {
   maxSize,
   regex,
   uuid,
-  union,
   optional,
   enum_,
   nullable,
 } from "valibot";
 
 export const RecipeIngredientSchema = object({
-  ingredient: union([
-    object({
-      id: string("This field is required.", [
-        toTrimmed(),
-        minLength(1, "This field is required."),
-      ]),
-      unitTypes: optional(
-        nullable(array(enum_(UnitType), "This field is required.")),
+  ingredient: object({
+    id: optional(
+      nullable(
+        string("This field is required.", [
+          toTrimmed(),
+          minLength(1, "This field is required."),
+          uuid("Invalid ingredient ID."),
+        ]),
       ),
-    }),
-    object({
-      title: string("This field is required.", [
-        toTrimmed(),
-        minLength(1, "This field is required."),
-      ]),
-      unitTypes: array(string(), "This field is required.", []),
-    }),
-  ]),
+    ),
+    title: string("This field is required.", [
+      toTrimmed(),
+      minLength(1, "This field is required."),
+    ]),
+    unitTypes: array(enum_(UnitType), "This field is required."),
+  }),
   amount: number("This field is required.", [
     minValue(1, "Value must be at least 1."),
   ]),

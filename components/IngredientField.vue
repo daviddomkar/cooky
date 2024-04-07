@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import BaseButton from "./BaseButton.vue";
+import TextField from "./TextField.vue";
+
 type Props = {
   name: string;
   label: string;
@@ -12,7 +15,7 @@ type Ingredient = {
   unitTypes: string[];
 };
 
-const { value, handleChange } = useField<Ingredient>(
+const { value, handleChange: handleFieldChange } = useField<Ingredient | null>(
   () => `${props.name}.ingredient`,
 );
 
@@ -24,61 +27,81 @@ const queryIngredient = computed(() => {
     : { id: null, title: query.value, unitTypes: [] };
 });
 
-// const idk = ref<HTMLElement | null>(null);
-/*
+const ingredientsContainerRef = ref<HTMLElement | null>(null);
+
+const params = computed(() => {
+  return {
+    take: 10,
+    query: query.value,
+  };
+});
+
 const { data: ingredients } = useInfiniteScrollFetch<Ingredient>(
   "/api/ingredients",
-  idk,
-); */
+  ingredientsContainerRef,
+  params,
+);
 
-const ingredients = ref<Ingredient[]>([
-  {
-    id: "1",
-    title: "Flour",
-    unitTypes: ["g", "kg"],
-  },
-  {
-    id: "2",
-    title: "Sugar",
-    unitTypes: ["g", "kg"],
-  },
-  {
-    id: "3",
-    title: "Salt",
-    unitTypes: ["g", "kg"],
-  },
-  {
-    id: "4",
-    title: "Water",
-    unitTypes: ["ml", "l"],
-  },
-]);
+const handleChange = (ingredient: Ingredient | null) => {
+  if (ingredient) {
+    query.value = ingredient.title;
+  }
+
+  handleFieldChange(ingredient);
+};
 </script>
 
 <template>
   <div>
     <HeadlessCombobox
       as="div"
+      class="relative focus:outline-none"
       immediate
       :model-value="value"
       nullable
       @update:model-value="handleChange"
     >
-      <HeadlessComboboxInput
-        :display-value="(ingredient) => (ingredient as any).title ?? ''"
-        @change="query = $event.target.value"
-      />
-      <HeadlessComboboxOptions>
-        <HeadlessComboboxOption v-if="queryIngredient" :value="queryIngredient">
-          Create "{{ query }}"
-        </HeadlessComboboxOption>
-        <HeadlessComboboxOption
-          v-for="ingredient in ingredients"
-          :key="ingredient.id"
-          :value="ingredient"
+      <HeadlessComboboxInput as="template">
+        <TextField
+          :controlled="false"
+          :label="label"
+          :model-value="query"
+          :name="`${name}.query`"
+          @update:model-value="query = $event"
         >
-          {{ ingredient.title }}
-        </HeadlessComboboxOption>
+          <template v-if="value" #trailing>
+            <BaseButton class="mr-0.75" spread="compact" variant="secondary">
+              <div class="i-material-symbols:edit h-6 w-6 scale-[0.75]" />
+            </BaseButton>
+          </template>
+        </TextField>
+      </HeadlessComboboxInput>
+
+      <HeadlessComboboxOptions as="template">
+        <ul
+          ref="ingredientsContainerRef"
+          class="absolute z-1 my-0 max-h-80 w-full list-none overflow-auto rounded-3xl bg-surface pl-0 text-on-surface shadow-2xl -mt-2 dark:bg-surface-container"
+        >
+          <HeadlessComboboxOption
+            v-for="(ingredient, index) in ingredients"
+            :key="ingredient.id"
+            class="block cursor-pointer px-6 py-3 text-base"
+            :class="{
+              'border-b-1 border-b-outline/50 border-b-solid':
+                index !== ingredients.length - 1,
+            }"
+            :value="ingredient"
+          >
+            {{ ingredient.title }}
+          </HeadlessComboboxOption>
+          <HeadlessComboboxOption
+            v-if="queryIngredient"
+            class="cursor-pointer from-primary to-secondary bg-gradient-to-r px-6 py-3 text-base text-white"
+            :value="queryIngredient"
+          >
+            Create "{{ query.trim() }}"
+          </HeadlessComboboxOption>
+        </ul>
       </HeadlessComboboxOptions>
     </HeadlessCombobox>
     <!--<TextField :label="label">
@@ -88,7 +111,7 @@ const ingredients = ref<Ingredient[]>([
         </BaseButton>
       </template>
     </TextField>-->
-    <div class="box-border sm:ml-12">
+    <div v-if="value" class="box-border sm:ml-12">
       <TextField label="Amount" :name="`${name}.amount`" type="number">
         <template #trailing>
           <BaseButton class="mr-0.75" spread="compact" variant="secondary">
