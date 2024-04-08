@@ -23,20 +23,7 @@ const { data: randomRecipe } = await useFetch("/api/recipes/random", {
   query: { category: route.params.slug },
 });
 
-const categoryContainerRef = ref<HTMLElement | null>(null);
-
-const query = computed(() => {
-  return {
-    take: 10,
-    category: route.params.slug,
-  };
-});
-
-const { data: recipes } = useInfiniteScrollFetch<any>(
-  "/api/recipes",
-  categoryContainerRef,
-  query,
-);
+const { data } = useFetch("/api/recipes");
 
 const mostRatedRecipe = computed(() => mostRatedRecipeData?.value?.[0]);
 const mostSavedRecipe = computed(() => mostSavedRecipeData?.value?.[0]);
@@ -54,7 +41,7 @@ const { isMobile } = useDevice();
 
 <template>
   <main
-    class="mx-auto box-border max-w-336 w-full flex flex-col gap-8 px-4 pb-4 sm:px-8 sm:pb-8"
+    class="mx-auto box-border max-w-336 w-full flex flex-col gap-8 px-4 py-4 sm:px-8 sm:py-8"
   >
     <div class="grid grid-cols-[repeat(auto-fit,_minmax(256px,_auto))] gap-4">
       <NuxtLink
@@ -63,7 +50,6 @@ const { isMobile } = useDevice();
         :to="`/${randomRecipe.author.username}/${randomRecipe.slug}`"
       >
         <RecipeListCard
-          class="mx-4 box-border w-80 sm:w-96"
           :cover-image-id="randomRecipe.imageId"
           title="Inspiration for you"
         />
@@ -74,7 +60,6 @@ const { isMobile } = useDevice();
         :to="`/${mostRatedRecipe.authorUsername}/${mostRatedRecipe.slug}`"
       >
         <RecipeListCard
-          class="mx-4 box-border w-80 sm:w-96"
           :cover-image-id="mostRatedRecipe.imageId"
           title="Most rated recipe"
         />
@@ -85,7 +70,6 @@ const { isMobile } = useDevice();
         :to="`/${mostSavedRecipe.authorUsername}/${mostSavedRecipe.slug}`"
       >
         <RecipeListCard
-          class="mx-4 box-border w-80 sm:w-96"
           :cover-image-id="mostSavedRecipe.imageId"
           title="Most saved recipe"
         />
@@ -96,7 +80,6 @@ const { isMobile } = useDevice();
         :to="`/${mostRecentRecipe.authorUsername}/${mostRecentRecipe.slug}`"
       >
         <RecipeListCard
-          class="mx-4 box-border w-80 sm:w-96"
           :cover-image-id="mostRecentRecipe.imageId"
           title="Most recent recipe"
         />
@@ -107,26 +90,26 @@ const { isMobile } = useDevice();
       <div v-if="specialCardCount < 3" />
       <div v-if="specialCardCount < 4" />
     </div>
-    <div ref="categoryContainerRef">
-      <h2 class="text-5xl">{{ route.params.slug }}</h2>
+    <div>
+      <h2 class="my-0 text-5xl">{{ route.params.slug }}</h2>
       <MasonryWall
         :column-width="256"
         :gap="16"
-        :items="recipes!"
+        :items="data?.data!"
         :max-columns="4"
         :ssr-columns="isMobile ? 1 : 4"
       >
         <template #default="{ item }">
           <NuxtLink
             class="block transition-transform hover:active:scale-[0.97]"
-            :to="`/${item.authorUsername}/${item.slug}`"
+            :to="`/${item.author.username}/${item.slug}`"
           >
             <RecipeCard
               :key="item.id"
               :author="{
-                username: item.authorUsername,
-                name: item.authorName,
-                profileImageId: item.authorProfileImageId,
+                username: item.author.username,
+                name: item.author.name,
+                profileImageId: item.author.profileImageId,
               }"
               :cover-image-id="item.imageId"
               :title="item.title"

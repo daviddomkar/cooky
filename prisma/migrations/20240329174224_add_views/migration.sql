@@ -40,9 +40,9 @@ LIMIT 1;
 
 -- Create function to get random recipe in category
 CREATE OR REPLACE FUNCTION find_random_recipe_in_category(
-    IN p_category_id categories.id%TYPE
+    IN p_category_slug categories.slug%TYPE
 )
-RETURNS SETOF recipes
+RETURNS SETOF random_recipe
 LANGUAGE plpgsql
 AS $$
 BEGIN
@@ -51,7 +51,7 @@ BEGIN
     JOIN users ON recipes.author_id = users.id
     JOIN recipe_categories ON recipes.id = recipe_categories.recipe_id
     JOIN categories ON recipe_categories.category_id = categories.id
-    WHERE categories.id = p_category_id
+    WHERE categories.slug = p_category_slug
     ORDER BY random()
     LIMIT 1;
 END;

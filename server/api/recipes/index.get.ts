@@ -12,13 +12,31 @@ export default defineEventHandler(async (event) => {
     }),
   );
 
-  return usePagination<Recipe>({
+  return usePagination<
+    Recipe & {
+      author: {
+        username: string;
+        name: string;
+        profileImageId: string | null;
+      };
+    }
+  >({
+    // @ts-ignore
     prismaModel: prisma.recipe,
     paginationData,
     where: {
       slug,
       author: {
         username,
+      },
+    },
+    include: {
+      author: {
+        select: {
+          username: true,
+          name: true,
+          profileImageId: true,
+        },
       },
     },
   });

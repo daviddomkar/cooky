@@ -13,12 +13,14 @@ type PaginateParams<T> = {
   };
   paginationData: PaginationData;
   where?: Record<string, any>;
+  include?: Record<string, any>;
 };
 
 export async function usePagination<T extends { id: string }>({
   prismaModel,
   paginationData,
   where = {},
+  include = {},
 }: PaginateParams<T>) {
   const { take = DEFAULT_TAKE, backwards = false, ...cursors } = paginationData;
   let { prevCursor, nextCursor } = cursors;
@@ -36,6 +38,7 @@ export async function usePagination<T extends { id: string }>({
 
   const data = await prismaModel.findMany({
     where,
+    include,
     skip: skipCursor, // Adjusted skip logic
     take: adjustedTake,
     cursor: cursor ? { id: cursor as string } : undefined,
