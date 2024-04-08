@@ -15,9 +15,12 @@ type Ingredient = {
   unitTypes: string[];
 };
 
-const { value, handleChange: handleFieldChange } = useField<Ingredient | null>(
-  () => `${props.name}.ingredient`,
-);
+const {
+  value,
+  handleChange: handleFieldChange,
+  errorMessage,
+  meta,
+} = useField<Ingredient | null>(() => `${props.name}.ingredient`);
 
 const query = ref("");
 
@@ -69,10 +72,18 @@ const handleChange = (ingredient: Ingredient | null) => {
           :name="`${name}.query`"
           @update:model-value="query = $event"
         >
-          <template v-if="value" #trailing>
+          <template v-if="value && meta.dirty && meta.valid" #trailing>
             <BaseButton class="mr-0.75" spread="compact" variant="secondary">
               <div class="i-material-symbols:edit h-6 w-6 scale-[0.75]" />
             </BaseButton>
+          </template>
+          <template #error>
+            <label
+              v-if="errorMessage"
+              class="inline-block px-6 pb-1 text-xs text-error"
+            >
+              {{ errorMessage }}
+            </label>
           </template>
         </TextField>
       </HeadlessComboboxInput>
@@ -104,14 +115,7 @@ const handleChange = (ingredient: Ingredient | null) => {
         </ul>
       </HeadlessComboboxOptions>
     </HeadlessCombobox>
-    <!--<TextField :label="label">
-      <template #trailing>
-        <BaseButton class="mr-0.75" spread="compact" variant="secondary">
-          <div class="i-material-symbols:edit h-6 w-6 scale-[0.75]" />
-        </BaseButton>
-      </template>
-    </TextField>-->
-    <div v-if="value" class="box-border sm:ml-12">
+    <div v-if="value && meta.dirty && meta.valid" class="box-border sm:ml-12">
       <TextField label="Amount" :name="`${name}.amount`" type="number">
         <template #trailing>
           <BaseButton class="mr-0.75" spread="compact" variant="secondary">

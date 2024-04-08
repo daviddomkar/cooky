@@ -59,13 +59,8 @@ useSortable("#ingredients", ingredients, {
     <BaseButton
       spread="compact"
       @click="
-        addIngredient({
-          ingredient: {
-            id: '',
-          },
-          amount: 1,
-          unitId: '',
-        })
+        // @ts-ignore
+        addIngredient({})
       "
     >
       <template #icon>

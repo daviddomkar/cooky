@@ -119,7 +119,9 @@ export const prisma = new PrismaClient().$extends({
           updated_at: Date;
         };
 
-        const result = await prisma.$queryRaw<FindRandomRecipeInCategoryOutput[]>`
+        const result = await prisma.$queryRaw<
+          FindRandomRecipeInCategoryOutput[]
+        >`
           SELECT id, title, slug, description, preparation_duration::text, state, steps, nutrition_per_serving, number_of_servings, image_id, author_id, author_username, created_at, updated_at FROM find_random_recipe_in_category(${categoryId}::uuid)
         `;
 
@@ -148,7 +150,7 @@ export const prisma = new PrismaClient().$extends({
             username: string;
           };
         };
-      }
+      },
     },
   },
 });

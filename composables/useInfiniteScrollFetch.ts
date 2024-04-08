@@ -1,7 +1,7 @@
 import type { UseInfiniteScrollOptions } from "@vueuse/core";
 
 export const useInfiniteScrollFetch = <T>(
-  request: Parameters<typeof useFetch<T>>[0],
+  request: Parameters<typeof useFetch>[0],
   el: Ref<HTMLElement | null>,
   providedQuery: MaybeRefOrGetter<PaginationQuery> = {},
   infiniteScrollOptions: UseInfiniteScrollOptions = {},
@@ -17,16 +17,15 @@ export const useInfiniteScrollFetch = <T>(
     () => toValue(providedQuery),
     async (changedQuery) => {
       query.value = changedQuery;
-      data.value = [];
       nextCursor.value = undefined;
       hasMore.value = true;
       isFetching.value = true;
-      await infiniteScrollCallback();
+      await fetchData(true);
       isFetching.value = false;
     },
   );
 
-  const infiniteScrollCallback = async () => {
+  const fetchData = async (replace?: boolean) => {
     try {
       const result = await $fetch<PaginationResult<T>>(toValue(request), {
         query: {
@@ -35,7 +34,12 @@ export const useInfiniteScrollFetch = <T>(
         },
       });
 
-      data.value?.push(...result.data);
+      if (replace) {
+        data.value = result.data;
+      } else {
+        data.value?.push(...result.data);
+      }
+
       nextCursor.value = result.pagination.nextCursor;
       hasMore.value = !!result.pagination.nextCursor;
     } catch (e) {
@@ -43,7 +47,7 @@ export const useInfiniteScrollFetch = <T>(
     }
   };
 
-  const { isLoading } = useInfiniteScroll(el, infiniteScrollCallback, {
+  const { isLoading } = useInfiniteScroll(el, () => fetchData(), {
     ...infiniteScrollOptions,
     canLoadMore: () => hasMore.value && !isFetching.value,
   });

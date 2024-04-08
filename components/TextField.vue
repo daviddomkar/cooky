@@ -101,11 +101,13 @@ const hasValue = computed(
         </legend>
       </fieldset>
     </div>
-    <label
-      v-if="errorMessage"
-      class="inline-block px-6 pb-1 text-xs text-error"
-    >
-      {{ errorMessage }}
-    </label>
+    <slot name="error">
+      <label
+        v-if="errorMessage"
+        class="inline-block px-6 pb-1 text-xs text-error"
+      >
+        {{ errorMessage }}
+      </label>
+    </slot>
   </div>
 </template>
