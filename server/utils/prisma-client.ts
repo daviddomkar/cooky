@@ -112,6 +112,16 @@ export const prisma = new PrismaClient().$extends({
                 unit: true,
               },
             },
+            comments: {
+              include: {
+                author: true,
+                replies: {
+                  include: {
+                    author: true,
+                  },
+                },
+              },
+            },
           },
           where: {
             slug,

@@ -74,5 +74,39 @@
         </ol>
       </div>
     </div>
+    <div class="footer px-4">
+      <div class="review">
+        <div class="flex flex-row items-start gap-3">
+          <PictureFrame
+            borderless
+            class="w-5 shrink-0 cursor-pointer sm:w-12"
+            :src="getProfileImageUrl(userData.username, userData.profileImageId)"
+          />
+          <TextField label="Add a comment..." name="comment" type="text" />
+        </div>
+      </div>
+      <ul>
+        <li v-for="comment in recipeData.comments" :key="comment.id">
+          <RecipeComment 
+            :author-image-id="comment.author.profileImageId"
+            :author-name="comment.author.username"
+            class="mb-3"
+            :content="comment.content"
+            :created-at="comment.createdAt"
+          />
+          <ul>
+            <li v-for="reply in comment.replies" :key="reply.id">
+              <RecipeComment 
+                :author-image-id="reply.author.profileImageId"
+                :author-name="reply.author.username"
+                class="mb-3"
+                :content="reply.content"
+                :created-at="reply.createdAt"
+              />
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </main>
 </template>
