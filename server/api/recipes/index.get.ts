@@ -1,14 +1,13 @@
 import type { Recipe } from "@prisma/client";
 import { useValidatedQuery } from "h3-valibot";
-import { objectAsync, string, optional, nullable } from "valibot";
-import PaginationMetadataSchema from "~/server/schemas/PaginationMetadataSchema";
+import { objectAsync, string, nullish } from "valibot";
 
 export default defineEventHandler(async (event) => {
   const { username, slug, ...paginationData } = await useValidatedQuery(
     event,
     objectAsync({
-      username: nullable(optional(string())),
-      slug: nullable(optional(string())),
+      username: nullish(string()),
+      slug: nullish(string()),
       ...PaginationMetadataSchema.entries,
     }),
   );

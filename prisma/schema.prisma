@@ -292,104 +292,114 @@ model Notification {
 }
 
 view RecipesByRatings {
-  id                  String                  @id
-  title               String
-  slug                String
-  description         String
-  preparitionDuration Unsupported("interval") @map("preparation_duration")
-  state               RecipeState
+  id                   String                  @id
+  title                String
+  slug                 String
+  description          String
+  preparitionDuration  Unsupported("interval") @map("preparation_duration")
+  state                RecipeState
   /// [Step]
-  steps               Json[]
-  nutritionPerServing Int                     @map("nutrition_per_serving")
-  numberOfServings    Int                     @map("number_of_servings")
-  imageId             String                  @map("image_id")
-  authorId            String                  @map("author_id")
-  authorUsername      String                  @map("author_username")
-  createdAt           DateTime                @map("created_at")
-  updatedAt           DateTime                @map("updated_at")
-  averageStars        Decimal                 @map("average_stars")
+  steps                Json[]
+  nutritionPerServing  Int                     @map("nutrition_per_serving")
+  numberOfServings     Int                     @map("number_of_servings")
+  imageId              String                  @map("image_id")
+  authorId             String                  @map("author_id")
+  authorUsername       String                  @map("author_username")
+  authorName           String                  @map("author_name")
+  authorProfileImageId String?                 @map("author_profile_image_id")
+  createdAt            DateTime                @map("created_at")
+  updatedAt            DateTime                @map("updated_at")
+  averageStars         Decimal                 @map("average_stars")
 
   @@map("recipes_by_ratings")
 }
 
 view RecipesByComments {
-  id                  String                  @id
-  title               String
-  slug                String
-  description         String
-  preparitionDuration Unsupported("interval") @map("preparation_duration")
-  state               RecipeState
+  id                   String                  @id
+  title                String
+  slug                 String
+  description          String
+  preparitionDuration  Unsupported("interval") @map("preparation_duration")
+  state                RecipeState
   /// [Step]
-  steps               Json[]
-  nutritionPerServing Int                     @map("nutrition_per_serving")
-  numberOfServings    Int                     @map("number_of_servings")
-  imageId             String                  @map("image_id")
-  authorId            String                  @map("author_id")
-  authorUsername      String                  @map("author_username")
-  createdAt           DateTime                @map("created_at")
-  updatedAt           DateTime                @map("updated_at")
-  comentCount         Int                     @map("comment_count")
+  steps                Json[]
+  nutritionPerServing  Int                     @map("nutrition_per_serving")
+  numberOfServings     Int                     @map("number_of_servings")
+  imageId              String                  @map("image_id")
+  authorId             String                  @map("author_id")
+  authorUsername       String                  @map("author_username")
+  authorName           String                  @map("author_name")
+  authorProfileImageId String?                 @map("author_profile_image_id")
+  createdAt            DateTime                @map("created_at")
+  updatedAt            DateTime                @map("updated_at")
+  comentCount          Int                     @map("comment_count")
 
   @@map("recipes_by_comments")
 }
 
 view RecipesBySaves {
-  id                  String                  @id
-  title               String
-  slug                String
-  description         String
-  preparitionDuration Unsupported("interval") @map("preparation_duration")
-  state               RecipeState
+  id                   String                  @id
+  title                String
+  slug                 String
+  description          String
+  preparitionDuration  Unsupported("interval") @map("preparation_duration")
+  state                RecipeState
   /// [Step]
-  steps               Json[]
-  nutritionPerServing Int                     @map("nutrition_per_serving")
-  numberOfServings    Int                     @map("number_of_servings")
-  imageId             String                  @map("image_id")
-  authorId            String                  @map("author_id")
-  authorUsername      String                  @map("author_username")
-  createdAt           DateTime                @map("created_at")
-  updatedAt           DateTime                @map("updated_at")
-  saveCount           Int                     @map("save_count")
+  steps                Json[]
+  nutritionPerServing  Int                     @map("nutrition_per_serving")
+  numberOfServings     Int                     @map("number_of_servings")
+  imageId              String                  @map("image_id")
+  authorId             String                  @map("author_id")
+  authorUsername       String                  @map("author_username")
+  authorName           String                  @map("author_name")
+  authorProfileImageId String?                 @map("author_profile_image_id")
+  createdAt            DateTime                @map("created_at")
+  updatedAt            DateTime                @map("updated_at")
+  saveCount            Int                     @map("save_count")
 
   @@map("recipes_by_saves")
 }
 
 view RecipesByCreatedAt {
-  id                  String                  @id
-  title               String
-  slug                String
-  description         String
-  preparitionDuration Unsupported("interval") @map("preparation_duration")
-  state               RecipeState
+  id                   String                  @id
+  title                String
+  slug                 String
+  description          String
+  preparitionDuration  Unsupported("interval") @map("preparation_duration")
+  state                RecipeState
   /// [Step]
-  steps               Json[]
-  nutritionPerServing Int                     @map("nutrition_per_serving")
-  numberOfServings    Int                     @map("number_of_servings")
-  imageId             String                  @map("image_id")
-  authorId            String                  @map("author_id")
-  authorUsername      String                  @map("author_username")
-  createdAt           DateTime                @map("created_at")
-  updatedAt           DateTime                @map("updated_at")
+  steps                Json[]
+  nutritionPerServing  Int                     @map("nutrition_per_serving")
+  numberOfServings     Int                     @map("number_of_servings")
+  imageId              String                  @map("image_id")
+  authorId             String                  @map("author_id")
+  authorUsername       String                  @map("author_username")
+  authorName           String                  @map("author_name")
+  authorProfileImageId String?                 @map("author_profile_image_id")
+  createdAt            DateTime                @map("created_at")
+  updatedAt            DateTime                @map("updated_at")
 
   @@map("recipes_by_created_at")
 }
 
 view RandomRecipe {
-  id                  String                  @id
-  title               String
-  slug                String
-  description         String
-  preparitionDuration Unsupported("interval") @map("preparation_duration")
-  state               RecipeState
+  id                   String                  @id
+  title                String
+  slug                 String
+  description          String
+  preparitionDuration  Unsupported("interval") @map("preparation_duration")
+  state                RecipeState
   /// [Step]
-  steps               Json[]
-  nutritionPerServing Int                     @map("nutrition_per_serving")
-  numberOfServings    Int                     @map("number_of_servings")
-  imageId             String                  @map("image_id")
-  authorId            String                  @map("author_id")
-  authorUsername      String                  @map("author_username")
-  createdAt           DateTime                @map("created_at")
-  updatedAt           DateTime                @map("updated_at")
+  steps                Json[]
+  nutritionPerServing  Int                     @map("nutrition_per_serving")
+  numberOfServings     Int                     @map("number_of_servings")
+  imageId              String                  @map("image_id")
+  authorId             String                  @map("author_id")
+  authorUsername       String                  @map("author_username")
+  authorName           String                  @map("author_name")
+  authorProfileImageId String?                 @map("author_profile_image_id")
+  createdAt            DateTime                @map("created_at")
+  updatedAt            DateTime                @map("updated_at")
 
   @@map("random_recipe")
 }

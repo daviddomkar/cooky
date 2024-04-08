@@ -98,8 +98,36 @@ export const prisma = new PrismaClient().$extends({
           updatedAt: result[0].o_updated_at,
         } satisfies Recipe;
       },
-      findRandom() {
-        return prisma.randomRecipe.findFirst();
+      async findRandom() {
+        const recipe = await prisma.randomRecipe.findFirst();
+
+        if (!recipe) return null;
+
+        return {
+          id: recipe.id,
+          title: recipe.title,
+          slug: recipe.slug,
+          description: recipe.description,
+          state: recipe.state,
+          steps: recipe.steps,
+          nutritionPerServing: recipe.nutritionPerServing,
+          numberOfServings: recipe.numberOfServings,
+          imageId: recipe.imageId,
+          authorId: recipe.authorId,
+          author: {
+            username: recipe.authorUsername,
+            name: recipe.authorName,
+            profileImageId: recipe.authorProfileImageId,
+          },
+          createdAt: recipe.createdAt,
+          updatedAt: recipe.updatedAt,
+        } satisfies Recipe & {
+          author: {
+            username: string;
+            name: string;
+            profileImageId?: string | null;
+          };
+        };
       },
       async findRandomInCategory(categoryId: string) {
         type FindRandomRecipeInCategoryOutput = {
@@ -115,12 +143,16 @@ export const prisma = new PrismaClient().$extends({
           image_id: string;
           author_id: string;
           author_username: string;
+          author_name: string;
+          author_profile_image_id?: string | null;
           created_at: Date;
           updated_at: Date;
         };
 
-        const result = await prisma.$queryRaw<FindRandomRecipeInCategoryOutput[]>`
-          SELECT id, title, slug, description, preparation_duration::text, state, steps, nutrition_per_serving, number_of_servings, image_id, author_id, author_username, created_at, updated_at FROM find_random_recipe_in_category(${categoryId}::uuid)
+        const result = await prisma.$queryRaw<
+          FindRandomRecipeInCategoryOutput[]
+        >`
+          SELECT id, title, slug, description, preparation_duration::text, state, steps, nutrition_per_serving, number_of_servings, image_id, author_id, author_username, author_name, author_profile_image_id, created_at, updated_at FROM find_random_recipe_in_category(${categoryId}::uuid)
         `;
 
         if (result.length === 0) {
@@ -140,15 +172,19 @@ export const prisma = new PrismaClient().$extends({
           authorId: result[0].author_id,
           author: {
             username: result[0].author_username,
+            name: result[0].author_name,
+            profileImageId: result[0].author_profile_image_id,
           },
           createdAt: result[0].created_at,
           updatedAt: result[0].updated_at,
         } satisfies Recipe & {
           author: {
             username: string;
+            name: string;
+            profileImageId?: string | null;
           };
         };
-      }
+      },
     },
   },
 });
