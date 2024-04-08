@@ -31,8 +31,10 @@
             /> {{ userData?.username }}
           </div>
           <div class="flex flex-row flex-wrap items-center text-3xl font-display">
-            <!-- GET RATING -->
-            <h2>{{ recipeData.title }}</h2><div>4,5/5</div>
+            <h2>{{ recipeData.title }}</h2>
+            <div>
+              <RecipeStars :count="recipeData.rating" />
+            </div>
           </div>
         </div>
         <p class="description">

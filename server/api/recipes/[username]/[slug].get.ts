@@ -19,5 +19,17 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  return recipe;
+  const averageRating = await prisma.rating.aggregate({
+    _avg: {
+      numberOfStars: true,
+    },
+    where: {
+      recipeId: recipe.id,
+    },
+  });
+
+  return {
+    ...recipe,
+    rating: averageRating._avg.numberOfStars,
+  };
 });
