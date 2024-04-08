@@ -6,6 +6,12 @@
 
   console.log(recipeData.value);
 
+  const processInterval = (x: string) => x
+          .split(":")
+          .map((x) => Number(x))
+          .map((x, i) => (x === 0 ? "" : `${x}${["h", "m", "s"][i]}`))
+          .join("");
+
 </script>
 
 <template>
@@ -36,7 +42,7 @@
           <li class="flex flex-row items-center">
             <span class="mr-3 text-xl font-bold font-display">PREP TIME</span>
             <!-- GET PREP DURATION -->
-            40 minutes
+            {{ processInterval(recipeData.preparitionDuration) }}
           </li>
           <li class="flex flex-row items-center">
             <span class="mr-3 text-xl font-bold font-display">NUTRITION / SERV</span>

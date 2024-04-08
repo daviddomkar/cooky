@@ -10,22 +10,7 @@ const ParametersSchema = objectAsync({
 export default defineEventHandler(async (event) => {
   const { username, slug } = await useValidatedParams(event, ParametersSchema);
 
-  const recipe = prisma.recipe.findFirst({
-    include: {
-      ingredients: {
-        include: {
-          ingredient: true,
-          unit: true,
-        },
-      },
-    },
-    where: {
-      slug,
-      author: {
-        username,
-      },
-    },
-  });
+  const recipe = await prisma.recipe.findByUsernameAndSlug(username, slug);
 
   if (!recipe) {
     throw createError({

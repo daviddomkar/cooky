@@ -103,6 +103,52 @@ export const prisma = new PrismaClient().$extends({
       },
     },
     recipe: {
+      async findByUsernameAndSlug(username: string, slug: string) {
+        const recipePromise = prisma.recipe.findFirst({
+          include: {
+            ingredients: {
+              include: {
+                ingredient: true,
+                unit: true,
+              },
+            },
+          },
+          where: {
+            slug,
+            author: {
+              username,
+            },
+          },
+        });
+
+        type RecipeDurationQueryOutput = {
+          preparation_duration: string;
+        };
+
+        const durationQueryPromise = prisma.$queryRaw<
+          RecipeDurationQueryOutput[]
+        >`
+          SELECT
+            preparation_duration::text
+          FROM recipes
+          JOIN users ON recipes.author_id = users.id
+          WHERE slug = ${slug} AND username = ${username}
+        `;
+
+        const [recipe, durationQuery] = await Promise.all([
+          recipePromise,
+          durationQueryPromise,
+        ]);
+
+        if (recipe == null || durationQuery.length === 0) {
+          return null;
+        }
+
+        return {
+          ...recipe,
+          preparitionDuration: durationQuery[0].preparation_duration,
+        };
+      },
       async create(data: {
         title: string;
         description: string;
