@@ -30,10 +30,10 @@
               :src="getProfileImageUrl(userData.username, userData.profileImageId)"
             /> {{ userData?.username }}
           </div>
-          <div class="flex flex-row flex-wrap items-center text-3xl font-display">
+          <div class="flex flex-row flex-wrap items-center gap-3 text-3xl font-display">
             <h2>{{ recipeData.title }}</h2>
             <div>
-              <RecipeStars :count="recipeData.rating" />
+              <RecipeStars :count="1.75" />
             </div>
           </div>
         </div>
