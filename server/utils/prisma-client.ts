@@ -4,11 +4,104 @@ import {
   Prisma,
   type RecipeIngredient,
 } from "@prisma/client";
+import { type Output /* is, instance, isoTimestamp, string */ } from "valibot";
 
-type RecipeIngredientInput = Omit<RecipeIngredient, "recipeId">;
+type PrismaPaginationArgs<T> = Omit<
+  Prisma.Args<T, "findMany">,
+  "skip" | "take" | "cursor" | "orderBy"
+> &
+  Output<typeof PaginationSchema> & {
+    cursor: {
+      field: keyof Prisma.Payload<T, "findMany">["scalars"];
+      direction: "asc" | "desc";
+    };
+  };
+
+function encodeCursor(cursor: any) {
+  /*
+  if (is(instance(Date), cursor)) {
+    cursor = cursor.toISOString();
+  }
+  */
+  return Buffer.from(cursor).toString("base64");
+}
+
+function decodeCursor(encodedCursor: string) {
+  const cursor: any = Buffer.from(encodedCursor, "base64").toString("utf-8");
+  /*
+  if (is(string([isoTimestamp()]), cursor)) {
+    cursor = new Date(cursor);
+  }
+  */
+  return cursor;
+}
 
 export const prisma = new PrismaClient().$extends({
   model: {
+    $allModels: {
+      async paginate<T, A extends PrismaPaginationArgs<T>>(
+        this: T,
+        args: A,
+      ): Promise<{
+        results: Prisma.Result<T, A, "findMany">;
+        after?: string;
+        before?: string;
+      }> {
+        const context = Prisma.getExtensionContext(this) as any;
+
+        const take = args.take ?? 10;
+        const after = args.after ? decodeCursor(args.after) : undefined;
+        const before = args.before ? decodeCursor(args.before) : undefined;
+
+        const results = await context.findMany({
+          // Pass all args except for 'after', 'before', 'skip', 'take', 'cursor' and 'orderBy'
+          // since values are handled by the pagination logic.
+          ...{
+            ...(args as any),
+            after: undefined,
+            before: undefined,
+            skip: undefined,
+            take: undefined,
+            cursor: undefined,
+            orderBy: undefined,
+          },
+          // Skip cursor when we have a 'before' or 'after' cursor.
+          skip: after || before ? 1 : undefined,
+          // Take one extra item to determine if there are more items.
+          // If we have a 'before' cursor, we need to reverse the order.
+          take: before ? -take - 1 : take + 1,
+          // Use the cursor if we have one.
+          cursor:
+            after || before
+              ? { [args.cursor.field]: after ?? before }
+              : undefined,
+          // Order by the cursor field in the specified direction.
+          orderBy: {
+            [args.cursor.field]: args.cursor.direction,
+          },
+        });
+
+        const hasMore = results.length > take;
+
+        if (hasMore && !args.before) {
+          results.pop();
+        } else if (hasMore && args.before) {
+          results.shift();
+        }
+
+        return {
+          results,
+          after:
+            (hasMore && !args.before) || args.before
+              ? encodeCursor(results[results.length - 1]?.[args.cursor.field])
+              : undefined,
+          before:
+            (hasMore && args.before) || args.after
+              ? encodeCursor(results[0]?.[args.cursor.field])
+              : undefined,
+        };
+      },
+    },
     recipe: {
       async create(data: {
         title: string;
@@ -25,7 +118,7 @@ export const prisma = new PrismaClient().$extends({
         numberOfServings: number;
         imageId: string;
         authorId: string;
-        recipeIngredients: RecipeIngredientInput[];
+        recipeIngredients: Omit<RecipeIngredient, "recipeId">[];
         categories: string[];
       }) {
         const {

@@ -1,3 +1,6 @@
+/*
+import { Prisma } from "@prisma/client";
+
 const DEFAULT_TAKE = 10;
 
 type PaginationData = {
@@ -7,21 +10,17 @@ type PaginationData = {
   nextCursor?: string | null;
 };
 
-type PaginateParams<T> = {
-  prismaModel: {
-    findMany: (where: any, ...args: any) => Promise<T[]>;
-  };
+type PaginateParams<T, A> = {
+  prismaModel: T;
   paginationData: PaginationData;
-  where?: Record<string, any>;
-  include?: Record<string, any>;
+  args?: Prisma.Exact<A, Omit<Prisma.Args<T, "findMany">, "skip" | "take" | "cursor">>;
 };
 
-export async function usePagination<T extends { id: string }>({
+export async function usePagination<T>({
   prismaModel,
   paginationData,
-  where = {},
-  include = {},
-}: PaginateParams<T>) {
+  args,
+}: PaginateParams<T>): {
   const { take = DEFAULT_TAKE, backwards = false, ...cursors } = paginationData;
   let { prevCursor, nextCursor } = cursors;
   prevCursor = prevCursor
@@ -36,9 +35,8 @@ export async function usePagination<T extends { id: string }>({
   // Adjust skip logic: Skip only when paginating forwards with a 'nextCursor'.
   const skipCursor = backwards ? (prevCursor ? 1 : 0) : nextCursor ? 1 : 0;
 
-  const data = await prismaModel.findMany({
-    where,
-    include,
+  const data = await (prismaModel as any).findMany({
+    ...args,
     skip: skipCursor, // Adjusted skip logic
     take: adjustedTake,
     cursor: cursor ? { id: cursor as string } : undefined,
@@ -73,10 +71,11 @@ export async function usePagination<T extends { id: string }>({
     newNextCursor = Buffer.from(newNextCursor).toString("base64");
 
   return {
-    data,
+    data: data as Prisma.Result<T, typeof args, "findMany">,
     pagination: {
       prevCursor: newPrevCursor,
       nextCursor: newNextCursor,
     },
   };
 }
+*/
