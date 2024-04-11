@@ -1,7 +1,40 @@
 import type { UseInfiniteScrollOptions } from "@vueuse/core";
-import type { AsyncData, UseFetchOptions, FetchResult } from "nuxt/app";
+import type { UseFetchOptions, FetchResult } from "nuxt/app";
 import type { FetchError } from "ofetch";
 import type { NitroFetchRequest, AvailableRouterMethod } from "nitropack";
+
+type FilterPaginationRequests<R extends NitroFetchRequest> = R extends string
+  ? AvailableRouterMethod<R> extends "get"
+    ? FetchResult<R, AvailableRouterMethod<R>> extends {
+        after?: string | null;
+        before?: string | null;
+        results: any[];
+      }
+      ? R
+      : never
+    : never
+  : never;
+
+type GetMethod<R extends NitroFetchRequest, M = AvailableRouterMethod<R>> =
+  AvailableRouterMethod<R> extends "get" ? M : never;
+
+type PaginationDataT<
+  R extends NitroFetchRequest,
+  D = FetchResult<R, AvailableRouterMethod<R>>,
+> =
+  AvailableRouterMethod<R> extends "get"
+    ? D extends {
+        after?: string | null;
+        before?: string | null;
+        results: any[];
+      }
+      ? D
+      : never
+    : never;
+
+type PaginatedNitroFetchRequest =
+  | FilterPaginationRequests<NitroFetchRequest>
+  | (string & {});
 
 type InfiniteScrollElement =
   | HTMLElement
@@ -12,104 +45,71 @@ type InfiniteScrollElement =
   | undefined;
 
 type UseInfiniteScrollFetchOptions<
-  _ResT,
-  DataT,
-  PickKeys extends KeysOf<DataT>,
-  DefaultT,
-  ReqT extends NitroFetchRequest,
-  Method extends AvailableRouterMethod<ReqT>,
+  ReqT extends PaginatedNitroFetchRequest,
+  DataT extends PaginationDataT<ReqT>,
+  PickKeys extends KeysOf<DataT> = KeysOf<DataT>,
   E extends InfiniteScrollElement = InfiniteScrollElement,
-> = UseFetchOptions<_ResT, DataT, PickKeys, DefaultT, ReqT, Method> &
+> = UseFetchOptions<DataT, DataT, PickKeys, DataT, ReqT, GetMethod<ReqT>> &
   Omit<UseInfiniteScrollOptions<E>, "canLoadMore"> & {
     take?: number;
   };
 
-type FilterPaginationRequests<R extends NitroFetchRequest> = R extends string
-  ? FetchResult<R, AvailableRouterMethod<R>> extends {
-      after?: string;
-      before?: string;
-      results: any[];
-    }
-    ? R
-    : never
-  : never;
-
-type PaginatedNitroFetchRequest = FilterPaginationRequests<NitroFetchRequest>;
-
 export async function useInfiniteScrollFetch<
-  ResT = void,
+  ReqT extends PaginatedNitroFetchRequest,
+  DataT extends PaginationDataT<ReqT>,
   ErrorT = FetchError,
-  ReqT extends PaginatedNitroFetchRequest = PaginatedNitroFetchRequest,
-  Method extends AvailableRouterMethod<ReqT> = ResT extends void
-    ? "get" extends AvailableRouterMethod<ReqT>
-      ? "get"
-      : AvailableRouterMethod<ReqT>
-    : AvailableRouterMethod<ReqT>,
-  _ResT = ResT extends void ? FetchResult<ReqT, Method> : ResT,
-  DataT = _ResT,
   PickKeys extends KeysOf<DataT> = KeysOf<DataT>,
-  DefaultT = DataT,
   E extends InfiniteScrollElement = InfiniteScrollElement,
 >(
   element: MaybeRefOrGetter<E>,
   request: MaybeRefOrGetter<ReqT>,
-  opts: UseInfiniteScrollFetchOptions<
-    _ResT,
-    DataT,
-    PickKeys,
-    DefaultT,
-    ReqT,
-    Method,
-    E
-  > = {},
+  opts: UseInfiniteScrollFetchOptions<ReqT, DataT, PickKeys, E> = {},
 ): Promise<{
-  data: AsyncData<PickFrom<DataT, PickKeys> | DefaultT, ErrorT | null>["data"];
+  data: Ref<DataT["results"]>;
 }> {
-  const after = ref<string | null>(null);
-  const data = ref() as Ref<DefaultT | PickFrom<DataT, PickKeys>>;
+  const after = ref<string | undefined | null>(null);
+  const results = ref([]) as Ref<DataT["results"]>;
 
-  const { data: currentData, refresh } = await useFetch<
-    ResT,
+  const { data: currentData, status } = await useFetch<
+    DataT,
     ErrorT,
     ReqT,
-    Method,
-    _ResT,
+    GetMethod<ReqT>,
+    DataT,
     DataT,
     PickKeys,
-    DefaultT
+    DataT
   >(request, {
     ...opts,
     query: {
       ...opts.query,
-      take: 20,
+      take: opts.take,
       after,
     },
   });
 
-  watch(
-    currentData,
-    (newData) => {
-      data.value = newData;
-      console.log("newData", newData);
-    },
-    { immediate: true },
-  );
+  const currentAfter = computed(() => (currentData.value as DataT).after);
+
+  results.value = (currentData.value as DataT).results;
+
+  watch(currentData, (newData) => {
+    const data = newData as DataT;
+    results.value = [...results.value, ...data.results];
+  });
 
   useInfiniteScroll(
     element,
-    async () => {
-      if (after.value) {
-        await refresh();
-      }
+    () => {
+      after.value = currentAfter.value;
     },
     {
       ...opts,
-      canLoadMore: () => !!after.value,
+      canLoadMore: () => !!currentAfter.value && status.value !== "pending",
     },
   );
 
   return {
-    data,
+    data: results,
   };
 }
 

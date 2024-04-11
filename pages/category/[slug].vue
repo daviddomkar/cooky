@@ -23,7 +23,9 @@ const { data: randomRecipe } = await useFetch("/api/recipes/random", {
   query: { category: route.params.slug },
 });
 
-const { data } = await useInfiniteScrollFetch(window, "/api/recipes");
+const { data } = await useInfiniteScrollFetch(window, "/api/recipes", {
+  query: { category: route.params.slug },
+});
 
 const mostRatedRecipe = computed(() => mostRatedRecipeData?.value?.[0]);
 const mostSavedRecipe = computed(() => mostSavedRecipeData?.value?.[0]);
@@ -95,7 +97,7 @@ const { isMobile } = useDevice();
       <MasonryWall
         :column-width="256"
         :gap="16"
-        :items="data?.results"
+        :items="data"
         :max-columns="4"
         :ssr-columns="isMobile ? 1 : 4"
       >
