@@ -1,114 +1,109 @@
-export const usePaginatedFetch = async <T>(
-  url: string,
-  providedQuery: MaybeRefOrGetter<PaginationQuery> = {},
-) => {
-  const prevCursor = ref<string | undefined>();
-  const nextCursor = ref<string | undefined>();
-  const data = ref<T[]>();
-  const pending = ref(false);
-  const error = ref<any>(undefined);
-  const query = ref(providedQuery);
+import type { NitroFetchRequest, AvailableRouterMethod } from "nitropack";
+import type { FetchError } from "ofetch";
+import type {
+  UseFetchOptions,
+  FetchResult,
+  AsyncDataRequestStatus,
+} from "nuxt/app";
 
-  const canGoBack = computed(() => !!prevCursor.value);
-  const canGoForward = computed(() => !!nextCursor.value);
+type GetMethod<R extends NitroFetchRequest, M = AvailableRouterMethod<R>> =
+  AvailableRouterMethod<R> extends "get" ? M : never;
 
-  const isInitialFetch = ref(true);
+type PaginationData<
+  R extends NitroFetchRequest,
+  D = FetchResult<R, AvailableRouterMethod<R>>,
+> =
+  AvailableRouterMethod<R> extends "get"
+    ? D extends {
+        after?: string | null;
+        before?: string | null;
+        results: any[];
+      }
+      ? D
+      : never
+    : never;
+
+type FilterPaginationRequests<R extends NitroFetchRequest> = R extends string
+  ? AvailableRouterMethod<R> extends GetMethod<R>
+    ? FetchResult<R, AvailableRouterMethod<R>> extends PaginationData<R>
+      ? R
+      : never
+    : never
+  : never;
+
+type PaginatedNitroFetchRequest = FilterPaginationRequests<NitroFetchRequest>;
+
+type UsePaginatedFetchOptions<
+  ReqT extends PaginatedNitroFetchRequest,
+  DataT extends PaginationData<ReqT>,
+  PickKeys extends KeysOf<DataT> = KeysOf<DataT>,
+> = UseFetchOptions<DataT, DataT, PickKeys, DataT, ReqT, GetMethod<ReqT>> & {
+  take?: number;
+};
+
+export async function usePaginatedFetch<
+  ReqT extends PaginatedNitroFetchRequest,
+  DataT extends PaginationData<ReqT>,
+  ErrorT = FetchError,
+  PickKeys extends KeysOf<DataT> = KeysOf<DataT>,
+>(
+  request: MaybeRefOrGetter<ReqT>,
+  opts: UsePaginatedFetchOptions<ReqT, DataT, PickKeys> = {},
+): Promise<{
+  data: Ref<DataT["results"]>;
+  status: Ref<AsyncDataRequestStatus>;
+  error: Ref<ErrorT | null>;
+  next: Ref<(() => void) | null>;
+  previous: Ref<(() => void) | null>;
+}> {
+  const after = ref<string | null | undefined>(null);
+  const before = ref<string | null | undefined>(null);
 
   watch(
-    () => toValue(query),
-    async (changedQuery) => {
-      query.value = changedQuery;
-      data.value = [];
-      prevCursor.value = undefined;
-      nextCursor.value = undefined;
-      isInitialFetch.value = true;
-      await next();
-      isInitialFetch.value = false;
+    () => opts.query?.value,
+    () => {
+      before.value = null;
+      after.value = null;
     },
   );
 
-  const next = async () => {
-    if (!canGoForward.value && !isInitialFetch.value) return;
-    error.value = undefined;
-    pending.value = true;
+  const { data, status, error } = await useFetch<
+    DataT,
+    ErrorT,
+    ReqT,
+    GetMethod<ReqT>,
+    DataT,
+    DataT,
+    PickKeys,
+    DataT
+  >(request, {
+    ...opts,
+    query: {
+      ...opts.query,
+      take: opts.take,
+      after,
+      before,
+    },
+  });
 
-    try {
-      const { data: records, pagination } = await $fetch<PaginationResult<T>>(
-        url,
-        {
-          query: {
-            ...query.value,
-            prevCursor: prevCursor.value,
-            nextCursor: nextCursor.value,
-          },
-        },
-      );
+  const currentAfter = computed(() => (data.value as DataT).after);
+  const currentBefore = computed(() => (data.value as DataT).before);
 
-      data.value = records;
+  const results = computed(() => (data.value as DataT).results);
 
-      prevCursor.value = pagination.prevCursor;
-      nextCursor.value = pagination.nextCursor;
-    } catch (e) {
-      error.value = e;
-    } finally {
-      pending.value = false;
-    }
-  };
+  const next = computed(() => {
+    if (!currentAfter.value) return null;
+    return () => {
+      after.value = currentAfter.value;
+    };
+  });
 
-  const previous = async () => {
-    if (!canGoBack.value) return;
-    error.value = undefined;
-    pending.value = true;
+  const previous = computed(() => {
+    if (!currentBefore.value) return null;
+    return () => {
+      before.value = currentBefore.value;
+    };
+  });
 
-    try {
-      const { data: records, pagination } = await $fetch<PaginationResult<T>>(
-        url,
-        {
-          query: {
-            ...query.value,
-            prevCursor: prevCursor.value,
-            nextCursor: nextCursor.value,
-            backwards: true,
-          },
-        },
-      );
-
-      data.value = records;
-
-      prevCursor.value = pagination.prevCursor;
-      nextCursor.value = pagination.nextCursor;
-    } catch (e) {
-      error.value = e;
-    } finally {
-      pending.value = false;
-    }
-  };
-
-  // Initial fetch with useFetch
-  const result = reactive(
-    await useFetch<PaginationResult<T>>(url, {
-      query: {
-        ...query.value,
-        prevCursor: prevCursor.value,
-        nextCursor: nextCursor.value,
-      },
-    }),
-  );
-
-  data.value = result.data?.data;
-  pending.value = result.pending;
-  error.value = result.error;
-
-  prevCursor.value = result.data?.pagination.prevCursor;
-  nextCursor.value = result.data?.pagination.nextCursor;
-
-  return {
-    data,
-    pending,
-    error,
-    next,
-    previous,
-    canGoBack,
-    canGoForward,
-  };
-};
+  return { data: results, status, error, next, previous };
+}

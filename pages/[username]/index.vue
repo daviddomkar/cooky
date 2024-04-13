@@ -71,7 +71,7 @@ const saveCoverImage = async (blob: Blob) => {
       </div>
       <div v-if="profile!.lists.length > 0" class="flex flex-col gap-1">
         <h2
-          class="my-0 text-center text-4xl text-on-surface-variant lg:text-left sm:text-5xl"
+          class="mb-4 mt-0 text-center text-4xl text-on-surface-variant lg:text-left sm:text-5xl"
         >
           Lists
         </h2>
@@ -97,7 +97,7 @@ const saveCoverImage = async (blob: Blob) => {
       </div>
       <div v-if="profile!.recipes.length > 0" class="flex flex-col gap-1">
         <h2
-          class="my-0 text-center text-4xl text-on-surface-variant lg:text-left sm:text-5xl"
+          class="mb-4 mt-0 text-center text-4xl text-on-surface-variant lg:text-left sm:text-5xl"
         >
           Recipes
         </h2>
