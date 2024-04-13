@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
     where: query
       ? {
           title: {
-        search: `${query.replace(/[\s\n\t]/g, "_")}:*`,
+            search: `${query.replace(/[\s\n\t]/g, "_")}:*`,
           },
         }
       : undefined,
