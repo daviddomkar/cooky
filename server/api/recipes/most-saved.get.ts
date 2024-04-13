@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
     }),
   );
 
-  const recipes = await prisma.recipesByRatings.findMany({
+  const recipes = await prisma.recipesBySaves.findMany({
     take: limit,
   });
 
