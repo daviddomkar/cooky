@@ -1,28 +1,16 @@
 import type { UseInfiniteScrollOptions } from "@vueuse/core";
+import type { NitroFetchRequest, AvailableRouterMethod } from "nitropack";
+import type { FetchError } from "ofetch";
 import type {
   UseFetchOptions,
   FetchResult,
   AsyncDataRequestStatus,
 } from "nuxt/app";
-import type { FetchError } from "ofetch";
-import type { NitroFetchRequest, AvailableRouterMethod } from "nitropack";
-
-type FilterPaginationRequests<R extends NitroFetchRequest> = R extends string
-  ? AvailableRouterMethod<R> extends "get"
-    ? FetchResult<R, AvailableRouterMethod<R>> extends {
-        after?: string | null;
-        before?: string | null;
-        results: any[];
-      }
-      ? R
-      : never
-    : never
-  : never;
 
 type GetMethod<R extends NitroFetchRequest, M = AvailableRouterMethod<R>> =
   AvailableRouterMethod<R> extends "get" ? M : never;
 
-type PaginationDataT<
+type PaginationData<
   R extends NitroFetchRequest,
   D = FetchResult<R, AvailableRouterMethod<R>>,
 > =
@@ -36,9 +24,15 @@ type PaginationDataT<
       : never
     : never;
 
-type PaginatedNitroFetchRequest =
-  | FilterPaginationRequests<NitroFetchRequest>
-  | (string & {});
+type FilterPaginationRequests<R extends NitroFetchRequest> = R extends string
+  ? AvailableRouterMethod<R> extends GetMethod<R>
+    ? FetchResult<R, AvailableRouterMethod<R>> extends PaginationData<R>
+      ? R
+      : never
+    : never
+  : never;
+
+type PaginatedNitroFetchRequest = FilterPaginationRequests<NitroFetchRequest>;
 
 type InfiniteScrollElement =
   | HTMLElement
@@ -50,7 +44,7 @@ type InfiniteScrollElement =
 
 type UseInfiniteScrollFetchOptions<
   ReqT extends PaginatedNitroFetchRequest,
-  DataT extends PaginationDataT<ReqT>,
+  DataT extends PaginationData<ReqT>,
   PickKeys extends KeysOf<DataT> = KeysOf<DataT>,
   E extends InfiniteScrollElement = InfiniteScrollElement,
 > = UseFetchOptions<DataT, DataT, PickKeys, DataT, ReqT, GetMethod<ReqT>> &
@@ -60,7 +54,7 @@ type UseInfiniteScrollFetchOptions<
 
 export async function useInfiniteScrollFetch<
   ReqT extends PaginatedNitroFetchRequest,
-  DataT extends PaginationDataT<ReqT>,
+  DataT extends PaginationData<ReqT>,
   ErrorT = FetchError,
   PickKeys extends KeysOf<DataT> = KeysOf<DataT>,
   E extends InfiniteScrollElement = InfiniteScrollElement,
@@ -73,8 +67,15 @@ export async function useInfiniteScrollFetch<
   status: Ref<AsyncDataRequestStatus>;
   error: Ref<ErrorT | null>;
 }> {
-  const after = ref<string | undefined | null>(null);
+  const after = ref<string | null | undefined>(null);
   const data = ref([]) as Ref<DataT["results"]>;
+
+  watch(
+    () => opts.query?.value,
+    () => {
+      after.value = null;
+    },
+  );
 
   const {
     data: currentData,
@@ -103,7 +104,11 @@ export async function useInfiniteScrollFetch<
   data.value = (currentData.value as DataT).results;
 
   watch(currentData, (newData) => {
-    data.value = [...data.value, ...(newData as DataT).results];
+    if (!(newData as DataT).before) {
+      data.value = (newData as DataT).results;
+    } else {
+      data.value = [...data.value, ...(newData as DataT).results];
+    }
   });
 
   useInfiniteScroll(

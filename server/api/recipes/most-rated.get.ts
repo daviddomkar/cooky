@@ -6,6 +6,7 @@ import {
   maxValue,
   minValue,
   coerce,
+  integer,
 } from "valibot";
 
 export default defineEventHandler(async (event) => {
@@ -15,8 +16,9 @@ export default defineEventHandler(async (event) => {
       limit: nullish(
         coerce(
           number("Limit must be a number.", [
+            integer("Limit must be an integer."),
             minValue(1, "Limit must be at least 1."),
-            maxValue(100, "Limit must be at most 30."),
+            maxValue(100, "Limit must be at most 100."),
           ]),
           Number,
         ),
