@@ -93,7 +93,10 @@ const { isMobile } = useDevice();
       <div v-if="specialCardCount < 4" />
     </div>
     <div>
-      <h2 class="my-0 text-5xl">{{ route.params.slug }}</h2>
+      <h2
+        class="mb-4 mt-0 text-center text-4xl text-on-surface-variant lg:text-left sm:text-5xl"
+        >{{ route.params.slug }}</h2
+      >
       <MasonryWall
         :column-width="256"
         :gap="16"
