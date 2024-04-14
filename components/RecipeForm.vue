@@ -3,12 +3,12 @@ import type { Input, Output } from "valibot";
 import type { SubmissionHandler } from "vee-validate";
 
 const props = defineProps<{
-  initialValues?: Input<typeof NewRecipeSchema>;
-  onSubmit?: SubmissionHandler<Output<typeof NewRecipeSchema>>;
+  initialValues?: Input<typeof RecipeFormSchema>;
+  onSubmit?: SubmissionHandler<Output<typeof RecipeFormSchema>>;
 }>();
 
 const { handleSubmit, handleReset, errors } = useForm({
-  validationSchema: toTypedSchema(NewRecipeSchema),
+  validationSchema: toTypedSchema(RecipeFormSchema),
   initialValues: props.initialValues,
 });
 

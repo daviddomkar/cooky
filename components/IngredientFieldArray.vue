@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Output } from "valibot";
+import type { Input } from "valibot";
 import { useSortable } from "@vueuse/integrations/useSortable";
 
 const {
@@ -7,7 +7,7 @@ const {
   remove: removeIngredient,
   fields: ingredients,
   move: moveIngredient,
-} = useFieldArray<Output<typeof RecipeIngredientSchema>>("ingredients");
+} = useFieldArray<Input<typeof RecipeIngredientSchema>>("ingredients");
 
 useSortable("#ingredients", ingredients, {
   handle: ".cursor-grab",
@@ -59,8 +59,14 @@ useSortable("#ingredients", ingredients, {
     <BaseButton
       spread="compact"
       @click="
-        // @ts-ignore
-        addIngredient({})
+        addIngredient({
+          ingredient: {
+            title: '',
+            unitTypes: [],
+          },
+          amount: 0,
+          unitId: '',
+        })
       "
     >
       <template #icon>

@@ -7,6 +7,7 @@ type Props = {
   min?: number;
   max?: number;
   controlled?: boolean;
+  error?: boolean;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -15,13 +16,21 @@ const props = withDefaults(defineProps<Props>(), {
   controlled: true,
   min: undefined,
   max: undefined,
+  error: false,
 });
 
 defineModel<string>();
 
-const { value, errorMessage, handleBlur, handleChange } = useField<
-  string | number
->(() => props.name, undefined, {
+const emit = defineEmits<{
+  (e: "blur", event: Event): void;
+}>();
+
+const {
+  value,
+  errorMessage,
+  handleBlur: handleFieldBlur,
+  handleChange,
+} = useField<string | number>(() => props.name, undefined, {
   validateOnValueUpdate: false,
   syncVModel: true,
   controlled: props.controlled,
@@ -31,13 +40,20 @@ const { value, errorMessage, handleBlur, handleChange } = useField<
 const hasValue = computed(
   () => value.value !== null && value.value !== undefined && value.value !== "",
 );
+
+const hasError = computed(() => !!errorMessage.value || props.error);
+
+const handleBlur = (event: Event, validate: boolean) => {
+  handleFieldBlur(event, validate);
+  emit("blur", event);
+};
 </script>
 
 <template>
   <div
     class="box-border w-full flex flex-col gap-1"
     :class="{
-      'pb-4': !errorMessage,
+      'pb-4': !hasError,
     }"
   >
     <div
@@ -51,8 +67,8 @@ const hasValue = computed(
         class="peer box-border h-full w-full flex items-center self-start overflow-hidden border-1 rounded-3xl border-solid text-on-surface transition-colors focus-within:border-primary/0 dark:bg-surface-container"
         :class="{
           'border-primary/0': hasValue,
-          'border-outline': !hasValue && !errorMessage,
-          'border-error': errorMessage,
+          'border-outline': !hasValue && !hasError,
+          'border-error': hasError,
         }"
       >
         <component
@@ -66,7 +82,7 @@ const hasValue = computed(
           :value="value"
           @blur="handleBlur($event, true)"
           @change="handleChange"
-          @input="handleChange($event, !!errorMessage)"
+          @input="handleChange($event, hasError)"
         />
         <slot name="trailing" />
       </div>
@@ -74,11 +90,9 @@ const hasValue = computed(
         class="pointer-events-none absolute top-4 ml-6 inline-block leading-4 uppercase transition-all peer-focus-within:translate-x-[1px] peer-focus-within:translate-y-[-23.5px] peer-focus-within:text-xs"
         :class="{
           'text-xs translate-y-[-23.5px] translate-x-[1px]': hasValue,
-          'text-primary peer-focus-within:text-primary':
-            hasValue && !errorMessage,
-          'text-outline peer-focus-within:text-primary':
-            !hasValue && !errorMessage,
-          'text-error peer-focus-within:text-error': errorMessage,
+          'text-primary peer-focus-within:text-primary': hasValue && !hasError,
+          'text-outline peer-focus-within:text-primary': !hasValue && !hasError,
+          'text-error peer-focus-within:text-error': hasError,
         }"
         :for="name"
       >
@@ -88,10 +102,10 @@ const hasValue = computed(
         class="pointer-events-none absolute bottom-0 left-0 mx-0 box-border h-[calc(100%_+_0.475rem)] w-full border-1 rounded-3xl border-solid p-0 transition-colors"
         :class="{
           'border-primary peer-focus-within:border-primary':
-            hasValue && !errorMessage,
+            hasValue && !hasError,
           'border-transparent peer-focus-within:border-primary':
-            !hasValue && !errorMessage,
-          'border-error peer-focus-within:border-error': errorMessage,
+            !hasValue && !hasError,
+          'border-error peer-focus-within:border-error': hasError,
         }"
       >
         <legend
@@ -102,10 +116,7 @@ const hasValue = computed(
       </fieldset>
     </div>
     <slot name="error">
-      <label
-        v-if="errorMessage"
-        class="inline-block px-6 pb-1 text-xs text-error"
-      >
+      <label v-if="hasError" class="inline-block px-6 pb-1 text-xs text-error">
         {{ errorMessage }}
       </label>
     </slot>

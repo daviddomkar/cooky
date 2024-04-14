@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Input } from "valibot";
 import BaseButton from "./BaseButton.vue";
 import TextField from "./TextField.vue";
 
@@ -9,68 +10,79 @@ type Props = {
 
 const props = defineProps<Props>();
 
-type Ingredient = {
-  id: string;
-  title: string;
-  unitTypes: string[];
-};
-
 const {
   value,
   handleChange: handleFieldChange,
   errorMessage,
   meta,
-} = useField<Ingredient | null>(() => `${props.name}.ingredient`);
+  validate,
+} = useField<Input<typeof IngredientFormSchema>>(
+  () => `${props.name}.ingredient`,
+);
 
 const query = ref("");
 
-const queryIngredient = computed(() => {
-  return query.value === ""
-    ? null
-    : { id: null, title: query.value, unitTypes: [] };
-});
+const dialogRef = ref<Input<typeof IngredientFormSchema> | undefined>();
 
 const ingredientsContainerRef = ref<HTMLElement | null>(null);
 
-const params = computed(() => {
-  return {
-    take: 10,
-    query: query.value,
-  };
-});
-
-const { data: ingredients } = useInfiniteScrollFetch<Ingredient>(
-  "/api/ingredients",
+const { data: ingredients } = await useInfiniteScrollFetch(
   ingredientsContainerRef,
-  params,
+  "/api/ingredients",
+  {
+    take: 10,
+    query: {
+      query,
+    },
+  },
 );
 
-const handleChange = (ingredient: Ingredient | null) => {
+const handleChange = (ingredient: Input<typeof IngredientFormSchema>) => {
+  /* if (queryIngredient.value !== null && ingredient === queryIngredient.value) {
+    dialogRef.value = ingredient;
+    return;
+  } */
+
+  console.log(ingredient);
+
   if (ingredient) {
     query.value = ingredient.title;
   }
 
-  handleFieldChange(ingredient);
+  handleFieldChange(ingredient, query.value !== "");
+};
+
+const handleQueryUpdate = (q: string) => {
+  query.value = q;
+};
+
+const handleQueryBlur = () => {
+  if (query.value === "") {
+    validate();
+  }
 };
 </script>
 
 <template>
   <div>
+    <IngredientFormDialog v-model="dialogRef" />
     <HeadlessCombobox
       as="div"
       class="relative focus:outline-none"
-      immediate
       :model-value="value"
+      :name="`${props.name}.ingredient`"
       nullable
       @update:model-value="handleChange"
     >
-      <HeadlessComboboxInput as="template">
+      <HeadlessComboboxInput as="template" class="focus:outline-none">
         <TextField
           :controlled="false"
+          :error="!!errorMessage"
           :label="label"
           :model-value="query"
           :name="`${name}.query`"
-          @update:model-value="query = $event"
+          @blur="handleQueryBlur"
+          @update:model-value="handleQueryUpdate"
         >
           <template v-if="value && meta.dirty && meta.valid" #trailing>
             <BaseButton class="mr-0.75" spread="compact" variant="secondary">
@@ -91,7 +103,10 @@ const handleChange = (ingredient: Ingredient | null) => {
       <HeadlessComboboxOptions as="template">
         <ul
           ref="ingredientsContainerRef"
-          class="absolute z-1 my-0 max-h-80 w-full list-none overflow-auto rounded-3xl bg-surface pl-0 text-on-surface shadow-2xl -mt-2 dark:bg-surface-container"
+          class="absolute z-1 my-0 max-h-80 w-full list-none overflow-auto rounded-3xl bg-surface pl-0 text-on-surface shadow-2xl -mt-3 dark:bg-surface-container"
+          :class="{
+            '-mt-5': !!errorMessage,
+          }"
         >
           <HeadlessComboboxOption
             v-for="(ingredient, index) in ingredients"
@@ -106,9 +121,10 @@ const handleChange = (ingredient: Ingredient | null) => {
             {{ ingredient.title }}
           </HeadlessComboboxOption>
           <HeadlessComboboxOption
-            v-if="queryIngredient"
+            v-if="query"
             class="cursor-pointer from-primary to-secondary bg-gradient-to-r px-6 py-3 text-base text-white"
-            :value="queryIngredient"
+            :value="null"
+            @click="dialogRef = { title: query, unitTypes: [] }"
           >
             Create "{{ query.trim() }}"
           </HeadlessComboboxOption>
