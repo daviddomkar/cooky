@@ -6,6 +6,7 @@
       key: string;
       title: string;
       value: V;
+      disabled?: boolean;
     },
     V extends string | number | boolean | object | null | undefined
   "
@@ -85,8 +86,9 @@ const hasValue = computed(() => {
           <HeadlessListboxOption
             v-for="(option, index) in options"
             :key="option.key"
-            v-slot="{ selected, active }"
+            v-slot="{ selected, active, disabled }"
             as="template"
+            :disabled="option.disabled"
             :value="option.value"
           >
             <li
@@ -95,7 +97,8 @@ const hasValue = computed(() => {
                 'border-b-1 border-b-outline/50 border-b-solid':
                   index !== options.length - 1,
                 'bg-outline/20': active,
-                'text-primary': selected,
+                'text-primary': selected && !disabled,
+                'text-outline cursor-not-allowed': disabled,
               }"
             >
               <div class="grow">

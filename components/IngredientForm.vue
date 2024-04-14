@@ -5,6 +5,7 @@ import type { SubmissionHandler } from "vee-validate";
 
 const props = defineProps<{
   initialValues?: Input<typeof IngredientFormSchema>;
+  disabledUnitTypes?: UnitType[];
   onSubmit?: SubmissionHandler<Output<typeof IngredientFormSchema>>;
 }>();
 
@@ -39,16 +40,25 @@ onMounted(() =>
           key: 'quantity',
           title: 'Quantity',
           value: UnitType.QUANTITY,
+          disabled:
+            !!initialValues?.id &&
+            !!disabledUnitTypes?.includes(UnitType.QUANTITY),
         },
         {
           key: 'volume',
           title: 'Volume',
           value: UnitType.VOLUME,
+          disabled:
+            !!initialValues?.id &&
+            !!disabledUnitTypes?.includes(UnitType.VOLUME),
         },
         {
           key: 'weight',
           title: 'Weight',
           value: UnitType.WEIGHT,
+          disabled:
+            !!initialValues?.id &&
+            !!disabledUnitTypes?.includes(UnitType.WEIGHT),
         },
       ]"
     />

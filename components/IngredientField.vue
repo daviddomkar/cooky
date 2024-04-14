@@ -22,6 +22,10 @@ const {
 
 const query = ref("");
 
+// Used for storing current existing ingredient based on which the unit types are disabled
+const originalValue = ref<Input<typeof IngredientFormSchema> | undefined>();
+
+// Used for storing the ingredient that is being created
 const queryIngredient = computed(() => {
   return { id: undefined, title: query.value, unitTypes: [] };
 });
@@ -56,11 +60,13 @@ const handleIngredientSubmit = (
 
 const handleChange = (ingredient: Input<typeof IngredientFormSchema>) => {
   if (ingredient?.id === undefined && ingredient?.title === query.value) {
+    originalValue.value = undefined;
     dialogRef.value = ingredient;
     return;
   }
 
   if (ingredient) {
+    originalValue.value = ingredient;
     query.value = ingredient.title;
   }
 
@@ -91,6 +97,7 @@ watch(dialogRef, (opened) => {
   <div>
     <IngredientFormDialog
       v-model="dialogRef"
+      :disabled-unit-types="originalValue?.unitTypes"
       :on-submit="handleIngredientSubmit"
     />
     <HeadlessCombobox
@@ -111,9 +118,9 @@ watch(dialogRef, (opened) => {
           @blur="handleQueryBlur"
           @update:model-value="handleQueryUpdate"
         >
-          <template v-if="value && meta.dirty && meta.valid" #trailing>
+          <template #trailing>
             <BaseButton
-              class="mr-0.75"
+              v-if="value && meta.dirty && meta.valid"
               spread="compact"
               variant="secondary"
               @click="dialogRef = value"
@@ -123,7 +130,6 @@ watch(dialogRef, (opened) => {
           </template>
         </TextField>
       </HeadlessComboboxInput>
-
       <HeadlessComboboxOptions as="template">
         <ul
           ref="ingredientsContainerRef"

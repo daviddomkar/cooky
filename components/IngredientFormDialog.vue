@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import type { UnitType } from "@prisma/client";
 import type { Input, Output } from "valibot";
 import type { SubmissionHandler } from "vee-validate";
 
 const props = defineProps<{
+  disabledUnitTypes?: UnitType[];
   onSubmit?: SubmissionHandler<Output<typeof IngredientFormSchema>>;
 }>();
 
@@ -34,6 +36,10 @@ const onSubmit = async (
     <template #activator>
       <slot name="activator" :open="open" />
     </template>
-    <IngredientForm :initial-values="model" :on-submit="onSubmit" />
+    <IngredientForm
+      :disabled-unit-types="disabledUnitTypes"
+      :initial-values="model"
+      :on-submit="onSubmit"
+    />
   </BaseDialog>
 </template>
