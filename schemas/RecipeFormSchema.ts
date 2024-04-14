@@ -13,6 +13,8 @@ import {
   regex,
   uuid,
   notValue,
+  boolean,
+  nullish,
 } from "valibot";
 
 export const RecipeIngredientSchema = object({
@@ -38,6 +40,7 @@ export const StepSchema = object({
 });
 
 export default object({
+  draft: nullish(boolean(), true),
   title: string("This field is required.", [
     toTrimmed(),
     minLength(1, "This field is required."),
