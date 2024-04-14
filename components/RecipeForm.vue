@@ -101,7 +101,7 @@ const saveAsDraft = async () => {
         </div>
       </div>
       <div class="flex flex-col gap-8 xl:flex-row">
-        <IngredientFieldArray class="grow-1 basis-0" :units="units" />
+        <RecipeIngredientFieldArray class="grow-1 basis-0" :units="units" />
         <StepFieldArray class="grow-2 basis-0" />
       </div>
     </div>

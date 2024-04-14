@@ -12,7 +12,7 @@ const {
   remove: removeIngredient,
   fields: ingredients,
   move: moveIngredient,
-} = useFieldArray<Input<typeof RecipeIngredientSchema>>("ingredients");
+} = useFieldArray<Input<typeof RecipeIngredientFormSchema>>("ingredients");
 
 useSortable("#ingredients", ingredients, {
   handle: ".cursor-grab",
@@ -43,7 +43,7 @@ useSortable("#ingredients", ingredients, {
           </BaseButton>
         </div>
         <div class="flex grow basis-0 gap-2">
-          <IngredientField
+          <RecipeIngredientField
             class="grow basis-0"
             :label="`${idx + 1}. Ingredient`"
             :name="`ingredients[${idx}]`"
@@ -52,6 +52,7 @@ useSortable("#ingredients", ingredients, {
           <div class="h-12 flex items-center">
             <BaseButton
               class="z-1"
+              :disabled="ingredients.length === 1"
               spread="compact"
               variant="danger"
               @click="removeIngredient(idx)"
@@ -63,6 +64,7 @@ useSortable("#ingredients", ingredients, {
       </div>
     </div>
     <BaseButton
+      v-if="ingredients.length < 32"
       spread="compact"
       @click="
         // @ts-expect-error

@@ -7,7 +7,7 @@ const {
   remove: removeStep,
   fields: steps,
   move: moveStep,
-} = useFieldArray<Output<typeof StepSchema>>("steps");
+} = useFieldArray<Output<typeof StepFormSchema>>("steps");
 
 useSortable("#steps", steps, {
   handle: ".cursor-grab",
@@ -41,6 +41,7 @@ useSortable("#steps", steps, {
         <div class="h-12 flex items-center">
           <BaseButton
             class="z-1"
+            :disabled="steps.length === 1"
             spread="compact"
             variant="danger"
             @click="removeStep(idx)"
@@ -50,7 +51,11 @@ useSortable("#steps", steps, {
         </div>
       </div>
     </div>
-    <BaseButton spread="compact" @click="addStep({ title: '', content: '' })">
+    <BaseButton
+      v-if="steps.length < 32"
+      spread="compact"
+      @click="addStep({ title: '', content: '' })"
+    >
       <template #icon>
         <div class="i-material-symbols:add scale-[1.25]" />
       </template>
