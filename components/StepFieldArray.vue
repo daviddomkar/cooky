@@ -25,7 +25,7 @@ useSortable("#steps", steps, {
       <div v-for="(step, idx) in steps" :key="step.key" class="flex gap-2">
         <div class="h-12 flex items-center">
           <BaseButton
-            class="cursor-grab"
+            class="cursor-grab text-outline"
             density="compact"
             spread="none"
             variant="transparent"

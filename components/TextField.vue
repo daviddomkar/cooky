@@ -6,20 +6,22 @@ type Props = {
   multiline?: boolean;
   min?: number;
   max?: number;
+  disabled?: boolean;
   controlled?: boolean;
-  error?: boolean;
+  errorMessage?: string;
 };
 
 const props = withDefaults(defineProps<Props>(), {
   type: "text",
   multiline: false,
-  controlled: true,
   min: undefined,
   max: undefined,
-  error: false,
+  disabled: false,
+  controlled: true,
+  errorMessage: undefined,
 });
 
-defineModel<string>();
+defineModel<string | number>();
 
 const emit = defineEmits<{
   (e: "blur", event: Event): void;
@@ -27,7 +29,7 @@ const emit = defineEmits<{
 
 const {
   value,
-  errorMessage,
+  errorMessage: fieldErrorMessage,
   handleBlur: handleFieldBlur,
   handleChange,
 } = useField<string | number>(() => props.name, undefined, {
@@ -41,7 +43,9 @@ const hasValue = computed(
   () => value.value !== null && value.value !== undefined && value.value !== "",
 );
 
-const hasError = computed(() => !!errorMessage.value || props.error);
+const hasError = computed(
+  () => !!fieldErrorMessage.value || !!props.errorMessage,
+);
 
 const handleBlur = (event: Event, validate: boolean) => {
   handleFieldBlur(event, validate);
@@ -50,75 +54,31 @@ const handleBlur = (event: Event, validate: boolean) => {
 </script>
 
 <template>
-  <div
-    class="box-border w-full flex flex-col gap-1"
-    :class="{
-      'pb-4': !hasError,
-    }"
+  <FieldScaffold
+    :active="hasValue"
+    :disabled="disabled"
+    :error-message="fieldErrorMessage ?? errorMessage"
+    :expanded="multiline"
+    :label="label"
+    :name="name"
   >
-    <div
-      class="relative w-full flex shrink-0 basis-12"
+    <component
+      :is="multiline ? 'textarea' : 'input'"
+      :id="name"
+      class="box-border h-full w-full grow basis-0 resize-none border-none bg-transparent px-6 py-3 text-on-surface focus:outline-none focus:ring-none"
       :class="{
-        'grow-0': !props.multiline,
-        grow: props.multiline,
+        'text-outline cursor-not-allowed': disabled,
       }"
-    >
-      <div
-        class="peer box-border h-full w-full flex items-center self-start overflow-hidden border-1 rounded-3xl border-solid text-on-surface transition-colors focus-within:border-primary/0 dark:bg-surface-container"
-        :class="{
-          'border-primary/0': hasValue,
-          'border-outline': !hasValue && !hasError,
-          'border-error': hasError,
-        }"
-      >
-        <component
-          :is="props.multiline ? 'textarea' : 'input'"
-          :id="name"
-          class="box-border h-full w-full grow basis-0 resize-none border-none bg-transparent px-6 py-3 text-on-surface focus:outline-none focus:ring-none"
-          :max="max"
-          :min="min"
-          :name="name"
-          :type="type"
-          :value="value"
-          @blur="handleBlur($event, true)"
-          @change="handleChange"
-          @input="handleChange($event, hasError)"
-        />
-        <slot name="trailing" />
-      </div>
-      <label
-        class="pointer-events-none absolute top-4 ml-6 inline-block leading-4 uppercase transition-all peer-focus-within:translate-x-[1px] peer-focus-within:translate-y-[-23.5px] peer-focus-within:text-xs"
-        :class="{
-          'text-xs translate-y-[-23.5px] translate-x-[1px]': hasValue,
-          'text-primary peer-focus-within:text-primary': hasValue && !hasError,
-          'text-outline peer-focus-within:text-primary': !hasValue && !hasError,
-          'text-error peer-focus-within:text-error': hasError,
-        }"
-        :for="name"
-      >
-        {{ label }}
-      </label>
-      <fieldset
-        class="pointer-events-none absolute bottom-0 left-0 mx-0 box-border h-[calc(100%_+_0.475rem)] w-full border-1 rounded-3xl border-solid p-0 transition-colors"
-        :class="{
-          'border-primary peer-focus-within:border-primary':
-            hasValue && !hasError,
-          'border-transparent peer-focus-within:border-primary':
-            !hasValue && !hasError,
-          'border-error peer-focus-within:border-error': hasError,
-        }"
-      >
-        <legend
-          class="invisible ml-5 inline-block px-1 text-xs text-outline leading-4 uppercase"
-        >
-          {{ label }}
-        </legend>
-      </fieldset>
-    </div>
-    <slot name="error">
-      <label v-if="hasError" class="inline-block px-6 pb-1 text-xs text-error">
-        {{ errorMessage }}
-      </label>
-    </slot>
-  </div>
+      :disabled="disabled"
+      :max="max"
+      :min="min"
+      :name="name"
+      :type="type"
+      :value="value"
+      @blur="handleBlur($event, true)"
+      @change="handleChange"
+      @input="handleChange($event, hasError)"
+    />
+    <slot name="trailing" />
+  </FieldScaffold>
 </template>

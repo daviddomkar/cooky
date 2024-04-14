@@ -1,10 +1,23 @@
 <script setup lang="ts">
-import type { Input } from "valibot";
+import type { Input, Output } from "valibot";
+import type { SubmissionHandler } from "vee-validate";
+
+const props = defineProps<{
+  onSubmit?: SubmissionHandler<Output<typeof IngredientFormSchema>>;
+}>();
 
 const model = defineModel<Input<typeof IngredientFormSchema> | undefined>();
 
 const open = (ingredient: Input<typeof IngredientFormSchema>) => {
   model.value = ingredient;
+};
+
+const onSubmit = async (
+  values: Output<typeof IngredientFormSchema>,
+  opts: any,
+) => {
+  await props.onSubmit?.(values, opts);
+  model.value = undefined;
 };
 </script>
 
@@ -21,6 +34,6 @@ const open = (ingredient: Input<typeof IngredientFormSchema>) => {
     <template #activator>
       <slot name="activator" :open="open" />
     </template>
-    <IngredientForm :initial-values="model" />
+    <IngredientForm :initial-values="model" :on-submit="onSubmit" />
   </BaseDialog>
 </template>

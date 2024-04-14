@@ -29,7 +29,7 @@ useSortable("#ingredients", ingredients, {
       >
         <div class="h-12 flex items-center gap-2">
           <BaseButton
-            class="cursor-grab"
+            class="cursor-grab text-outline"
             density="compact"
             spread="none"
             variant="transparent"

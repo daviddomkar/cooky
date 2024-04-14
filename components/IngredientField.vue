@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Input } from "valibot";
+import type { Input, Output } from "valibot";
 import BaseButton from "./BaseButton.vue";
 import TextField from "./TextField.vue";
 
@@ -22,6 +22,10 @@ const {
 
 const query = ref("");
 
+const queryIngredient = computed(() => {
+  return { id: undefined, title: query.value, unitTypes: [] };
+});
+
 const dialogRef = ref<Input<typeof IngredientFormSchema> | undefined>();
 
 const ingredientsContainerRef = ref<HTMLElement | null>(null);
@@ -37,7 +41,25 @@ const { data: ingredients } = await useInfiniteScrollFetch(
   },
 );
 
+const handleIngredientSubmit = (
+  ingredient: Output<typeof IngredientFormSchema>,
+) => {
+  if (ingredient.id) {
+    handleFieldChange({
+      ...ingredient,
+      title: query.value,
+    });
+  } else {
+    handleFieldChange(ingredient);
+  }
+};
+
 const handleChange = (ingredient: Input<typeof IngredientFormSchema>) => {
+  if (ingredient?.id === undefined && ingredient?.title === query.value) {
+    dialogRef.value = ingredient;
+    return;
+  }
+
   if (ingredient) {
     query.value = ingredient.title;
   }
@@ -45,8 +67,8 @@ const handleChange = (ingredient: Input<typeof IngredientFormSchema>) => {
   handleFieldChange(ingredient, query.value !== "");
 };
 
-const handleQueryUpdate = (q: string) => {
-  query.value = q;
+const handleQueryUpdate = (q: string | number) => {
+  query.value = q as string;
 };
 
 const handleQueryBlur = () => {
@@ -54,11 +76,23 @@ const handleQueryBlur = () => {
     validate();
   }
 };
+
+watch(dialogRef, (opened) => {
+  if (!opened) {
+    validate();
+    if (value?.value?.title) {
+      query.value = value.value.title;
+    }
+  }
+});
 </script>
 
 <template>
   <div>
-    <IngredientFormDialog v-model="dialogRef" />
+    <IngredientFormDialog
+      v-model="dialogRef"
+      :on-submit="handleIngredientSubmit"
+    />
     <HeadlessCombobox
       as="div"
       class="relative focus:outline-none"
@@ -70,7 +104,7 @@ const handleQueryBlur = () => {
       <HeadlessComboboxInput as="template" class="focus:outline-none">
         <TextField
           :controlled="false"
-          :error="!!errorMessage"
+          :error-message="errorMessage"
           :label="label"
           :model-value="query"
           :name="`${name}.query`"
@@ -78,17 +112,14 @@ const handleQueryBlur = () => {
           @update:model-value="handleQueryUpdate"
         >
           <template v-if="value && meta.dirty && meta.valid" #trailing>
-            <BaseButton class="mr-0.75" spread="compact" variant="secondary">
+            <BaseButton
+              class="mr-0.75"
+              spread="compact"
+              variant="secondary"
+              @click="dialogRef = value"
+            >
               <div class="i-material-symbols:edit h-6 w-6 scale-[0.75]" />
             </BaseButton>
-          </template>
-          <template #error>
-            <label
-              v-if="errorMessage"
-              class="inline-block px-6 pb-1 text-xs text-error"
-            >
-              {{ errorMessage }}
-            </label>
           </template>
         </TextField>
       </HeadlessComboboxInput>
@@ -104,20 +135,34 @@ const handleQueryBlur = () => {
           <HeadlessComboboxOption
             v-for="(ingredient, index) in ingredients"
             :key="ingredient.id"
-            class="block cursor-pointer px-6 py-3 text-base"
-            :class="{
-              'border-b-1 border-b-outline/50 border-b-solid':
-                index !== ingredients.length - 1,
-            }"
+            v-slot="{ selected, active }"
+            as="template"
             :value="ingredient"
           >
-            {{ ingredient.title }}
+            <li
+              class="flex cursor-pointer px-6 py-3 text-base"
+              :class="{
+                'border-b-1 border-b-outline/50 border-b-solid':
+                  index !== ingredients.length - 1,
+                'bg-outline/20': active,
+                'text-primary': selected,
+              }"
+            >
+              <div class="grow">
+                {{ ingredient.title }}
+              </div>
+              <div
+                class="i-material-symbols:check-small-rounded h-6 w-6 scale-[1.25]"
+                :class="{
+                  invisible: !selected,
+                }"
+              />
+            </li>
           </HeadlessComboboxOption>
           <HeadlessComboboxOption
             v-if="query"
             class="cursor-pointer from-primary to-secondary bg-gradient-to-r px-6 py-3 text-base text-white"
-            :value="null"
-            @click="dialogRef = { title: query, unitTypes: [] }"
+            :value="queryIngredient"
           >
             Create "{{ query.trim() }}"
           </HeadlessComboboxOption>
