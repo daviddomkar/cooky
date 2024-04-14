@@ -1,13 +1,22 @@
 <script setup lang="ts">
-import type { Unit } from ".prisma/client";
+import type { UnitType } from "@prisma/client";
 import type { Input, Output } from "valibot";
 import type { SubmissionHandler } from "vee-validate";
 
 const props = defineProps<{
-  units: Unit[];
+  categories: { id: string; title: string }[];
+  units: { id: string; title: string; abbreviation: string; type: UnitType }[];
   initialValues?: Input<typeof RecipeFormSchema>;
   onSubmit?: SubmissionHandler<Output<typeof RecipeFormSchema>>;
 }>();
+
+const categoryOptions = computed(() => {
+  return props.categories.map((category) => ({
+    key: category.id,
+    title: category.title,
+    value: category.id,
+  }));
+});
 
 const { handleSubmit, handleReset, errors } = useForm({
   validationSchema: toTypedSchema(RecipeFormSchema),
@@ -61,7 +70,12 @@ const submit = handleSubmit(async (values, opts) => {
               type="number"
             />
           </div>
-          <TextField label="Categories" name="categories" />
+          <SelectField
+            label="Categories"
+            multiple
+            name="categories"
+            :options="categoryOptions"
+          />
           <TextField
             class="shrink-0 grow"
             label="Description"

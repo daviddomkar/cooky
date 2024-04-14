@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { Input, Output } from "valibot";
-import type { Unit } from "@prisma/client";
+import type { UnitType } from "@prisma/client";
 import BaseButton from "./BaseButton.vue";
 import TextField from "./TextField.vue";
 
 type Props = {
-  units: Unit[];
+  units: { id: string; title: string; abbreviation: string; type: UnitType }[];
   name: string;
   label: string;
 };

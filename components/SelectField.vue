@@ -51,12 +51,14 @@ const hasValue = computed(() => {
   >
     <HeadlessListbox
       as="div"
-      class="h-full w-full focus:outline-none"
+      class="h-full max-h-[46px] w-full focus:outline-none"
       :model-value="value"
       :multiple="multiple"
+      :name="name"
       @update:model-value="handleChange"
     >
       <HeadlessListboxButton
+        as="div"
         class="box-border h-full w-full flex cursor-pointer items-center border-none bg-transparent px-0"
       >
         <div class="grow px-6 py-3 text-left text-on-surface">

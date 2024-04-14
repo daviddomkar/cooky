@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { Input } from "valibot";
 import { useSortable } from "@vueuse/integrations/useSortable";
-import type { Unit } from "@prisma/client";
+import type { UnitType } from "@prisma/client";
 
 defineProps<{
-  units: Unit[];
+  units: { id: string; title: string; abbreviation: string; type: UnitType }[];
 }>();
 
 const {

@@ -6,6 +6,7 @@ definePageMeta({
 });
 
 const { data: units } = await useFetch("/api/units");
+const { data: categories } = await useFetch("/api/categories");
 
 const submit = (values: Output<typeof RecipeFormSchema>) => {
   console.log(values);
@@ -15,10 +16,12 @@ const submit = (values: Output<typeof RecipeFormSchema>) => {
 <template>
   <main class="mx-auto box-border max-w-336 w-full px-4 py-4 sm:px-8 sm:py-8">
     <RecipeForm
+      :categories="categories!"
       :initial-values="
         {
           title: '',
           description: '',
+          categories: [],
           ingredients: [
             {
               ingredient: {
@@ -37,7 +40,7 @@ const submit = (values: Output<typeof RecipeFormSchema>) => {
         } as any
       "
       :on-submit="submit"
-      :units="units! as any"
+      :units="units!"
     />
   </main>
 </template>
