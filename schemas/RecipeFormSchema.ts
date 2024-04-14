@@ -12,12 +12,14 @@ import {
   maxSize,
   regex,
   uuid,
+  notValue,
 } from "valibot";
 
 export const RecipeIngredientSchema = object({
   ingredient: IngredientFormSchema,
   amount: number("This field is required.", [
-    minValue(1, "Value must be at least 1."),
+    minValue(0, "The value must be greater than 0."),
+    notValue(0, "The value must be greater than 0."),
   ]),
   unitId: string("This field is required.", [
     toTrimmed(),

@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import type { Input, Output } from "valibot";
+import type { Unit } from "@prisma/client";
 import BaseButton from "./BaseButton.vue";
 import TextField from "./TextField.vue";
 
 type Props = {
+  units: Unit[];
   name: string;
   label: string;
 };
@@ -21,6 +23,7 @@ const {
 );
 
 const query = ref("");
+const unitId = ref<string | undefined>();
 
 // Used for storing current existing ingredient based on which the unit types are disabled
 const originalValue = ref<Input<typeof IngredientFormSchema> | undefined>();
@@ -28,6 +31,18 @@ const originalValue = ref<Input<typeof IngredientFormSchema> | undefined>();
 // Used for storing the ingredient that is being created
 const queryIngredient = computed(() => {
   return { id: undefined, title: query.value, unitTypes: [] };
+});
+
+const unitOptions = computed(() => {
+  return props.units
+    .filter((unit) =>
+      value?.value.unitTypes?.some((type) => unit.type === type),
+    )
+    .map((unit) => ({
+      key: unit.id,
+      title: `${unit.title} (${unit.abbreviation})`,
+      value: unit.id,
+    }));
 });
 
 const dialogRef = ref<Input<typeof IngredientFormSchema> | undefined>();
@@ -91,6 +106,12 @@ watch(dialogRef, (opened) => {
     }
   }
 });
+
+watch(unitOptions, (options) => {
+  if (!options.some((option) => option.value === unitId.value)) {
+    unitId.value = undefined;
+  }
+});
 </script>
 
 <template>
@@ -118,7 +139,7 @@ watch(dialogRef, (opened) => {
           @blur="handleQueryBlur"
           @update:model-value="handleQueryUpdate"
         >
-          <template #trailing>
+          <template v-if="value && meta.dirty && meta.valid" #trailing>
             <BaseButton
               v-if="value && meta.dirty && meta.valid"
               spread="compact"
@@ -176,18 +197,13 @@ watch(dialogRef, (opened) => {
       </HeadlessComboboxOptions>
     </HeadlessCombobox>
     <div v-if="value && meta.dirty && meta.valid" class="box-border sm:ml-12">
-      <TextField label="Amount" :name="`${name}.amount`" type="number">
-        <template #trailing>
-          <BaseButton class="mr-0.75" spread="compact" variant="secondary">
-            <template #icon>
-              <div
-                class="i-material-symbols:keyboard-arrow-down-rounded scale-[1.25]"
-              />
-            </template>
-            ks
-          </BaseButton>
-        </template>
-      </TextField>
+      <TextField label="Amount" :name="`${name}.amount`" type="number" />
+      <SelectField
+        v-model="unitId"
+        label="Unit"
+        :name="`${name}.unitId`"
+        :options="unitOptions"
+      />
     </div>
   </div>
 </template>

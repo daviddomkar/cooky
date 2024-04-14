@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import type { Input } from "valibot";
 import { useSortable } from "@vueuse/integrations/useSortable";
+import type { Unit } from "@prisma/client";
+
+defineProps<{
+  units: Unit[];
+}>();
 
 const {
   push: addIngredient,
@@ -42,6 +47,7 @@ useSortable("#ingredients", ingredients, {
             class="grow basis-0"
             :label="`${idx + 1}. Ingredient`"
             :name="`ingredients[${idx}]`"
+            :units="units"
           />
           <div class="h-12 flex items-center">
             <BaseButton
@@ -59,13 +65,13 @@ useSortable("#ingredients", ingredients, {
     <BaseButton
       spread="compact"
       @click="
+        // @ts-expect-error
         addIngredient({
           ingredient: {
+            id: undefined,
             title: '',
             unitTypes: [],
           },
-          amount: 0,
-          unitId: '',
         })
       "
     >

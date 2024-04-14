@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import type { Unit } from ".prisma/client";
 import type { Input, Output } from "valibot";
 import type { SubmissionHandler } from "vee-validate";
 
 const props = defineProps<{
+  units: Unit[];
   initialValues?: Input<typeof RecipeFormSchema>;
   onSubmit?: SubmissionHandler<Output<typeof RecipeFormSchema>>;
 }>();
@@ -69,7 +71,7 @@ const submit = handleSubmit(async (values, opts) => {
         </div>
       </div>
       <div class="flex flex-col gap-8 xl:flex-row">
-        <IngredientFieldArray class="grow-1 basis-0" />
+        <IngredientFieldArray class="grow-1 basis-0" :units="units" />
         <StepFieldArray class="grow-2 basis-0" />
       </div>
     </div>
