@@ -38,13 +38,6 @@ const { data: ingredients } = await useInfiniteScrollFetch(
 );
 
 const handleChange = (ingredient: Input<typeof IngredientFormSchema>) => {
-  /* if (queryIngredient.value !== null && ingredient === queryIngredient.value) {
-    dialogRef.value = ingredient;
-    return;
-  } */
-
-  console.log(ingredient);
-
   if (ingredient) {
     query.value = ingredient.title;
   }
