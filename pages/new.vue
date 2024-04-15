@@ -9,6 +9,14 @@ const { data: units } = await useFetch("/api/units");
 const { data: categories } = await useFetch("/api/categories");
 
 const submit = (values: Output<typeof RecipeFormSchema>) => {
+  const formData = new FormData();
+
+  formData.append("image", values.image);
+  formData.append("json", JSON.stringify({ ...values, image: undefined }));
+
+  // TODO: Submit the form data
+
+  // eslint-disable-next-line no-console
   console.log(values);
 };
 </script>
