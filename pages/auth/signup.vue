@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { useNotification } from "@kyvg/vue3-notification";
+import { FetchError } from "ofetch";
 import type { Output } from "valibot";
 
 const { signIn } = useAuth();
+
+const { notify } = useNotification();
 
 definePageMeta({
   layout: "auth",
@@ -24,9 +28,21 @@ const signUp = async (values: Output<typeof SignUpSchema>) => {
       usernameOrEmail: values.username,
       password: values.password,
     });
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to sign up.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to sign up.",
+      text: "An unknown error occurred.",
+    });
   }
 };
 </script>

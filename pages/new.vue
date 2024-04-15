@@ -1,23 +1,53 @@
 <script setup lang="ts">
+import { useNotification } from "@kyvg/vue3-notification";
 import { type Output } from "valibot";
+import { FetchError } from "ofetch";
 
 definePageMeta({
   middleware: "auth",
 });
 
+const { notify } = useNotification();
+
 const { data: units } = await useFetch("/api/units");
 const { data: categories } = await useFetch("/api/categories");
 
-const submit = (values: Output<typeof RecipeFormSchema>) => {
+// For now the method does not need to be async
+// eslint-disable-next-line require-await
+const submit = async (values: Output<typeof RecipeFormSchema>) => {
   const formData = new FormData();
 
   formData.append("image", values.image);
   formData.append("json", JSON.stringify({ ...values, image: undefined }));
 
-  // TODO: Submit the form data
+  try {
+    // TODO: Create the endpoint, maybe it should return slug so we can redirect to the new recipe
+    // await $fetch("/api/recipes", {
+    //   method: "POST",
+    //   body: formData,
+    // });
 
-  // eslint-disable-next-line no-console
-  console.log(values);
+    // For now, just log the values
+    // eslint-disable-next-line no-console
+    console.log(values);
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: `Failed to ${values.draft ? "save the recipe as draft" : "publish recipe"}.`,
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: `Failed to ${values.draft ? "save the recipe as draft" : "publish recipe"}.`,
+      text: "An unknown error occurred.",
+    });
+  }
+
+  // TODO: Submit the form data
 };
 </script>
 

@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import type { Session } from "@auth/core/types";
+import { useNotification } from "@kyvg/vue3-notification";
+import { FetchError } from "ofetch";
 
 const route = useRoute();
+
+const { notify } = useNotification();
 
 const { session, updateSession } = useAuth();
 
@@ -15,32 +19,66 @@ const saveProfileImage = async (blob: Blob) => {
   const formData = new FormData();
   formData.append("profileImage", blob);
 
-  await $fetch(`/api/profile/${profile.value?.username}`, {
-    method: "PATCH",
-    body: formData,
-  });
+  try {
+    await $fetch(`/api/profile/${profile.value?.username}`, {
+      method: "PATCH",
+      body: formData,
+    });
 
-  await refresh();
+    await refresh();
 
-  const refreshedSession = await $fetch<Session>(`/api/auth/session`);
+    const refreshedSession = await $fetch<Session>(`/api/auth/session`);
 
-  updateSession(refreshedSession);
+    updateSession(refreshedSession);
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to save profile image.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to save profile image.",
+      text: "An unknown error occurred.",
+    });
+  }
 };
 
 const saveCoverImage = async (blob: Blob) => {
   const formData = new FormData();
   formData.append("coverImage", blob);
 
-  await $fetch(`/api/profile/${profile.value?.username}`, {
-    method: "PATCH",
-    body: formData,
-  });
+  try {
+    await $fetch(`/api/profile/${profile.value?.username}`, {
+      method: "PATCH",
+      body: formData,
+    });
 
-  await refresh();
+    await refresh();
 
-  const refreshedSession = await $fetch<Session>(`/api/auth/session`);
+    const refreshedSession = await $fetch<Session>(`/api/auth/session`);
 
-  updateSession(refreshedSession);
+    updateSession(refreshedSession);
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to save cover photo.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to save cover photo.",
+      text: "An unknown error occurred.",
+    });
+  }
 };
 </script>
 

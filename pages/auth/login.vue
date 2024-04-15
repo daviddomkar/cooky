@@ -19,7 +19,7 @@ const logIn = async (values: Output<typeof LogInSchema>) => {
   } catch (error) {
     notify({
       type: "error",
-      title: "Failed to log in",
+      title: "Failed to log in.",
       text: "Check your credentials and try again.",
     });
   }
