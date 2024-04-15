@@ -76,11 +76,11 @@ export const Danger: Story = {
   }),
 };
 
-export const Spread: Story = {
+export const Expanded: Story = {
   args: {
     variant: "primary",
     density: "default",
-    spread: "full",
+    expanded: true,
     default: "Click me",
   },
   render: (args) => ({

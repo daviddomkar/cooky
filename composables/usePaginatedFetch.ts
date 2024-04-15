@@ -59,13 +59,10 @@ export async function usePaginatedFetch<
   const after = ref<string | null | undefined>(null);
   const before = ref<string | null | undefined>(null);
 
-  watch(
-    () => opts.query?.value,
-    () => {
-      before.value = null;
-      after.value = null;
-    },
-  );
+  watch(toReactive(opts), () => {
+    before.value = null;
+    after.value = null;
+  });
 
   const { data, status, error } = await useFetch<
     DataT,

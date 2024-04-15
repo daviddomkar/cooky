@@ -19,11 +19,11 @@ const submit = handleSubmit(async (values, opts) => {
 
 <template>
   <form
-    class="w-full flex flex-col items-center gap-2"
+    class="w-full flex flex-col items-center"
     @reset="handleReset"
     @submit="submit"
   >
-    <div class="mb-6 box-border sm:mb-8">
+    <div class="mb-8 box-border">
       <h1 class="my-0 select-none text-center text-8xl xl:hidden sm:text-9xl">
         COOKY
       </h1>
@@ -43,16 +43,16 @@ const submit = handleSubmit(async (values, opts) => {
       type="password"
     />
     <TextField
-      class="max-w-80"
+      class="mb-2 max-w-80"
       label="Confirm password"
       name="confirmPassword"
       type="password"
     />
-    <BaseCheckbox name="agreedToTermsAndPrivacyPolicy">
+    <BaseCheckbox class="mt-2" name="agreedToTermsAndPrivacyPolicy">
       Agree to our <a class="cursor-pointer text-primary underline">Terms</a> &
       <a class="cursor-pointer text-primary underline">Privacy Policy</a>
     </BaseCheckbox>
-    <BaseButton class="mt-2 sm:mt-4" :loading="isSubmitting" type="submit">
+    <BaseButton class="mb-8 mt-4" :loading="isSubmitting" type="submit">
       Sign up
     </BaseButton>
     <slot name="trailing" />

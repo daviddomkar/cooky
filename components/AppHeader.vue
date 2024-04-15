@@ -11,6 +11,7 @@ defineProps<Props>();
 const emit = defineEmits<{
   (e: 'open'): void
   (e: 'log-in'): void
+  (e: 'new'): void
 }>();
 
 const searchVisible = ref(false);
@@ -74,7 +75,7 @@ const searchVisible = ref(false);
         <BaseButton class="shrink-0 !hidden !px-4 lg:!flex" variant="secondary">
           <div class="i-fad:random-1dice h-6 w-6 scale-[1.25]" />
         </BaseButton>
-        <BaseButton v-if="user" class="shrink-0 !hidden lg:!flex">New recipe</BaseButton>
+        <BaseButton v-if="user" class="shrink-0 !hidden lg:!flex" @click="emit('new')">New recipe</BaseButton>
         <BaseButton v-else class="shrink-0 !hidden md:!flex" @click="emit('log-in')">Log in</BaseButton>
         <BaseButton
           v-if="user"

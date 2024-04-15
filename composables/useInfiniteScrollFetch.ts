@@ -70,12 +70,9 @@ export async function useInfiniteScrollFetch<
   const after = ref<string | null | undefined>(null);
   const data = ref([]) as Ref<DataT["results"]>;
 
-  watch(
-    () => opts.query?.value,
-    () => {
-      after.value = null;
-    },
-  );
+  watch(toReactive(opts), () => {
+    after.value = null;
+  });
 
   const {
     data: currentData,
@@ -104,7 +101,7 @@ export async function useInfiniteScrollFetch<
   data.value = (currentData.value as DataT).results;
 
   watch(currentData, (newData) => {
-    if (!(newData as DataT).before) {
+    if (!(newData as DataT)?.before) {
       data.value = (newData as DataT).results;
     } else {
       data.value = [...data.value, ...(newData as DataT).results];

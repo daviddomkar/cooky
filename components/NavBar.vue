@@ -4,22 +4,28 @@ type Props = {
     username: string;
     favoritesListId?: string | null;
   };
-  categories: { title: string; slug: string; icon: string; }[];
+  categories: { title: string; slug: string; icon: string }[];
 };
 
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: 'log-out'): void
+  (e: "log-out"): void;
 }>();
 
 const route = useRoute();
 
-const getSkirtPath = (x: number, y: number, height: number, edgeWidth: number, edgeHeight: number) => {
-  return `M ${x} ${y} c 0 0, ${edgeWidth} 0, ${edgeWidth} -${edgeHeight} l 0 ${height + 2*edgeHeight} c 0 -${edgeHeight} -${edgeWidth} -${edgeHeight} -${edgeWidth} -${edgeHeight} Z`;
+const getSkirtPath = (
+  x: number,
+  y: number,
+  height: number,
+  edgeWidth: number,
+  edgeHeight: number,
+) => {
+  return `M ${x} ${y} c 0 0, ${edgeWidth} 0, ${edgeWidth} -${edgeHeight} l 0 ${height + 2 * edgeHeight} c 0 -${edgeHeight} -${edgeWidth} -${edgeHeight} -${edgeWidth} -${edgeHeight} Z`;
 };
 
-const admin = computed(() => route.path.startsWith('/admin'));
+const admin = computed(() => route.path.startsWith("/admin"));
 
 const sections = computed(() => {
   return [
@@ -31,31 +37,67 @@ const sections = computed(() => {
         to: `/category/${category.slug}`,
         icon: category.icon,
         exact: false,
-      }))
+      })),
     },
     {
       title: "Profile",
       hidden: admin.value || !props.user,
       items: [
-        { title: "My Recipes", to: `/${props.user?.username}`, icon: "my-recipes", exact: true },
-        { title: "Favourites", to: `/list/${props.user?.favoritesListId}`, icon: "favourites", exact: false }
-      ]
+        {
+          title: "My Recipes",
+          to: `/${props.user?.username}`,
+          icon: "my-recipes",
+          exact: true,
+        },
+        {
+          title: "Favourites",
+          to: `/list/${props.user?.favoritesListId}`,
+          icon: "favourites",
+          exact: false,
+        },
+      ],
     },
     {
       hidden: !admin.value,
       items: [
-        { title: "Recipes", to: "/admin/recipes", icon: "recipes", exact: false },
-        { title: "Categories", to: "/admin/categories", icon: "list", exact: false },
-        { title: "Ingredients", to: "/admin/ingredients", icon: "ingredients", exact: false },
-        { title: "Reviews", to: "/admin/reviews", icon: "reviews", exact: false },
+        {
+          title: "Recipes",
+          to: "/admin/recipes",
+          icon: "recipes",
+          exact: false,
+        },
+        {
+          title: "Categories",
+          to: "/admin/categories",
+          icon: "list",
+          exact: false,
+        },
+        {
+          title: "Ingredients",
+          to: "/admin/ingredients",
+          icon: "ingredients",
+          exact: false,
+        },
+        {
+          title: "Reviews",
+          to: "/admin/reviews",
+          icon: "reviews",
+          exact: false,
+        },
         { title: "Users", to: "/admin/users", icon: "users", exact: false },
-        { title: "Roles", to: "/admin/roles", icon: "roles", exact: false }
-      ]
+        { title: "Roles", to: "/admin/roles", icon: "roles", exact: false },
+      ],
     },
   ];
 });
 
-const active = computed(() => sections.value.flatMap((section) => section.items).some((item) => item.exact ? route.path === item.to : route.path.startsWith(item.to)));
+const active = computed(() =>
+  sections.value
+    .flatMap((section) => section.items)
+    .some((item) =>
+      item.exact ? route.path === item.to : route.path.startsWith(item.to),
+    ),
+);
 
 const activeItemY = computed(() => {
   if (!active.value) return 0;
@@ -74,7 +116,9 @@ const activeItemY = computed(() => {
 
     for (const item of section.items) {
       // Active item found, return y
-      if (item.exact ? route.path === item.to : route.path.startsWith(item.to)) {
+      if (
+        item.exact ? route.path === item.to : route.path.startsWith(item.to)
+      ) {
         return y;
       }
 
@@ -98,26 +142,45 @@ const activeItemY = computed(() => {
 </script>
 
 <template>
-  <nav class="relative z-1 box-border min-w-60 flex flex-col bg-surface-container">
+  <nav
+    class="relative z-1 box-border min-w-60 flex flex-col bg-surface-container"
+  >
     <template v-if="active">
-      <div class="[clip-path:url(#clip)] absolute left-0 top-0 h-full w-full from-primary to-secondary bg-gradient-to-b -z-1" />
-      <div class="absolute right-0 top-0 h-full w-4 from-primary to-secondary bg-gradient-to-b -z-1" />
+      <div
+        class="[clip-path:url(#clip)] absolute left-0 top-0 h-full w-full from-primary to-secondary bg-gradient-to-b -z-1"
+      />
+      <div
+        class="absolute right-0 top-0 h-full w-4 from-primary to-secondary bg-gradient-to-b -z-1"
+      />
       <svg class="absolute left-0 top-0 h-full w-full -z-1">
         <clipPath id="clip">
           <rect
-            height="2.5rem" rx="1.25rem" :width="`${176 + 32}px`" :x="32" :y="activeItemY - 1"
+            height="2.5rem"
+            rx="1.25rem"
+            :width="`${176 + 32}px`"
+            :x="32"
+            :y="activeItemY - 1"
           />
-          <path
-            :d="getSkirtPath(176 + 12, activeItemY - 1, 40, 36, 36)"
-          />
+          <path :d="getSkirtPath(176 + 12, activeItemY - 1, 40, 36, 36)" />
         </clipPath>
       </svg>
     </template>
     <div class="h-24 flex shrink-0 items-center justify-center">
-      <h1 class="relative my-0 block text-center text-5xl transition-transform hover:active:scale-[0.97]">
-        <NuxtLink class="decoration-none link:text-inherit visited:text-inherit" to="/">Cooky</NuxtLink>
-        <span v-if="admin" class="absolute left-0 w-full text-xs font-display uppercase -bottom-3">
-          <span class="rounded-full from-primary to-secondary bg-gradient-to-r px-2 text-white tracking-normal">
+      <h1
+        class="relative my-0 block text-center text-5xl transition-transform hover:active:scale-[0.97]"
+      >
+        <NuxtLink
+          class="decoration-none link:text-inherit visited:text-inherit"
+          to="/"
+          >Cooky</NuxtLink
+        >
+        <span
+          v-if="admin"
+          class="absolute left-0 w-full text-xs font-display uppercase -bottom-3"
+        >
+          <span
+            class="rounded-full from-primary to-secondary bg-gradient-to-r px-2 text-white tracking-normal"
+          >
             Admin
           </span>
         </span>
@@ -126,13 +189,17 @@ const activeItemY = computed(() => {
     <div class="box-border flex grow flex-col gap-8 pb-8">
       <template v-for="(section, index) in sections" :key="index">
         <section v-if="!section.hidden" class="box-border px-8">
-          <h2 v-if="section.title" class="my-0 ml-4 text-on-surface-variant">{{ section.title }}</h2>
+          <h2 v-if="section.title" class="my-0 ml-4 text-on-surface-variant">{{
+            section.title
+          }}</h2>
           <ul class="my-0 flex flex-col list-none gap-4 pl-0">
             <li v-for="item in section.items" :key="item.to">
               <NuxtLink
                 class="box-border h-10 flex items-center gap-2 rounded-full bg-surface px-4 decoration-none transition-transform link:text-inherit visited:text-inherit hover:active:scale-[0.97]"
                 :class="{
-                  '!bg-transparent !text-white': item.exact ? route.path === item.to : route.path.startsWith(item.to)
+                  '!bg-transparent !text-white': item.exact
+                    ? route.path === item.to
+                    : route.path.startsWith(item.to),
                 }"
                 :to="item.to"
               >
@@ -143,8 +210,11 @@ const activeItemY = computed(() => {
           </ul>
         </section>
       </template>
-      <div v-if="props.user" class="box-border w-full flex grow flex-col justify-end gap-4 px-8">
-        <BaseButton spread="full" @click="emit('log-out')">
+      <div
+        v-if="props.user"
+        class="box-border w-full flex grow flex-col justify-end gap-4 px-8"
+      >
+        <BaseButton expanded spread="compact" @click="emit('log-out')">
           <template #icon>
             <div class="i-cooky:logout" />
           </template>
