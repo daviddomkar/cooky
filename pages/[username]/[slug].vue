@@ -14,14 +14,14 @@
 
 <template>
    <main
-    v-if="recipeData && userData"
+    v-if="recipeData"
     class="m-auto min-h-[calc(100vh-96px)] w-full flex flex-col justify-center gap-8 py-24"
   >
     <div class="header flex flex-col gap-8 px-4 sm:flex-row sm:px-8">
       <RecipeImage class="flex-shrink-0" :image-id="recipeData.imageId" />
       <div class="info flex flex-col justify-start">
         <div class="info-header flex flex-col">
-          <div class="flex flex-row items-center gap-3">
+          <div v-if="userData" class="flex flex-row items-center gap-3">
             <PictureFrame
               borderless
               class="w-5 shrink-0 cursor-pointer sm:w-8"
@@ -48,6 +48,15 @@
             {{ recipeData.nutritionPerServing }} kcal
           </li>
         </ul>
+        <div class="options mt-auto flex flex-row items-center justify-end gap-3">
+          <BaseButton spread="compact" variant="secondary">
+            <div class="i-cooky:print" />
+          </BaseButton>
+          <BaseButton expanded spread="compact">
+            <div class="i-cooky:favourites" />
+          SAVE
+        </BaseButton>
+        </div>
       </div>
     </div>
     <div class="body flex flex-col items-start gap-8 px-4 sm:flex-row sm:px-8">
@@ -73,7 +82,7 @@
       </div>
     </div>
     <div class="footer px-4">
-      <div class="review">
+      <div v-if="userData" class="review">
         <div class="flex flex-row items-start gap-3">
           <PictureFrame
             borderless
