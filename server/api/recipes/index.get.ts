@@ -1,3 +1,4 @@
+import { RecipeState } from "@prisma/client";
 import { useValidatedQuery } from "h3-valibot";
 import { objectAsync, string, nullish, mergeAsync, toTrimmed } from "valibot";
 
@@ -28,6 +29,7 @@ export default defineEventHandler(async (event) => {
     after,
     before,
     where: {
+      state: RecipeState.PUBLISHED,
       slug: slug ?? undefined,
       categories: category
         ? {

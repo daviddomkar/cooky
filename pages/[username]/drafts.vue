@@ -3,11 +3,13 @@ const route = useRoute();
 
 const { isMobile } = useDevice();
 
-const { data: recipes } = await useInfiniteScrollFetch(window, "/api/recipes", {
-  query: {
-    username: route.params.username,
+const { data: recipes } = await useInfiniteScrollFetch(
+  window,
+  "/api/recipes/drafts",
+  {
+    query: { username: route.params.username },
   },
-});
+);
 </script>
 
 <template>
