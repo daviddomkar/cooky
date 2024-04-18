@@ -50,5 +50,8 @@ const isOwnProfile = computed(
         </NuxtLink>
       </template>
     </MasonryWall>
+    <BaseButton v-if="isOwnProfile && recipes?.length" :as="NuxtLink" to="/new">
+      Create new recipe
+    </BaseButton>
   </div>
 </template>

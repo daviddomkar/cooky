@@ -16,6 +16,8 @@ const isOwnProfile = computed(
 );
 
 const createNewList = () => {
+  // TODO: Implement create new list
+  // eslint-disable-next-line no-console
   console.log("Create new list");
 };
 </script>

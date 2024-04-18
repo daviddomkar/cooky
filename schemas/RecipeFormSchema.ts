@@ -14,6 +14,7 @@ import {
   uuid,
   boolean,
   nullish,
+  notValue,
 } from "valibot";
 
 export default object({
@@ -22,6 +23,10 @@ export default object({
     toTrimmed(),
     minLength(1, "This field is required."),
     maxLength(64, "Title is too long."),
+    // TODO: Correctly handle reserved titles (lowercase, etc.)
+    ...["drafts", "lists"].map((reserved) =>
+      notValue<string, string>(reserved, `Title "${reserved}" is reserved.`),
+    ),
   ]),
   preparationDuration: string("This field is required.", [
     toTrimmed(),

@@ -1,7 +1,19 @@
 <script setup lang="ts">
 import NuxtLink from "#app/components/nuxt-link";
 
+definePageMeta({
+  middleware: (to) => {
+    const { session } = useAuth();
+
+    if (session.value?.user?.username !== to.params.username) {
+      return abortNavigation();
+    }
+  },
+});
+
 const route = useRoute();
+
+const { session } = useAuth();
 
 const { isMobile } = useDevice();
 
@@ -11,6 +23,10 @@ const { data: recipes } = await useInfiniteScrollFetch(
   {
     query: { username: route.params.username },
   },
+);
+
+const isOwnProfile = computed(
+  () => session?.value?.user?.username === route.params.username,
 );
 </script>
 
@@ -44,5 +60,8 @@ const { data: recipes } = await useInfiniteScrollFetch(
         </NuxtLink>
       </template>
     </MasonryWall>
+    <BaseButton v-if="isOwnProfile && recipes?.length" :as="NuxtLink" to="/new">
+      Create new recipe draft
+    </BaseButton>
   </div>
 </template>
