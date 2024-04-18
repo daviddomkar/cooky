@@ -4,8 +4,6 @@
   const { data: userData } = await useFetch(`/api/profile/${username}`);
   const { data: recipeData } = await useFetch(`/api/recipes/${username}/${slug}`);
 
-  console.log(recipeData.value);
-
   const processInterval = (x: string) => x
           .split(":")
           .map((x) => Number(x))
@@ -33,7 +31,7 @@
           <div class="flex flex-row flex-wrap items-center gap-3 text-3xl font-display">
             <h2>{{ recipeData.title }}</h2>
             <div>
-              <RecipeStars :model-value="1.75" variant="interactive" />
+              <RecipeStars :model-value="recipeData.rating ?? undefined" variant="display" />
             </div>
           </div>
         </div>
@@ -53,7 +51,7 @@
       </div>
     </div>
     <div class="body flex flex-col items-start gap-8 px-4 sm:flex-row sm:px-8">
-      <div class="ingredients sm:text-nowrap">
+      <div class="ingredients flex flex-col sm:flex-shrink-0">
         <div class="title flex flex-row items-center gap-3">
           <h2>INGREDIENTS</h2>
           <h3 >SERV</h3>
