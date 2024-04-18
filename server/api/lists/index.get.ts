@@ -12,8 +12,6 @@ export default defineEventHandler(async (event) => {
     mergeAsync([
       objectAsync({
         username: nullish(string("Username must be a string.", [toTrimmed()])),
-        slug: nullish(string("Slug must be a string.", [toTrimmed()])),
-        category: nullish(string("Category must be a string.", [toTrimmed()])),
       }),
       PaginationSchema,
     ]),

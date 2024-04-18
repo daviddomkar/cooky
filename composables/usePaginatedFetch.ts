@@ -13,7 +13,7 @@ type PaginationData<
   R extends NitroFetchRequest,
   D = FetchResult<R, AvailableRouterMethod<R>>,
 > =
-  AvailableRouterMethod<R> extends "get"
+  AvailableRouterMethod<R> extends GetMethod<R>
     ? D extends {
         after?: string | null;
         before?: string | null;
