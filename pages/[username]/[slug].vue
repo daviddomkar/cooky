@@ -20,7 +20,13 @@ const printPage = () => {
   window.print();
 };
 const handleListSave = (data: any) => {
-  console.log("listsave", data);
+  console.log("list save", data);
+};
+const handleRatingSubmition = (data: any) => {
+  console.log("rating submition", data);
+};
+const handleCommentSubmition = (data: any) => {
+  console.log("comment submition", data);
 };
 </script>
 
@@ -116,10 +122,12 @@ const handleListSave = (data: any) => {
     </div>
     <div class="footer px-4 print:hidden">
       <div v-if="userData" class="review">
+        <RecipeStars variant="interactive" @submit="handleRatingSubmition" />
         <CommentTextField
           expanded
           :profile-image-id="userData.profileImageId"
           :username="userData.username"
+          @submit="handleCommentSubmition"
         />
       </div>
       <ul class="list-none">
