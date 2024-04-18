@@ -15,6 +15,9 @@ const printPage = () => {
   window.scrollTo(0, 0);
   window.print();
 };
+const handleListSave = (data: any) => {
+  console.log("listsave", data);
+};
 </script>
 
 <template>
@@ -69,12 +72,11 @@ const printPage = () => {
               <div class="i-cooky:print" />
             </template>
           </BaseButton>
-          <BaseButton spread="compact">
-            <template #icon>
-              <div class="i-cooky:favourites" />
-            </template>
-            SAVE
-          </BaseButton>
+          <RecipeFavoriteButton
+            v-if="userData"
+            :lists="userData.lists"
+            @submit="handleListSave"
+          />
         </div>
       </div>
     </div>
