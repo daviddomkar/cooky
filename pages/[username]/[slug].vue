@@ -1,7 +1,11 @@
 <script setup lang="ts">
 const route = useRoute();
+const { session } = useAuth();
 const { username, slug } = route.params;
-const { data: userData } = await useFetch(`/api/profile/${username}`);
+const { data: userData } = await useFetch(
+  `/api/profile/${session.value?.user.username ?? ""}`,
+);
+const { data: authorData } = await useFetch(`/api/profile/${username}`);
 const { data: recipeData } = await useFetch(`/api/recipes/${username}/${slug}`);
 
 const processInterval = (x: string) =>
@@ -29,15 +33,18 @@ const handleListSave = (data: any) => {
       <RecipeImage class="flex-shrink-0" :image-id="recipeData.imageId" />
       <div class="info flex flex-col justify-start">
         <div class="info-header flex flex-col">
-          <div v-if="userData" class="flex flex-row items-center gap-3">
+          <div v-if="authorData" class="flex flex-row items-center gap-3">
             <PictureFrame
               borderless
               class="w-5 shrink-0 cursor-pointer sm:w-8"
               :src="
-                getProfileImageUrl(userData.username, userData.profileImageId)
+                getProfileImageUrl(
+                  authorData.username,
+                  authorData.profileImageId,
+                )
               "
             />
-            {{ userData?.username }}
+            {{ authorData?.username }}
           </div>
           <div
             class="flex flex-row flex-wrap items-center gap-3 text-3xl font-display"
