@@ -1,7 +1,12 @@
 import { useValidatedQuery } from "h3-valibot";
+import { getServerSession } from "#auth";
 import { objectAsync, string, nullish, mergeAsync, toTrimmed } from "valibot";
+import { Visibility } from "@prisma/client";
+import { authOptions } from "../auth/[...]";
 
 export default defineEventHandler(async (event) => {
+  const session = await getServerSession(event, authOptions);
+
   const { username, take, after, before } = await useValidatedQuery(
     event,
     mergeAsync([
@@ -23,6 +28,10 @@ export default defineEventHandler(async (event) => {
     after,
     before,
     where: {
+      visibility:
+        session?.user?.username && session?.user?.username === username
+          ? undefined
+          : Visibility.PUBLIC,
       author: username
         ? {
             username,

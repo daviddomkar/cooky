@@ -1,16 +1,39 @@
 <script setup lang="ts">
+import NuxtLink from "#app/components/nuxt-link";
+
 const route = useRoute();
+
+const { session } = useAuth();
 
 const { data: lists } = await useInfiniteScrollFetch(window, "/api/lists", {
   query: {
     username: route.params.username,
   },
 });
+
+const isOwnProfile = computed(
+  () => session?.value?.user?.username === route.params.username,
+);
+
+const createNewList = () => {
+  console.log("Create new list");
+};
 </script>
 
 <template>
-  <div>
-    <div class="grid grid-cols-[repeat(auto-fit,_minmax(256px,_auto))] gap-4">
+  <div class="flex flex-col justify-center gap-8">
+    <div v-if="!lists?.length" class="flex flex-col items-center">
+      <h2 class="mb-4 mt-0 text-center text-3xl text-on-surface-variant">
+        {{ `${isOwnProfile ? "Your" : "This"} profile has no lists yet.` }}
+      </h2>
+      <BaseButton v-if="isOwnProfile" @click="createNewList">
+        Create new list
+      </BaseButton>
+    </div>
+    <div
+      v-else
+      class="grid grid-cols-[repeat(auto-fit,_minmax(256px,_auto))] gap-4"
+    >
       <NuxtLink
         v-for="list in lists"
         :key="list.id"
@@ -27,5 +50,8 @@ const { data: lists } = await useInfiniteScrollFetch(window, "/api/lists", {
       <div v-if="lists.length < 3" />
       <div v-if="lists.length < 4" />
     </div>
+    <BaseButton v-if="isOwnProfile && lists?.length" @click="createNewList">
+      Create new list
+    </BaseButton>
   </div>
 </template>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import NuxtLink from "#app/components/nuxt-link";
+
 const route = useRoute();
 
 const { isMobile } = useDevice();
@@ -13,8 +15,15 @@ const { data: recipes } = await useInfiniteScrollFetch(
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col gap-8">
+    <div v-if="!recipes?.length" class="flex flex-col items-center">
+      <h2 class="mb-4 mt-0 text-center text-3xl text-on-surface-variant">
+        No drafts found.
+      </h2>
+      <BaseButton :as="NuxtLink" to="/new">Create new recipe draft</BaseButton>
+    </div>
     <MasonryWall
+      v-else
       :column-width="256"
       :gap="16"
       :items="recipes"
