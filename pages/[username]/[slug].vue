@@ -107,18 +107,13 @@ const printPage = () => {
     </div>
     <div class="footer px-4 print:hidden">
       <div v-if="userData" class="review">
-        <div class="flex flex-row items-start gap-3">
-          <PictureFrame
-            borderless
-            class="w-5 shrink-0 cursor-pointer sm:w-12"
-            :src="
-              getProfileImageUrl(userData.username, userData.profileImageId)
-            "
-          />
-          <TextField label="Add a comment..." name="comment" type="text" />
-        </div>
+        <CommentTextField
+          expanded
+          :profile-image-id="userData.profileImageId"
+          :username="userData.username"
+        />
       </div>
-      <ul>
+      <ul class="list-none">
         <li v-for="comment in recipeData.comments" :key="comment.id">
           <RecipeComment
             :author-image-id="comment.author.profileImageId"
@@ -127,7 +122,7 @@ const printPage = () => {
             :content="comment.content"
             :created-at="comment.createdAt"
           />
-          <ul>
+          <ul class="list-none">
             <li v-for="reply in comment.replies" :key="reply.id">
               <RecipeComment
                 :author-image-id="reply.author.profileImageId"
