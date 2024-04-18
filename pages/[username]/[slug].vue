@@ -33,7 +33,7 @@
           <div class="flex flex-row flex-wrap items-center gap-3 text-3xl font-display">
             <h2>{{ recipeData.title }}</h2>
             <div>
-              <RecipeStars :count="1.75" />
+              <RecipeStars :model-value="1.75" variant="interactive" />
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
       </div>
     </div>
     <div class="body flex flex-col items-start gap-8 px-4 sm:flex-row sm:px-8">
-      <div class="ingredients">
+      <div class="ingredients sm:text-nowrap">
         <div class="title flex flex-row items-center gap-3">
           <h2>INGREDIENTS</h2>
           <h3 >SERV</h3>
