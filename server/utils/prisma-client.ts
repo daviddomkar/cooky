@@ -5,6 +5,7 @@ import {
   type RecipeIngredient,
 } from "@prisma/client";
 import { type Output /* is, instance, isoTimestamp, string */ } from "valibot";
+import PaginationSchema from "../schemas/PaginationSchema";
 
 type PrismaPaginationArgs<T> = Omit<
   Prisma.Args<T, "findMany">,

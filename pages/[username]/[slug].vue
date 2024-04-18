@@ -10,6 +10,11 @@ const processInterval = (x: string) =>
     .map((x) => Number(x))
     .map((x, i) => (x === 0 ? "" : `${x}${["h", "m", "s"][i]}`))
     .join("");
+
+const printPage = () => {
+  window.scrollTo(0, 0);
+  window.print();
+};
 </script>
 
 <template>
@@ -57,9 +62,9 @@ const processInterval = (x: string) =>
           </li>
         </ul>
         <div
-          class="options mt-auto flex flex-row items-center justify-end gap-3"
+          class="options mt-auto flex flex-row items-center justify-end gap-3 print:hidden"
         >
-          <BaseButton spread="compact" variant="secondary">
+          <BaseButton spread="compact" variant="secondary" @click="printPage">
             <template #icon>
               <div class="i-cooky:print" />
             </template>
@@ -100,7 +105,7 @@ const processInterval = (x: string) =>
         </ol>
       </div>
     </div>
-    <div class="footer px-4">
+    <div class="footer px-4 print:hidden">
       <div v-if="userData" class="review">
         <div class="flex flex-row items-start gap-3">
           <PictureFrame
