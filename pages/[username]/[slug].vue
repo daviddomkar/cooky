@@ -142,4 +142,7 @@ const printPage = () => {
       </ul>
     </div>
   </main>
+  <main v-else class="w-full flex flex-col justify-center py-24">
+    <h2 class="text-center">Recipe {{ `${username}/${slug}` }} not found.</h2>
+  </main>
 </template>
