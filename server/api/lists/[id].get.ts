@@ -32,8 +32,8 @@ export default defineEventHandler(async (event) => {
 
     if (!session || session.user.id !== list.authorId) {
       throw createError({
-        statusCode: 403,
-        statusMessage: "Forbidden.",
+        statusCode: 401,
+        statusMessage: "Unauthorized.",
       });
     }
   }

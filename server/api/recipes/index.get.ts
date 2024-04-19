@@ -3,7 +3,7 @@ import { useValidatedQuery } from "h3-valibot";
 import { objectAsync, string, nullish, mergeAsync, toTrimmed } from "valibot";
 
 export default defineEventHandler(async (event) => {
-  const { username, slug, category, take, after, before } =
+  const { username, slug, category, listId, take, after, before } =
     await useValidatedQuery(
       event,
       mergeAsync([
@@ -15,6 +15,7 @@ export default defineEventHandler(async (event) => {
           category: nullish(
             string("Category must be a string.", [toTrimmed()]),
           ),
+          listId: nullish(string("List id must be a string.", [toTrimmed()])),
         }),
         PaginationSchema,
       ]),
@@ -43,6 +44,13 @@ export default defineEventHandler(async (event) => {
       author: username
         ? {
             username,
+          }
+        : undefined,
+      lists: listId
+        ? {
+            some: {
+              listId,
+            },
           }
         : undefined,
     },
