@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
   if (!recipe) {
     throw createError({
       statusCode: 404,
-      statusMessage: "Recipe for the given parameters not found",
+      statusMessage: "Recipe not found.",
     });
   }
 

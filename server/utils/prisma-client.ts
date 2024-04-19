@@ -123,6 +123,13 @@ export const prisma = new PrismaClient().$extends({
                 },
               },
             },
+            author: {
+              select: {
+                username: true,
+                name: true,
+                profileImageId: true,
+              },
+            },
           },
           where: {
             slug,
@@ -151,7 +158,7 @@ export const prisma = new PrismaClient().$extends({
           durationQueryPromise,
         ]);
 
-        if (recipe == null || durationQuery.length === 0) {
+        if (!recipe || !durationQuery?.length) {
           return null;
         }
 
