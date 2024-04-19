@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import NuxtLink from "#app/components/nuxt-link";
+import { Visibility } from "@prisma/client";
+import type { Input, Output } from "valibot";
 
 const route = useRoute();
 
@@ -11,19 +13,28 @@ const { data: lists } = await useInfiniteScrollFetch(window, "/api/lists", {
   },
 });
 
+const dialogRef = ref<Input<typeof ListFormSchema> | undefined>();
+
 const isOwnProfile = computed(
   () => session?.value?.user?.username === route.params.username,
 );
 
 const createNewList = () => {
-  // TODO: Implement create new list
-  // eslint-disable-next-line no-console
-  console.log("Create new list");
+  dialogRef.value = { title: "", visibility: Visibility.PRIVATE };
+};
+
+const handleListSubmit = (list: Output<typeof ListFormSchema>) => {
+  console.log(list);
 };
 </script>
 
 <template>
   <div class="flex flex-col justify-center gap-8">
+    <ListFormDialog
+      v-if="isOwnProfile"
+      v-model="dialogRef"
+      :on-submit="handleListSubmit"
+    />
     <div v-if="!lists?.length" class="flex flex-col items-center">
       <h2 class="mb-4 mt-0 text-center text-3xl text-on-surface-variant">
         {{ `${isOwnProfile ? "Your" : "This"} profile has no lists yet.` }}
