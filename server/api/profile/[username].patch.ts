@@ -17,9 +17,9 @@ import { File } from "@prisma/client";
 import { authOptions } from "../auth/[...]";
 
 const ParametersSchema = objectAsync({
-  username: string("This field is required.", [
+  username: string("username parameter is required.", [
     toTrimmed(),
-    minLength(1, "This field is required."),
+    minLength(1, "username parameter is required."),
   ]),
 });
 

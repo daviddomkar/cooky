@@ -1,3 +1,4 @@
+import { Visibility } from "@prisma/client";
 import { hash } from "bcrypt";
 import { useValidatedBody } from "h3-valibot";
 
@@ -58,6 +59,7 @@ export default defineEventHandler(async (event) => {
           },
         },
         title: "Favorites",
+        visibility: Visibility.PRIVATE,
       },
     });
 
