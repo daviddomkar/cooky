@@ -18,6 +18,18 @@ export default defineEventHandler(async (event) => {
     where: {
       id,
     },
+    select: {
+      title: true,
+      visibility: true,
+      authorId: true,
+      author: {
+        select: {
+          username: true,
+          name: true,
+          profileImageId: true,
+        },
+      },
+    },
   });
 
   if (!list) {

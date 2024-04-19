@@ -146,7 +146,7 @@ watch(unitOptions, (options) => {
               variant="secondary"
               @click="dialogRef = value"
             >
-              <div class="i-material-symbols:edit h-6 w-6 scale-[0.75]" />
+              <div class="i-material-symbols:edit h-6 w-6" />
             </BaseButton>
           </template>
         </TextField>
