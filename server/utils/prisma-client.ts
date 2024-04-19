@@ -3,6 +3,7 @@ import {
   type Recipe,
   Prisma,
   type RecipeIngredient,
+  UnitType,
 } from "@prisma/client";
 import { type Output /* is, instance, isoTimestamp, string */ } from "valibot";
 
@@ -16,6 +17,11 @@ type PrismaPaginationArgs<T> = Omit<
       direction: "asc" | "desc";
     };
   };
+
+type RecipeIngredientInput = Omit<RecipeIngredient, "recipeId"> & {
+  title?: string;
+  unitTypes?: UnitType[];
+};
 
 function encodeCursor(cursor: any) {
   /*
@@ -116,10 +122,11 @@ export const prisma = new PrismaClient().$extends({
         steps: PrismaJson.Step[];
         nutritionPerServing: number;
         numberOfServings: number;
-        imageId: string;
         authorId: string;
-        recipeIngredients: Omit<RecipeIngredient, "recipeId">[];
+        recipeIngredients: RecipeIngredientInput[];
         categories: string[];
+        imageKey: Buffer;
+        imageMimeType: string;
       }) {
         const {
           title,
@@ -128,7 +135,6 @@ export const prisma = new PrismaClient().$extends({
           steps,
           nutritionPerServing,
           numberOfServings,
-          imageId,
           authorId,
           recipeIngredients,
           categories,
@@ -138,15 +144,34 @@ export const prisma = new PrismaClient().$extends({
             minutes = 0,
             seconds = 0,
           },
+          imageKey,
+          imageMimeType,
         } = data;
 
         const preparationDurationSQL = `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
-        const recipeIngredientsSQL = Prisma.join(
-          recipeIngredients.map(
-            ({ amount, ingredientId, unitId }) =>
-              Prisma.sql`(${amount}, ${ingredientId}::uuid, ${unitId}::uuid)`,
-          ),
-        );
+
+        let recipeIngredientsSQL = null;
+
+        if (recipeIngredients.length > 0) {
+          recipeIngredientsSQL = Prisma.join(
+            recipeIngredients.map(
+              ({
+                amount,
+                ingredientId,
+                unitId,
+                title = "NULL",
+                unitTypes = [],
+              }) => {
+                const unitTypesSQL =
+                  unitTypes.length > 0
+                    ? `ARRAY[${Prisma.join(unitTypes)}]::unit_types[]`
+                    : "{}";
+                return Prisma.sql`(${amount}, ${ingredientId}::uuid, ${unitId}::uuid, ${title}, ${unitTypesSQL}::unit_types[])`;
+              },
+            ),
+          );
+        }
+
         const categoriesSQL = Prisma.join(categories);
 
         type CreateRecipeOutput = {
@@ -154,6 +179,7 @@ export const prisma = new PrismaClient().$extends({
           o_slug: string;
           o_created_at: Date;
           o_updated_at: Date;
+          o_image_id: string;
         };
 
         const result = await prisma.$queryRaw<CreateRecipeOutput[]>`
@@ -165,10 +191,12 @@ export const prisma = new PrismaClient().$extends({
             ${steps},
             ${nutritionPerServing}::integer,
             ${numberOfServings}::integer,
-            ${imageId}::uuid,
             ${authorId}::uuid,
             ARRAY[${recipeIngredientsSQL}]::recipe_ingredient_input[],
             ARRAY[${categoriesSQL}]::uuid[],
+            ${imageKey}::bytea,
+            ${imageMimeType},
+            NULL,
             NULL,
             NULL,
             NULL,
@@ -185,7 +213,7 @@ export const prisma = new PrismaClient().$extends({
           steps,
           nutritionPerServing,
           numberOfServings,
-          imageId,
+          imageId: result[0].o_image_id,
           authorId,
           createdAt: result[0].o_created_at,
           updatedAt: result[0].o_updated_at,
