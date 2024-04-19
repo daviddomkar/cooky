@@ -1,10 +1,4 @@
-import {
-  PrismaClient,
-  type Recipe,
-  Prisma,
-  type RecipeIngredient,
-  UnitType,
-} from "@prisma/client";
+import { PrismaClient, type Recipe, Prisma, UnitType } from "@prisma/client";
 import { type Output /* is, instance, isoTimestamp, string */ } from "valibot";
 
 type PrismaPaginationArgs<T> = Omit<
@@ -18,7 +12,10 @@ type PrismaPaginationArgs<T> = Omit<
     };
   };
 
-type RecipeIngredientInput = Omit<RecipeIngredient, "recipeId"> & {
+type RecipeIngredientInput = {
+  amount: number;
+  unitId: string;
+  ingredientId?: string;
   title?: string;
   unitTypes?: UnitType[];
 };
@@ -152,7 +149,7 @@ export const prisma = new PrismaClient().$extends({
               }) => {
                 const unitTypesSQL =
                   unitTypes.length > 0
-                    ? `ARRAY[${Prisma.join(unitTypes)}]::unit_types[]`
+                    ? Prisma.sql`ARRAY[${Prisma.join(unitTypes, ", ")}]`
                     : "{}";
                 return Prisma.sql`(${amount}, ${ingredientId}::uuid, ${unitId}::uuid, ${title}, ${unitTypesSQL}::unit_types[])`;
               },
