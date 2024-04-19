@@ -112,12 +112,7 @@ export const prisma = new PrismaClient().$extends({
       async create(data: {
         title: string;
         description: string;
-        preparationDuration: {
-          days: number;
-          hours: number;
-          minutes: number;
-          seconds: number;
-        };
+        preparationDuration: string;
         state: Recipe["state"];
         steps: PrismaJson.Step[];
         nutritionPerServing: number;
@@ -138,17 +133,10 @@ export const prisma = new PrismaClient().$extends({
           authorId,
           recipeIngredients,
           categories,
-          preparationDuration: {
-            days = 0,
-            hours = 0,
-            minutes = 0,
-            seconds = 0,
-          },
+          preparationDuration,
           imageKey,
           imageMimeType,
         } = data;
-
-        const preparationDurationSQL = `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
 
         let recipeIngredientsSQL = null;
 
@@ -186,7 +174,7 @@ export const prisma = new PrismaClient().$extends({
           CALL create_recipe(
             ${title}::character varying,
             ${description},
-            ${preparationDurationSQL}::interval,
+            ${preparationDuration}::interval,
             ${state}::recipe_state,
             ${steps},
             ${nutritionPerServing}::integer,
