@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import NuxtLink from "#app/components/nuxt-link";
+import { useNotification } from "@kyvg/vue3-notification";
+import { FetchError } from "ofetch";
 import { Visibility } from "@prisma/client";
 import type { Input, Output } from "valibot";
 
 const route = useRoute();
+
+const { notify } = useNotification();
 
 const { session } = useAuth();
 
@@ -23,8 +27,36 @@ const createNewList = () => {
   dialogRef.value = { title: "", visibility: Visibility.PRIVATE };
 };
 
-const handleListSubmit = (list: Output<typeof ListFormSchema>) => {
-  console.log(list);
+const handleListSubmit = async (list: Output<typeof ListFormSchema>) => {
+  try {
+    const response = await $fetch("/api/lists", {
+      method: "POST",
+      body: list,
+    });
+
+    notify({
+      type: "success",
+      title: `List ${list.title} created.`,
+      text: "Your list has been successfully created.",
+    });
+
+    navigateTo(`/list/${response.id}`);
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to create list.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to create list.",
+      text: "An unknown error occurred.",
+    });
+  }
 };
 </script>
 
