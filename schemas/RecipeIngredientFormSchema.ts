@@ -9,6 +9,8 @@ import {
   notValue,
 } from "valibot";
 
+import IngredientFormSchema from "~/schemas/IngredientFormSchema";
+
 export default object({
   ingredient: IngredientFormSchema,
   amount: number("This field is required.", [
