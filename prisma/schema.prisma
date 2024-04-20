@@ -200,10 +200,10 @@ model List {
   title      String     @db.VarChar(32)
   visibility Visibility @default(PUBLIC)
 
-  favouritesOfUser User?  @relation("favorites_list")
-  lastUsedOfUser   User?  @relation("last_used_list")
-  author           User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  authorId         String @map("author_id") @db.Uuid
+  favoritesOfUser User?  @relation("favorites_list")
+  lastUsedOfUser  User?  @relation("last_used_list")
+  author          User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  authorId        String @map("author_id") @db.Uuid
 
   recipes RecipeList[]
 

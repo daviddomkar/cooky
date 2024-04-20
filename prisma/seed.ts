@@ -56,6 +56,44 @@ async function main() {
     userData.map((data) => prisma.user.create({ data })),
   );
 
+  // Lists
+  const listData = seedData.list.map((list) => {
+    return {
+      ...list,
+      authorId: users[list.authorId].id,
+    };
+  });
+  const lists = await prisma.$transaction(
+    listData.map((data) => prisma.list.create({ data })),
+  );
+
+  // Favorite lists
+  const favoriteListData = lists
+    .filter((list) => list.title === "Favorites")
+    .map((list) => {
+      return {
+        where: {
+          id: list.id,
+        },
+        data: {
+          favoritesOfUser: {
+            connect: {
+              id: list.authorId,
+            },
+          },
+          lastUsedOfUser: {
+            connect: {
+              id: list.authorId,
+            },
+          },
+        },
+      };
+    });
+
+  await prisma.$transaction(
+    favoriteListData.map((data) => prisma.list.update(data)),
+  );
+
   // Units
   const unitData = seedData.unit as Prisma.UnitCreateInput[];
   const units = await prisma.$transaction(
@@ -212,17 +250,6 @@ async function main() {
     notificationData.map((data) => prisma.notification.create({ data })),
   );
 
-  // Lists
-  const listData = seedData.list.map((list) => {
-    return {
-      ...list,
-      authorId: users[list.authorId].id,
-    };
-  });
-  const lists = await prisma.$transaction(
-    listData.map((data) => prisma.list.create({ data })),
-  );
-
   // Recipe Lists
   const recipeListData = seedData.recipeList.map((recipeList) => {
     return {
@@ -231,8 +258,23 @@ async function main() {
       recipeId: recipes[recipeList.recipeId].id,
     };
   });
+
+  const favoriteListIds = users.map((user) => user.favoritesListId);
+
   await prisma.$transaction(
-    recipeListData.map((data) => prisma.recipeList.create({ data })),
+    // First filter out all recipes that have a rating of 4 or higher and are included in some favorite lists,
+    // because they are already in the favorites list
+    recipeListData
+      .filter(({ listId, recipeId }) => {
+        const isFavoriteList = favoriteListIds.includes(listId);
+
+        if (!isFavoriteList) return false;
+
+        return !ratingData.some(
+          (rating) => rating.recipeId === recipeId && rating.numberOfStars >= 4,
+        );
+      })
+      .map((data) => prisma.recipeList.create({ data })),
   );
 }
 

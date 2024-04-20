@@ -52,7 +52,7 @@ export default defineEventHandler(async (event) => {
             id: user.id,
           },
         },
-        favouritesOfUser: {
+        favoritesOfUser: {
           connect: {
             id: user.id,
           },
