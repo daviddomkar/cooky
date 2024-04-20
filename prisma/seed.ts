@@ -56,6 +56,44 @@ async function main() {
     userData.map((data) => prisma.user.create({ data })),
   );
 
+  // Lists
+  const listData = seedData.list.map((list) => {
+    return {
+      ...list,
+      authorId: users[list.authorId].id,
+    };
+  });
+  const lists = await prisma.$transaction(
+    listData.map((data) => prisma.list.create({ data })),
+  );
+
+  // Favourite lists
+  const favouriteListData = lists
+    .filter((list) => list.title === "Favorites")
+    .map((list) => {
+      return {
+        where: {
+          id: list.id,
+        },
+        data: {
+          favoritesOfUser: {
+            connect: {
+              id: list.authorId,
+            },
+          },
+          lastUsedOfUser: {
+            connect: {
+              id: list.authorId,
+            },
+          },
+        },
+      };
+    });
+
+  await prisma.$transaction(
+    favouriteListData.map((data) => prisma.list.update(data)),
+  );
+
   // Units
   const unitData = seedData.unit as Prisma.UnitCreateInput[];
   const units = await prisma.$transaction(
@@ -210,17 +248,6 @@ async function main() {
   });
   await prisma.$transaction(
     notificationData.map((data) => prisma.notification.create({ data })),
-  );
-
-  // Lists
-  const listData = seedData.list.map((list) => {
-    return {
-      ...list,
-      authorId: users[list.authorId].id,
-    };
-  });
-  const lists = await prisma.$transaction(
-    listData.map((data) => prisma.list.create({ data })),
   );
 
   // Recipe Lists
