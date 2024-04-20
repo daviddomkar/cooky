@@ -1,4 +1,3 @@
-
 import { randomBytes } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { Blob } from "node:buffer";
@@ -13,34 +12,42 @@ const path = process.env.FILE_STORAGE_PATH;
 const secret = process.env.FILE_STORAGE_SECRET;
 
 async function main() {
+  const lastRecipeImage = seedData.recipe[seedData.recipe.length - 1].imageId;
   // Files
-  const files = await prisma.$transaction(async(tx) => {
-    return await Promise.all(seedData.file.map(async ({ path: imagePath, mimeType}) => {
-        const key = randomBytes(32);
-        const blob = new Blob([readFileSync(imagePath)]);
+  const files = await prisma.$transaction(async (tx) => {
+    return await Promise.all(
+      seedData.file
+        .filter((_file, i) => i > lastRecipeImage)
+        .map(async ({ path: imagePath, mimeType }) => {
+          const key = randomBytes(32);
+          const blob = new Blob([readFileSync(imagePath)]);
 
-        const file = await tx.file.create({
-          data: {
-            mimeType,
-            key: await fileStorage.encryptKey(secret!, key),
-          },
-        });
+          const file = await tx.file.create({
+            data: {
+              mimeType,
+              key: await fileStorage.encryptKey(secret!, key),
+            },
+          });
 
-        await fileStorage.saveFile(join(path!, file.id), blob, key);
+          await fileStorage.saveFile(join(path!, file.id), blob, key);
 
-        return file;
-    }));
+          return file;
+        }),
+    );
   });
 
   // Users
   const userDataPromise = seedData.user.map(async (user) => {
+    const indexOffset = lastRecipeImage + 1;
     return {
       ...user,
       password: await hash(`${user.username}password`, 12),
       profileImageId: user.profileImageId
-        ? files[user.profileImageId].id
+        ? files[user.profileImageId - indexOffset].id
         : null,
-      coverImageId: user.coverImageId ? files[user.coverImageId].id : null,
+      coverImageId: user.coverImageId
+        ? files[user.coverImageId - indexOffset].id
+        : null,
     };
   });
   const userData = await Promise.all(userDataPromise);
@@ -67,8 +74,22 @@ async function main() {
     categoryData.map((data) => prisma.category.create({ data })),
   );
 
+  const recipeImageData = await Promise.all(
+    seedData.recipe.map((recipe) => {
+      const key = randomBytes(32);
+      const image = seedData.file[recipe.imageId];
+      const blob = new Blob([readFileSync(image.path)]);
+
+      return {
+        imageMimeType: image.mimeType,
+        imageKey: key,
+        blob,
+      };
+    }),
+  );
+
   // Recipes
-  const recipeData = seedData.recipe.map((recipe) => {
+  const recipeData = seedData.recipe.map((recipe, index) => {
     const recipeIngredients = recipe.recipeIngredients.map((ingredient) => {
       return {
         ...ingredient,
@@ -77,18 +98,48 @@ async function main() {
         ingredientId: ingredients[ingredient.ingredientId].id,
       };
     });
-    const recipeCategories = recipe.categories.map((category) => categories[category].id);
+
+    const recipeCategories = recipe.categories.map(
+      (category) => categories[category].id,
+    );
+
+    const { imageMimeType, imageKey } = recipeImageData[index];
+
     return {
       ...recipe,
       categories: recipeCategories,
       recipeIngredients,
       state: recipe.state as Recipe["state"],
-      imageId: files[recipe.imageId].id,
+      imageMimeType,
+      imageKey,
       authorId: users[recipe.authorId].id,
     };
   });
-  const createRecipes = recipeData.map((data) => prisma.recipe.create(data));
-  const recipes = await Promise.all(createRecipes);
+
+  const recipes = await prisma.$transaction(async (tx) => {
+    const recipesResult = await Promise.all(
+      recipeData.map(async (data) =>
+        tx.recipe.create({
+          ...data,
+          imageKey: await fileStorage.encryptKey(secret!, data.imageKey),
+        }),
+      ),
+    );
+
+    // Save Images
+    await Promise.all(
+      recipeImageData.map(({ blob, imageKey }, i) => {
+        const recipe = recipesResult[i];
+        return fileStorage.saveFile(
+          join(path!, recipe.imageId),
+          blob,
+          imageKey,
+        );
+      }),
+    );
+
+    return recipesResult;
+  });
 
   // Ratings
   const ratingData = seedData.rating.map((rating) => {
