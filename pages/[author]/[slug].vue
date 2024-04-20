@@ -42,6 +42,10 @@ const { data: lists, refresh: refreshLists } = await useAsyncData(
   },
 );
 
+const isOwnRecipe = computed(
+  () => recipe.value?.author?.username === session?.value?.user?.username,
+);
+
 const print = () => {
   window.scrollTo(0, 0);
   window.print();
@@ -63,14 +67,32 @@ const rate = (value: number) => {
         :src="`/api/files/${recipe.imageId}`"
       />
       <div class="mx-auto flex flex-col self-stretch gap-2 lg:mx-0 lg:grow">
-        <h1 class="my-0 text-center text-5xl lg:text-left">
-          {{ recipe.title }}
-        </h1>
-        <ProfileLink class="mx-auto self-start lg:mx-0" :user="recipe.author" />
+        <div
+          class="flex flex-col items-center gap-4 lg:flex-row lg:items-start"
+        >
+          <div class="flex grow flex-col items-center lg:items-start">
+            <h1 class="my-0 text-center text-5xl lg:text-left">
+              {{ recipe.title }}
+            </h1>
+            <ProfileLink
+              class="mx-auto self-start lg:mx-0"
+              :user="recipe.author"
+            />
+          </div>
+          <div v-if="isOwnRecipe" class="flex gap-2">
+            <BaseButton spread="compact" variant="secondary">
+              <div class="i-material-symbols:edit h-6 w-6" />
+            </BaseButton>
+            <BaseButton spread="compact" variant="danger">
+              <div class="i-material-symbols:delete h-6 w-6" />
+            </BaseButton>
+          </div>
+        </div>
         <RatingField
+          v-if="recipe.state !== RecipeState.DRAFT"
           class="mx-auto mt-4 lg:mx-0 print:hidden"
           :controlled="false"
-          :editable="!!session"
+          :editable="!!session && !isOwnRecipe"
           :model-value="recipe.rating ?? undefined"
           name="rating"
           @update:model-value="rate"

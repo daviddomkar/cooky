@@ -63,36 +63,26 @@ const remove = (listId: string) => {
 
 <template>
   <main
-    class="mx-auto box-border max-w-336 w-full flex flex-col px-4 py-4 sm:px-8 sm:py-8"
+    v-if="list"
+    class="mx-auto box-border max-w-336 w-full flex flex-col gap-8 px-4 py-4 sm:px-8 sm:py-8"
   >
-    <div class="flex gap-2">
-      <div class="grow">
+    <div class="flex flex-col items-center gap-4 lg:flex-row lg:items-start">
+      <div class="mx-auto flex flex-col self-stretch gap-2 lg:mx-0 lg:grow">
         <h1
           class="my-0 text-center text-5xl text-on-surface-variant lg:text-left sm:text-6xl"
         >
-          {{ list!.title }}
+          {{ list.title }}
         </h1>
-        <h2
-          class="mb-4 mt-0 text-center text-xl text-on-surface-variant lg:text-left"
-        >
-          <img
-            class="h-6 w-6 rounded-full object-cover align-middle"
-            :src="
-              getProfileImageUrl(
-                list!.author.username,
-                list!.author.profileImageId,
-              )
-            "
-          />
-          <span class="ml-2 grow font-sans">{{ list!.author.name }}</span>
-        </h2>
+        <ProfileLink class="mx-auto self-start lg:mx-0" :user="list.author" />
       </div>
-      <BaseButton v-if="isOwnList" spread="compact" variant="secondary">
-        <div class="i-material-symbols:edit h-6 w-6" />
-      </BaseButton>
-      <BaseButton v-if="isOwnList" spread="compact" variant="danger">
-        <div class="i-material-symbols:delete h-6 w-6" />
-      </BaseButton>
+      <div v-if="isOwnList" class="flex gap-2">
+        <BaseButton spread="compact" variant="secondary">
+          <div class="i-material-symbols:edit h-6 w-6" />
+        </BaseButton>
+        <BaseButton spread="compact" variant="danger">
+          <div class="i-material-symbols:delete h-6 w-6" />
+        </BaseButton>
+      </div>
     </div>
     <div v-if="!recipes?.length" class="flex flex-col items-center">
       <h2 class="mb-4 mt-0 text-center text-3xl text-on-surface-variant">
