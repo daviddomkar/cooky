@@ -36,7 +36,7 @@ const queryIngredient = computed(() => {
 const unitOptions = computed(() => {
   return props.units
     .filter((unit) =>
-      value?.value.unitTypes?.some((type) => unit.type === type),
+      value.value?.unitTypes?.some((type) => unit.type === type),
     )
     .map((unit) => ({
       key: unit.id,
@@ -112,6 +112,8 @@ watch(unitOptions, (options) => {
     unitId.value = undefined;
   }
 });
+
+watch(value, (value) => console.log(value));
 </script>
 
 <template>

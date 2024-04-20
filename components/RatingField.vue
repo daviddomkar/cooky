@@ -3,16 +3,19 @@ type Props = {
   name: string;
   editable?: boolean;
   controlled?: boolean;
+  modelValue?: number;
 };
 
 const props = withDefaults(defineProps<Props>(), {
   editable: false,
   controlled: true,
+  modelValue: undefined,
 });
 
 const { value, handleChange } = useField<number>(() => props.name, undefined, {
   syncVModel: true,
   controlled: props.controlled,
+  initialValue: props.modelValue ?? 0,
 });
 
 const model = defineModel<number>();
@@ -79,7 +82,10 @@ const setValue = (value: number) => {
         </div>
       </div>
     </div>
-    <p class="my-0 text-nowrap leading-none">
+    <p
+      v-show="hoverValue ?? roundedValue"
+      class="my-0 text-nowrap leading-none"
+    >
       {{ hoverValue ? hoverValue : roundedValue }} / 5
     </p>
   </div>

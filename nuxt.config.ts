@@ -36,7 +36,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     imports: {
-      dirs: ["server/schemas", "server/composables"],
+      dirs: ["schemas", "server/schemas", "server/composables"],
     },
   },
   eslint: {
