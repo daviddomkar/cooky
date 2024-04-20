@@ -34,7 +34,7 @@ withDefaults(defineProps<Props>(), {
         />
         <span class="ml-2 grow text-xs text-white">{{ author.name }}</span>
         <div
-          class="i-ph-heart-fill h-6 w-6 transition-all duration-300 ease-in-out hover:scale-110"
+          class="i-cooky:favourites h-6 w-6 transition-all duration-300 ease-in-out hover:scale-110"
           :class="{
             'bg-red': liked,
             'bg-gray': !liked,

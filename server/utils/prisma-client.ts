@@ -5,6 +5,7 @@ import {
   type RecipeIngredient,
 } from "@prisma/client";
 import { type Output /* is, instance, isoTimestamp, string */ } from "valibot";
+import PaginationSchema from "../schemas/PaginationSchema";
 
 type PrismaPaginationArgs<T> = Omit<
   Prisma.Args<T, "findMany">,
@@ -103,6 +104,75 @@ export const prisma = new PrismaClient().$extends({
       },
     },
     recipe: {
+      async findByUsernameAndSlug(username: string, slug: string) {
+        const recipePromise = prisma.recipe.findFirst({
+          include: {
+            ingredients: {
+              include: {
+                ingredient: true,
+                unit: true,
+              },
+            },
+            comments: {
+              include: {
+                author: {
+                  select: {
+                    username: true,
+                    name: true,
+                    profileImageId: true,
+                  },
+                },
+                replies: {
+                  include: {
+                    author: true,
+                  },
+                },
+              },
+            },
+            author: {
+              select: {
+                username: true,
+                name: true,
+                profileImageId: true,
+              },
+            },
+          },
+          where: {
+            slug,
+            author: {
+              username,
+            },
+          },
+        });
+
+        type RecipeDurationQueryOutput = {
+          preparation_duration: string;
+        };
+
+        const durationQueryPromise = prisma.$queryRaw<
+          RecipeDurationQueryOutput[]
+        >`
+          SELECT
+            preparation_duration::text
+          FROM recipes
+          JOIN users ON recipes.author_id = users.id
+          WHERE slug = ${slug} AND username = ${username}
+        `;
+
+        const [recipe, durationQuery] = await Promise.all([
+          recipePromise,
+          durationQueryPromise,
+        ]);
+
+        if (!recipe || !durationQuery?.length) {
+          return null;
+        }
+
+        return {
+          ...recipe,
+          preparitionDuration: durationQuery[0].preparation_duration,
+        };
+      },
       async create(data: {
         title: string;
         description: string;

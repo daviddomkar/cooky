@@ -56,7 +56,7 @@ watch(
         }"
       >
         <AppHeader
-          class="sticky top-0 z-10"
+          class="sticky top-0 z-10 print:hidden"
           :user="session?.user"
           @log-in="logIn"
           @new="newRecipe"

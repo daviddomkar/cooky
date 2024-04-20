@@ -56,7 +56,7 @@ withDefaults(defineProps<Props>(), {
     </div>
 
     <div
-      class="flex"
+      class="flex items-center"
       :class="{
         invisible: loading,
         'gap-2 w-full': $slots.icon,
