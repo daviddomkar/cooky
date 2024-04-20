@@ -1,7 +1,7 @@
 import { RecipeState } from "@prisma/client";
 import { useValidatedQuery } from "h3-valibot";
 import { getServerSession } from "#auth";
-import { objectAsync, string, nullish, mergeAsync, toTrimmed } from "valibot";
+import { objectAsync, string, mergeAsync, toTrimmed } from "valibot";
 import { authOptions } from "../auth/[...]";
 
 export default defineEventHandler(async (event) => {
@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
   if (!session) {
     throw createError({
       statusCode: 401,
-      statusMessage: "Unauthorized",
+      statusMessage: "Unauthorized.",
     });
   }
 
@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     event,
     mergeAsync([
       objectAsync({
-        username: nullish(string("Username must be a string.", [toTrimmed()])),
+        username: string("Username must be a string.", [toTrimmed()]),
       }),
       PaginationSchema,
     ]),

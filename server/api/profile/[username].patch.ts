@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
   if (!session) {
     throw createError({
       statusCode: 401,
-      statusMessage: "Unauthorized",
+      statusMessage: "Unauthorized.",
     });
   }
 
@@ -38,7 +38,7 @@ export default defineEventHandler(async (event) => {
   if (username !== session.user.username) {
     throw createError({
       statusCode: 403,
-      statusMessage: "Forbidden",
+      statusMessage: "Forbidden.",
     });
   }
 
@@ -55,7 +55,7 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Bad Request",
+      statusMessage: "Bad Request.",
       data: error,
     });
   }

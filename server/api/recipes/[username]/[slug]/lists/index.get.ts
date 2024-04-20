@@ -1,8 +1,8 @@
-import { useValidatedParams } from "h3-valibot";
-import { string, objectAsync, toTrimmed, minLength } from "valibot";
 import { getServerSession } from "#auth";
+import { string, objectAsync, toTrimmed, minLength } from "valibot";
+import { useValidatedParams } from "h3-valibot";
 import { RecipeState } from "@prisma/client";
-import { authOptions } from "../../../auth/[...]";
+import { authOptions } from "../../../../auth/[...]";
 
 const ParametersSchema = objectAsync({
   username: string("username parameter is required.", [
@@ -17,6 +17,14 @@ const ParametersSchema = objectAsync({
 
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event, authOptions);
+
+  if (!session) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: "Unauthorized.",
+    });
+  }
+
   const { username, slug } = await useValidatedParams(event, ParametersSchema);
 
   const recipe = await prisma.recipe.findByUsernameAndSlug(username, slug);
@@ -29,25 +37,24 @@ export default defineEventHandler(async (event) => {
   }
 
   if (recipe.state === RecipeState.DRAFT) {
-    if (!session || session.user.id !== recipe.authorId) {
-      throw createError({
-        statusCode: 403,
-        statusMessage: "Forbidden.",
-      });
-    }
+    throw createError({
+      statusCode: 403,
+      statusMessage: "Forbidden.",
+    });
   }
 
-  const averageRating = await prisma.rating.aggregate({
-    _avg: {
-      numberOfStars: true,
-    },
+  return prisma.list.findMany({
     where: {
-      recipeId: recipe.id,
+      authorId: session.user.id,
+      recipes: {
+        some: {
+          recipeId: recipe.id,
+        },
+      },
+    },
+    select: {
+      id: true,
+      title: true,
     },
   });
-
-  return {
-    ...recipe,
-    rating: averageRating._avg.numberOfStars,
-  };
 });

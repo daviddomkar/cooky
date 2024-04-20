@@ -5,8 +5,8 @@ definePageMeta({
   middleware: async (to) => {
     const { error } = await useFetch(`/api/lists/${to.params.id}`);
 
-    if (error.value?.statusCode === 401) {
-      return abortNavigation();
+    if (error.value) {
+      return abortNavigation(error.value);
     }
   },
 });

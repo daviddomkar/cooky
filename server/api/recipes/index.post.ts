@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
   if (!session) {
     throw createError({
       statusCode: 401,
-      statusMessage: "Unauthorized",
+      statusMessage: "Unauthorized.",
     });
   }
 
@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
   if (!multipartFormData) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Bad Request",
+      statusMessage: "Bad Request.",
       data: "No data found in multipart form data.",
     });
   }
@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
   if (!image || !json) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Bad Request",
+      statusMessage: "Bad Request.",
       data: "The image and JSON fields are required.",
     });
   }
@@ -51,7 +51,7 @@ export default defineEventHandler(async (event) => {
   if (!success) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Bad Request",
+      statusMessage: "Bad Request.",
       data: issues,
     });
   }

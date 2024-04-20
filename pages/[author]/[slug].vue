@@ -2,7 +2,7 @@
 definePageMeta({
   middleware: async (to) => {
     const { error } = await useFetch(
-      `/api/recipes/${to.params.username}/${to.params.slug}`,
+      `/api/recipes/${to.params.author}/${to.params.slug}`,
     );
 
     if (error.value) {
@@ -16,16 +16,32 @@ const route = useRoute();
 const { session } = useAuth();
 
 const { data: recipe } = await useFetch(
-  `/api/recipes/${route.params.username}/${route.params.slug}`,
+  `/api/recipes/${route.params.author}/${route.params.slug}`,
+);
+
+const { data: lists } = await useAsyncData(
+  async () => {
+    if (!session.value?.user?.username) {
+      return [];
+    }
+
+    const data = await $fetch("/api/lists", {
+      query: {
+        take: 100,
+        username: session.value?.user?.username,
+      },
+    });
+
+    return data.results;
+  },
+  {
+    watch: [session],
+  },
 );
 
 const print = () => {
   window.scrollTo(0, 0);
   window.print();
-};
-
-const save = (data: any) => {
-  console.log("list save", data);
 };
 
 const rate = (value: number) => {
@@ -81,12 +97,16 @@ const rate = (value: number) => {
           <BaseButton spread="compact" variant="secondary" @click="print">
             <div class="i-cooky:print scale-[1.25]" />
           </BaseButton>
-          <BaseButton spread="compact" @click="save">
-            <template #icon>
-              <div class="i-cooky:favourites scale-[1.25]" />
+          <AddToListPopover v-if="session && lists">
+            <template #activator>
+              <BaseButton spread="compact">
+                <template #icon>
+                  <div class="i-cooky:favourites scale-[1.25]" />
+                </template>
+                Save
+              </BaseButton>
             </template>
-            Save
-          </BaseButton>
+          </AddToListPopover>
         </div>
       </div>
     </div>
