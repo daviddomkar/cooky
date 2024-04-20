@@ -19,6 +19,7 @@ export default defineEventHandler(async (event) => {
       id,
     },
     select: {
+      id: true,
       title: true,
       visibility: true,
       authorId: true,

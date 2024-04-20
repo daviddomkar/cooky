@@ -27,7 +27,7 @@ const createNewList = () => {
   dialogRef.value = { title: "", visibility: Visibility.PRIVATE };
 };
 
-const handleListSubmit = async (list: Output<typeof ListFormSchema>) => {
+const submit = async (list: Output<typeof ListFormSchema>) => {
   try {
     const response = await $fetch("/api/lists", {
       method: "POST",
@@ -65,7 +65,7 @@ const handleListSubmit = async (list: Output<typeof ListFormSchema>) => {
     <ListFormDialog
       v-if="isOwnProfile"
       v-model="dialogRef"
-      :on-submit="handleListSubmit"
+      :on-submit="submit"
     />
     <div v-if="!lists?.length" class="flex flex-col items-center">
       <h2 class="mb-4 mt-0 text-center text-3xl text-on-surface-variant">

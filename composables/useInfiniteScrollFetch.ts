@@ -67,6 +67,7 @@ export async function useInfiniteScrollFetch<
   data: Ref<DataT["results"]>;
   status: Ref<AsyncDataRequestStatus>;
   error: Ref<ErrorT | null>;
+  refresh: () => Promise<void>;
 }> {
   const after = ref<string | null | undefined>(null);
   const data = ref([]) as Ref<DataT["results"]>;
@@ -79,6 +80,7 @@ export async function useInfiniteScrollFetch<
     data: currentData,
     status,
     error,
+    refresh,
   } = await useFetch<
     DataT,
     ErrorT,
@@ -124,5 +126,9 @@ export async function useInfiniteScrollFetch<
     data,
     status,
     error,
+    refresh: async () => {
+      after.value = null;
+      await refresh();
+    },
   };
 }

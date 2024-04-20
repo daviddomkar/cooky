@@ -82,6 +82,7 @@ model Unit {
 
 model RecipeIngredient {
   amount Decimal @db.Decimal
+  order  Int     @default(autoincrement()) @db.Integer
 
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   ingredientId String     @map("ingredient_id") @db.Uuid

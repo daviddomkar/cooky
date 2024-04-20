@@ -47,8 +47,6 @@ const submit = async (values: Output<typeof RecipeFormSchema>) => {
       text: "An unknown error occurred.",
     });
   }
-
-  // TODO: Submit the form data
 };
 </script>
 

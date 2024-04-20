@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import { RecipeState } from "@prisma/client";
+
 definePageMeta({
   middleware: async (to) => {
-    const { error } = await useFetch(
-      `/api/recipes/${to.params.author}/${to.params.slug}`,
-    );
-
-    if (error.value) {
-      return abortNavigation(error.value);
+    try {
+      await $fetch(`/api/recipes/${to.params.author}/${to.params.slug}`);
+    } catch (error) {
+      if (error) {
+        return abortNavigation(error);
+      }
     }
   },
 });
@@ -19,7 +21,7 @@ const { data: recipe } = await useFetch(
   `/api/recipes/${route.params.author}/${route.params.slug}`,
 );
 
-const { data: lists } = await useAsyncData(
+const { data: lists, refresh: refreshLists } = await useAsyncData(
   async () => {
     if (!session.value?.user?.username) {
       return [];
@@ -27,6 +29,7 @@ const { data: lists } = await useAsyncData(
 
     const data = await $fetch("/api/lists", {
       query: {
+        // TODO: This should be a proper pagination
         take: 100,
         username: session.value?.user?.username,
       },
@@ -97,7 +100,12 @@ const rate = (value: number) => {
           <BaseButton spread="compact" variant="secondary" @click="print">
             <div class="i-cooky:print scale-[1.25]" />
           </BaseButton>
-          <AddToListPopover v-if="session && lists">
+          <ListsPopover
+            v-if="session && lists && recipe.state !== RecipeState.DRAFT"
+            :lists="lists"
+            :recipe="recipe"
+            :refresh-lists="refreshLists"
+          >
             <template #activator>
               <BaseButton spread="compact">
                 <template #icon>
@@ -106,7 +114,7 @@ const rate = (value: number) => {
                 Save
               </BaseButton>
             </template>
-          </AddToListPopover>
+          </ListsPopover>
         </div>
       </div>
     </div>

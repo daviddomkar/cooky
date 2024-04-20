@@ -3,10 +3,12 @@ import NuxtLink from "#app/components/nuxt-link";
 
 definePageMeta({
   middleware: async (to) => {
-    const { error } = await useFetch(`/api/lists/${to.params.id}`);
-
-    if (error.value) {
-      return abortNavigation(error.value);
+    try {
+      await $fetch(`/api/lists/${to.params.id}`);
+    } catch (error) {
+      if (error) {
+        return abortNavigation(error);
+      }
     }
   },
 });
@@ -19,13 +21,44 @@ const { isMobile } = useDevice();
 
 const { data: list } = await useFetch(`/api/lists/${route.params.id}`);
 
-const { data: recipes } = await useInfiniteScrollFetch(window, "/api/recipes", {
-  query: { listId: route.params.id },
-});
+const { data: recipes, refresh: refreshRecipes } = await useInfiniteScrollFetch(
+  window,
+  "/api/recipes",
+  {
+    query: { listId: route.params.id },
+  },
+);
+
+const { data: lists, refresh: refreshLists } = await useAsyncData(
+  async () => {
+    if (!session.value?.user?.username) {
+      return [];
+    }
+
+    const data = await $fetch("/api/lists", {
+      query: {
+        // TODO: This should be a proper pagination
+        take: 100,
+        username: session.value?.user?.username,
+      },
+    });
+
+    return data.results;
+  },
+  {
+    watch: [session],
+  },
+);
 
 const isOwnList = computed(
   () => list.value?.author?.username === session?.value?.user?.username,
 );
+
+const remove = (listId: string) => {
+  if (listId === list.value?.id) {
+    refreshRecipes();
+  }
+};
 </script>
 
 <template>
@@ -78,21 +111,12 @@ const isOwnList = computed(
       :ssr-columns="isMobile ? 1 : 4"
     >
       <template #default="{ item }">
-        <NuxtLink
-          class="block transition-transform hover:active:scale-[0.97]"
-          :to="`/${item.author.username}/${item.slug}`"
-        >
-          <RecipeCard
-            :key="item.id"
-            :author="{
-              username: item.author.username,
-              name: item.author.name,
-              profileImageId: item.author.profileImageId,
-            }"
-            :cover-image-id="item.imageId"
-            :title="item.title"
-          />
-        </NuxtLink>
+        <RecipeCard
+          :lists="lists!"
+          :recipe="item"
+          :refresh-lists="refreshLists"
+          @remove="remove"
+        />
       </template>
     </MasonryWall>
   </main>

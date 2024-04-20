@@ -112,8 +112,6 @@ watch(unitOptions, (options) => {
     unitId.value = undefined;
   }
 });
-
-watch(value, (value) => console.log(value));
 </script>
 
 <template>

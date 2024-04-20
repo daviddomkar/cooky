@@ -25,6 +25,27 @@ const { data: recipes } = await useInfiniteScrollFetch(
   },
 );
 
+const { data: lists, refresh: refreshLists } = await useAsyncData(
+  async () => {
+    if (!session.value?.user?.username) {
+      return [];
+    }
+
+    const data = await $fetch("/api/lists", {
+      query: {
+        // TODO: This should be a proper pagination
+        take: 100,
+        username: session.value?.user?.username,
+      },
+    });
+
+    return data.results;
+  },
+  {
+    watch: [session],
+  },
+);
+
 const isOwnProfile = computed(
   () => session?.value?.user?.username === route.params.username,
 );
@@ -52,10 +73,9 @@ const isOwnProfile = computed(
           :to="`/${item.author.username}/${item.slug}`"
         >
           <RecipeCard
-            :key="item.id"
-            :author="item.author"
-            :cover-image-id="item.imageId"
-            :title="item.title"
+            :lists="lists!"
+            :recipe="item"
+            :refresh-lists="refreshLists"
           />
         </NuxtLink>
       </template>
