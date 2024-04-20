@@ -28,10 +28,6 @@ const save = (data: any) => {
   console.log("list save", data);
 };
 
-const handleCommentSubmition = (data: any) => {
-  console.log("comment submition", data);
-};
-
 const rate = (value: number) => {
   console.log("rate", value);
 };
@@ -47,27 +43,11 @@ const rate = (value: number) => {
         class="block w-full shrink-0 rounded-3xl print:hidden lg:min-w-80 lg:w-80"
         :src="`/api/files/${recipe.imageId}`"
       />
-      <div class="mx-auto flex flex-col self-stretch lg:mx-0 lg:grow">
+      <div class="mx-auto flex flex-col self-stretch gap-2 lg:mx-0 lg:grow">
         <h1 class="my-0 text-center text-5xl lg:text-left">
           {{ recipe.title }}
         </h1>
-        <h2
-          class="my-0 text-center text-xl text-on-surface-variant lg:text-left"
-        >
-          <PictureFrame
-            borderless
-            class="inline-block h-6 w-6 rounded-full object-cover align-middle"
-            :src="
-              getProfileImageUrl(
-                recipe.author.username,
-                recipe.author.profileImageId,
-              )
-            "
-          />
-          <span class="ml-2 grow text-on-surface font-sans">
-            {{ recipe.author.name }}
-          </span>
-        </h2>
+        <ProfileLink class="mx-auto self-start lg:mx-0" :user="recipe.author" />
         <RatingField
           class="mx-auto mt-4 lg:mx-0 print:hidden"
           :controlled="false"
@@ -76,7 +56,7 @@ const rate = (value: number) => {
           name="rating"
           @update:model-value="rate"
         />
-        <div class="my-8 flex justify-center lg:justify-left">
+        <div class="my-4 flex justify-center lg:justify-left">
           <ul class="my-0 max-w-60 w-60 list-none pl-0">
             <li class="flex items-center">
               <span class="grow text-2xl font-display">PREP TIME</span>
@@ -96,14 +76,14 @@ const rate = (value: number) => {
           {{ recipe.description }}
         </p>
         <div
-          class="mt-8 flex grow items-end justify-center gap-2 print:hidden lg:justify-end"
+          class="mt-4 flex grow items-end justify-center gap-2 print:hidden lg:justify-end"
         >
           <BaseButton spread="compact" variant="secondary" @click="print">
-            <div class="i-cooky:print h-6 w-6" />
+            <div class="i-cooky:print scale-[1.25]" />
           </BaseButton>
           <BaseButton spread="compact" @click="save">
             <template #icon>
-              <div class="i-ph:heart-fill h-6 w-6" />
+              <div class="i-cooky:favourites scale-[1.25]" />
             </template>
             Save
           </BaseButton>
@@ -133,33 +113,32 @@ const rate = (value: number) => {
         </ol>
       </div>
     </div>
-    <div class="flex flex-col print:hidden">
+    <div
+      v-if="recipe.comments.length || session"
+      class="flex flex-col print:hidden"
+    >
       <h2 class="my-0 mb-4 text-3xl text-on-surface-variant">Comments</h2>
-      <div v-if="session" class="review">
-        <CommentTextField
-          expanded
-          :profile-image-id="session.user.profileImageId"
-          :username="session.user.username"
-          @submit="handleCommentSubmition"
-        />
-      </div>
-      <ul class="list-none">
+      <CommentCard
+        v-if="session"
+        :author="{
+          name: session.user.name,
+          username: session.user.username,
+          profileImageId: session.user.profileImageId,
+        }"
+        :editable="true"
+      />
+      <ul class="my-0 flex flex-col list-none gap-8 pl-0">
         <li v-for="comment in recipe!.comments" :key="comment.id">
-          <RecipeComment
-            :author-image-id="comment.author.profileImageId"
-            :author-name="comment.author.username"
-            class="mb-3"
-            :content="comment.content"
-            :created-at="comment.createdAt"
-          />
-          <ul class="list-none">
+          <CommentCard :author="comment.author" :content="comment.content" />
+          <ul
+            v-if="comment.replies.length"
+            class="mb-0 mt-4 flex flex-col list-none gap-4 pl-14"
+          >
             <li v-for="reply in comment.replies" :key="reply.id">
-              <RecipeComment
-                :author-image-id="reply.author.profileImageId"
-                :author-name="reply.author.username"
-                class="mb-3"
+              <CommentCard
+                :author="reply.author"
                 :content="reply.content"
-                :created-at="reply.createdAt"
+                :reply="true"
               />
             </li>
           </ul>

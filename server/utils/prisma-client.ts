@@ -115,7 +115,13 @@ export const prisma = new PrismaClient().$extends({
             },
             comments: {
               include: {
-                author: true,
+                author: {
+                  select: {
+                    username: true,
+                    name: true,
+                    profileImageId: true,
+                  },
+                },
                 replies: {
                   include: {
                     author: true,

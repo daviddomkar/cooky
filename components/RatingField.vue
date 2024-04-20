@@ -57,7 +57,7 @@ const setValue = (value: number) => {
         @mouseover="setHoverValue(i)"
       >
         <div
-          class="i-cooky:star relative text-amber group-hover:text-amber"
+          class="i-cooky:star relative text-primary group-hover:text-primary"
           :class="{
             'text-on-surface-variant dark:text-outline': roundedValue < i,
             'group-hover:text-on-surface-variant dark:group-hover:text-outline':
@@ -69,7 +69,7 @@ const setValue = (value: number) => {
             class="absolute inset-0 box-border w-50% overflow-hidden"
           >
             <div
-              class="i-cooky:starhalf text-amber"
+              class="i-cooky:starhalf text-primary"
               :class="{
                 'text-on-surface-variant dark:text-outline':
                   roundedValue < i - 0.5,
