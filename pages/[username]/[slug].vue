@@ -125,6 +125,7 @@ const rate = (value: number) => {
           username: session.user.username,
           profileImageId: session.user.profileImageId,
         }"
+        class="mb-4"
         :editable="true"
       />
       <ul class="my-0 flex flex-col list-none gap-8 pl-0">
