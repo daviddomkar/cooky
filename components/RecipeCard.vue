@@ -24,11 +24,16 @@ const emit = defineEmits<{
 defineProps<Props>();
 
 const { session } = useAuth();
+
+const hoveringOverActions = ref(false);
 </script>
 
 <template>
   <div
-    class="relative block transition-transform [&:not(has(a:hover)):hover:active]:scale-[0.97]"
+    class="relative block transition-transform"
+    :class="{
+      'hover:active:scale-[0.97]': !hoveringOverActions,
+    }"
   >
     <div class="relative overflow-hidden rounded-3xl">
       <img
@@ -44,10 +49,19 @@ const { session } = useAuth();
         </h2>
       </NuxtLink>
     </div>
-    <div class="absolute bottom-2 left-2">
+    <div
+      class="absolute bottom-2 left-2"
+      @mouseenter="hoveringOverActions = true"
+      @mouseleave="hoveringOverActions = false"
+    >
       <ProfileLink small :user="recipe.author" />
     </div>
-    <div v-if="session" class="absolute bottom-2 right-2">
+    <div
+      v-if="session"
+      class="absolute bottom-2 right-2"
+      @mouseenter="hoveringOverActions = true"
+      @mouseleave="hoveringOverActions = false"
+    >
       <ListsPopover
         :lists="lists"
         :recipe="recipe"
