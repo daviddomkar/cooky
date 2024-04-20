@@ -3,13 +3,9 @@ import { join } from "node:path";
 import { Blob } from "node:buffer";
 import { safeParseAsync } from "valibot";
 import { getServerSession } from "#auth";
-import { RecipeState } from "@prisma/client";
+import { Prisma, RecipeState } from "@prisma/client";
 import { authOptions } from "../auth/[...]";
 import NewRecipeSchema from "~/server/schemas/NewRecipeSchema";
-
-const {
-  fileStorage: { path, secret },
-} = useRuntimeConfig();
 
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event, authOptions);
@@ -60,46 +56,45 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  if (
-    output.ingredients.some(
-      ({ ingredient }) => !ingredient.id && ingredient.unitTypes.length === 0,
-    )
-  ) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: "Bad Request",
-      data: "All ingredients must have an ID or at least one unit type.",
-    });
-  }
+  const {
+    fileStorage: { path, secret },
+  } = useRuntimeConfig();
 
-  return prisma.$transaction(async (tx) => {
+  const recipe = await prisma.$transaction(async (tx) => {
     const key = randomBytes(32);
 
     const { image, draft, ingredients: recipeIngredients, ...rest } = output;
 
-    const draftState = draft ? RecipeState.DRAFT : RecipeState.PUBLISHED;
+    const state = draft ? RecipeState.DRAFT : RecipeState.PUBLISHED;
 
     const recipe = await tx.recipe.create({
       ...rest,
       imageKey: await fileStorage.encryptKey(secret!, key),
       authorId: session.user.id,
-      state: draftState,
+      state,
       imageMimeType: image.type,
       recipeIngredients: recipeIngredients.map((recipeIngredient) => {
         const { ingredient, amount, unitId } = recipeIngredient;
 
         return {
-          amount,
-          ingredientId: ingredient.id,
+          amount: new Prisma.Decimal(amount),
+          ingredientId: "id" in ingredient ? ingredient.id : undefined,
           unitId,
-          title: ingredient.title,
-          unitTypes: ingredient.unitTypes,
-        };
+          title: "title" in ingredient ? ingredient.title : undefined,
+          unitTypes: ingredient.unitTypes ?? undefined,
+        } satisfies RecipeIngredientInput;
       }),
     });
 
-    await fileStorage.saveFile(join(path!, recipe.imageId), image as Blob, key);
+    await fileStorage.saveFile(join(path, recipe.imageId), image as Blob, key);
 
     return recipe;
   });
+
+  setResponseStatus(event, 201);
+
+  return {
+    username: session.user.username,
+    slug: recipe.slug,
+  };
 });

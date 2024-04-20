@@ -1,4 +1,8 @@
-import { objectAsync } from "valibot";
-import RecipeFormSchema from "~/schemas/RecipeFormSchema";
+import { objectAsync, mergeAsync, arrayAsync } from "valibot";
 
-export default objectAsync(RecipeFormSchema.entries);
+export default mergeAsync([
+  RecipeFormSchema,
+  objectAsync({
+    ingredients: arrayAsync(RecipeIngredientSchema, "This field is required."),
+  }),
+]);

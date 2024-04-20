@@ -98,10 +98,13 @@ async function main() {
         ingredientId: ingredients[ingredient.ingredientId].id,
       };
     });
+
     const recipeCategories = recipe.categories.map(
       (category) => categories[category].id,
     );
+
     const { imageMimeType, imageKey } = recipeImageData[index];
+
     return {
       ...recipe,
       categories: recipeCategories,
@@ -112,8 +115,6 @@ async function main() {
       authorId: users[recipe.authorId].id,
     };
   });
-
-  // const recipes = await
 
   const recipes = await prisma.$transaction(async (tx) => {
     const recipesResult = await Promise.all(

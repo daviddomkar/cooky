@@ -12,8 +12,6 @@ const { notify } = useNotification();
 const { data: units } = await useFetch("/api/units");
 const { data: categories } = await useFetch("/api/categories");
 
-// For now the method does not need to be async
-// eslint-disable-next-line require-await
 const submit = async (values: Output<typeof RecipeFormSchema>) => {
   const formData = new FormData();
 
@@ -21,15 +19,18 @@ const submit = async (values: Output<typeof RecipeFormSchema>) => {
   formData.append("json", JSON.stringify({ ...values, image: undefined }));
 
   try {
-    // TODO: Create the endpoint, maybe it should return slug so we can redirect to the new recipe
-    // await $fetch("/api/recipes", {
-    //   method: "POST",
-    //   body: formData,
-    // });
+    const result = await $fetch("/api/recipes", {
+      method: "POST",
+      body: formData,
+    });
 
-    // For now, just log the values
-    // eslint-disable-next-line no-console
-    console.log(values);
+    notify({
+      type: "success",
+      title: `Recipe ${values.draft ? "saved as draft" : "published"}.`,
+      text: "The recipe has been successfully saved.",
+    });
+
+    navigateTo(`/${result.username}/${result.slug}`);
   } catch (e) {
     if (e instanceof FetchError) {
       notify({

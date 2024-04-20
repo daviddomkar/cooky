@@ -12,8 +12,8 @@ type PrismaPaginationArgs<T> = Omit<
     };
   };
 
-type RecipeIngredientInput = {
-  amount: number;
+export type RecipeIngredientInput = {
+  amount: Prisma.Decimal;
   unitId: string;
   ingredientId?: string;
   title?: string;

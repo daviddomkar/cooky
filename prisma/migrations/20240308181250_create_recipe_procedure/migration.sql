@@ -86,7 +86,7 @@ BEGIN
             -- Check if update is necessary
             IF v_existing_unit_types IS DISTINCT FROM v_recipe_ingredient.unit_types THEN
                 UPDATE ingredients
-                SET unit_types = coalesce(v_recipe_ingredient.unit_types, ARRAY[]::unit_types[])
+                SET unit_types = concat_array_agg(v_existing_unit_types, coalesce(v_recipe_ingredient.unit_types, ARRAY[]::unit_types[]))
                 WHERE id = v_recipe_ingredient.ingredient_id;
             END IF;
         END IF;
