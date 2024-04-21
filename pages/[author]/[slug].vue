@@ -176,7 +176,7 @@ const deleteRecipe = async () => {
         class="mx-auto flex flex-col items-center self-stretch gap-2 lg:mx-0 lg:grow lg:items-start"
       >
         <div
-          class="flex flex-col items-center gap-4 lg:flex-row lg:items-start"
+          class="flex flex-col items-center self-stretch gap-4 lg:flex-row lg:items-start"
         >
           <div class="flex grow flex-col items-center lg:items-start">
             <h1 class="my-0 text-center text-5xl lg:text-left">
@@ -302,7 +302,10 @@ const deleteRecipe = async () => {
       </div>
     </div>
     <div
-      v-if="recipe.comments.length || session"
+      v-if="
+        (recipe.comments.length || session) &&
+        recipe.state !== RecipeState.DRAFT
+      "
       class="flex flex-col print:hidden"
     >
       <h2 class="my-0 mb-4 text-3xl text-on-surface-variant">Comments</h2>
