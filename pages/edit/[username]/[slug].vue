@@ -34,10 +34,13 @@ const submit = async (values: Output<typeof RecipeFormSchema>) => {
   formData.append("json", JSON.stringify({ ...values, image: undefined }));
 
   try {
-    const result = await $fetch("/api/recipes", {
-      method: "POST",
-      body: formData,
-    });
+    const result = await $fetch(
+      `/api/recipes/${route.params.username}/${route.params.slug}`,
+      {
+        method: "PUT",
+        body: formData,
+      },
+    );
 
     notify({
       type: "success",
