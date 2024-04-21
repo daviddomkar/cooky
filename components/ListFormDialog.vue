@@ -6,7 +6,9 @@ const props = defineProps<{
   onSubmit?: SubmissionHandler<Output<typeof ListFormSchema>>;
 }>();
 
-const model = defineModel<Input<typeof ListFormSchema> | undefined>();
+const model = defineModel<Input<typeof ListFormSchema> | undefined>({
+  default: undefined,
+});
 
 const open = (list: Input<typeof ListFormSchema>) => {
   model.value = list;
