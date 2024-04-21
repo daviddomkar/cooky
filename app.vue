@@ -10,14 +10,13 @@ provideHeadlessUseId(() => useId());
       <NuxtPage />
     </NuxtLayout>
     <Notifications position="bottom right">
-      <template #body="props">
-        <div class="my-notification">
-          <p class="title">
-            {{ props.item.title }}
-          </p>
-          <button class="close" @click="props.close"> Close </button>
-          <p>{{ props.item.text }}</p>
-        </div>
+      <template #body="{ item, close }">
+        <BaseNotification
+          :content="item.text!"
+          :title="item.title!"
+          :type="(item as any).type"
+          @close="close"
+        />
       </template>
     </Notifications>
   </div>
