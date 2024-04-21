@@ -4,6 +4,7 @@ import { useNotification } from "@kyvg/vue3-notification";
 import { FetchError } from "ofetch";
 
 const route = useRoute();
+const router = useRouter();
 
 const { notify } = useNotification();
 
@@ -142,7 +143,7 @@ const deleteRecipe = async () => {
       text: "Your recipe has been successfully deleted.",
     });
 
-    navigateTo(`/${session.value?.user.username}`);
+    router.replace(`/${session.value?.user.username}`);
   } catch (e) {
     if (e instanceof FetchError) {
       notify({

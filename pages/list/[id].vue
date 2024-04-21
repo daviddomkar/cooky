@@ -5,6 +5,7 @@ import { FetchError } from "ofetch";
 import type { Output } from "valibot";
 
 const route = useRoute();
+const router = useRouter();
 
 const { notify } = useNotification();
 
@@ -112,7 +113,7 @@ const deleteList = async () => {
       text: "Your list has been successfully deleted.",
     });
 
-    navigateTo(`/${session.value?.user.username}/lists`);
+    router.replace(`/${session.value?.user.username}/lists`);
   } catch (e) {
     if (e instanceof FetchError) {
       notify({

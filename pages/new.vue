@@ -7,6 +7,8 @@ definePageMeta({
   middleware: "auth",
 });
 
+const router = useRouter();
+
 const { notify } = useNotification();
 
 const { data: units } = await useFetch("/api/units");
@@ -30,7 +32,7 @@ const submit = async (values: Output<typeof RecipeFormSchema>) => {
       text: "The recipe has been successfully saved.",
     });
 
-    navigateTo(`/${result.username}/${result.slug}`);
+    router.replace(`/${result.username}/${result.slug}`);
   } catch (e) {
     if (e instanceof FetchError) {
       notify({
