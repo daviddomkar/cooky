@@ -14,6 +14,17 @@ const newRecipe = () => {
   router.push("/new");
 };
 
+const search = (query: string) => {
+  if (!query) {
+    return;
+  }
+
+  router.push({
+    path: "/search",
+    query: { query },
+  });
+};
+
 const logOut = async () => {
   await signOut({
     callbackUrl: "/",
@@ -61,6 +72,7 @@ watch(
           @log-in="logIn"
           @new="newRecipe"
           @open="navbarOpened = true"
+          @search="search"
         />
         <div class="box-border flex grow flex-col items-stretch">
           <slot />

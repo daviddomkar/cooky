@@ -36,6 +36,7 @@ export default object(
         "auth",
         "category",
         "list",
+        "search",
       ].map((reserved) =>
         notValue<string, string>(
           reserved,
