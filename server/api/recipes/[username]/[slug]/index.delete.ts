@@ -1,12 +1,16 @@
 import { getServerSession } from "#auth";
 import { useValidatedParams } from "h3-valibot";
-import { string, toTrimmed, objectAsync, uuid } from "valibot";
-import { authOptions } from "../auth/[...]";
+import { string, toTrimmed, objectAsync, minLength } from "valibot";
+import { authOptions } from "../../../auth/[...]";
 
 const ParametersSchema = objectAsync({
-  id: string("id parameter is required.", [
+  username: string("username parameter is required.", [
     toTrimmed(),
-    uuid("id parameter must be a valid UUID."),
+    minLength(1, "username parameter is required."),
+  ]),
+  slug: string("slug parameter is required.", [
+    toTrimmed(),
+    minLength(1, "slug parameter is required."),
   ]),
 });
 
@@ -19,13 +23,15 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Unauthorized.",
     });
   }
-
-  const { id } = await useValidatedParams(event, ParametersSchema);
+  const { username, slug } = await useValidatedParams(event, ParametersSchema);
 
   await prisma.$transaction(async (tx) => {
-    const recipe = await tx.recipe.findUnique({
+    const recipe = await tx.recipe.findFirst({
       where: {
-        id,
+        author: {
+          username,
+        },
+        slug,
       },
       select: {
         authorId: true,
@@ -46,9 +52,12 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    await prisma.recipe.delete({
+    await prisma.recipe.deleteMany({
       where: {
-        id,
+        author: {
+          username,
+        },
+        slug,
       },
     });
   });

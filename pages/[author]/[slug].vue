@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { RecipeState } from "@prisma/client";
+import { useNotification } from "@kyvg/vue3-notification";
+import { FetchError } from "ofetch";
 
 definePageMeta({
   middleware: async (to) => {
@@ -14,6 +16,8 @@ definePageMeta({
 });
 
 const route = useRoute();
+
+const { notify } = useNotification();
 
 const { session } = useAuth();
 
@@ -54,6 +58,40 @@ const print = () => {
 const rate = (value: number) => {
   console.log("rate", value);
 };
+
+const deleteRecipe = async () => {
+  try {
+    await $fetch(
+      `/api/recipes/${recipe.value?.author?.username}/${recipe.value?.slug}`,
+      {
+        method: "DELETE",
+      },
+    );
+
+    notify({
+      type: "success",
+      title: `Recipe ${recipe.value?.title} deleted.`,
+      text: "Your recipe has been successfully deleted.",
+    });
+
+    navigateTo(`/${session.value?.user.username}`);
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to delete recipe.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to delete recipe.",
+      text: "An unknown error occurred.",
+    });
+  }
+};
 </script>
 
 <template>
@@ -83,9 +121,16 @@ const rate = (value: number) => {
             <BaseButton spread="compact" variant="secondary">
               <div class="i-material-symbols:edit h-6 w-6" />
             </BaseButton>
-            <BaseButton spread="compact" variant="danger">
-              <div class="i-material-symbols:delete h-6 w-6" />
-            </BaseButton>
+            <ConfirmationDialog
+              :on-confirm="deleteRecipe"
+              :reason="`Recipe ${recipe.title} will be deleted.`"
+            >
+              <template #activator="{ open }">
+                <BaseButton spread="compact" variant="danger" @click="open">
+                  <div class="i-material-symbols:delete h-6 w-6" />
+                </BaseButton>
+              </template>
+            </ConfirmationDialog>
           </div>
         </div>
         <RatingField
