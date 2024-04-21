@@ -128,6 +128,10 @@ const removeRating = async () => {
   }
 };
 
+const editRecipe = () => {
+  router.push(`/edit/${recipe.value?.author?.username}/${recipe.value?.slug}`);
+};
+
 const deleteRecipe = async () => {
   try {
     await $fetch(
@@ -189,7 +193,11 @@ const deleteRecipe = async () => {
             />
           </div>
           <div v-if="isOwnRecipe" class="flex gap-2">
-            <BaseButton spread="compact" variant="secondary">
+            <BaseButton
+              spread="compact"
+              variant="secondary"
+              @click="editRecipe"
+            >
               <div class="i-material-symbols:edit h-6 w-6" />
             </BaseButton>
             <ConfirmationDialog
@@ -242,7 +250,7 @@ const deleteRecipe = async () => {
           <ul class="my-0 max-w-60 w-60 list-none pl-0">
             <li class="flex items-center">
               <span class="grow text-2xl font-display">PREP TIME</span>
-              {{ parseInterval(recipe.preparitionDuration) }}
+              {{ parseInterval(recipe.preparationDuration) }}
             </li>
             <li class="flex items-center">
               <span class="grow text-2xl font-display">SERVINGS</span>

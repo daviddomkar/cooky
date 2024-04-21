@@ -56,10 +56,9 @@ const submit = async (values: Output<typeof RecipeFormSchema>) => {
   <main class="mx-auto box-border max-w-336 w-full px-4 py-4 sm:px-8 sm:py-8">
     <RecipeForm
       :categories="categories!"
+      :initial-src="null"
       :initial-values="
         {
-          title: '',
-          description: '',
           categories: [],
           ingredients: [
             {

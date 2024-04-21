@@ -7,6 +7,8 @@ const props = defineProps<{
   categories: { id: string; title: string }[];
   units: { id: string; title: string; abbreviation: string; type: UnitType }[];
   initialValues?: Input<typeof RecipeFormSchema>;
+  initialRecipeImageSrc?: string;
+  initialRecipeBlob?: Blob;
   onSubmit?: SubmissionHandler<Output<typeof RecipeFormSchema>>;
 }>();
 
@@ -46,8 +48,12 @@ const saveAsDraft = async () => {
     @submit="submit"
   >
     <div class="flex flex-col items-center gap-4 lg:flex-row">
-      <h1 class="my-0 grow text-center text-5xl lg:text-left">New recipe</h1>
+      <h1 class="my-0 grow text-center text-5xl lg:text-left">
+        {{ initialValues?.title ? `Edit ${initialValues?.title}` : "New" }}
+        recipe
+      </h1>
       <BaseButton
+        v-if="initialValues?.draft"
         :loading="isSubmitting"
         type="submit"
         variant="secondary"
@@ -70,6 +76,8 @@ const saveAsDraft = async () => {
           :class="{
             'pb-6': errors.description && !errors.image,
           }"
+          :initial-blob="initialRecipeBlob"
+          :initial-src="initialRecipeImageSrc"
           name="image"
         />
         <div

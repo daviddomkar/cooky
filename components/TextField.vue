@@ -70,10 +70,10 @@ const handleBlur = (event: Event, validate: boolean) => {
         'text-outline cursor-not-allowed': disabled,
       }"
       :disabled="disabled"
-      :max="max"
-      :min="min"
+      :max="multiline ? undefined : max"
+      :min="multiline ? undefined : min"
       :name="name"
-      :type="type"
+      :type="multiline ? undefined : type"
       :value="value"
       @blur="handleBlur($event, true)"
       @change="handleChange"
