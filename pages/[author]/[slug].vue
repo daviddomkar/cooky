@@ -9,9 +9,11 @@ const { notify } = useNotification();
 
 const { session } = useAuth();
 
-const { data: recipe, error } = await useFetch(
-  `/api/recipes/${route.params.author}/${route.params.slug}`,
-);
+const {
+  data: recipe,
+  refresh: refreshRecipe,
+  error,
+} = await useFetch(`/api/recipes/${route.params.author}/${route.params.slug}`);
 
 if (error.value) {
   throw createError({
@@ -19,6 +21,10 @@ if (error.value) {
     statusMessage: error.value?.statusMessage,
   });
 }
+
+const { data: rating, refresh: refreshRating } = await useFetch(
+  `/api/recipes/${route.params.author}/${route.params.slug}/ratings`,
+);
 
 const { data: lists, refresh: refreshLists } = await useAsyncData(
   async () => {
@@ -50,8 +56,75 @@ const print = () => {
   window.print();
 };
 
-const rate = (value: number) => {
-  console.log("rate", value);
+const addRating = async (value: number) => {
+  try {
+    await $fetch(
+      `/api/recipes/${recipe.value?.author?.username}/${recipe.value?.slug}/ratings`,
+      {
+        method: "POST",
+        body: {
+          numberOfStars: value,
+        },
+      },
+    );
+
+    await Promise.all([refreshRating(), refreshRecipe()]);
+
+    notify({
+      type: "success",
+      title: `Recipe ${recipe.value?.title} rated.`,
+      text: `You rated the recipe with ${value} stars.`,
+    });
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to rate recipe.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to rate recipe.",
+      text: "An unknown error occurred.",
+    });
+  }
+};
+
+const removeRating = async () => {
+  try {
+    await $fetch(
+      `/api/recipes/${recipe.value?.author?.username}/${recipe.value?.slug}/ratings`,
+      {
+        method: "DELETE",
+      },
+    );
+
+    await Promise.all([refreshRating(), refreshRecipe()]);
+
+    notify({
+      type: "success",
+      title: `Recipe ${recipe.value?.title} unrated.`,
+      text: `You deleted your rating from this recipe.`,
+    });
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to unrate recipe.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to unrate recipe.",
+      text: "An unknown error occurred.",
+    });
+  }
 };
 
 const deleteRecipe = async () => {
@@ -99,7 +172,9 @@ const deleteRecipe = async () => {
         class="block w-full shrink-0 rounded-3xl print:hidden lg:min-w-80 lg:w-80"
         :src="`/api/files/${recipe.imageId}`"
       />
-      <div class="mx-auto flex flex-col self-stretch gap-2 lg:mx-0 lg:grow">
+      <div
+        class="mx-auto flex flex-col items-center self-stretch gap-2 lg:mx-0 lg:grow lg:items-start"
+      >
         <div
           class="flex flex-col items-center gap-4 lg:flex-row lg:items-start"
         >
@@ -128,15 +203,38 @@ const deleteRecipe = async () => {
             </ConfirmationDialog>
           </div>
         </div>
-        <RatingField
-          v-if="recipe.state !== RecipeState.DRAFT"
-          class="mx-auto mt-4 lg:mx-0 print:hidden"
-          :controlled="false"
-          :editable="!!session && !isOwnRecipe"
-          :model-value="recipe.rating ?? undefined"
-          name="rating"
-          @update:model-value="rate"
-        />
+        <div class="flex flex-col gap-2">
+          <RatingField
+            v-if="recipe.state !== RecipeState.DRAFT"
+            class="mx-auto mt-4 lg:mx-0 print:hidden"
+            :class="{
+              '[&>p]:text-primary': rating?.numberOfStars,
+            }"
+            :controlled="false"
+            :editable="!!session && !isOwnRecipe"
+            :model-value="rating?.numberOfStars ?? recipe.rating ?? undefined"
+            name="rating"
+            @update:model-value="addRating"
+          >
+            <template v-if="rating && recipe.rating" #trailing>
+              <BaseButton
+                v-if="rating && rating.numberOfStars"
+                class="ml-2 inline-flex vertical-top !h-4 !min-w-4"
+                density="compact"
+                spread="none"
+                variant="transparent"
+                @click="removeRating"
+              >
+                <div
+                  class="i-material-symbols:close-rounded scale-[1.25] text-error"
+                />
+              </BaseButton>
+            </template>
+          </RatingField>
+          <span v-if="rating && recipe.rating" class="self-end">
+            ({{ Math.round(recipe.rating * 2) / 2 }} global rating)
+          </span>
+        </div>
         <div class="my-4 flex justify-center lg:justify-left">
           <ul class="my-0 max-w-60 w-60 list-none pl-0">
             <li class="flex items-center">
