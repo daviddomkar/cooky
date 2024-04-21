@@ -30,6 +30,11 @@ export default defineEventHandler(async (event) => {
       },
       select: {
         authorId: true,
+        favoritesOfUser: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
 
@@ -43,6 +48,13 @@ export default defineEventHandler(async (event) => {
     if (list.authorId !== session.user.id) {
       throw createError({
         statusCode: 401,
+        statusMessage: "Forbidden.",
+      });
+    }
+
+    if (list.favoritesOfUser?.id) {
+      throw createError({
+        statusCode: 403,
         statusMessage: "Forbidden.",
       });
     }

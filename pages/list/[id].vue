@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import NuxtLink from "#app/components/nuxt-link";
+import { useNotification } from "@kyvg/vue3-notification";
+import { FetchError } from "ofetch";
+import type { Output } from "valibot";
 
 definePageMeta({
   middleware: async (to) => {
@@ -15,11 +18,15 @@ definePageMeta({
 
 const route = useRoute();
 
+const { notify } = useNotification();
+
 const { session } = useAuth();
 
 const { isMobile } = useDevice();
 
-const { data: list } = await useFetch(`/api/lists/${route.params.id}`);
+const { data: list, refresh: refreshList } = await useFetch(
+  `/api/lists/${route.params.id}`,
+);
 
 const { data: recipes, refresh: refreshRecipes } = await useInfiniteScrollFetch(
   window,
@@ -54,9 +61,76 @@ const isOwnList = computed(
   () => list.value?.author?.username === session?.value?.user?.username,
 );
 
+const isFavoritesList = computed(
+  () => session?.value?.user?.favoritesListId === list.value?.id,
+);
+
 const remove = (listId: string) => {
   if (listId === list.value?.id) {
     refreshRecipes();
+  }
+};
+
+const editList = async (newList: Output<typeof ListFormSchema>) => {
+  try {
+    await $fetch(`/api/lists/${list.value?.id}`, {
+      method: "PUT",
+      body: newList,
+    });
+
+    notify({
+      type: "success",
+      title: `List ${list.value?.title} edited.`,
+      text: "Your list has been successfully edited.",
+    });
+
+    refreshList();
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to edit list.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to edit list.",
+      text: "An unknown error occurred.",
+    });
+  }
+};
+
+const deleteList = async () => {
+  try {
+    await $fetch(`/api/lists/${list.value?.id}`, {
+      method: "DELETE",
+    });
+
+    notify({
+      type: "success",
+      title: `List ${list.value?.title} deleted.`,
+      text: "Your list has been successfully deleted.",
+    });
+
+    navigateTo(`/${session.value?.user.username}/lists`);
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to delete list.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to delete list.",
+      text: "An unknown error occurred.",
+    });
   }
 };
 </script>
@@ -75,13 +149,28 @@ const remove = (listId: string) => {
         </h1>
         <ProfileLink class="mx-auto self-start lg:mx-0" :user="list.author" />
       </div>
-      <div v-if="isOwnList" class="flex gap-2">
-        <BaseButton spread="compact" variant="secondary">
-          <div class="i-material-symbols:edit h-6 w-6" />
-        </BaseButton>
-        <BaseButton spread="compact" variant="danger">
-          <div class="i-material-symbols:delete h-6 w-6" />
-        </BaseButton>
+      <div v-if="isOwnList && !isFavoritesList" class="flex gap-2">
+        <ListFormDialog :on-submit="editList">
+          <template #activator="{ open }">
+            <BaseButton
+              spread="compact"
+              variant="secondary"
+              @click="open(list)"
+            >
+              <div class="i-material-symbols:edit h-6 w-6" />
+            </BaseButton>
+          </template>
+        </ListFormDialog>
+        <ConfirmationDialog
+          :on-confirm="deleteList"
+          :reason="`List ${list.title} will be deleted.`"
+        >
+          <template #activator="{ open }">
+            <BaseButton spread="compact" variant="danger" @click="open">
+              <div class="i-material-symbols:delete h-6 w-6" />
+            </BaseButton>
+          </template>
+        </ConfirmationDialog>
       </div>
     </div>
     <div v-if="!recipes?.length" class="flex flex-col items-center">

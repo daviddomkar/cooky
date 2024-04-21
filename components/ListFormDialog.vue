@@ -21,12 +21,16 @@ const onSubmit = async (values: Output<typeof ListFormSchema>, opts: any) => {
 <template>
   <BaseDialog
     :model-value="!!model"
-    title="Create new list"
+    :title="model?.id ? `Edit ${model.title} list` : 'Create new list'"
     @update:model-value="model = undefined"
   >
     <template #activator>
       <slot name="activator" :open="open" />
     </template>
-    <ListForm :initial-values="model" :on-submit="onSubmit" />
+    <ListForm
+      :initial-values="model"
+      :on-submit="onSubmit"
+      @cancel="model = undefined"
+    />
   </BaseDialog>
 </template>

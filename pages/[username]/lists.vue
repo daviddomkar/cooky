@@ -24,7 +24,11 @@ const isOwnProfile = computed(
 );
 
 const createNewList = () => {
-  dialogRef.value = { title: "", visibility: Visibility.PRIVATE };
+  dialogRef.value = {
+    id: undefined,
+    title: "",
+    visibility: Visibility.PRIVATE,
+  };
 };
 
 const submit = async (list: Output<typeof ListFormSchema>) => {

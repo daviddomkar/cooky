@@ -8,6 +8,10 @@ const props = defineProps<{
   onSubmit?: SubmissionHandler<Output<typeof ListFormSchema>>;
 }>();
 
+const emit = defineEmits<{
+  (e: "cancel"): void;
+}>();
+
 const { handleSubmit, handleReset, isSubmitting, setValues } = useForm({
   validationSchema: toTypedSchema(ListFormSchema),
   initialValues: props.initialValues,
@@ -46,8 +50,18 @@ onMounted(() =>
         },
       ]"
     />
-    <BaseButton expanded :loading="isSubmitting" type="submit">
-      Create
-    </BaseButton>
+    <div class="flex flex-row-reverse gap-2">
+      <BaseButton expanded :loading="isSubmitting" type="submit">
+        {{ props.initialValues?.id ? "Edit" : "Create" }}
+      </BaseButton>
+      <BaseButton
+        class="w-full"
+        :disabled="isSubmitting"
+        variant="danger"
+        @click="emit('cancel')"
+      >
+        Cancel
+      </BaseButton>
+    </div>
   </form>
 </template>
