@@ -62,6 +62,9 @@ model Role {
   permissions String[]   @db.VarChar(64)
   users       UserRole[]
 
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
   @@map("roles")
 }
 
