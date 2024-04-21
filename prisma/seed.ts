@@ -258,8 +258,23 @@ async function main() {
       recipeId: recipes[recipeList.recipeId].id,
     };
   });
+
+  const favoriteListIds = users.map((user) => user.favoritesListId);
+
   await prisma.$transaction(
-    recipeListData.map((data) => prisma.recipeList.create({ data })),
+    // First filter out all recipes that have a rating of 4 or higher and are included in some favorite lists,
+    // because they are already in the favorites list
+    recipeListData
+      .filter(({ listId, recipeId }) => {
+        const isFavoriteList = favoriteListIds.includes(listId);
+
+        if (!isFavoriteList) return false;
+
+        return !ratingData.some(
+          (rating) => rating.recipeId === recipeId && rating.numberOfStars >= 4,
+        );
+      })
+      .map((data) => prisma.recipeList.create({ data })),
   );
 }
 
