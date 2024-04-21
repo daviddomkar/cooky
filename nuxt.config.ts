@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
 
 export default defineNuxtConfig({
-  css: ["~/assets/css/base.css"],
+  css: ["~/assets/css/base.css", "vue-advanced-cropper/dist/style.css"],
   modules: [
     "@nuxtjs/eslint-module",
     "@nuxtjs/stylelint-module",
@@ -9,6 +9,9 @@ export default defineNuxtConfig({
     "@vee-validate/nuxt",
     "@hebilicious/authjs-nuxt",
     "@nuxtjs/color-mode",
+    "@vueuse/nuxt",
+    "@nuxtjs/device",
+    "nuxt-headlessui",
   ],
   runtimeConfig: {
     fileStorage: {
@@ -33,7 +36,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     imports: {
-      dirs: ["server/schemas", "server/composables"],
+      dirs: ["schemas", "server/schemas", "server/composables"],
     },
   },
   eslint: {
@@ -51,6 +54,9 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
+  authJs: {
+    guestRedirectTo: "/auth/login",
+  },
   veeValidate: {
     autoImports: true,
     componentNames: {
@@ -66,5 +72,13 @@ export default defineNuxtConfig({
     classPrefix: "",
     classSuffix: "",
     storageKey: "theme",
+  },
+  vite: {
+    resolve: {
+      alias: {
+        ".prisma/client/index-browser":
+          "./node_modules/.prisma/client/index-browser.js",
+      },
+    },
   },
 });

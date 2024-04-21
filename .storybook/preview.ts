@@ -1,10 +1,27 @@
-import type { Preview, VueRenderer } from "@storybook/vue3";
+import { setup, type Preview, type VueRenderer } from "@storybook/vue3";
+import { action } from "@storybook/addon-actions";
 import { withThemeByClassName } from "@storybook/addon-themes";
+
+setup((app) => {
+  app.component("RouterLink", {
+    props: {
+      to: {
+        type: String,
+        required: true,
+      },
+    },
+    methods: {
+      log() {
+        action("link target")(this.to);
+      },
+    },
+    template: '<a @click="log"><slot></slot></a>',
+  });
+});
 
 const preview: Preview = {
   parameters: {
     layout: "centered",
-    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,

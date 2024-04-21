@@ -19,21 +19,32 @@ const submit = handleSubmit(async (values, opts) => {
 
 <template>
   <form
-    class="w-full flex flex-col items-center gap-2"
+    class="w-full flex flex-col items-center"
     @reset="handleReset"
     @submit="submit"
   >
-    <div class="mb-6 box-border sm:mb-8">
-      <h1 class="my-0 select-none text-center text-8xl sm:text-9xl">COOKY</h1>
+    <div class="mb-8 box-border">
+      <h1 class="my-0 select-none text-center text-8xl xl:hidden sm:text-9xl">
+        COOKY
+      </h1>
       <h2
-        class="my-0 select-none from-primary to-secondary bg-gradient-to-r bg-clip-text text-center text-4xl text-transparent uppercase sm:text-5xl"
+        class="my-0 select-none from-primary to-secondary bg-gradient-to-r bg-clip-text text-center text-4xl text-transparent uppercase sm:text-5xl xl:text-8xl xl:text-on-surface"
       >
         You're back!
       </h2>
     </div>
-    <TextField label="Username / Email" name="usernameOrEmail" type="text" />
-    <TextField label="Password" name="password" type="password" />
-    <BaseButton class="mt-2 sm:mt-4" :loading="isSubmitting" type="submit">
+    <TextField
+      class="max-w-80"
+      label="Username / Email"
+      name="usernameOrEmail"
+    />
+    <TextField
+      class="mb-2 max-w-80"
+      label="Password"
+      name="password"
+      type="password"
+    />
+    <BaseButton class="mb-8 mt-4" :loading="isSubmitting" type="submit">
       Log in
     </BaseButton>
     <slot name="trailing" />

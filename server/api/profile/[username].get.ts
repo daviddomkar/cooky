@@ -2,9 +2,9 @@ import { useValidatedParams } from "h3-valibot";
 import { string, toTrimmed, objectAsync, minLength } from "valibot";
 
 const ParametersSchema = objectAsync({
-  username: string("This field is required.", [
+  username: string("username parameter is required.", [
     toTrimmed(),
-    minLength(1, "This field is required."),
+    minLength(1, "username parameter is required."),
   ]),
 });
 
@@ -16,7 +16,6 @@ export default defineEventHandler(async (event) => {
       username,
     },
     select: {
-      // TODO: Add more fields here as needed on full profile page, we don't want to expose everything
       name: true,
       username: true,
       profileImageId: true,

@@ -7,7 +7,15 @@ const meta: Meta<typeof BaseButton> = {
   component: BaseButton,
   argTypes: {
     variant: {
-      options: ["primary", "secondary"],
+      options: ["primary", "secondary", "danger"],
+      control: { type: "radio" },
+    },
+    density: {
+      options: ["relaxed", "default", "compact"],
+      control: { type: "radio" },
+    },
+    spread: {
+      options: ["compact", "default", "full", "none"],
       control: { type: "radio" },
     },
     default: {
@@ -23,6 +31,8 @@ type Story = StoryObj<typeof BaseButton>;
 export const Primary: Story = {
   args: {
     variant: "primary",
+    density: "default",
+    spread: "default",
     default: "Click me",
   },
   render: (args) => ({
@@ -37,8 +47,78 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     variant: "secondary",
+    density: "default",
+    spread: "default",
     default: "Click me",
-    loading: false,
+  },
+  render: (args) => ({
+    components: { BaseButton },
+    setup() {
+      return { args };
+    },
+    template: '<BaseButton v-bind="args">{{ args.default }}</BaseButton>',
+  }),
+};
+
+export const Danger: Story = {
+  args: {
+    variant: "danger",
+    density: "default",
+    spread: "default",
+    default: "Click me",
+  },
+  render: (args) => ({
+    components: { BaseButton },
+    setup() {
+      return { args };
+    },
+    template: '<BaseButton v-bind="args">{{ args.default }}</BaseButton>',
+  }),
+};
+
+export const Expanded: Story = {
+  args: {
+    variant: "primary",
+    density: "default",
+    expanded: true,
+    default: "Click me",
+  },
+  render: (args) => ({
+    components: { BaseButton },
+    setup() {
+      return { args };
+    },
+    template: `
+    <div class="w-[90vw]">
+      <BaseButton v-bind="args">{{ args.default }}</BaseButton>
+    </div>`,
+  }),
+};
+
+export const Loading: Story = {
+  args: {
+    variant: "primary",
+    density: "default",
+    spread: "default",
+    loading: true,
+    default: "Click me",
+  },
+  render: (args) => ({
+    components: { BaseButton },
+    setup() {
+      return { args };
+    },
+    template: '<BaseButton v-bind="args">{{ args.default }}</BaseButton>',
+  }),
+};
+
+export const Disabled: Story = {
+  args: {
+    variant: "primary",
+    density: "default",
+    spread: "default",
+    disabled: true,
+    default: "Click me",
   },
   render: (args) => ({
     components: { BaseButton },

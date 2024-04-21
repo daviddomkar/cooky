@@ -2093,13 +2093,8 @@
         {
             "title": "Sedlácký salát",
             "description": "Rustikální salát s osmaženými ve slupce uvařenými bramborami, pečenými cherry rajčátky, oblanšírovanou brokolicí, plátky mrkve a natvrdo uvařenými vajíčky, zalitý zálivkou s hrubozrnné hořčice, medu a olivového oleje, je skvělým tipem na lehkou večeři.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 20,
-                "seconds": 0
-            },
-            "state": "PUBLISHED",
+            "preparationDuration": "0:20",
+            "state": "DRAFT",
             "nutritionPerServing": 340,
             "numberOfServings": 4,
             "categories": [
@@ -2188,13 +2183,8 @@
         {
             "title": "Cuketová polévka s pórkem a špenátem",
             "description": "Hustá zeleninová polévka z cibule, pórku, cukety a špenátu, ovoněná mátou, podávaná s natvrdo uvařeným vejcem, plátky dokřupava opečené slaniny a rozdrobeným sýrem feta, je rychle hotová, zasytí ale na dlouho.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 30,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:30",
+            "state": "PUBLISHED",
             "nutritionPerServing": 563,
             "numberOfServings": 4,
             "categories": [
@@ -2295,13 +2285,8 @@
         {
             "title": "Babiččiny masové placičky",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 35,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:35",
+            "state": "PUBLISHED",
             "nutritionPerServing": 331,
             "numberOfServings": 1,
             "categories": [
@@ -2371,13 +2356,8 @@
         {
             "title": "Slané palačinky",
             "description": "Oblíbené palačinky si můžete připravit na několik způsobů. Tyto slané palačinky zapečené se sýrem, šunkou, vajíčkem a rajčaty, ozdobené pažitkou a petrželkou si zkrátka zamilujete. Jsou ideální snídaní i svačinkou.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 30,
-                "seconds": 0
-            },
-            "state": "PUBLISHED",
+            "preparationDuration": "0:30",
+            "state": "DRAFT",
             "nutritionPerServing": 606,
             "numberOfServings": 4,
             "categories": [
@@ -2463,13 +2443,8 @@
         {
             "title": "Palačinky se šunkou a vejci",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 15,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:15",
+            "state": "PUBLISHED",
             "nutritionPerServing": 375,
             "numberOfServings": 4,
             "categories": [
@@ -2531,13 +2506,8 @@
         {
             "title": "Palačinky s jablkovou náplní",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 45,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:45",
+            "state": "PUBLISHED",
             "nutritionPerServing": 674,
             "numberOfServings": 1,
             "categories": [
@@ -2597,13 +2567,8 @@
         {
             "title": "Zmrzlinové palačinky s lesním ovocem",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 20,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:20",
+            "state": "PUBLISHED",
             "nutritionPerServing": 366,
             "numberOfServings": 1,
             "categories": [
@@ -2667,13 +2632,8 @@
         {
             "title": "Penne se špenátem",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 20,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:20",
+            "state": "PUBLISHED",
             "nutritionPerServing": 471,
             "numberOfServings": 1,
             "categories": [
@@ -2768,13 +2728,8 @@
         {
             "title": "Losos na páře s restovanou zeleninou",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 40,
-                "seconds": 0
-            },
-            "state": "PUBLISHED",
+            "preparationDuration": "0:40",
+            "state": "DRAFT",
             "nutritionPerServing": 563,
             "numberOfServings": 4,
             "categories": [
@@ -2834,13 +2789,8 @@
         {
             "title": "Zeleninové pohankové \"rizoto\"",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 20,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:20",
+            "state": "PUBLISHED",
             "nutritionPerServing": 318,
             "numberOfServings": 1,
             "categories": [
@@ -2905,13 +2855,8 @@
         {
             "title": "Pečené tofu s citrónovou marinádou",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 30,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:30",
+            "state": "PUBLISHED",
             "nutritionPerServing": 648,
             "numberOfServings": 1,
             "categories": [
@@ -2981,13 +2926,8 @@
         {
             "title": "Pikantní špenátové rolky",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 15,
-                "seconds": 0
-            },
-            "state": "PUBLISHED",
+            "preparationDuration": "0:15",
+            "state": "DRAFT",
             "nutritionPerServing": 442,
             "numberOfServings": 1,
             "categories": [
@@ -3055,13 +2995,8 @@
         {
             "title": "Penne s tuňákem a kukuřicí",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 15,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:15",
+            "state": "PUBLISHED",
             "nutritionPerServing": 518,
             "numberOfServings": 4,
             "categories": [
@@ -3135,13 +3070,8 @@
         {
             "title": "Salát z kapusty s treskou",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 25,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:25",
+            "state": "PUBLISHED",
             "nutritionPerServing": 667,
             "numberOfServings": 4,
             "categories": [
@@ -3232,13 +3162,8 @@
         {
             "title": "Bramborový salát s vejci",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 15,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:15",
+            "state": "PUBLISHED",
             "nutritionPerServing": 422,
             "numberOfServings": 4,
             "categories": [
@@ -3330,13 +3255,8 @@
         {
             "title": "Brambory s lososovým tvarohem",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 25,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:25",
+            "state": "PUBLISHED",
             "nutritionPerServing": 686,
             "numberOfServings": 4,
             "categories": [
@@ -3408,13 +3328,8 @@
         {
             "title": "Zelené špagety",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 20,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:20",
+            "state": "PUBLISHED",
             "nutritionPerServing": 646,
             "numberOfServings": 2,
             "categories": [
@@ -3483,13 +3398,8 @@
         {
             "title": "Foie gras",
             "description": "Foie gas, ztučnělá játra hus a kachen, jsou považována za delikatesu nejenom ve francouzské kuchyni. Tuhle luxusní lahůdku si nejlépe vychutnáte s čerstvým křupavým pečivem.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 20,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:20",
+            "state": "PUBLISHED",
             "nutritionPerServing": 554,
             "numberOfServings": 4,
             "categories": [
@@ -3550,13 +3460,8 @@
         {
             "title": "Gyoza knedlíčky",
             "description": "Mezi jedny z nejoblíbenějších japonských dobrot patří gyoza, malé plněné knedlíčky. Jsou tvořeny tenkým těstem z mouky a vody, plněným směsí masa a dalších ingrediencí. Tradičně se gyoza podávají s omáčkou připravenou z octa, sójovky a sezamového oleje, dohromady tvoří úžasnou harmonii chutí.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 70,
-                "seconds": 0
-            },
-            "state": "PUBLISHED",
+            "preparationDuration": "01:10",
+            "state": "DRAFT",
             "nutritionPerServing": 463,
             "numberOfServings": 2,
             "categories": [
@@ -3663,13 +3568,8 @@
         {
             "title": "Dim Sum knedlíčky",
             "description": "Čínské plněné knedlíčky Dim Sum se dají připravit na tisíc způsobů. Můžete si je dát jako předkrm, lehký oběd, svačinu nebo večeři, a vychutnat si tak jejich lahodnou návykovou chuť. Zkuste třeba variantu s mletým krůtím masem a zeleninou.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 45,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:45",
+            "state": "PUBLISHED",
             "nutritionPerServing": 451,
             "numberOfServings": 4,
             "categories": [
@@ -3762,13 +3662,8 @@
         {
             "title": "Gruzínské chačapuri",
             "description": "Gruzínské chačapuri jsou tradiční gruzínské chlebové placky plněné sýrem a mají charakteristický tvar lodi nebo měsíčku. Chačapuri jsou považovány za jedno z hlavních jídel gruzínské kuchyně a mají několik variant, z nichž každá má své vlastní regionální a kulturní odlišnosti.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 60,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "01:00",
+            "state": "PUBLISHED",
             "nutritionPerServing": 511,
             "numberOfServings": 4,
             "categories": [
@@ -3839,13 +3734,8 @@
         {
             "title": "Pizza se špenátem, slaninou a vejcem",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 25,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:25",
+            "state": "PUBLISHED",
             "nutritionPerServing": 306,
             "numberOfServings": 3,
             "categories": [
@@ -3922,13 +3812,8 @@
         {
             "title": "Uzená kuřecí polévka",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 30,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:30",
+            "state": "PUBLISHED",
             "nutritionPerServing": 412,
             "numberOfServings": 8,
             "categories": [
@@ -4032,13 +3917,8 @@
         {
             "title": "Nejlepší mrkvový krém",
             "description": "Nevíte co uvařit? Mrkvový krém vás jistě potěší a bude chutnat celé rodině. Je opravdu nejlepší!",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 30,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:30",
+            "state": "PUBLISHED",
             "nutritionPerServing": 447,
             "numberOfServings": 4,
             "categories": [
@@ -4133,13 +4013,8 @@
         {
             "title": "Brokolicová polévka s drožďovými knedlíčky (dělená strava)",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 60,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "01:00",
+            "state": "PUBLISHED",
             "nutritionPerServing": 455,
             "numberOfServings": 6,
             "categories": [
@@ -4237,13 +4112,8 @@
         {
             "title": "Bramboračka s pórkem",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 45,
-                "seconds": 0
-            },
-            "state": "PUBLISHED",
+            "preparationDuration": "0:45",
+            "state": "DRAFT",
             "nutritionPerServing": 427,
             "numberOfServings": 1,
             "categories": [
@@ -4321,13 +4191,8 @@
         {
             "title": "Jihočeská kulajda podle časopisu F.O.O.D.",
             "description": "Sušenými houbami provoněná polévka. To je jihočeská kulajda, na které si můžete pochutnat  k obědu i večeři. Uvařte jí plný hrnec ještě dnes.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 30,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:30",
+            "state": "PUBLISHED",
             "nutritionPerServing": 571,
             "numberOfServings": 4,
             "categories": [
@@ -4429,13 +4294,8 @@
         {
             "title": "Hovězí tokáň",
             "description": "Hovězí tokáň možná na první pohled vypadá jako guláš, liší se ale tím, že se do základu nepřidává červená paprika a také se podlévá bílým vínem. Jako příloha se nejlépe hodí rýže, chutnat vám ale bude třeba i s tarhoňou.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 120,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "02:00",
+            "state": "PUBLISHED",
             "nutritionPerServing": 360,
             "numberOfServings": 4,
             "categories": [
@@ -4503,13 +4363,8 @@
         {
             "title": "Harissa pasta",
             "description": "Ostrá kořeněná Harissa pasta pochází z tradiční severoafrické kuchyně, zejména z Tuniska a Maroka. Vyznačuje se výraznou pikantností a používá se k dochucení různých jídel, jako omáčka nebo marináda. Jídlu dodává výrazné kořeněné aroma.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 20,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:20",
+            "state": "PUBLISHED",
             "nutritionPerServing": 356,
             "numberOfServings": 1,
             "categories": [
@@ -4583,13 +4438,8 @@
         {
             "title": "Kuřecí Tikka Masala",
             "description": "Chicken Tikka Masala, poklad indické kuchyně, láká chuťové pohárky svou bohatou kombinací křupavě upečeného kuřecího masa a krémově pikantní omáčky. Smyslná vůně koření dělá z tohoto pokrmu opravdovou kulinářskou perlu, která si našla oblibu po celém světě.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 50,
-                "seconds": 0
-            },
-            "state": "PUBLISHED",
+            "preparationDuration": "0:50",
+            "state": "DRAFT",
             "nutritionPerServing": 405,
             "numberOfServings": 6,
             "categories": [
@@ -4706,13 +4556,8 @@
         {
             "title": "Majolka",
             "description": "Domácí je nejlepší a u majonézy to platí dvojnásob!",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 15,
-                "seconds": 0
-            },
-            "state": "PUBLISHED",
+            "preparationDuration": "0:15",
+            "state": "DRAFT",
             "nutritionPerServing": 620,
             "numberOfServings": 10,
             "categories": [
@@ -4774,13 +4619,8 @@
         {
             "title": "Koprová omáčka s houskovými knedlíky",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 130,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "02:10",
+            "state": "PUBLISHED",
             "nutritionPerServing": 605,
             "numberOfServings": 6,
             "categories": [
@@ -4866,13 +4706,8 @@
         {
             "title": "Kuře na paprice",
             "description": "Omáčky patří v naší kuchyni mezi velmi oblíbené pokrmy a kuře na paprice není výjimkou. V tomto receptu nahradil smetanu jemný čerstvý sýr, který omáčku krásně zahustí. Servírovat ji můžete s přílohou dle své chuti, vynikající jsou kromě houskových knedlíků také např. špenátové noky.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 45,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:45",
+            "state": "PUBLISHED",
             "nutritionPerServing": 513,
             "numberOfServings": 4,
             "categories": [
@@ -4949,13 +4784,8 @@
         {
             "title": "Špekáčky na pivu",
             "description": "Chalupářská klasika, která má mnoho obměn. Tentokrát podle Koko.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 60,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "01:00",
+            "state": "PUBLISHED",
             "nutritionPerServing": 629,
             "numberOfServings": 4,
             "categories": [
@@ -5053,13 +4883,8 @@
         {
             "title": "Margotková bábovka",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 55,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:55",
+            "state": "PUBLISHED",
             "nutritionPerServing": 552,
             "numberOfServings": 4,
             "categories": [
@@ -5122,13 +4947,8 @@
         {
             "title": "Lotus cheesecake",
             "description": "Chesscake miluje snad každý, s tímhle ale rozhodně zabodujete. Tento dezert spojuje krémovou strukturu cheesecaku s lahodným a specifickým aroma karamelových sušenek. Je výborný, jednoduchý a rychlý na přípravu a také krásně vypadá.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 30,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:30",
+            "state": "PUBLISHED",
             "nutritionPerServing": 336,
             "numberOfServings": 1,
             "categories": [
@@ -5182,13 +5002,8 @@
         {
             "title": "Košíčky Izidor",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 90,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "01:30",
+            "state": "PUBLISHED",
             "nutritionPerServing": 695,
             "numberOfServings": 1,
             "categories": [
@@ -5285,13 +5100,8 @@
         {
             "title": "Kremrole",
             "description": "Upečte si nadýchané domácí kremrole z listového těsta naplněné sladkým sněhem, který se rozplyne na jazyku.",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 55,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:55",
+            "state": "PUBLISHED",
             "nutritionPerServing": 518,
             "numberOfServings": 9,
             "categories": [
@@ -5358,13 +5168,8 @@
         {
             "title": "Ovesná kaše proteinová",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 3,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:3",
+            "state": "PUBLISHED",
             "nutritionPerServing": 574,
             "numberOfServings": 1,
             "categories": [
@@ -5432,13 +5237,8 @@
         {
             "title": "Skotská vejce",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 60,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "01:00",
+            "state": "PUBLISHED",
             "nutritionPerServing": 568,
             "numberOfServings": 4,
             "categories": [
@@ -5511,13 +5311,8 @@
         {
             "title": "Vejce na maďarský způsob",
             "description": "",
-            "preparationDuration": {
-                "days": 0,
-                "hours": 0,
-                "minutes": 20,
-                "seconds": 0
-            },
-            "state": "DRAFT",
+            "preparationDuration": "0:20",
+            "state": "PUBLISHED",
             "nutritionPerServing": 691,
             "numberOfServings": 1,
             "categories": [

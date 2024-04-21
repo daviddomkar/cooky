@@ -13,6 +13,27 @@ declare global {
       content: string;
     };
   }
+
+  type PickFrom<T, K extends Array<string>> =
+    T extends Array<any>
+      ? T
+      : T extends Record<string, any>
+        ? keyof T extends K[number]
+          ? T
+          : K[number] extends never
+            ? T
+            : Pick<T, K[number]>
+        : T;
+
+  type KeysOf<T> = Array<
+    T extends T ? (keyof T extends string ? keyof T : never) : never
+  >;
+
+  type IsArray<T> = T extends Array<any> ? T : never;
+
+  type ArrayKeys<T> = {
+    [K in keyof T]: IsArray<T[K]>;
+  };
 }
 
 export {};

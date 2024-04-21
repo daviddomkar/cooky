@@ -9,6 +9,8 @@ import {
   regex,
   custom,
   forward,
+  toLowerCase,
+  notValue,
 } from "valibot";
 
 export default object(
@@ -20,8 +22,26 @@ export default object(
     ]),
     username: string("This field is required.", [
       toTrimmed(),
+      toLowerCase(),
       minLength(1, "This field is required."),
       maxLength(32, "Username is too long."),
+      // TODO: Correctly handle reserved usernames (lowercase, etc.)
+      ...[
+        "drafts",
+        "most-rated",
+        "most-saved",
+        "random",
+        "recent",
+        "admin",
+        "auth",
+        "category",
+        "list",
+      ].map((reserved) =>
+        notValue<string, string>(
+          reserved,
+          `Username "${reserved}" is reserved.`,
+        ),
+      ),
     ]),
     email: string("This field is required.", [
       toTrimmed(),
