@@ -12,7 +12,7 @@ import { getServerSession } from "#auth";
 import { Prisma, RecipeState } from "@prisma/client";
 import { useValidatedParams } from "h3-valibot";
 import { authOptions } from "../../../auth/[...]";
-import NewRecipeSchema from "~/server/schemas/NewRecipeSchema";
+import RecipeSchema from "~/server/schemas/RecipeSchema";
 
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event, authOptions);
@@ -51,7 +51,7 @@ export default defineEventHandler(async (event) => {
   };
 
   const { success, output, issues } = await safeParseAsync(
-    NewRecipeSchema,
+    RecipeSchema,
     constructedData,
   );
 
