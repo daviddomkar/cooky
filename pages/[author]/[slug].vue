@@ -266,7 +266,7 @@ const deleteRecipe = async () => {
           {{ recipe.description }}
         </p>
         <div
-          class="mt-4 flex grow items-end justify-center gap-2 print:hidden lg:justify-end"
+          class="mt-4 flex grow items-end justify-center gap-2 print:hidden lg:self-end"
         >
           <BaseButton spread="compact" variant="secondary" @click="print">
             <div class="i-cooky:print scale-[1.25]" />
@@ -307,7 +307,8 @@ const deleteRecipe = async () => {
         <h2 class="my-0 mb-4 text-3xl text-on-surface-variant">Steps</h2>
         <ol class="my-0 p-0 pl-5">
           <li v-for="(step, i) in recipe!.steps" :key="i" class="mb-4">
-            {{ step.content }}
+            <h3 class="mb-2 mt-0">{{ step.title }}</h3>
+            <p class="my-0">{{ step.content }}</p>
           </li>
         </ol>
       </div>

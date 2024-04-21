@@ -145,6 +145,7 @@ if (value.value?.title) {
         >
           <template v-if="value && meta.valid" #trailing>
             <BaseButton
+              class="mr-0.75"
               spread="compact"
               variant="secondary"
               @click="dialogRef = value"

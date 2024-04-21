@@ -38,11 +38,34 @@ model User {
   notifications Notification[]
   replyHearts   ReplyHeart[]
   commentHearts CommentHeart[]
+  roles         UserRole[]
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
 
   @@map("users")
+}
+
+model UserRole {
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String @map("user_id") @db.Uuid
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  roleId String @map("role_id") @db.Uuid
+
+  @@id(name: "id", fields: [userId, roleId])
+  @@map("user_roles")
+}
+
+model Role {
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String     @unique @db.VarChar(32)
+  permissions String[]   @db.VarChar(64)
+  users       UserRole[]
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("roles")
 }
 
 enum UnitType {
