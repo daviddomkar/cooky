@@ -1,10 +1,18 @@
 import { randomBytes } from "node:crypto";
 import { join } from "node:path";
 import { Blob } from "node:buffer";
-import { safeParseAsync } from "valibot";
+import {
+  safeParseAsync,
+  string,
+  objectAsync,
+  toTrimmed,
+  minLength,
+} from "valibot";
 import { getServerSession } from "#auth";
 import { Prisma, RecipeState } from "@prisma/client";
-import { authOptions } from "../auth/[...]";
+import { useValidatedParams } from "h3-valibot";
+import { authOptions } from "../../../auth/[...]";
+import RecipeSchema from "~/server/schemas/RecipeSchema";
 
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event, authOptions);
@@ -55,18 +63,54 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  const ParametersSchema = objectAsync({
+    username: string("username parameter is required.", [
+      toTrimmed(),
+      minLength(1, "username parameter is required."),
+    ]),
+    slug: string("slug parameter is required.", [
+      toTrimmed(),
+      minLength(1, "slug parameter is required."),
+    ]),
+  });
+
+  const { slug } = await useValidatedParams(event, ParametersSchema);
+
+  const existingRecipe = await prisma.recipe.findFirst({
+    where: {
+      slug,
+    },
+  });
+
+  if (!existingRecipe) {
+    throw createError({
+      statusCode: 404,
+      statusMessage: "Recipe not found.",
+    });
+  }
+
+  if (existingRecipe.authorId !== session.user.id) {
+    throw createError({
+      statusCode: 403,
+      statusMessage: "Forbidden.",
+    });
+  }
+
   const {
     fileStorage: { path, secret },
   } = useRuntimeConfig();
 
   const recipe = await prisma.$transaction(async (tx) => {
+    // Delete old image
+    await fileStorage.deleteFile(join(path, existingRecipe.imageId));
+
     const key = randomBytes(32);
 
     const { image, draft, ingredients: recipeIngredients, ...rest } = output;
 
     const state = draft ? RecipeState.DRAFT : RecipeState.PUBLISHED;
 
-    const recipe = await tx.recipe.create({
+    const recipe = await tx.recipe.update(existingRecipe.id, {
       ...rest,
       imageKey: await fileStorage.encryptKey(secret!, key),
       authorId: session.user.id,
@@ -89,8 +133,6 @@ export default defineEventHandler(async (event) => {
 
     return recipe;
   });
-
-  setResponseStatus(event, 201);
 
   return {
     username: session.user.username,
