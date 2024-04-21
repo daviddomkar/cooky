@@ -6,6 +6,7 @@ import { Visibility } from "@prisma/client";
 import type { Input, Output } from "valibot";
 
 const route = useRoute();
+const router = useRouter();
 
 const { notify } = useNotification();
 
@@ -44,7 +45,7 @@ const submit = async (list: Output<typeof ListFormSchema>) => {
       text: "Your list has been successfully created.",
     });
 
-    navigateTo(`/list/${response.id}`);
+    router.push(`/list/${response.id}`);
   } catch (e) {
     if (e instanceof FetchError) {
       notify({

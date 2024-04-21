@@ -3,6 +3,8 @@ import { useNotification } from "@kyvg/vue3-notification";
 
 type Props = {
   name: string;
+  initialSrc?: string;
+  initialBlob?: Blob;
 };
 
 const props = defineProps<Props>();
@@ -11,7 +13,13 @@ const draggedOver = ref(false);
 
 const src = ref<string | null>(null);
 
-const { value, setValue, errorMessage } = useField<Blob>(() => props.name);
+const { value, setValue, errorMessage } = useField<Blob>(
+  () => props.name,
+  undefined,
+  {
+    initialValue: props.initialBlob,
+  },
+);
 
 const { notify } = useNotification();
 

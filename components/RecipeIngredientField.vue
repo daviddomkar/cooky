@@ -112,6 +112,10 @@ watch(unitOptions, (options) => {
     unitId.value = undefined;
   }
 });
+
+if (value.value?.title) {
+  query.value = value.value.title;
+}
 </script>
 
 <template>
@@ -139,9 +143,8 @@ watch(unitOptions, (options) => {
           @blur="handleQueryBlur"
           @update:model-value="handleQueryUpdate"
         >
-          <template v-if="value && meta.dirty && meta.valid" #trailing>
+          <template v-if="value && meta.valid" #trailing>
             <BaseButton
-              v-if="value && meta.dirty && meta.valid"
               spread="compact"
               variant="secondary"
               @click="dialogRef = value"
@@ -196,7 +199,7 @@ watch(unitOptions, (options) => {
         </ul>
       </HeadlessComboboxOptions>
     </HeadlessCombobox>
-    <div v-if="value && meta.dirty && meta.valid" class="box-border sm:ml-12">
+    <div v-if="value && meta.valid" class="box-border sm:ml-12">
       <TextField label="Amount" :name="`${name}.amount`" type="number" />
       <SelectField
         v-model="unitId"

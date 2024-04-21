@@ -116,6 +116,11 @@ export const prisma = new PrismaClient().$extends({
                 unit: true,
               },
             },
+            categories: {
+              select: {
+                categoryId: true,
+              },
+            },
             comments: {
               include: {
                 author: {
@@ -173,7 +178,7 @@ export const prisma = new PrismaClient().$extends({
 
         return {
           ...recipe,
-          preparitionDuration: durationQuery[0].preparation_duration,
+          preparationDuration: durationQuery[0].preparation_duration,
         };
       },
       async create(data: {
