@@ -3,15 +3,24 @@ import NuxtLink from "#app/components/nuxt-link";
 
 const route = useRoute();
 
-const { isMobile } = useDevice();
-
 const { session } = useAuth();
 
-const { data: recipes } = await useInfiniteScrollFetch(window, "/api/recipes", {
-  query: {
-    username: route.params.username,
+if (session.value?.user?.username !== route.params.username) {
+  throw createError({
+    statusCode: 403,
+    statusMessage: "Forbidden",
+  });
+}
+
+const { isMobile } = useDevice();
+
+const { data: recipes } = await useInfiniteScrollFetch(
+  window,
+  "/api/recipes/drafts",
+  {
+    query: { username: route.params.username },
   },
-});
+);
 
 const { data: lists, refresh: refreshLists } = await useAsyncData(
   async () => {
@@ -43,11 +52,9 @@ const isOwnProfile = computed(
   <div class="flex flex-col gap-8">
     <div v-if="!recipes?.length" class="flex flex-col items-center">
       <h2 class="mb-4 mt-0 text-center text-3xl text-on-surface-variant">
-        {{ `${isOwnProfile ? "Your" : "This"} profile has no recipes yet.` }}
+        No drafts found.
       </h2>
-      <BaseButton v-if="isOwnProfile" :as="NuxtLink" to="/new">
-        Create new recipe
-      </BaseButton>
+      <BaseButton :as="NuxtLink" to="/new">Create new recipe draft</BaseButton>
     </div>
     <MasonryWall
       v-else
@@ -58,15 +65,20 @@ const isOwnProfile = computed(
       :ssr-columns="isMobile ? 1 : 4"
     >
       <template #default="{ item }">
-        <RecipeCard
-          :lists="lists!"
-          :recipe="item"
-          :refresh-lists="refreshLists"
-        />
+        <NuxtLink
+          class="block transition-transform hover:active:scale-[0.97]"
+          :to="`/${item.author.username}/${item.slug}`"
+        >
+          <RecipeCard
+            :lists="lists!"
+            :recipe="item"
+            :refresh-lists="refreshLists"
+          />
+        </NuxtLink>
       </template>
     </MasonryWall>
     <BaseButton v-if="isOwnProfile && recipes?.length" :as="NuxtLink" to="/new">
-      Create new recipe
+      Create new recipe draft
     </BaseButton>
   </div>
 </template>

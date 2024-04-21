@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import type { Component } from "vue";
+
 type Props = {
+  as?: string | Component;
   type?: "button" | "submit" | "reset";
   variant?: "primary" | "secondary" | "danger" | "transparent";
   density?: "relaxed" | "default" | "compact";
@@ -10,6 +13,7 @@ type Props = {
 };
 
 withDefaults(defineProps<Props>(), {
+  as: "button",
   type: "button",
   variant: "primary",
   density: "default",
@@ -22,8 +26,9 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <button
-    class="relative box-border flex items-center justify-center rounded-full border-none uppercase outline-none ring-none transition ease-in-out disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-none"
+  <component
+    :is="as"
+    class="relative box-border flex items-center justify-center rounded-full border-none uppercase decoration-none outline-none ring-none transition ease-in-out disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-none"
     :class="{
       'h-8 min-w-8': density === 'compact',
       'h-10 min-w-10': density === 'default',
@@ -40,8 +45,8 @@ withDefaults(defineProps<Props>(), {
       'w-fit px-8': spread === 'default',
       'w-full': expanded,
     }"
-    :disabled="disabled"
-    :type="type"
+    :disabled="as === 'button' ? disabled : undefined"
+    :type="as === 'button' ? type : undefined"
   >
     <div
       v-if="loading"
@@ -60,5 +65,5 @@ withDefaults(defineProps<Props>(), {
       <slot name="icon" />
       <slot />
     </div>
-  </button>
+  </component>
 </template>

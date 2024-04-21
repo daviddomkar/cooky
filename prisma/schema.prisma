@@ -82,6 +82,7 @@ model Unit {
 
 model RecipeIngredient {
   amount Decimal @db.Decimal
+  order  Int     @default(autoincrement()) @db.Integer
 
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   ingredientId String     @map("ingredient_id") @db.Uuid
@@ -200,10 +201,10 @@ model List {
   title      String     @db.VarChar(32)
   visibility Visibility @default(PUBLIC)
 
-  favouritesOfUser User?  @relation("favorites_list")
-  lastUsedOfUser   User?  @relation("last_used_list")
-  author           User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  authorId         String @map("author_id") @db.Uuid
+  favoritesOfUser User?  @relation("favorites_list")
+  lastUsedOfUser  User?  @relation("last_used_list")
+  author          User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  authorId        String @map("author_id") @db.Uuid
 
   recipes RecipeList[]
 
@@ -235,7 +236,7 @@ enum RecipeState {
 model Recipe {
   id                  String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title               String                  @db.VarChar(64)
-  slug                String                  @unique @db.VarChar(64)
+  slug                String                  @db.VarChar(64)
   description         String                  @db.Text
   preparitionDuration Unsupported("interval") @map("preparation_duration")
   state               RecipeState             @default(DRAFT)

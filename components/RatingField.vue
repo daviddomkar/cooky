@@ -7,7 +7,7 @@ type Props = {
 };
 
 const props = withDefaults(defineProps<Props>(), {
-  editable: false,
+  editable: true,
   controlled: true,
   modelValue: undefined,
 });
@@ -60,15 +60,16 @@ const setValue = (value: number) => {
         @mouseover="setHoverValue(i)"
       >
         <div
-          class="i-cooky:star relative text-primary group-hover:text-primary"
+          class="i-cooky:star relative text-primary"
           :class="{
+            'group-hover:text-primary': editable,
             'text-on-surface-variant dark:text-outline': roundedValue < i,
             'group-hover:text-on-surface-variant dark:group-hover:text-outline':
               hoverValue ? hoverValue < i : false,
           }"
         >
           <div
-            v-if="!hoverValue"
+            v-if="!hoverValue && editable"
             class="absolute inset-0 box-border w-50% overflow-hidden"
           >
             <div

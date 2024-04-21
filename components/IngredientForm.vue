@@ -9,7 +9,7 @@ const props = defineProps<{
   onSubmit?: SubmissionHandler<Output<typeof IngredientFormSchema>>;
 }>();
 
-const { handleSubmit, handleReset, setValues } = useForm({
+const { handleSubmit, handleReset, isSubmitting, setValues } = useForm({
   validationSchema: toTypedSchema(IngredientFormSchema),
   initialValues: props.initialValues,
 });
@@ -62,8 +62,8 @@ onMounted(() =>
         },
       ]"
     />
-    <BaseButton expanded type="submit">{{
-      initialValues?.unitTypes?.length ? "Edit" : "Create"
-    }}</BaseButton>
+    <BaseButton expanded :loading="isSubmitting" type="submit">
+      {{ initialValues?.unitTypes?.length ? "Edit" : "Create" }}
+    </BaseButton>
   </form>
 </template>

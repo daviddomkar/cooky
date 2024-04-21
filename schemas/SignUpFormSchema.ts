@@ -25,7 +25,9 @@ export default object(
       toLowerCase(),
       minLength(1, "This field is required."),
       maxLength(32, "Username is too long."),
+      // TODO: Correctly handle reserved usernames (lowercase, etc.)
       ...[
+        "drafts",
         "most-rated",
         "most-saved",
         "random",

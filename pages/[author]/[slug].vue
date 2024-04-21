@@ -1,22 +1,48 @@
 <script setup lang="ts">
-definePageMeta({
-  middleware: async (to) => {
-    const { error } = await useFetch(
-      `/api/recipes/${to.params.username}/${to.params.slug}`,
-    );
-
-    if (error.value) {
-      return abortNavigation(error.value);
-    }
-  },
-});
+import { RecipeState } from "@prisma/client";
+import { useNotification } from "@kyvg/vue3-notification";
+import { FetchError } from "ofetch";
 
 const route = useRoute();
 
+const { notify } = useNotification();
+
 const { session } = useAuth();
 
-const { data: recipe } = await useFetch(
-  `/api/recipes/${route.params.username}/${route.params.slug}`,
+const { data: recipe, error } = await useFetch(
+  `/api/recipes/${route.params.author}/${route.params.slug}`,
+);
+
+if (error.value) {
+  throw createError({
+    statusCode: error.value?.statusCode,
+    statusMessage: error.value?.statusMessage,
+  });
+}
+
+const { data: lists, refresh: refreshLists } = await useAsyncData(
+  async () => {
+    if (!session.value?.user?.username) {
+      return [];
+    }
+
+    const data = await $fetch("/api/lists", {
+      query: {
+        // TODO: This should be a proper pagination
+        take: 100,
+        username: session.value?.user?.username,
+      },
+    });
+
+    return data.results;
+  },
+  {
+    watch: [session],
+  },
+);
+
+const isOwnRecipe = computed(
+  () => recipe.value?.author?.username === session?.value?.user?.username,
 );
 
 const print = () => {
@@ -24,12 +50,42 @@ const print = () => {
   window.print();
 };
 
-const save = (data: any) => {
-  console.log("list save", data);
-};
-
 const rate = (value: number) => {
   console.log("rate", value);
+};
+
+const deleteRecipe = async () => {
+  try {
+    await $fetch(
+      `/api/recipes/${recipe.value?.author?.username}/${recipe.value?.slug}`,
+      {
+        method: "DELETE",
+      },
+    );
+
+    notify({
+      type: "success",
+      title: `Recipe ${recipe.value?.title} deleted.`,
+      text: "Your recipe has been successfully deleted.",
+    });
+
+    navigateTo(`/${session.value?.user.username}`);
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to delete recipe.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to delete recipe.",
+      text: "An unknown error occurred.",
+    });
+  }
 };
 </script>
 
@@ -44,14 +100,39 @@ const rate = (value: number) => {
         :src="`/api/files/${recipe.imageId}`"
       />
       <div class="mx-auto flex flex-col self-stretch gap-2 lg:mx-0 lg:grow">
-        <h1 class="my-0 text-center text-5xl lg:text-left">
-          {{ recipe.title }}
-        </h1>
-        <ProfileLink class="mx-auto self-start lg:mx-0" :user="recipe.author" />
+        <div
+          class="flex flex-col items-center gap-4 lg:flex-row lg:items-start"
+        >
+          <div class="flex grow flex-col items-center lg:items-start">
+            <h1 class="my-0 text-center text-5xl lg:text-left">
+              {{ recipe.title }}
+            </h1>
+            <ProfileLink
+              class="mx-auto self-start lg:mx-0"
+              :user="recipe.author"
+            />
+          </div>
+          <div v-if="isOwnRecipe" class="flex gap-2">
+            <BaseButton spread="compact" variant="secondary">
+              <div class="i-material-symbols:edit h-6 w-6" />
+            </BaseButton>
+            <ConfirmationDialog
+              :on-confirm="deleteRecipe"
+              :reason="`Recipe ${recipe.title} will be deleted.`"
+            >
+              <template #activator="{ open }">
+                <BaseButton spread="compact" variant="danger" @click="open">
+                  <div class="i-material-symbols:delete h-6 w-6" />
+                </BaseButton>
+              </template>
+            </ConfirmationDialog>
+          </div>
+        </div>
         <RatingField
+          v-if="recipe.state !== RecipeState.DRAFT"
           class="mx-auto mt-4 lg:mx-0 print:hidden"
           :controlled="false"
-          :editable="!!session"
+          :editable="!!session && !isOwnRecipe"
           :model-value="recipe.rating ?? undefined"
           name="rating"
           @update:model-value="rate"
@@ -81,12 +162,21 @@ const rate = (value: number) => {
           <BaseButton spread="compact" variant="secondary" @click="print">
             <div class="i-cooky:print scale-[1.25]" />
           </BaseButton>
-          <BaseButton spread="compact" @click="save">
-            <template #icon>
-              <div class="i-cooky:favourites scale-[1.25]" />
+          <ListsPopover
+            v-if="session && lists && recipe.state !== RecipeState.DRAFT"
+            :lists="lists"
+            :recipe="recipe"
+            :refresh-lists="refreshLists"
+          >
+            <template #activator>
+              <BaseButton spread="compact">
+                <template #icon>
+                  <div class="i-cooky:favourites scale-[1.25]" />
+                </template>
+                Save
+              </BaseButton>
             </template>
-            Save
-          </BaseButton>
+          </ListsPopover>
         </div>
       </div>
     </div>

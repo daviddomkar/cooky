@@ -18,10 +18,11 @@ const categoryOptions = computed(() => {
   }));
 });
 
-const { handleSubmit, handleReset, errors, setFieldValue } = useForm({
-  validationSchema: toTypedSchema(RecipeFormSchema),
-  initialValues: props.initialValues,
-});
+const { handleSubmit, handleReset, errors, isSubmitting, setFieldValue } =
+  useForm({
+    validationSchema: toTypedSchema(RecipeFormSchema),
+    initialValues: props.initialValues,
+  });
 
 const submit = handleSubmit(async (values, opts) => {
   await props.onSubmit?.(values, opts as any);
@@ -47,13 +48,20 @@ const saveAsDraft = async () => {
     <div class="flex flex-col items-center gap-4 lg:flex-row">
       <h1 class="my-0 grow text-center text-5xl lg:text-left">New recipe</h1>
       <BaseButton
+        :loading="isSubmitting"
         type="submit"
         variant="secondary"
         @click.prevent="saveAsDraft"
       >
         Save as draft
       </BaseButton>
-      <BaseButton type="submit" @click.prevent="publish">Publish</BaseButton>
+      <BaseButton
+        :loading="isSubmitting"
+        type="submit"
+        @click.prevent="publish"
+      >
+        Publish
+      </BaseButton>
     </div>
     <div class="items-strech w-full flex flex-col gap-4">
       <div class="flex flex-col gap-4 lg:flex-row lg:gap-8">

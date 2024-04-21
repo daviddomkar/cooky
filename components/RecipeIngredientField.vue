@@ -112,8 +112,6 @@ watch(unitOptions, (options) => {
     unitId.value = undefined;
   }
 });
-
-watch(value, (value) => console.log(value));
 </script>
 
 <template>
@@ -148,7 +146,7 @@ watch(value, (value) => console.log(value));
               variant="secondary"
               @click="dialogRef = value"
             >
-              <div class="i-material-symbols:edit h-6 w-6 scale-[0.75]" />
+              <div class="i-material-symbols:edit h-6 w-6" />
             </BaseButton>
           </template>
         </TextField>
