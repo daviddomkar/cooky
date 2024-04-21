@@ -59,6 +59,7 @@ const submit = async (values: Output<typeof RecipeFormSchema>) => {
       :initial-src="null"
       :initial-values="
         {
+          draft: true,
           categories: [],
           ingredients: [
             {
