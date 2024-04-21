@@ -4,10 +4,10 @@ import { Blob } from "node:buffer";
 import { join } from "node:path";
 import { hash } from "bcrypt";
 import { Prisma, type Recipe } from "@prisma/client";
+import { prisma } from "../server/utils/prisma-client";
+import { fileStorage } from "../server/utils/file-storage";
+import permissions from "../utils/permissions";
 import seedData from "./seed.json" assert { type: "json" };
-import { prisma } from "~/server/utils/prisma-client";
-import { fileStorage } from "~/server/utils/file-storage";
-import permissions from "~/utils/permissions";
 
 const path = process.env.FILE_STORAGE_PATH;
 const secret = process.env.FILE_STORAGE_SECRET;
