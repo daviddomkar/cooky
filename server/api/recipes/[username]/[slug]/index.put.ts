@@ -96,14 +96,6 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  if (existingRecipe.state === RecipeState.PUBLISHED) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: "Bad Request.",
-      data: "The recipe is already published.",
-    });
-  }
-
   const {
     fileStorage: { path, secret },
   } = useRuntimeConfig();
