@@ -266,7 +266,7 @@ const deleteRecipe = async () => {
           {{ recipe.description }}
         </p>
         <div
-          class="mt-4 flex grow items-end justify-center gap-2 print:hidden lg:justify-end"
+          class="mt-4 flex grow items-end justify-center gap-2 print:hidden lg:self-end"
         >
           <BaseButton spread="compact" variant="secondary" @click="print">
             <div class="i-cooky:print scale-[1.25]" />
