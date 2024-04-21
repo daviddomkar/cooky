@@ -1,6 +1,7 @@
 <script setup lang="ts">
 type Props = {
   small?: boolean;
+  dark?: boolean;
   user: {
     username: string;
     name: string;
@@ -29,7 +30,12 @@ defineProps<Props>();
       <span v-if="!small" class="text-xs text-primary">
         @{{ user.username }}
       </span>
-      <h2 class="my-0 grow text-2xl text-on-surface font-display">
+      <h2
+        class="my-0 grow text-2xl text-on-surface font-display"
+        :class="{
+          '!text-white': dark,
+        }"
+      >
         {{ user.name }}
       </h2>
     </div>

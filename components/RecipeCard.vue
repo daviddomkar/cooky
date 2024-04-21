@@ -54,7 +54,7 @@ const hoveringOverActions = ref(false);
       @mouseenter="hoveringOverActions = true"
       @mouseleave="hoveringOverActions = false"
     >
-      <ProfileLink small :user="recipe.author" />
+      <ProfileLink class="text-white" dark small :user="recipe.author" />
     </div>
     <div
       v-if="session"
