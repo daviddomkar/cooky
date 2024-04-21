@@ -210,6 +210,8 @@ const deleteRecipe = async () => {
             class="mx-auto mt-4 lg:mx-0 print:hidden"
             :class="{
               '[&>p]:text-primary': rating?.numberOfStars,
+              '[&>div>div]:!text-on-surface-variant [&>div>div]:dark:!text-outline':
+                !rating?.numberOfStars && !recipe.rating,
             }"
             :controlled="false"
             :editable="!!session && !isOwnRecipe"
