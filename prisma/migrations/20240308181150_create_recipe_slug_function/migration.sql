@@ -15,16 +15,9 @@ DECLARE
                     '\\-+$', ''),
             '^\\-', '');
 BEGIN
-
-    IF p_id IS NOT NULL THEN
-        PERFORM
-        FROM recipes
-        WHERE recipes.slug = v_clean_slug AND recipes.author_id = p_author_id AND recipes.id != p_id;
-    ELSE
-        PERFORM
-        FROM recipes
-        WHERE recipes.slug = v_clean_slug AND recipes.author_id = p_author_id;
-    END IF;
+    PERFORM
+    FROM recipes
+    WHERE recipes.slug = v_clean_slug AND recipes.author_id = p_author_id AND recipes.id != p_id;
 
     IF FOUND THEN
         RAISE EXCEPTION 'Slug "%" already exists for user %', v_clean_slug, p_author_id;
