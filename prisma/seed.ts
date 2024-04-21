@@ -7,6 +7,7 @@ import { Prisma, type Recipe } from "@prisma/client";
 import seedData from "./seed.json" assert { type: "json" };
 import { prisma } from "~/server/utils/prisma-client";
 import { fileStorage } from "~/server/utils/file-storage";
+import permissions from "~/utils/permissions";
 
 const path = process.env.FILE_STORAGE_PATH;
 const secret = process.env.FILE_STORAGE_SECRET;
@@ -276,6 +277,62 @@ async function main() {
       })
       .map((data) => prisma.recipeList.create({ data })),
   );
+
+  const adminRole = await prisma.role.create({
+    data: {
+      title: "Admin",
+      permissions: [
+        permissions.RolesList,
+        permissions.RolesCreate,
+        permissions.RolesUpdate,
+        permissions.RolesDelete,
+
+        permissions.UsersList,
+        permissions.UsersUpdate,
+        permissions.UsersDelete,
+
+        permissions.CategoriesList,
+        permissions.CategoriesCreate,
+        permissions.CategoriesUpdate,
+        permissions.CategoriesDelete,
+
+        permissions.UnitsList,
+        permissions.UnitsCreate,
+        permissions.UnitsUpdate,
+        permissions.UnitsDelete,
+      ],
+    },
+  });
+
+  await prisma.role.create({
+    data: {
+      title: "Editor",
+      permissions: [
+        permissions.CategoriesList,
+        permissions.CategoriesCreate,
+        permissions.CategoriesUpdate,
+        permissions.CategoriesDelete,
+
+        permissions.UnitsList,
+        permissions.UnitsCreate,
+        permissions.UnitsUpdate,
+        permissions.UnitsDelete,
+      ],
+    },
+  });
+
+  const adminUser = await prisma.user.findUnique({
+    where: {
+      username: "admin",
+    },
+  });
+
+  await prisma.userRole.create({
+    data: {
+      userId: adminUser!.id,
+      roleId: adminRole.id,
+    },
+  });
 }
 
 main();
