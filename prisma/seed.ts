@@ -67,8 +67,8 @@ async function main() {
     listData.map((data) => prisma.list.create({ data })),
   );
 
-  // Favorite lists
-  const favoriteListData = lists
+  // Favourite lists
+  const favouriteListData = lists
     .filter((list) => list.title === "Favorites")
     .map((list) => {
       return {
@@ -91,7 +91,7 @@ async function main() {
     });
 
   await prisma.$transaction(
-    favoriteListData.map((data) => prisma.list.update(data)),
+    favouriteListData.map((data) => prisma.list.update(data)),
   );
 
   // Units

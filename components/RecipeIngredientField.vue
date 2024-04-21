@@ -113,7 +113,9 @@ watch(unitOptions, (options) => {
   }
 });
 
-watch(value, (value) => console.log(value));
+if (value.value?.title) {
+  query.value = value.value.title;
+}
 </script>
 
 <template>
@@ -141,14 +143,13 @@ watch(value, (value) => console.log(value));
           @blur="handleQueryBlur"
           @update:model-value="handleQueryUpdate"
         >
-          <template v-if="value && meta.dirty && meta.valid" #trailing>
+          <template v-if="value && meta.valid" #trailing>
             <BaseButton
-              v-if="value && meta.dirty && meta.valid"
               spread="compact"
               variant="secondary"
               @click="dialogRef = value"
             >
-              <div class="i-material-symbols:edit h-6 w-6 scale-[0.75]" />
+              <div class="i-material-symbols:edit h-6 w-6" />
             </BaseButton>
           </template>
         </TextField>
@@ -198,7 +199,7 @@ watch(value, (value) => console.log(value));
         </ul>
       </HeadlessComboboxOptions>
     </HeadlessCombobox>
-    <div v-if="value && meta.dirty && meta.valid" class="box-border sm:ml-12">
+    <div v-if="value && meta.valid" class="box-border sm:ml-12">
       <TextField label="Amount" :name="`${name}.amount`" type="number" />
       <SelectField
         v-model="unitId"

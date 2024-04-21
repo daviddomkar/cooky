@@ -4,6 +4,7 @@ import {
   minLength,
   object,
   number,
+  coerce,
   minValue,
   uuid,
   notValue,
@@ -11,10 +12,13 @@ import {
 
 export default object({
   ingredient: IngredientFormSchema,
-  amount: number("This field is required.", [
-    minValue(0, "The value must be greater than 0."),
-    notValue(0, "The value must be greater than 0."),
-  ]),
+  amount: coerce(
+    number("This field is required.", [
+      minValue(0, "The value must be greater than 0."),
+      notValue(0, "The value must be greater than 0."),
+    ]),
+    Number,
+  ),
   unitId: string("This field is required.", [
     toTrimmed(),
     minLength(1, "This field is required."),

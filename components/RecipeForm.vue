@@ -7,6 +7,8 @@ const props = defineProps<{
   categories: { id: string; title: string }[];
   units: { id: string; title: string; abbreviation: string; type: UnitType }[];
   initialValues?: Input<typeof RecipeFormSchema>;
+  initialRecipeImageSrc?: string;
+  initialRecipeBlob?: Blob;
   onSubmit?: SubmissionHandler<Output<typeof RecipeFormSchema>>;
 }>();
 
@@ -18,10 +20,11 @@ const categoryOptions = computed(() => {
   }));
 });
 
-const { handleSubmit, handleReset, errors, setFieldValue } = useForm({
-  validationSchema: toTypedSchema(RecipeFormSchema),
-  initialValues: props.initialValues,
-});
+const { handleSubmit, handleReset, errors, isSubmitting, setFieldValue } =
+  useForm({
+    validationSchema: toTypedSchema(RecipeFormSchema),
+    initialValues: props.initialValues,
+  });
 
 const submit = handleSubmit(async (values, opts) => {
   await props.onSubmit?.(values, opts as any);
@@ -45,15 +48,26 @@ const saveAsDraft = async () => {
     @submit="submit"
   >
     <div class="flex flex-col items-center gap-4 lg:flex-row">
-      <h1 class="my-0 grow text-center text-5xl lg:text-left">New recipe</h1>
+      <h1 class="my-0 grow text-center text-5xl lg:text-left">
+        {{ initialValues?.title ? `Edit ${initialValues?.title}` : "New" }}
+        recipe
+      </h1>
       <BaseButton
+        v-if="initialValues?.draft"
+        :loading="isSubmitting"
         type="submit"
         variant="secondary"
         @click.prevent="saveAsDraft"
       >
         Save as draft
       </BaseButton>
-      <BaseButton type="submit" @click.prevent="publish">Publish</BaseButton>
+      <BaseButton
+        :loading="isSubmitting"
+        type="submit"
+        @click.prevent="publish"
+      >
+        Publish
+      </BaseButton>
     </div>
     <div class="items-strech w-full flex flex-col gap-4">
       <div class="flex flex-col gap-4 lg:flex-row lg:gap-8">
@@ -62,6 +76,8 @@ const saveAsDraft = async () => {
           :class="{
             'pb-6': errors.description && !errors.image,
           }"
+          :initial-blob="initialRecipeBlob"
+          :initial-src="initialRecipeImageSrc"
           name="image"
         />
         <div

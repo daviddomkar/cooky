@@ -7,32 +7,26 @@ import type {
   AsyncDataRequestStatus,
 } from "nuxt/app";
 
-type GetMethod<R extends NitroFetchRequest, M = AvailableRouterMethod<R>> =
-  AvailableRouterMethod<R> extends "get" ? M : never;
-
 type PaginationData<
   R extends NitroFetchRequest,
   D = FetchResult<R, AvailableRouterMethod<R>>,
-> =
-  AvailableRouterMethod<R> extends "get"
-    ? D extends {
-        after?: string | null;
-        before?: string | null;
-        results: any[];
-      }
-      ? D
-      : never
-    : never;
+> = D extends {
+  after?: string | null;
+  before?: string | null;
+  results: any[];
+}
+  ? D
+  : never;
 
 type FilterPaginationRequests<R extends NitroFetchRequest> = R extends string
-  ? AvailableRouterMethod<R> extends GetMethod<R>
-    ? FetchResult<R, AvailableRouterMethod<R>> extends PaginationData<R>
-      ? R
-      : never
+  ? FetchResult<R, AvailableRouterMethod<R>> extends PaginationData<R>
+    ? R
     : never
   : never;
 
-type PaginatedNitroFetchRequest = FilterPaginationRequests<NitroFetchRequest>;
+type PaginatedNitroFetchRequest =
+  | FilterPaginationRequests<NitroFetchRequest>
+  | (string & {});
 
 type InfiniteScrollElement =
   | HTMLElement
@@ -47,7 +41,14 @@ type UseInfiniteScrollFetchOptions<
   DataT extends PaginationData<ReqT>,
   PickKeys extends KeysOf<DataT> = KeysOf<DataT>,
   E extends InfiniteScrollElement = InfiniteScrollElement,
-> = UseFetchOptions<DataT, DataT, PickKeys, DataT, ReqT, GetMethod<ReqT>> &
+> = UseFetchOptions<
+  DataT,
+  DataT,
+  PickKeys,
+  DataT,
+  ReqT,
+  AvailableRouterMethod<ReqT>
+> &
   Omit<UseInfiniteScrollOptions<E>, "canLoadMore"> & {
     take?: number;
   };
@@ -66,6 +67,7 @@ export async function useInfiniteScrollFetch<
   data: Ref<DataT["results"]>;
   status: Ref<AsyncDataRequestStatus>;
   error: Ref<ErrorT | null>;
+  refresh: () => Promise<void>;
 }> {
   const after = ref<string | null | undefined>(null);
   const data = ref([]) as Ref<DataT["results"]>;
@@ -78,11 +80,12 @@ export async function useInfiniteScrollFetch<
     data: currentData,
     status,
     error,
+    refresh,
   } = await useFetch<
     DataT,
     ErrorT,
     ReqT,
-    GetMethod<ReqT>,
+    AvailableRouterMethod<ReqT>,
     DataT,
     DataT,
     PickKeys,
@@ -123,5 +126,9 @@ export async function useInfiniteScrollFetch<
     data,
     status,
     error,
+    refresh: async () => {
+      after.value = null;
+      await refresh();
+    },
   };
 }

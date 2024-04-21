@@ -7,6 +7,8 @@ definePageMeta({
   middleware: "auth",
 });
 
+const router = useRouter();
+
 const { notify } = useNotification();
 
 const { data: units } = await useFetch("/api/units");
@@ -30,7 +32,7 @@ const submit = async (values: Output<typeof RecipeFormSchema>) => {
       text: "The recipe has been successfully saved.",
     });
 
-    navigateTo(`/${result.username}/${result.slug}`);
+    router.replace(`/${result.username}/${result.slug}`);
   } catch (e) {
     if (e instanceof FetchError) {
       notify({
@@ -47,8 +49,6 @@ const submit = async (values: Output<typeof RecipeFormSchema>) => {
       text: "An unknown error occurred.",
     });
   }
-
-  // TODO: Submit the form data
 };
 </script>
 
@@ -56,10 +56,9 @@ const submit = async (values: Output<typeof RecipeFormSchema>) => {
   <main class="mx-auto box-border max-w-336 w-full px-4 py-4 sm:px-8 sm:py-8">
     <RecipeForm
       :categories="categories!"
+      :initial-src="null"
       :initial-values="
         {
-          title: '',
-          description: '',
           categories: [],
           ingredients: [
             {

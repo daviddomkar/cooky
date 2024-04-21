@@ -14,6 +14,29 @@ const newRecipe = () => {
   router.push("/new");
 };
 
+const search = (query: string) => {
+  if (!query) {
+    return;
+  }
+
+  router.push({
+    path: "/search",
+    query: { query },
+  });
+};
+
+const randomRecipeLoading = ref(false);
+
+const randomRecipe = async () => {
+  try {
+    randomRecipeLoading.value = true;
+    const recipe = await $fetch("/api/recipes/random");
+    router.push(`/${recipe?.author.username}/${recipe?.slug}`);
+  } finally {
+    randomRecipeLoading.value = false;
+  }
+};
+
 const logOut = async () => {
   await signOut({
     callbackUrl: "/",
@@ -57,10 +80,13 @@ watch(
       >
         <AppHeader
           class="sticky top-0 z-10 print:hidden"
+          :random-recipe-loading="randomRecipeLoading"
           :user="session?.user"
           @log-in="logIn"
           @new="newRecipe"
           @open="navbarOpened = true"
+          @random="randomRecipe"
+          @search="search"
         />
         <div class="box-border flex grow flex-col items-stretch">
           <slot />

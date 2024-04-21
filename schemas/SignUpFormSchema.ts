@@ -25,7 +25,9 @@ export default object(
       toLowerCase(),
       minLength(1, "This field is required."),
       maxLength(32, "Username is too long."),
+      // TODO: Correctly handle reserved usernames (lowercase, etc.)
       ...[
+        "drafts",
         "most-rated",
         "most-saved",
         "random",
@@ -34,6 +36,9 @@ export default object(
         "auth",
         "category",
         "list",
+        "search",
+        "edit",
+        "new",
       ].map((reserved) =>
         notValue<string, string>(
           reserved,
