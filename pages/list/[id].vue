@@ -4,18 +4,6 @@ import { useNotification } from "@kyvg/vue3-notification";
 import { FetchError } from "ofetch";
 import type { Output } from "valibot";
 
-definePageMeta({
-  middleware: async (to) => {
-    try {
-      await $fetch(`/api/lists/${to.params.id}`);
-    } catch (error) {
-      if (error) {
-        return abortNavigation(error);
-      }
-    }
-  },
-});
-
 const route = useRoute();
 
 const { notify } = useNotification();
@@ -24,9 +12,18 @@ const { session } = useAuth();
 
 const { isMobile } = useDevice();
 
-const { data: list, refresh: refreshList } = await useFetch(
-  `/api/lists/${route.params.id}`,
-);
+const {
+  data: list,
+  refresh: refreshList,
+  error,
+} = await useFetch(`/api/lists/${route.params.id}`);
+
+if (error.value) {
+  throw createError({
+    statusCode: error.value?.statusCode,
+    statusMessage: error.value?.statusMessage,
+  });
+}
 
 const { data: recipes, refresh: refreshRecipes } = await useInfiniteScrollFetch(
   window,

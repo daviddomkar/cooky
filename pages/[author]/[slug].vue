@@ -3,27 +3,22 @@ import { RecipeState } from "@prisma/client";
 import { useNotification } from "@kyvg/vue3-notification";
 import { FetchError } from "ofetch";
 
-definePageMeta({
-  middleware: async (to) => {
-    try {
-      await $fetch(`/api/recipes/${to.params.author}/${to.params.slug}`);
-    } catch (error) {
-      if (error) {
-        return abortNavigation(error);
-      }
-    }
-  },
-});
-
 const route = useRoute();
 
 const { notify } = useNotification();
 
 const { session } = useAuth();
 
-const { data: recipe } = await useFetch(
+const { data: recipe, error } = await useFetch(
   `/api/recipes/${route.params.author}/${route.params.slug}`,
 );
+
+if (error.value) {
+  throw createError({
+    statusCode: error.value?.statusCode,
+    statusMessage: error.value?.statusMessage,
+  });
+}
 
 const { data: lists, refresh: refreshLists } = await useAsyncData(
   async () => {

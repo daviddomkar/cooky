@@ -1,19 +1,16 @@
 <script setup lang="ts">
 import NuxtLink from "#app/components/nuxt-link";
 
-definePageMeta({
-  middleware: (to) => {
-    const { session } = useAuth();
-
-    if (session.value?.user?.username !== to.params.username) {
-      return abortNavigation();
-    }
-  },
-});
-
 const route = useRoute();
 
 const { session } = useAuth();
+
+if (session.value?.user?.username !== route.params.username) {
+  throw createError({
+    statusCode: 403,
+    statusMessage: "Forbidden",
+  });
+}
 
 const { isMobile } = useDevice();
 
