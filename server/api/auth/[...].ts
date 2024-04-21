@@ -58,20 +58,51 @@ export const authOptions: AuthConfig = {
       }
       return token;
     },
-    async session({ session, token }) { 
+    async session({ session, token }) {
       const user = await prisma.user.findUnique({
         where: {
           id: (token.user as User).id,
         },
-      })
+        select: {
+          id: true,
+          name: true,
+          username: true,
+          email: true,
+          profileImageId: true,
+          coverImageId: true,
+          favoritesListId: true,
+          lastUsedListId: true,
+          roles: {
+            select: {
+              role: {
+                select: {
+                  permissions: true,
+                },
+              },
+            },
+          },
+        },
+      });
 
-      const userWithoutPassword = {
-        ...user,
-        password: undefined,
+      if (!user) {
+        throw createError({
+          statusCode: 404,
+          message: "User not found.",
+        });
+      }
+
+      session.user = {
+        id: user.id,
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        profileImageId: user.profileImageId ?? undefined,
+        coverImageId: user.coverImageId ?? undefined,
+        favoritesListId: user.favoritesListId ?? undefined,
+        lastUsedListId: user.lastUsedListId ?? undefined,
+        permissions: user.roles.flatMap((role) => role.role.permissions),
       };
 
-      // @ts-ignore
-      session.user = userWithoutPassword;
       return session;
     },
   },

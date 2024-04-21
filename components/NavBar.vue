@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import NuxtLink from "#app/components/nuxt-link";
+
 type Props = {
   user?: {
     username: string;
     favoritesListId?: string | null;
+    permissions: string[];
   };
   categories: { title: string; slug: string; icon: string }[];
 };
@@ -25,7 +28,9 @@ const getSkirtPath = (
   return `M ${x} ${y} c 0 0, ${edgeWidth} 0, ${edgeWidth} -${edgeHeight} l 0 ${height + 2 * edgeHeight} c 0 -${edgeHeight} -${edgeWidth} -${edgeHeight} -${edgeWidth} -${edgeHeight} Z`;
 };
 
-const admin = computed(() => route.path.startsWith("/admin"));
+const admin = computed(
+  () => route.path.startsWith("/admin/") || route.path === "/admin",
+);
 
 const sections = computed(() => {
   return [
@@ -61,27 +66,15 @@ const sections = computed(() => {
       hidden: !admin.value,
       items: [
         {
-          title: "Recipes",
-          to: "/admin/recipes",
-          icon: "recipes",
-          exact: false,
-        },
-        {
           title: "Categories",
           to: "/admin/categories",
           icon: "list",
           exact: false,
         },
         {
-          title: "Ingredients",
-          to: "/admin/ingredients",
+          title: "Units",
+          to: "/admin/units",
           icon: "ingredients",
-          exact: false,
-        },
-        {
-          title: "Reviews",
-          to: "/admin/reviews",
-          icon: "reviews",
           exact: false,
         },
         { title: "Users", to: "/admin/users", icon: "users", exact: false },
@@ -171,7 +164,7 @@ const activeItemY = computed(() => {
       >
         <NuxtLink
           class="decoration-none link:text-inherit visited:text-inherit"
-          to="/"
+          :to="admin ? '/admin' : '/'"
           >Cooky</NuxtLink
         >
         <span
@@ -214,6 +207,30 @@ const activeItemY = computed(() => {
         v-if="props.user"
         class="box-border w-full flex grow flex-col justify-end gap-4 px-8"
       >
+        <BaseButton
+          v-if="props.user.permissions.length > 0 && admin"
+          :as="NuxtLink"
+          expanded
+          spread="compact"
+          to="/"
+        >
+          <template #icon>
+            <div class="i-cooky:cooky" />
+          </template>
+          Cooky
+        </BaseButton>
+        <BaseButton
+          v-if="props.user.permissions.length > 0 && !admin"
+          :as="NuxtLink"
+          expanded
+          spread="compact"
+          to="/admin"
+        >
+          <template #icon>
+            <div class="i-cooky:admin" />
+          </template>
+          Admin
+        </BaseButton>
         <BaseButton expanded spread="compact" @click="emit('log-out')">
           <template #icon>
             <div class="i-cooky:logout" />

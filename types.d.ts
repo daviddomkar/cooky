@@ -2,7 +2,17 @@ import type { User as PrismaUser } from "@prisma/client";
 
 declare module "@auth/core/types" {
   interface Session {
-    user: Omit<PrismaUser, "password">;
+    user: {
+      id: string;
+      name: string;
+      username: string;
+      email: string;
+      profileImageId?: string;
+      coverImageId?: string;
+      favoritesListId?: string;
+      lastUsedListId?: string;
+      permissions: string[];
+    };
   }
 }
 

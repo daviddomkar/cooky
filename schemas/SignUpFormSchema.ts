@@ -39,6 +39,7 @@ export default object(
         "search",
         "edit",
         "new",
+        "admin",
       ].map((reserved) =>
         notValue<string, string>(
           reserved,

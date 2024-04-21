@@ -89,10 +89,10 @@
       "coverImageId": 62
     },
     {
-      "name": "Admin",
-      "username": "admin",
-      "email": "admin@cooky.recipes",
-      "password": "admin",
+      "name": "Administrator",
+      "username": "administrator",
+      "email": "administrator@cooky.recipes",
+      "password": "administrator",
       "profileImageId": null,
       "coverImageId": null
     },
@@ -105,10 +105,10 @@
       "coverImageId": null
     },
     {
-      "name": "User",
-      "username": "user",
-      "email": "user@gcooky.recipes",
-      "password": "user",
+      "name": "Uzivatel",
+      "username": "uzivatel",
+      "email": "uzivatel@cooky.recipes",
+      "password": "uzivatel",
       "profileImageId": null,
       "coverImageId": null
     },

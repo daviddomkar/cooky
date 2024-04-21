@@ -42,7 +42,7 @@ async function main() {
     const indexOffset = lastRecipeImage + 1;
     return {
       ...user,
-      password: await hash(`${user.username}password`, 12),
+      password: await hash(user.password, 12),
       profileImageId: user.profileImageId
         ? files[user.profileImageId - indexOffset].id
         : null,
@@ -323,7 +323,7 @@ async function main() {
 
   const adminUser = await prisma.user.findUnique({
     where: {
-      username: "admin",
+      username: "administrator",
     },
   });
 
