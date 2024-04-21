@@ -60,11 +60,12 @@ const setValue = (value: number) => {
         @mouseover="setHoverValue(i)"
       >
         <div
-          class="i-cooky:star relative text-primary"
+          class="i-cooky:star relative"
           :class="{
-            'group-hover:text-primary': editable,
+            '!text-primary': roundedValue >= i || hoverValue,
+            'group-hover:text-primary': editable && roundedValue >= i,
             'text-on-surface-variant dark:text-outline': roundedValue < i,
-            'group-hover:text-on-surface-variant dark:group-hover:text-outline':
+            'group-hover:!text-on-surface-variant dark:group-hover:!text-outline':
               hoverValue ? hoverValue < i : false,
           }"
         >
@@ -73,8 +74,9 @@ const setValue = (value: number) => {
             class="absolute inset-0 box-border w-50% overflow-hidden"
           >
             <div
-              class="i-cooky:starhalf text-primary"
+              class="i-cooky:starhalf"
               :class="{
+                'text-primary': roundedValue >= i - 0.5,
                 'text-on-surface-variant dark:text-outline':
                   roundedValue < i - 0.5,
               }"
