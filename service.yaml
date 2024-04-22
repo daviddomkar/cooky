@@ -16,7 +16,7 @@ spec:
           resources:
             limits:
               memory: 4G
-              cpu: 4
+              cpu: '4'
           ports:
             - name: http1
               containerPort: 8080
