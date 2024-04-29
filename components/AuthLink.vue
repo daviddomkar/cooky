@@ -9,7 +9,7 @@ defineProps<Props>();
 <template>
   <NuxtLink
     active-class="cooky-auth-link !bg-surface !text-on-surface"
-    class="relative box-border h-24 w-64 flex cursor-pointer items-center justify-center rounded-l-full border-none bg-transparent px-8 py-3 text-2xl text-white uppercase decoration-none"
+    class="relative box-border h-24 w-64 flex cursor-pointer items-center justify-center rounded-l-full border-none bg-transparent px-8 py-3 text-2xl text-white uppercase decoration-none outline-none"
     :to="to"
   >
     <span>
