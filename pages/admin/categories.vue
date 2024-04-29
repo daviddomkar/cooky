@@ -17,6 +17,7 @@ definePageMeta({
 });
 
 const { notify } = useNotification();
+const { session } = useAuth();
 
 const { data: categories, refresh: refreshCategories } =
   await useFetch("/api/categories");
@@ -148,9 +149,14 @@ const deleteCategory = async (category: { id: string; title: string }) => {
       ]"
       item-key="id"
       :items="categories!"
-      :trailing="{
-        title: 'Actions',
-      }"
+      :trailing="
+        session?.user?.permissions.includes(permissions.CategoriesUpdate) ||
+        session?.user?.permissions.includes(permissions.CategoriesDelete)
+          ? {
+              title: 'Actions',
+            }
+          : undefined
+      "
     >
       <template #item[icon]="{ item }">
         <div :class="`i-cooky:${item.icon}`" />
@@ -164,6 +170,9 @@ const deleteCategory = async (category: { id: string; title: string }) => {
       <template #item[trailing]="{ item }">
         <div class="box-border flex justify-end gap-2 py-1 pr-1">
           <BaseButton
+            v-if="
+              session?.user?.permissions.includes(permissions.CategoriesUpdate)
+            "
             spread="compact"
             variant="secondary"
             @click="dialogRef = item"
@@ -171,6 +180,9 @@ const deleteCategory = async (category: { id: string; title: string }) => {
             <div class="i-material-symbols:edit h-6 w-6" />
           </BaseButton>
           <ConfirmationDialog
+            v-if="
+              session?.user?.permissions.includes(permissions.CategoriesDelete)
+            "
             :on-confirm="() => deleteCategory(item)"
             :reason="`Category ${item.title} will be deleted.`"
           >
