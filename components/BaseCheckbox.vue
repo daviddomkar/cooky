@@ -31,7 +31,7 @@ watch(
       <input
         :id="name"
         :checked="checked"
-        class="border-box m-0 border-1 rounded-full border-solid text-primary dark:bg-surface-container checked:bg-primary focus:ring-none"
+        class="border-box m-0 border-1 rounded-full border-solid text-primary checked:bg-primary dark:bg-surface-container focus:ring-none"
         :class="{
           'border-error': errorMessage,
           'border-outline': !errorMessage,

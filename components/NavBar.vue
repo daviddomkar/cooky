@@ -43,6 +43,7 @@ const sections = computed(() => {
         to: `/category/${category.slug}`,
         icon: category.icon,
         exact: false,
+        hidden: false,
       })),
     },
     {
@@ -54,12 +55,14 @@ const sections = computed(() => {
           to: `/${props.user?.username}`,
           icon: "my-recipes",
           exact: true,
+          hidden: false,
         },
         {
           title: "Favourites",
           to: `/list/${props.user?.favoritesListId}`,
           icon: "favourites",
           exact: false,
+          hidden: false,
         },
       ],
     },
@@ -71,15 +74,31 @@ const sections = computed(() => {
           to: "/admin/categories",
           icon: "list",
           exact: false,
+          hidden: !props.user?.permissions?.includes(
+            permissions.CategoriesList,
+          ),
         },
         {
           title: "Units",
           to: "/admin/units",
           icon: "ingredients",
           exact: false,
+          hidden: !props.user?.permissions?.includes(permissions.UnitsList),
         },
-        { title: "Users", to: "/admin/users", icon: "users", exact: false },
-        { title: "Roles", to: "/admin/roles", icon: "roles", exact: false },
+        {
+          title: "Users",
+          to: "/admin/users",
+          icon: "users",
+          exact: false,
+          hidden: !props.user?.permissions?.includes(permissions.UsersList),
+        },
+        {
+          title: "Roles",
+          to: "/admin/roles",
+          icon: "roles",
+          exact: false,
+          hidden: !props.user?.permissions?.includes(permissions.RolesList),
+        },
       ],
     },
   ];
@@ -166,8 +185,9 @@ const activeItemY = computed(() => {
         <NuxtLink
           class="decoration-none link:text-inherit visited:text-inherit"
           :to="admin ? '/admin' : '/'"
-          >Cooky</NuxtLink
         >
+          Cooky
+        </NuxtLink>
         <span
           v-if="admin"
           class="absolute left-0 w-full text-xs font-display uppercase -bottom-3"
@@ -187,20 +207,22 @@ const activeItemY = computed(() => {
             section.title
           }}</h2>
           <ul class="my-0 flex flex-col list-none gap-4 pl-0">
-            <li v-for="item in section.items" :key="item.to">
-              <NuxtLink
-                class="box-border h-10 flex items-center gap-2 rounded-full bg-surface px-4 decoration-none transition-transform link:text-inherit visited:text-inherit hover:active:scale-[0.97]"
-                :class="{
-                  '!bg-transparent !text-white': item.exact
-                    ? route.path === item.to
-                    : route.path.startsWith(item.to),
-                }"
-                :to="item.to"
-              >
-                <div :class="`i-cooky:${item.icon}`" />
-                <span class="uppercase">{{ item.title }}</span>
-              </NuxtLink>
-            </li>
+            <template v-for="item in section.items" :key="item.to">
+              <li v-if="!item.hidden">
+                <NuxtLink
+                  class="box-border h-10 flex items-center gap-2 rounded-full bg-surface px-4 decoration-none transition-transform link:text-inherit visited:text-inherit hover:active:scale-[0.97]"
+                  :class="{
+                    '!bg-transparent !text-white': item.exact
+                      ? route.path === item.to
+                      : route.path.startsWith(item.to),
+                  }"
+                  :to="item.to"
+                >
+                  <div :class="`i-cooky:${item.icon}`" />
+                  <span class="uppercase">{{ item.title }}</span>
+                </NuxtLink>
+              </li>
+            </template>
           </ul>
         </section>
       </template>
