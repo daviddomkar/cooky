@@ -3,18 +3,18 @@ import type { Input, Output } from "valibot";
 import type { SubmissionHandler } from "vee-validate";
 
 const props = defineProps<{
-  onSubmit?: SubmissionHandler<Output<typeof UnitFormSchema>>;
+  onSubmit?: SubmissionHandler<Output<typeof RoleFormSchema>>;
 }>();
 
-const model = defineModel<Input<typeof UnitFormSchema> | undefined>({
+const model = defineModel<Input<typeof RoleFormSchema> | undefined>({
   default: undefined,
 });
 
-const open = (list: Input<typeof UnitFormSchema>) => {
+const open = (list: Input<typeof RoleFormSchema>) => {
   model.value = list;
 };
 
-const onSubmit = async (values: Output<typeof UnitFormSchema>, opts: any) => {
+const onSubmit = async (values: Output<typeof RoleFormSchema>, opts: any) => {
   await props.onSubmit?.(values, opts);
   model.value = undefined;
 };
@@ -23,13 +23,13 @@ const onSubmit = async (values: Output<typeof UnitFormSchema>, opts: any) => {
 <template>
   <BaseDialog
     :model-value="!!model"
-    :title="model?.id ? `Edit ${model.title} unit` : 'Create new unit'"
+    :title="model?.id ? `Edit ${model.title} role` : 'Create new role'"
     @update:model-value="model = undefined"
   >
     <template #activator>
       <slot name="activator" :open="open" />
     </template>
-    <UnitForm
+    <RoleForm
       :initial-values="model"
       :on-submit="onSubmit"
       @cancel="model = undefined"

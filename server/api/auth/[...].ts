@@ -100,7 +100,9 @@ export const authOptions: AuthConfig = {
         coverImageId: user.coverImageId ?? undefined,
         favoritesListId: user.favoritesListId ?? undefined,
         lastUsedListId: user.lastUsedListId ?? undefined,
-        permissions: user.roles.flatMap((role) => role.role.permissions),
+        permissions: [
+          ...new Set(user.roles.flatMap((role) => role.role.permissions)),
+        ],
       };
 
       return session;

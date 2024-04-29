@@ -119,7 +119,6 @@ const deleteUnit = async (unit: { id: string; title: string }) => {
         Add Unit
       </BaseButton>
     </div>
-
     <BaseTable
       :headers="[
         {
