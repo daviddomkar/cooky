@@ -30,7 +30,6 @@ const createNewCategory = () => {
     title: "",
     slug: "",
     icon: "",
-    order: 0,
   };
 };
 
@@ -134,7 +133,7 @@ const deleteCategory = async (category: { id: string; title: string }) => {
         {
           key: 'icon',
           title: 'Icon',
-          width: '48px',
+          width: '64px',
         },
         {
           key: 'createdAt',

@@ -40,9 +40,9 @@ defineProps<Props>();
         class="sticky top-0 z-10 [&>tr>th]:whitespace-nowrap [&>tr>th]:px-0 [&>tr>th]:py-3 [&>tr>th:first-child]:pl-6 [&>tr>th:last-child]:pr-6 [&>tr>th]:text-start [&>tr>th]:text-base"
       >
         <tr class="from-primary to-secondary bg-gradient-to-r">
-          <th v-for="header in headers" :key="header.key">{{
-            header.title
-          }}</th>
+          <th v-for="header in headers" :key="header.key">
+            {{ header.title }}
+          </th>
           <th v-if="trailing" :key="'trailing'" class="!text-end">
             {{ trailing.title }}
           </th>
@@ -51,7 +51,7 @@ defineProps<Props>();
       <tbody
         class="[&>tr>td]:px-0 [&>tr>td]:py-0 [&>tr>th]:px-0 [&>tr>th]:py-0 [&>tr>th]:pl-6 [&>tr>td]:text-base"
         :class="{
-          '[&>tr>th]:text-start [&>tr>td]:text-start [&>tr:not(:has(button:hover))]:cursor-pointer [&>tr:not(:has(button:hover)):hover]:bg-outline/20':
+          '[&>tr>th]:text-start [&>tr>th]:font-normal [&>tr>td]:text-start [&>tr:not(:has(button:hover))]:cursor-pointer [&>tr:not(:has(button:hover)):hover]:bg-outline/20':
             items.length > 0,
         }"
       >

@@ -1,3 +1,4 @@
+import { UnitType } from "@prisma/client";
 import {
   object,
   string,
@@ -6,6 +7,7 @@ import {
   nullish,
   uuid,
   transform,
+  enum_,
 } from "valibot";
 
 export default transform(
@@ -19,11 +21,8 @@ export default transform(
       toTrimmed(),
       minLength(1, "This field is required."),
     ]),
-    slug: string("This field is required.", [
-      toTrimmed(),
-      minLength(1, "This field is required."),
-    ]),
-    icon: string("This field is required.", [
+    type: enum_(UnitType, "This field is required."),
+    abbreviation: string("This field is required.", [
       toTrimmed(),
       minLength(1, "This field is required."),
     ]),
@@ -31,8 +30,8 @@ export default transform(
   (value) => {
     return {
       title: value.title,
-      slug: value.slug,
-      icon: value.icon,
+      slug: value.type,
+      icon: value.abbreviation,
     };
   },
 );
