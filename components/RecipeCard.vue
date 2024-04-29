@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { RecipeState } from "@prisma/client";
+
 type Props = {
   recipe: {
     title: string;
@@ -9,6 +11,7 @@ type Props = {
       name: string;
       profileImageId?: string | null;
     };
+    state: RecipeState;
   };
   lists: {
     id: string;
@@ -57,7 +60,7 @@ const hoveringOverActions = ref(false);
       <ProfileLink class="text-white" dark small :user="recipe.author" />
     </div>
     <div
-      v-if="session"
+      v-if="session && recipe.state !== RecipeState.DRAFT"
       class="absolute bottom-2 right-2"
       @mouseenter="hoveringOverActions = true"
       @mouseleave="hoveringOverActions = false"
