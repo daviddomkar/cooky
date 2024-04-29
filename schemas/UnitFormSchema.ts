@@ -30,8 +30,8 @@ export default transform(
   (value) => {
     return {
       title: value.title,
-      slug: value.type,
-      icon: value.abbreviation,
+      type: value.type,
+      abbreviation: value.abbreviation,
     };
   },
 );

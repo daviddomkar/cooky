@@ -13,10 +13,7 @@ const ParametersSchema = objectAsync({
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event, authOptions);
 
-  if (
-    !session ||
-    !session.user.permissions.includes(permissions.CategoriesDelete)
-  ) {
+  if (!session || !session.user.permissions.includes(permissions.UnitsDelete)) {
     throw createError({
       statusCode: 401,
       statusMessage: "Unauthorized.",
@@ -35,7 +32,7 @@ export default defineEventHandler(async (event) => {
     if (!unit) {
       throw createError({
         statusCode: 404,
-        statusMessage: "Category not found.",
+        statusMessage: "Unit not found.",
       });
     }
 
