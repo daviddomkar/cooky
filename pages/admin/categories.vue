@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useNotification } from "@kyvg/vue3-notification";
+import { FetchError } from "ofetch";
+import type { Input, Output } from "valibot";
+
 definePageMeta({
   middleware: () => {
     const { session } = useAuth();
@@ -12,7 +16,94 @@ definePageMeta({
   },
 });
 
-const { data: categories } = await useFetch("/api/categories");
+const { notify } = useNotification();
+
+const { data: categories, refresh: refreshCategories } =
+  await useFetch("/api/categories");
+
+const dialogRef = ref<Input<typeof CategoryFormSchema> | undefined>();
+
+const createNewCategory = () => {
+  dialogRef.value = {
+    id: undefined,
+    title: "",
+    slug: "",
+    icon: "",
+    order: 0,
+  };
+};
+
+const submit = async (category: Output<typeof CategoryFormSchema>) => {
+  const id = dialogRef.value?.id;
+
+  try {
+    if (id) {
+      await $fetch(`/api/categories/${id}`, {
+        method: "PUT",
+        body: category,
+      });
+    } else {
+      await $fetch("/api/categories", {
+        method: "POST",
+        body: category,
+      });
+    }
+
+    await refreshCategories();
+
+    notify({
+      type: "success",
+      title: `Category ${category.title} ${id ? "edited" : "created"}.`,
+      text: `Category has been successfully ${id ? "edited" : "created"}.`,
+    });
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: `Failed to ${id ? "edit" : "create"} category.`,
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: `Failed to ${id ? "edit" : "create"} category.`,
+      text: "An unknown error occurred.",
+    });
+  }
+};
+
+const deleteCategory = async (category: { id: string; title: string }) => {
+  try {
+    await $fetch(`/api/categories/${category.id}`, {
+      method: "DELETE",
+    });
+
+    await refreshCategories();
+
+    notify({
+      type: "success",
+      title: `Category ${category.title} deleted.`,
+      text: "Category has been successfully deleted.",
+    });
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to delete category.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to delete category.",
+      text: "An unknown error occurred.",
+    });
+  }
+};
 </script>
 
 <template>
@@ -21,9 +112,9 @@ const { data: categories } = await useFetch("/api/categories");
   >
     <div class="flex flex-col items-center gap-4 lg:flex-row">
       <h1 class="my-0 grow text-center text-5xl lg:text-left">Categories</h1>
-      <BaseButton>Add Category</BaseButton>
+      <CategoryFormDialog v-model="dialogRef" :on-submit="submit" />
+      <BaseButton @click="createNewCategory">Add Category</BaseButton>
     </div>
-
     <BaseTable
       :headers="[
         {
@@ -70,14 +161,25 @@ const { data: categories } = await useFetch("/api/categories");
       <template #item[updatedAt]="{ item }">
         {{ new Date(item.updatedAt).toLocaleString() }}
       </template>
-      <template #item[trailing]>
+      <template #item[trailing]="{ item }">
         <div class="box-border flex justify-end gap-2 py-1 pr-1">
-          <BaseButton spread="compact" variant="secondary">
+          <BaseButton
+            spread="compact"
+            variant="secondary"
+            @click="dialogRef = item"
+          >
             <div class="i-material-symbols:edit h-6 w-6" />
           </BaseButton>
-          <BaseButton spread="compact" variant="danger">
-            <div class="i-material-symbols:delete h-6 w-6" />
-          </BaseButton>
+          <ConfirmationDialog
+            :on-confirm="() => deleteCategory(item)"
+            :reason="`Category ${item.title} will be deleted.`"
+          >
+            <template #activator="{ open }">
+              <BaseButton spread="compact" variant="danger" @click="open">
+                <div class="i-material-symbols:delete h-6 w-6" />
+              </BaseButton>
+            </template>
+          </ConfirmationDialog>
         </div>
       </template>
     </BaseTable>
