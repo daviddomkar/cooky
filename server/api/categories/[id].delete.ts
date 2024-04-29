@@ -2,7 +2,6 @@ import { getServerSession } from "#auth";
 import { useValidatedParams } from "h3-valibot";
 import { string, toTrimmed, objectAsync, uuid } from "valibot";
 import { authOptions } from "../auth/[...]";
-import permissions from "~/utils/permissions";
 
 const ParametersSchema = objectAsync({
   id: string("id parameter is required.", [

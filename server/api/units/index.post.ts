@@ -5,23 +5,23 @@ import { authOptions } from "../auth/[...]";
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event, authOptions);
 
-  if (
-    !session ||
-    !session.user.permissions.includes(permissions.CategoriesCreate)
-  ) {
+  if (!session || !session.user.permissions.includes(permissions.UnitsCreate)) {
     throw createError({
       statusCode: 401,
       statusMessage: "Unauthorized.",
     });
   }
 
-  const { title, slug, icon } = await useValidatedBody(event, CategorySchema);
+  const { title, type, abbreviation } = await useValidatedBody(
+    event,
+    UnitSchema,
+  );
 
-  await prisma.category.create({
+  await prisma.unit.create({
     data: {
       title,
-      slug,
-      icon,
+      type,
+      abbreviation,
     },
   });
 

@@ -1,5 +1,5 @@
 import { getServerSession } from "#auth";
-import { useValidatedBody, useValidatedParams } from "h3-valibot";
+import { useValidatedParams } from "h3-valibot";
 import { string, toTrimmed, objectAsync, uuid } from "valibot";
 import { authOptions } from "../auth/[...]";
 
@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
 
   if (
     !session ||
-    !session.user.permissions.includes(permissions.CategoriesUpdate)
+    !session.user.permissions.includes(permissions.CategoriesDelete)
   ) {
     throw createError({
       statusCode: 401,
@@ -24,30 +24,24 @@ export default defineEventHandler(async (event) => {
   }
 
   const { id } = await useValidatedParams(event, ParametersSchema);
-  const { title, slug, icon } = await useValidatedBody(event, CategorySchema);
 
   await prisma.$transaction(async (tx) => {
-    const category = await tx.category.findUnique({
+    const unit = await tx.unit.findUnique({
       where: {
         id,
       },
     });
 
-    if (!category) {
+    if (!unit) {
       throw createError({
         statusCode: 404,
         statusMessage: "Category not found.",
       });
     }
 
-    await prisma.category.update({
+    await prisma.unit.delete({
       where: {
         id,
-      },
-      data: {
-        title,
-        slug,
-        icon,
       },
     });
   });

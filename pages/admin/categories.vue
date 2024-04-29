@@ -113,7 +113,12 @@ const deleteCategory = async (category: { id: string; title: string }) => {
     <div class="flex flex-col items-center gap-4 lg:flex-row">
       <h1 class="my-0 grow text-center text-5xl lg:text-left">Categories</h1>
       <CategoryFormDialog v-model="dialogRef" :on-submit="submit" />
-      <BaseButton @click="createNewCategory">Add Category</BaseButton>
+      <BaseButton
+        v-if="session?.user?.permissions.includes(permissions.CategoriesCreate)"
+        @click="createNewCategory"
+      >
+        Add Category
+      </BaseButton>
     </div>
     <BaseTable
       :headers="[

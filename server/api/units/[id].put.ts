@@ -13,10 +13,7 @@ const ParametersSchema = objectAsync({
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event, authOptions);
 
-  if (
-    !session ||
-    !session.user.permissions.includes(permissions.CategoriesUpdate)
-  ) {
+  if (!session || !session.user.permissions.includes(permissions.UnitsUpdate)) {
     throw createError({
       statusCode: 401,
       statusMessage: "Unauthorized.",
@@ -24,30 +21,33 @@ export default defineEventHandler(async (event) => {
   }
 
   const { id } = await useValidatedParams(event, ParametersSchema);
-  const { title, slug, icon } = await useValidatedBody(event, CategorySchema);
+  const { title, type, abbreviation } = await useValidatedBody(
+    event,
+    UnitSchema,
+  );
 
   await prisma.$transaction(async (tx) => {
-    const category = await tx.category.findUnique({
+    const unit = await tx.unit.findUnique({
       where: {
         id,
       },
     });
 
-    if (!category) {
+    if (!unit) {
       throw createError({
         statusCode: 404,
-        statusMessage: "Category not found.",
+        statusMessage: "Unit not found.",
       });
     }
 
-    await prisma.category.update({
+    await prisma.unit.update({
       where: {
         id,
       },
       data: {
         title,
-        slug,
-        icon,
+        type,
+        abbreviation,
       },
     });
   });
