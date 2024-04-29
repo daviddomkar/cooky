@@ -83,7 +83,7 @@ const hasValue = computed(() => {
       <HeadlessListboxOptions as="template">
         <ul
           ref="ingredientsContainerRef"
-          class="absolute z-1 my-0 mt-1 max-h-80 w-full list-none overflow-auto rounded-3xl bg-surface pl-0 text-on-surface shadow-2xl dark:bg-surface-container focus:outline-none"
+          class="absolute z-20 my-0 mt-1 max-h-80 w-full list-none overflow-auto rounded-3xl bg-surface pl-0 text-on-surface shadow-2xl dark:bg-surface-container focus:outline-none"
         >
           <HeadlessListboxOption
             v-for="(option, index) in options"
