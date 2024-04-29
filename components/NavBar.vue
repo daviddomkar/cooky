@@ -13,6 +13,7 @@ type Props = {
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
+  (e: "log-in"): void;
   (e: "log-out"): void;
 }>();
 
@@ -236,6 +237,17 @@ const activeItemY = computed(() => {
             <div class="i-cooky:logout" />
           </template>
           Log out
+        </BaseButton>
+      </div>
+      <div
+        v-else
+        class="box-border w-full flex grow flex-col justify-end gap-4 px-8 md:hidden"
+      >
+        <BaseButton expanded spread="compact" @click="emit('log-in')">
+          <template #icon>
+            <div class="i-material-symbols:login" />
+          </template>
+          Log In
         </BaseButton>
       </div>
     </div>

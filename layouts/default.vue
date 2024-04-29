@@ -69,6 +69,7 @@ watch(
           :categories="categories!"
           class="min-h-screen"
           :user="session?.user"
+          @log-in="logIn"
           @log-out="logOut"
         />
       </div>
