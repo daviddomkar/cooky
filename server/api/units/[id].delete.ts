@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    await prisma.unit.delete({
+    await tx.unit.delete({
       where: {
         id,
       },

@@ -1,0 +1,43 @@
+<script setup lang="ts">
+import type { Input, Output } from "valibot";
+import type { SubmissionHandler } from "vee-validate";
+
+const props = defineProps<{
+  onSubmit?: SubmissionHandler<Output<typeof UserFormSchema>>;
+  roles: {
+    id: string;
+    title: string;
+  }[];
+}>();
+
+const model = defineModel<Input<typeof UserFormSchema> | undefined>({
+  default: undefined,
+});
+
+const open = (list: Input<typeof UserFormSchema>) => {
+  model.value = list;
+};
+
+const onSubmit = async (values: Output<typeof UserFormSchema>, opts: any) => {
+  await props.onSubmit?.(values, opts);
+  model.value = undefined;
+};
+</script>
+
+<template>
+  <BaseDialog
+    :model-value="!!model"
+    :title="model?.id ? `Edit ${model.name} user` : 'Create new user'"
+    @update:model-value="model = undefined"
+  >
+    <template #activator>
+      <slot name="activator" :open="open" />
+    </template>
+    <UserForm
+      :initial-values="model"
+      :on-submit="onSubmit"
+      :roles="roles"
+      @cancel="model = undefined"
+    />
+  </BaseDialog>
+</template>

@@ -59,7 +59,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    await prisma.list.update({
+    await tx.list.update({
       where: {
         id,
       },

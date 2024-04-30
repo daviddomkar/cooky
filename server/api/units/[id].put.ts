@@ -40,7 +40,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    await prisma.unit.update({
+    await tx.unit.update({
       where: {
         id,
       },

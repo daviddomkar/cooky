@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    await prisma.category.delete({
+    await tx.category.delete({
       where: {
         id,
       },

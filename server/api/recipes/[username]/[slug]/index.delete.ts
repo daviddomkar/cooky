@@ -52,7 +52,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    await prisma.recipe.deleteMany({
+    await tx.recipe.deleteMany({
       where: {
         author: {
           username,

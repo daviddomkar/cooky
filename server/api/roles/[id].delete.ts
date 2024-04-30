@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    const user = await prisma.user.findFirst({
+    const user = await tx.user.findFirst({
       where: {
         id: session.user.id,
         roles: {
@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    await prisma.role.delete({
+    await tx.role.delete({
       where: {
         id,
       },

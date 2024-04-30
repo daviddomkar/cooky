@@ -170,7 +170,7 @@ const deleteRole = async (role: { id: string; title: string }) => {
             v-if="currentUserRoleIds?.includes(item.id)"
             class="pr-5 text-outline"
           >
-            You cannot manage your own role
+            Forbidden
           </p>
           <BaseButton
             v-if="

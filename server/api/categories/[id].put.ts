@@ -40,7 +40,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    await prisma.category.update({
+    await tx.category.update({
       where: {
         id,
       },

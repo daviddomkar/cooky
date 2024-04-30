@@ -13,7 +13,7 @@ const ParametersSchema = objectAsync({
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event, authOptions);
 
-  if (!session) {
+  if (!session || !session.user.permissions.includes(permissions.UsersDelete)) {
     throw createError({
       statusCode: 401,
       statusMessage: "Unauthorized.",
@@ -23,42 +23,27 @@ export default defineEventHandler(async (event) => {
   const { id } = await useValidatedParams(event, ParametersSchema);
 
   await prisma.$transaction(async (tx) => {
-    const list = await tx.list.findUnique({
+    const user = await tx.user.findUnique({
       where: {
         id,
       },
-      select: {
-        authorId: true,
-        favoritesOfUser: {
-          select: {
-            id: true,
-          },
-        },
-      },
     });
 
-    if (!list) {
+    if (!user) {
       throw createError({
         statusCode: 404,
-        statusMessage: "List not found.",
+        statusMessage: "User not found.",
       });
     }
 
-    if (list.authorId !== session.user.id) {
+    if (user.id === session.user.id) {
       throw createError({
         statusCode: 403,
-        statusMessage: "Forbidden.",
+        statusMessage: "You cannot delete yourself.",
       });
     }
 
-    if (list.favoritesOfUser?.id) {
-      throw createError({
-        statusCode: 403,
-        statusMessage: "Forbidden.",
-      });
-    }
-
-    await tx.list.delete({
+    await tx.user.delete({
       where: {
         id,
       },
