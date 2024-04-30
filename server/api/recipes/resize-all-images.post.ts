@@ -15,21 +15,17 @@ export default defineEventHandler(async (event) => {
     fileStorage: { secret, path },
   } = useRuntimeConfig();
 
-  await Promise.all(
-    recipeImages.map(async (image) => {
-      const key = await fileStorage.decryptKey(secret, image.key);
-      const imgPath = join(path, image.id);
+  for (const image of recipeImages) {
+    const key = await fileStorage.decryptKey(secret, image.key);
+    const imgPath = join(path, image.id);
 
-      const stream = await fileStorage.readFile(imgPath, key);
+    const stream = await fileStorage.readFile(imgPath, key);
 
-      const buffer = await stream
-        .pipe(sharp().resize(420).keepExif())
-        .toBuffer();
-      const blob = new Blob([buffer], { type: image.mimeType });
+    const buffer = await stream.pipe(sharp().resize(420).keepExif()).toBuffer();
+    const blob = new Blob([buffer], { type: image.mimeType });
 
-      return fileStorage.saveFile(imgPath, blob, key);
-    }),
-  );
+    await fileStorage.saveFile(imgPath, blob, key);
+  }
 
   sendNoContent(event);
 });
