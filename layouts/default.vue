@@ -1,10 +1,37 @@
 <script setup lang="ts">
+import { useNotification } from "@kyvg/vue3-notification";
 const { session, signOut } = useAuth();
 
+const { notify } = useNotification();
+
 const { data: categories } = await useFetch("/api/categories");
+const { data: notifications, refresh: refreshNotifications } =
+  await useFetch("/api/notifications");
 
 const route = useRoute();
 const router = useRouter();
+
+const readNotification = async (id: string) => {
+  try {
+    await $fetch(`/api/notifications/${id}`, {
+      method: "PATCH",
+    });
+
+    await refreshNotifications();
+
+    notify({
+      type: "success",
+      title: "Notification read",
+      text: "The notification has been marked as read",
+    });
+  } catch (e) {
+    notify({
+      type: "error",
+      title: "Error",
+      text: "An error occurred while marking the notification as read",
+    });
+  }
+};
 
 const logIn = () => {
   router.push("/auth/login");
@@ -52,6 +79,25 @@ watch(
     navbarOpened.value = false;
   },
 );
+
+const timer = ref<NodeJS.Timeout | null>(null);
+
+onMounted(() => {
+  // Refresh notifications every 5 minutes
+  timer.value = setInterval(
+    () => {
+      if (session) {
+        refreshNotifications();
+      }
+    },
+    1000 * 60 * 5,
+  );
+});
+
+onUnmounted(() => {
+  clearInterval(timer.value!);
+  timer.value = null;
+});
 </script>
 
 <template>
@@ -81,7 +127,9 @@ watch(
       >
         <AppHeader
           class="sticky top-0 z-10 print:hidden"
+          :notifications="notifications ?? []"
           :random-recipe-loading="randomRecipeLoading"
+          :read-notification="readNotification"
           :user="session?.user"
           @log-in="logIn"
           @new="newRecipe"

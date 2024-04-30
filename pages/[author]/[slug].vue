@@ -30,6 +30,8 @@ const { data: rating, refresh: refreshRating } = await useFetch(
 
 const { data: lists, refresh: refreshLists } = await useAsyncData(
   async () => {
+    const { session } = useAuth();
+
     if (!session.value?.user?.username) {
       return [];
     }

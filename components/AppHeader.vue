@@ -4,7 +4,13 @@ type Props = {
     username: string;
     profileImageId?: string | null;
   };
+  notifications: {
+    id: string;
+    title: string;
+    content: string;
+  }[];
   randomRecipeLoading: boolean;
+  readNotification: (id: string) => Promise<void>;
 };
 
 defineProps<Props>();
@@ -95,23 +101,32 @@ const searchVisible = ref(false);
         v-else
         class="shrink-0 !hidden md:!flex"
         @click="emit('log-in')"
-        >Log in</BaseButton
-      >
-      <BaseButton
-        v-if="user"
-        class="relative shrink-0 sm:h-12 sm:min-w-12"
-        :class="{
-          '!hidden': searchVisible,
-        }"
-        density="compact"
-        spread="none"
-        variant="transparent"
-      >
-        <div class="i-cooky:notification h-6 w-6 text-on-surface" />
-        <div
-          class="absolute right-1 top-1 h-2 w-2 rounded-full bg-secondary sm:right-3 sm:top-3"
-        />
+        >Log in
       </BaseButton>
+      <NotificationsPopover
+        v-if="user"
+        :notifications="notifications"
+        :read-notification="readNotification"
+      >
+        <template #activator>
+          <BaseButton
+            class="relative shrink-0 sm:h-12 sm:min-w-12"
+            :class="{
+              '!hidden': searchVisible,
+            }"
+            density="compact"
+            spread="none"
+            variant="transparent"
+          >
+            <div class="i-cooky:notification h-6 w-6 text-on-surface" />
+            <div
+              v-if="notifications.length > 0"
+              class="absolute right-1 top-1 h-2 w-2 rounded-full bg-secondary sm:right-3 sm:top-3"
+            />
+          </BaseButton>
+        </template>
+      </NotificationsPopover>
+
       <NuxtLink
         v-if="user"
         class="block transition-transform hover:active:scale-[0.97]"

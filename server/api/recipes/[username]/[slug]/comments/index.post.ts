@@ -46,19 +46,35 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  await prisma.comment.create({
-    data: {
-      recipe: {
-        connect: {
-          id: recipe.id,
+  await prisma.$transaction(async (tx) => {
+    await tx.comment.create({
+      data: {
+        recipe: {
+          connect: {
+            id: recipe.id,
+          },
         },
-      },
-      author: {
-        connect: {
-          id: session.user.id,
+        author: {
+          connect: {
+            id: session.user.id,
+          },
         },
+        content,
       },
-      content,
-    },
+    });
+
+    if (recipe.authorId !== session.user.id) {
+      await tx.notification.create({
+        data: {
+          user: {
+            connect: {
+              id: recipe.authorId,
+            },
+          },
+          title: "New comment on your recipe",
+          content: `${session.user.name} commented on your recipe "${recipe.title}".`,
+        },
+      });
+    }
   });
 });

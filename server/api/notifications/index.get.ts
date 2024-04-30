@@ -4,14 +4,22 @@ import { authOptions } from "../auth/[...]";
 export default defineEventHandler(async (event) => {
   const session = await getServerSession(event, authOptions);
 
-  if (!session || !session.user.permissions.includes(permissions.RolesList)) {
+  if (!session) {
     throw createError({
       statusCode: 401,
       statusMessage: "Unauthorized.",
     });
   }
 
-  const roles = await prisma.role.findMany();
+  const notifications = await prisma.notification.findMany({
+    where: {
+      userId: session.user.id,
+      read: false,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
-  return roles;
+  return notifications;
 });

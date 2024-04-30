@@ -65,28 +65,42 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  await prisma.rating.upsert({
-    where: {
-      id: {
-        recipeId: recipe.id,
-        authorId: session.user.id,
-      },
-    },
-    update: {
-      numberOfStars,
-    },
-    create: {
-      numberOfStars,
-      recipe: {
-        connect: {
-          id: recipe.id,
+  await prisma.$transaction(async (tx) => {
+    await tx.rating.upsert({
+      where: {
+        id: {
+          recipeId: recipe.id,
+          authorId: session.user.id,
         },
       },
-      author: {
-        connect: {
-          id: session.user.id,
+      update: {
+        numberOfStars,
+      },
+      create: {
+        numberOfStars,
+        recipe: {
+          connect: {
+            id: recipe.id,
+          },
+        },
+        author: {
+          connect: {
+            id: session.user.id,
+          },
         },
       },
-    },
+    });
+
+    await tx.notification.create({
+      data: {
+        user: {
+          connect: {
+            id: recipe.authorId,
+          },
+        },
+        title: "New rating on your recipe",
+        content: `${session.user.name} rated your recipe "${recipe.title}".`,
+      },
+    });
   });
 });
