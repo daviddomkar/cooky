@@ -20,6 +20,11 @@ const { notify } = useNotification();
 const { session } = useAuth();
 
 const { data: roles, refresh: refreshRoles } = await useFetch("/api/roles");
+const { data: currentUser } = await useFetch("/api/users/me");
+
+const currentUserRoleIds = computed(() =>
+  currentUser.value?.roles?.map((role) => role.id),
+);
 
 const dialogRef = ref<Input<typeof RoleFormSchema> | undefined>();
 
@@ -161,8 +166,17 @@ const deleteRole = async (role: { id: string; title: string }) => {
       </template>
       <template #item[trailing]="{ item }">
         <div class="box-border flex justify-end gap-2 py-1 pr-1">
+          <p
+            v-if="currentUserRoleIds?.includes(item.id)"
+            class="pr-5 text-outline"
+          >
+            You cannot manage your own role
+          </p>
           <BaseButton
-            v-if="session?.user?.permissions.includes(permissions.RolesUpdate)"
+            v-if="
+              session?.user?.permissions.includes(permissions.RolesUpdate) &&
+              !currentUserRoleIds?.includes(item.id)
+            "
             spread="compact"
             variant="secondary"
             @click="dialogRef = item"
@@ -170,7 +184,10 @@ const deleteRole = async (role: { id: string; title: string }) => {
             <div class="i-material-symbols:edit h-6 w-6" />
           </BaseButton>
           <ConfirmationDialog
-            v-if="session?.user?.permissions.includes(permissions.RolesDelete)"
+            v-if="
+              session?.user?.permissions.includes(permissions.RolesDelete) &&
+              !currentUserRoleIds?.includes(item.id)
+            "
             :on-confirm="() => deleteRole(item)"
             :reason="`Role ${item.title} will be deleted.`"
           >

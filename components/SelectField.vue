@@ -61,7 +61,9 @@ const hasValue = computed(() => {
         as="div"
         class="box-border h-full w-full flex cursor-pointer items-center border-none bg-transparent px-0"
       >
-        <div class="grow px-6 py-3 text-left text-on-surface">
+        <div
+          class="grow overflow-hidden text-ellipsis whitespace-nowrap px-6 py-3 text-left text-on-surface"
+        >
           {{
             multiple
               ? (value as V[])

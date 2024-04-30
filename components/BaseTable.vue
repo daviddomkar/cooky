@@ -51,7 +51,7 @@ defineProps<Props>();
       <tbody
         class="[&>tr>td]:px-0 [&>tr>td]:py-0 [&>tr>th]:px-0 [&>tr>th]:py-0 [&>tr>th]:pl-6 [&>tr>td]:text-base"
         :class="{
-          '[&>tr>th]:text-start [&>tr>th]:font-normal [&>tr>td]:text-start [&>tr:not(:has(button:hover))]:cursor-pointer [&>tr:not(:has(button:hover)):hover]:bg-outline/20':
+          '[&>tr>th]:text-start [&>tr>th]:font-normal [&>tr>td]:text-start':
             items.length > 0,
         }"
       >

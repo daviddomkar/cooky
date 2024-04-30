@@ -40,6 +40,24 @@ export default defineEventHandler(async (event) => {
       });
     }
 
+    const user = await prisma.user.findFirst({
+      where: {
+        id: session.user.id,
+        roles: {
+          some: {
+            roleId: role.id,
+          },
+        },
+      },
+    });
+
+    if (user) {
+      throw createError({
+        statusCode: 403,
+        statusMessage: "You cannot edit your own role.",
+      });
+    }
+
     await prisma.role.update({
       where: {
         id,
