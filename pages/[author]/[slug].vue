@@ -2,6 +2,7 @@
 import { RecipeState } from "@prisma/client";
 import { useNotification } from "@kyvg/vue3-notification";
 import { FetchError } from "ofetch";
+import type { Output } from "valibot";
 
 const route = useRoute();
 const router = useRouter();
@@ -46,6 +47,10 @@ const { data: lists, refresh: refreshLists } = await useAsyncData(
   {
     watch: [session],
   },
+);
+
+const { data: comments, refresh: refreshComments } = await useFetch(
+  `/api/recipes/${route.params.author}/${route.params.slug}/comments`,
 );
 
 const isOwnRecipe = computed(
@@ -161,6 +166,336 @@ const deleteRecipe = async () => {
     notify({
       type: "error",
       title: "Failed to delete recipe.",
+      text: "An unknown error occurred.",
+    });
+  }
+};
+
+const addComment = async (comment: Output<typeof CommentFormSchema>) => {
+  try {
+    await $fetch(
+      `/api/recipes/${recipe.value?.author?.username}/${recipe.value?.slug}/comments`,
+      {
+        method: "POST",
+        body: comment,
+      },
+    );
+
+    await refreshComments();
+
+    notify({
+      type: "success",
+      title: "Comment added.",
+      text: "Your comment has been successfully added.",
+    });
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to add comment.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to add comment.",
+      text: "An unknown error occurred.",
+    });
+  }
+};
+
+const editComment = async (
+  id: string,
+  comment: Output<typeof CommentFormSchema>,
+) => {
+  try {
+    await $fetch(
+      `/api/recipes/${recipe.value?.author?.username}/${recipe.value?.slug}/comments/${id}`,
+      {
+        method: "PUT",
+        body: comment,
+      },
+    );
+
+    await refreshComments();
+
+    notify({
+      type: "success",
+      title: "Comment edited.",
+      text: "Your comment has been successfully edited.",
+    });
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to edit comment.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to edit comment.",
+      text: "An unknown error occurred.",
+    });
+  }
+};
+
+const deleteComment = async (id: string) => {
+  try {
+    await $fetch(
+      `/api/recipes/${recipe.value?.author?.username}/${recipe.value?.slug}/comments/${id}`,
+      {
+        method: "DELETE",
+      },
+    );
+
+    await refreshComments();
+
+    notify({
+      type: "success",
+      title: "Comment deleted.",
+      text: "Your comment has been successfully deleted.",
+    });
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to delete comment.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to delete comment.",
+      text: "An unknown error occurred.",
+    });
+  }
+};
+
+const likeComment = async (id: string) => {
+  try {
+    await $fetch(
+      `/api/recipes/${recipe.value?.author?.username}/${recipe.value?.slug}/comments/${id}/hearts`,
+      {
+        method: "POST",
+      },
+    );
+
+    await refreshComments();
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to like comment.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to like comment.",
+      text: "An unknown error occurred.",
+    });
+  }
+};
+
+const unlikeComment = async (id: string) => {
+  try {
+    await $fetch(
+      `/api/recipes/${recipe.value?.author?.username}/${recipe.value?.slug}/comments/${id}/hearts`,
+      {
+        method: "DELETE",
+      },
+    );
+
+    await refreshComments();
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to unlike comment.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to unlike comment.",
+      text: "An unknown error occurred.",
+    });
+  }
+};
+
+const addReply = async (
+  commentId: string,
+  reply: Output<typeof CommentFormSchema>,
+) => {
+  try {
+    await $fetch(
+      `/api/recipes/${recipe.value?.author?.username}/${recipe.value?.slug}/comments/${commentId}/replies`,
+      {
+        method: "POST",
+        body: reply,
+      },
+    );
+
+    await refreshComments();
+
+    notify({
+      type: "success",
+      title: "Reply added.",
+      text: "Your reply has been successfully added.",
+    });
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to add reply.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to add reply.",
+      text: "An unknown error occurred.",
+    });
+  }
+};
+
+const editReply = async (
+  id: string,
+  commentId: string,
+  reply: Output<typeof CommentFormSchema>,
+) => {
+  try {
+    await $fetch(
+      `/api/recipes/${recipe.value?.author?.username}/${recipe.value?.slug}/comments/${commentId}/replies/${id}`,
+      {
+        method: "PUT",
+        body: reply,
+      },
+    );
+
+    await refreshComments();
+
+    notify({
+      type: "success",
+      title: "Reply edited.",
+      text: "Your reply has been successfully edited.",
+    });
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to edit reply.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to edit reply.",
+      text: "An unknown error occurred.",
+    });
+  }
+};
+
+const deleteReply = async (id: string, commentId: string) => {
+  try {
+    await $fetch(
+      `/api/recipes/${recipe.value?.author?.username}/${recipe.value?.slug}/comments/${commentId}/replies/${id}`,
+      {
+        method: "DELETE",
+      },
+    );
+
+    await refreshComments();
+
+    notify({
+      type: "success",
+      title: "Reply deleted.",
+      text: "Your reply has been successfully deleted.",
+    });
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to delete reply.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to delete reply.",
+      text: "An unknown error occurred.",
+    });
+  }
+};
+
+const likeReply = async (id: string, commentId: string) => {
+  try {
+    await $fetch(
+      `/api/recipes/${recipe.value?.author?.username}/${recipe.value?.slug}/comments/${commentId}/replies/${id}/hearts`,
+      {
+        method: "POST",
+      },
+    );
+
+    await refreshComments();
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to like reply.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to like reply.",
+      text: "An unknown error occurred.",
+    });
+  }
+};
+
+const unlikeReply = async (id: string, commentId: string) => {
+  try {
+    await $fetch(
+      `/api/recipes/${recipe.value?.author?.username}/${recipe.value?.slug}/comments/${commentId}/replies/${id}/hearts`,
+      {
+        method: "DELETE",
+      },
+    );
+
+    await refreshComments();
+  } catch (e) {
+    if (e instanceof FetchError) {
+      notify({
+        type: "error",
+        title: "Failed to unlike reply.",
+        text: e.message,
+      });
+      return;
+    }
+
+    notify({
+      type: "error",
+      title: "Failed to unlike reply.",
       text: "An unknown error occurred.",
     });
   }
@@ -314,35 +649,47 @@ const deleteRecipe = async () => {
       </div>
     </div>
     <div
-      v-if="
-        (recipe.comments.length || session) &&
-        recipe.state !== RecipeState.DRAFT
-      "
+      v-if="(comments?.length || session) && recipe.state !== RecipeState.DRAFT"
       class="flex flex-col print:hidden"
     >
       <h2 class="my-0 mb-4 text-3xl text-on-surface-variant">Comments</h2>
       <CommentCard
         v-if="session"
-        :author="{
-          name: session.user.name,
-          username: session.user.username,
-          profileImageId: session.user.profileImageId,
-        }"
         class="mb-4"
-        :editable="true"
+        :on-submit="addComment"
+        :user="session.user"
       />
       <ul class="my-0 flex flex-col list-none gap-8 pl-0">
-        <li v-for="comment in recipe!.comments" :key="comment.id">
-          <CommentCard :author="comment.author" :content="comment.content" />
+        <li v-for="comment in comments" :key="comment.id">
+          <CommentCard
+            :comment="comment"
+            :on-delete="deleteComment"
+            :on-like="likeComment"
+            :on-submit="(c) => editComment(comment.id, c)"
+            :on-unlike="unlikeComment"
+            :user="session?.user"
+          />
           <ul
-            v-if="comment.replies.length"
+            v-if="comment.replies.length || session"
             class="mb-0 mt-4 flex flex-col list-none gap-4 pl-14"
           >
             <li v-for="reply in comment.replies" :key="reply.id">
               <CommentCard
-                :author="reply.author"
-                :content="reply.content"
-                :reply="true"
+                :comment="reply"
+                :on-delete="(id) => deleteReply(id, comment.id)"
+                :on-like="(id) => likeReply(id, comment.id)"
+                :on-submit="(r) => editReply(reply.id, comment.id, r)"
+                :on-unlike="(id) => unlikeReply(id, comment.id)"
+                reply
+                :user="session?.user"
+              />
+            </li>
+            <li>
+              <CommentCard
+                class="mb-4"
+                :on-submit="(r) => addReply(comment.id, r)"
+                reply
+                :user="session?.user"
               />
             </li>
           </ul>

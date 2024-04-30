@@ -7,6 +7,9 @@ import {
   uuid,
   transform,
   array,
+  notValue,
+  toLowerCase,
+  maxLength,
 } from "valibot";
 
 export default transform(
@@ -22,7 +25,30 @@ export default transform(
     ]),
     username: string("This field is required.", [
       toTrimmed(),
+      toLowerCase(),
       minLength(1, "This field is required."),
+      maxLength(32, "Username is too long."),
+      // TODO: Correctly handle reserved usernames (lowercase, etc.)
+      ...[
+        "drafts",
+        "most-rated",
+        "most-saved",
+        "random",
+        "recent",
+        "admin",
+        "auth",
+        "category",
+        "list",
+        "search",
+        "edit",
+        "new",
+        "admin",
+      ].map((reserved) =>
+        notValue<string, string>(
+          reserved,
+          `Username "${reserved}" is reserved.`,
+        ),
+      ),
     ]),
     email: string("This field is required.", [
       toTrimmed(),
