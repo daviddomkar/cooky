@@ -47,7 +47,6 @@ export default object({
   description: string("This field is required.", [
     toTrimmed(),
     minLength(1, "This field is required."),
-    maxLength(640, "Description is too long."),
   ]),
   image: blob("This field is required.", [
     mimeType(
