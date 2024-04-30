@@ -4,6 +4,7 @@ import { Blob } from "node:buffer";
 import { safeParseAsync } from "valibot";
 import { getServerSession } from "#auth";
 import { Prisma, RecipeState } from "@prisma/client";
+import sharp from "sharp";
 import { authOptions } from "../auth/[...]";
 
 export default defineEventHandler(async (event) => {
@@ -85,7 +86,12 @@ export default defineEventHandler(async (event) => {
       }),
     });
 
-    await fileStorage.saveFile(join(path, recipe.imageId), image as Blob, key);
+    await fileStorage.saveFile(
+      join(path, recipe.imageId),
+      image as Blob,
+      key,
+      sharp().resize(420).keepExif(),
+    );
 
     return recipe;
   });

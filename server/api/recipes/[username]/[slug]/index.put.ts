@@ -11,6 +11,7 @@ import {
 import { getServerSession } from "#auth";
 import { Prisma, RecipeState } from "@prisma/client";
 import { useValidatedParams } from "h3-valibot";
+import sharp from "sharp";
 import { authOptions } from "../../../auth/[...]";
 import RecipeSchema from "~/server/schemas/RecipeSchema";
 
@@ -129,7 +130,12 @@ export default defineEventHandler(async (event) => {
       }),
     });
 
-    await fileStorage.saveFile(join(path, recipe.imageId), image as Blob, key);
+    await fileStorage.saveFile(
+      join(path, recipe.imageId),
+      image as Blob,
+      key,
+      sharp().resize(420).keepExif(),
+    );
 
     return recipe;
   });

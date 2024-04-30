@@ -4,6 +4,7 @@ import { Blob } from "node:buffer";
 import { join } from "node:path";
 import { hash } from "bcrypt";
 import { Prisma, type Recipe } from "@prisma/client";
+import sharp from "sharp";
 import { prisma } from "../server/utils/prisma-client";
 import { fileStorage } from "../server/utils/file-storage";
 import permissions from "../utils/permissions";
@@ -14,7 +15,7 @@ const secret = process.env.FILE_STORAGE_SECRET;
 
 async function main() {
   const lastRecipeImage = seedData.recipe[seedData.recipe.length - 1].imageId;
-  // Files
+  // Profile images
   const files = await prisma.$transaction(async (tx) => {
     return await Promise.all(
       seedData.file
@@ -173,6 +174,7 @@ async function main() {
           join(path!, recipe.imageId),
           blob,
           imageKey,
+          sharp().resize(420).keepExif(),
         );
       }),
     );
