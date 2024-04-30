@@ -134,7 +134,7 @@ export default defineEventHandler(async (event) => {
       join(path, recipe.imageId),
       image as Blob,
       key,
-      sharp().resize(420),
+      sharp().resize(420).keepExif(),
     );
 
     return recipe;

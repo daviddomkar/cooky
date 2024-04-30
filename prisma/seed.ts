@@ -179,7 +179,7 @@ async function main() {
           join(path!, recipe.imageId),
           blob,
           imageKey,
-          sharp().resize(420),
+          sharp().resize(420).keepExif(),
         );
       }),
     );
