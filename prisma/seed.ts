@@ -31,12 +31,7 @@ async function main() {
             },
           });
 
-          await fileStorage.saveFile(
-            join(path!, file.id),
-            blob,
-            key,
-            sharp({ animated: true }).resize(256, 256),
-          );
+          await fileStorage.saveFile(join(path!, file.id), blob, key);
 
           return file;
         }),
